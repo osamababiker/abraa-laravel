@@ -40,8 +40,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="card-body">
+
+                                    <!-- custome search box to search all table  -->
+                                    <div class="row mb-2 m-1">
+                                        <div class="d-non d-sm-inline-block">
+                                            <div class="input-group input-group-navbar">
+                                                <input type="text" name="search_query" class="form-control" placeholder="Search buyers ...." aria-label="Search">
+                                                <div class="input-group-append">
+                                                    <button name="search_buyers_btn" form="buyers_actions_form" class="btn" type="submit">
+                                                        <i class="align-middle" data-feather="search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     
                                     <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                                         <thead>

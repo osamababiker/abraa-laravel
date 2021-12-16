@@ -19,6 +19,7 @@ class ItemsController extends Controller
         return view('admin.items.index', compact(['items','items_count']));
     }
 
+    // to get approved items (products) only
     public function active_items()
     {
         $items_obj = DB::table('items')
@@ -27,12 +28,50 @@ class ItemsController extends Controller
             ->where('users_store.trash',0)
             ->where('users_store.rejected',0)
             ->where('items.status', 1)
-            ->where('items.rejected', 0);
+            ->where('items.rejected', 0)
+            ->where('items.approved', 1);
 
         $items = $items_obj->paginate(10);
         $items_count = $items_obj->count();
         return view('admin.items.active_items', compact(['items','items_count']));
     }
+
+    // to get pending items (products) only
+    public function pending_items()
+    {
+        $items_obj = DB::table('items')
+            ->leftJoin('users', 'users.id', '=', 'items.user_id')
+            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
+            ->where('users_store.trash',0)
+            ->where('users_store.rejected',0)
+            ->where('items.status', 0)
+            ->where('items.rejected', 0)
+            ->where('items.approved', 0);
+
+        $items = $items_obj->paginate(10);
+        $items_count = $items_obj->count();
+        return view('admin.items.active_items', compact(['items','items_count']));
+    }
+
+    // to get rejected items (products) only 
+    public function rejected_items()
+    {
+        $items_obj = Item::where('rejected',1);
+
+        $items = $items_obj->paginate(10);
+        $items_count = $items_obj->count();
+        return view('admin.items.active_items', compact(['items','items_count']));
+    }
+
+     // to get home items (products) only 
+     public function home_items()
+     {
+         $items_obj = Item::where('rejected',1);
+ 
+         $items = $items_obj->paginate(10);
+         $items_count = $items_obj->count();
+         return view('admin.items.active_items', compact(['items','items_count']));
+     }
 
     
     public function create()

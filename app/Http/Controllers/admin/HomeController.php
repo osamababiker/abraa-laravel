@@ -38,6 +38,7 @@ class HomeController extends Controller
             ->where('users_store.rejected',0)
             ->where('items.status', 0)
             ->where('items.rejected', 0)
+            ->where('items.approved', 0)
             ->count(); 
         $approved_items_count = DB::table('items')
             ->leftJoin('users', 'users.id', '=', 'items.user_id')
@@ -46,6 +47,7 @@ class HomeController extends Controller
             ->where('users_store.rejected',0)
             ->where('items.status', 1)
             ->where('items.rejected', 0)
+            ->where('items.approved', 1)
             ->count();
         
         // get buying requests count

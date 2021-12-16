@@ -113,6 +113,18 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('items/active', [
         ItemsController::class, 'active_items'
     ])->name('items.active');
+    // pending items route
+    Route::get('items/pending', [
+        ItemsController::class, 'pending_items'
+    ])->name('items.pending');
+    // rejected items route
+      Route::get('items/rejected', [
+        ItemsController::class, 'rejected_items'
+    ])->name('items.rejected');
+    // home items route
+    Route::get('items/home_items', [
+        ItemsController::class, 'home_items'
+    ])->name('items.home_items');
     // resource route
     Route::resource('items', ItemsController::class, ['except' => ['destroy']]);
     

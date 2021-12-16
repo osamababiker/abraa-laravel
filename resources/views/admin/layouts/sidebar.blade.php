@@ -60,9 +60,9 @@
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.index') }}">All Products</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.active') }}">Active Products</a>
                     </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Waiting Products</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Rejected Products</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Home Products</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.pending') }}">Pending Products</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.rejected') }}">Rejected Products</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.home_items') }}">Home Products</a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

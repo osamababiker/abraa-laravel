@@ -24,7 +24,8 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title"> You have {{ $suppliers_count }} supplier in this table </h5>
-                                        <div class="row">
+                                        
+                                        <div class="row ml-1">
                                             <a href="{{ route('suppliers.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </a>
                                             &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal" data-target="#delete_selected_confirm" class="btn btn-danger"> <i class="fa fa-trash"></i> Archive Selected  </button>
@@ -44,6 +45,21 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
+
+                                        <!-- custome search box to search all table  -->
+                                        <div class="row mb-2 m-1">
+                                            <div class="d-non d-sm-inline-block">
+                                                <div class="input-group input-group-navbar">
+                                                    <input type="text" name="search_query" class="form-control" placeholder="Search suppliers ...." aria-label="Search">
+                                                    <div class="input-group-append">
+                                                        <button name="search_suppliers_btn" form="suppliers_actions_form" class="btn" type="submit">
+                                                            <i class="align-middle" data-feather="search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                                             <thead>
                                                 <tr>

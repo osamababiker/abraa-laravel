@@ -13,11 +13,11 @@ class SuppliersController extends Controller
  
     public function index()
     {
-        $suppliers = Supplier::whereIn('member_type',[1,3])
-            ->where('user_type',0)->orderBy('id','desc')->paginate(10); 
+        $suppliers_obj = Supplier::whereIn('member_type',[1,3])
+            ->where('user_type',0)->orderBy('id','desc'); 
             
-        $suppliers_count = Supplier::whereIn('member_type',[1,3])
-        ->where('user_type',0)->orderBy('id','desc')->count();
+        $suppliers_count = $suppliers_obj->count();
+        $suppliers = $suppliers_obj->paginate(10);
 
         return view('admin.suppliers.index', compact(['suppliers','suppliers_count']));
     }
@@ -58,18 +58,30 @@ class SuppliersController extends Controller
     //  or send email , sms to multiple 
     public function actions(Request $request)
     {
-
-        $supplier_id = $request->supplier_id;
-        if($request->all_colums){
-            dd($request->all_colums);
+        if($request->has('search_suppliers_btn')){
+            $suppliers_obj = Supplier::whereIn('member_type',[1,3])
+                ->where('user_type',0)->orderBy('id','desc')
+                ->where('full_name',$request->search_query); 
+            
+            $suppliers_count = $suppliers_obj->count();
+            $suppliers = $suppliers_obj->paginate(10);
+            return view('admin.suppliers.organic', compact(['suppliers','suppliers_count']));  
         }
-        elseif($supplier_id){
-            foreach($supplier_id as $id){
-                Supplier::where('id',$id)->delete();
+
+        if($request->has('delete_selected_btn')){
+            $supplier_id = $request->supplier_id;
+            if($request->all_colums){
+                Supplier::delete();
+            }
+            elseif($supplier_id){
+                foreach($supplier_id as $id){
+                    Supplier::where('id',$id)->delete();
+                }
             }
         }
         
     }
+
 
  
     public function show($id)
