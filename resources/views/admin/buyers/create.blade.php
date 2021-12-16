@@ -1,0 +1,109 @@
+@include('admin.layouts.header')
+
+
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
+    <div class="wrapper">
+
+        <!-- main sidebar here -->
+        @include('admin.layouts.sidebar')
+
+        <div class="main">
+
+            <!-- main nav here -->
+            @include('admin.layouts.nav')
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Buyer </h1>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="full_name">Full Name</label>
+                                                <input type="text" class="form-control" id="full_name"
+                                                    placeholder="full_name">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="email">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control" id="password"
+                                                    placeholder="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="counter">Country</label>
+                                                <select name="country" id="country" class="form-control select2">
+                                                    <option value="">Select country</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="counter">City</label>
+                                                <select name="city" id="city" class="form-control select2">
+                                                    <option value="">Select city</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="phone">Phone</label>
+                                                <input type="number" class="form-control" name="phone" id="phone">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="company">Company</label>
+                                                <input type="text" class="form-control" name="company" id="company">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="primary_name">Interested Products</label>
+                                                <select name="" id="interested_products" multiple="multiple" class="form-control select2">
+                                                    <option value="">add products</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <span class="">Verified</span>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="1" name="verified" checked>
+                                            </div>
+                                            &nbsp; &nbsp;
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="0" name="verified">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <span class="">Deactivated</span>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="1" name="deactivated" checked>
+                                            </div>
+                                            &nbsp; &nbsp;
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="0" name="deactivated">
+                                            </div>
+                                        </div>
+                                        <div class="form-row d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-success">Save Buyer</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+            <!-- footer is here -->
+            @include('admin.layouts.footer')
