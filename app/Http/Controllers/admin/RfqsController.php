@@ -59,16 +59,16 @@ class RfqsController extends Controller
 
         $buying_request_obj = buying_request::where('rejected',0);
 
-        if($buying_requests_status == 'active'){
+        if($buying_requests_status == 'approvel'){    
+            
+        }
+        elseif($buying_requests_status == 'completed'){
+           
+        }
+        elseif($buying_requests_status == 'canceled'){
             // $buying_request_obj = 1;
         }
         elseif($buying_requests_status == 'pending'){
-           // $buying_request_obj = 1;
-        }
-        elseif($buying_requests_status == 'rejected'){
-            // $buying_request_obj = 1;
-        }
-        elseif($buying_requests_status == 'home'){
             // $buying_request_obj = 1; 
         }
         

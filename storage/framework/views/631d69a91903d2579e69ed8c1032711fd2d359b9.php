@@ -1,0 +1,1 @@
+<div id="ajax_loader"></div><?php /**PATH C:\wamp64\www\abraa-dash\resources\views/admin/layouts/loader.blade.php ENDPATH**/ ?>
