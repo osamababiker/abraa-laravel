@@ -19,7 +19,7 @@
             </div>
             <div class="col-6 text-right">
                 <p class="mb-0">
-                    &copy; 2020 - <a href="index.html" class="text-muted">AppStack</a>
+                    &copy; 2022 - <a href="abraa.com" class="text-muted">Abraa</a>
                 </p>
             </div>
         </div>
@@ -148,6 +148,11 @@
                 "bPaginate": false,
                 //"scrollY": 200,
                 "scrollTop": true,
+                "searching": false,
+                "aoColumnDefs": [
+                    { "bSortable": false, "aTargets": [ 0, 1, 2, 3 ] }, 
+                    { "bSearchable": false, "aTargets": [ 0, 1, 2, 3 ] }
+                ] 
             });
         });
     </script>
@@ -157,12 +162,6 @@
             tags: true,
         });
     </script>
-
-    <script src="{{ asset('js/form_steps.js') }}"></script>
-
-    <script src="{{ asset('js/form_steps.js') }}"></script>
-
-    <script src="{{ asset('js/add_store.js') }}"></script>
 
     <script>
         $(".datepicker").daterangepicker({
@@ -183,6 +182,17 @@
             });
         });
     </script>
+
+    <script src="{{ asset('js/form_steps.js') }}"></script>
+
+    <script src="{{ asset('js/form_steps.js') }}"></script>
+
+    <script src="{{ asset('js/add_store.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/itemsDataTable.js') }}"></script>
+
 </body>
 
 </html>

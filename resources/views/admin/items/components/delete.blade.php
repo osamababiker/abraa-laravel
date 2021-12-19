@@ -16,6 +16,6 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" form="delete_item_form_{{ $item->id }}" class="btn btn-danger">Yes Sure</button>
             </div>
-        </div>
+        </div> 
     </div>
 </div>

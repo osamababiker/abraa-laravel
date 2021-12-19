@@ -23,7 +23,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title"> You have {{ $suppliers_count }} supplier in this table </h5>
+                                        <h5 class="card-title"> You have <span id="filter_counter"></span> supplier in this table </h5>
                                         
                                         <div class="row ml-1">
                                             <a href="{{ route('suppliers.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </a>
@@ -48,18 +48,48 @@
 
                                         <!-- custome search box to search all table  -->
                                         <div class="row mb-2 m-1">
-                                            <div class="d-non d-sm-inline-block">
-                                                <div class="input-group input-group-navbar">
-                                                    <input type="text" name="search_query" class="form-control" placeholder="Search suppliers ...." aria-label="Search">
-                                                    <div class="input-group-append">
-                                                        <button name="search_suppliers_btn" form="suppliers_actions_form" class="btn" type="submit">
-                                                            <i class="align-middle" data-feather="search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="search_by_name">Search suppliers by Name</label>
+                                                <input type="text" name="search_query" id="supplier_name" class="filter_data_table form-control" aria-label="Search">
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="filter_by_country">Filter by Country</label>
+                                                <select name="country[]" multiple="multiple" id="filter_by_country" class="filter_data_table form-control select2">
+                                                    <option value=""> choose country </option>
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
+                                                    @endforeach 
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="filter_by_keywords">Filter by Keywords</label>
+                                                <select name="keywords[]" multiple="multiple" id="filter_by_keywords" class="filter_data_table form-control select2">
+                                                    <option value=""> enter keywords </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="filter_by_level">Filter by level</label>
+                                                <select name="level[]" multiple="multiple" id="filter_by_level" class="filter_data_table form-control select2">
+                                                    <option value=""> choose level </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="filter_by_products_title">Filter by products title</label>
+                                                <select name="products_title[]" multiple="multiple" id="filter_by_products_title" class="filter_data_table form-control select2">
+                                                    <option value=""> enter words </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="rows_numbers">Numbers of rows</label>
+                                                <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                                    <option value="10"> 10 </option>
+                                                    <option value="100"> 100 </option>
+                                                    <option value="500"> 500 </option>
+                                                    <option value="1000"> 1000 </option>
+                                                </select>
                                             </div>
                                         </div>
-
+                                       
                                         <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                                             <thead>
                                                 <tr>
@@ -73,73 +103,15 @@
                                                     <th>Country</th>
                                                     <th>Company</th>
                                                     <th>Is Organic</th>
-                                                    <th>User Source </th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead> 
-                                            <tbody>
-                                                @foreach($suppliers as $supplier)
-                                                <tr>
-                                                    <td> <input type="checkbox" name="supplier_id[]" value="{{ $supplier->id }}" id=""> </td>
-                                                    <td>{{ $supplier->id }}</td>
-                                                    <td>{{ $supplier->full_name }}</td>
-                                                    <td>{{ $supplier->email }}</td>
-                                                    <td>{{ $supplier->phone }}</td>
-                                                    <td>{{ $supplier->date_added }}</td>
-                                                    <td> 
-                                                        @if($supplier->verified)
-                                                            <i class="fa fa-check" style="color: green;"></i> 
-                                                        @else 
-                                                            <i class="fa fa-times" style="color: red;"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if($supplier->supplier_country)
-                                                        {{ $supplier->supplier_country->en_name }}
-                                                        @endif
-                                                    </td>
-                                                    <td> {{ $supplier->company }} </td>
-                                                    <td> 
-                                                        @if($supplier->is_organic)
-                                                            <i class="fa fa-check" style="color: green;"></i> 
-                                                        @else 
-                                                            <i class="fa fa-times" style="color: red;"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td> {{ $supplier->getUserSource($supplier->user_source)  }} </td>
-                                                    <td class="table-action">
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#edit_supplier_{{ $supplier->id }}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                        <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_supplier_{{ $supplier->id }}" data-feather="trash"></i></a>
-                                                        <a class="dropdown">
-                                                            <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" type="button" data-toggle="modal" data-target="#supplier_items_{{ $supplier->id }}"><i class="align-middle">Items</a>
-                                                                <a class="dropdown-item" href="#">Users store</a>
-                                                                <a class="dropdown-item" href="#">Buying request suppliers</a>
-                                                                <a class="dropdown-item" href="#">Users files</a>
-                                                                <a class="dropdown-item" href="#">Buy request views</a>
-                                                                <a class="dropdown-item" href="#">Buying request invoice</a>
-                                                                <a class="dropdown-item" href="#">Marketing store activities </a>
-                                                                <a class="dropdown-item" href="#">Call center activities</a>
-                                                                <a class="dropdown-item" href="#">Rfq pending suppliers</a>
-                                                                <a class="dropdown-item" href="#">Store marketing docs</a>
-                                                                <a class="dropdown-item" href="#">Rfq supplier log</a>
-                                                                <a class="dropdown-item" href="#">Supplier verification</a>
-                                                            </div>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <!-- include table component -->
-                                                @include('admin.suppliers.components.items')
-                                                @include('admin.suppliers.components.edit')
-                                                @include('admin.suppliers.components.delete')
-                                                @include('admin.suppliers.components.delete_selected')
-                                                @endforeach
+                                            <tbody id="suppliers_table_body">
+                                                
                                             </tbody>
                                         </table>
-                                        <div class="d-flex justify-content-center">
-                                            {!! $suppliers->links("pagination::bootstrap-4") !!}
-                                        </div>
+                                        
+                                        @include('admin.suppliers.components.delete_selected')
                                     </div>
                                 </div>
                             </div>

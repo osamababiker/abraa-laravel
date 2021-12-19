@@ -8,15 +8,69 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Country;
 
 class ItemsController extends Controller
 {
 
     public function index()
     {
-        $items = Item::paginate(10);
-        $items_count = Item::count(); 
-        return view('admin.items.index', compact(['items','items_count']));
+        $countries = Country::all();
+        return view('admin.items.index', compact(['countries']));
+    }
+
+    public function getItemsAsJson(Request $request){
+
+        $rows_numbers = $request->rows_numbers;
+
+        $items_obj = Item::where('active',1)
+            ->where('status',1)
+            ->where('rejected',0)
+            ->where('approved',1)->orderBy('id','desc'); 
+            
+        $items_count = $items_obj->count();
+        $items = $items_obj->limit($rows_numbers)->with('category')->get();
+        
+        return response()->json([
+            'items' => $items,
+            'items_count' => $items_count
+        ]);
+    }
+
+    public function filterItems(Request $request){
+        
+        $product_name = $request->product_name;
+        $manufacture_country = $request->manufacture_country;
+        $rows_numbers = $request->rows_numbers; 
+        $meta_keyword = $request->meta_keyword;
+
+        $items_obj = Item::where('active',1)
+            ->where('status',1)
+            ->where('rejected',0)
+            ->where('approved',1);
+
+        if($product_name){
+            $items_obj->where('title', $product_name);
+        }
+
+        if($manufacture_country){
+            $items_obj->whereIn('manufacture_country', $manufacture_country);
+        }
+        
+        if($meta_keyword){
+            foreach($meta_keyword as $word){
+                $items_obj->where('meta_keyword','like', '%' . $word . '%');
+            }
+        }
+            
+        $items_count = $items_obj->count();
+        $items = $items_obj->limit($rows_numbers)->with('category')
+            ->orderBy('id','desc')->get();
+        
+        return response()->json([
+            'items' => $items,
+            'items_count' => $items_count
+        ]);
     }
 
     // to get approved items (products) only
@@ -63,15 +117,15 @@ class ItemsController extends Controller
         return view('admin.items.active_items', compact(['items','items_count']));
     }
 
-     // to get home items (products) only 
-     public function home_items()
-     {
-         $items_obj = Item::where('rejected',1);
- 
-         $items = $items_obj->paginate(10);
-         $items_count = $items_obj->count();
-         return view('admin.items.active_items', compact(['items','items_count']));
-     }
+    // to get home items (products) only 
+    public function home_items()
+    {
+        $items_obj = Item::where('rejected',1);
+
+        $items = $items_obj->paginate(10);
+        $items_count = $items_obj->count();
+        return view('admin.items.active_items', compact(['items','items_count']));
+    }
 
     
     public function create()

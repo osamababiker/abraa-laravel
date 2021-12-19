@@ -23,7 +23,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title"> You have {{ $items_count }} item in this table  </h5>
+                                        <h5 class="card-title"> You have <span id="filter_counter"></span> item in this table  </h5>
                                         <div class="row">
                                             <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                             &nbsp; &nbsp;
@@ -41,17 +41,34 @@
                                     </div>
                                     <div class="card-body">
 
-                                        <!-- custome search box to search all table  -->
-                                        <div class="row mb-2 m-1">
-                                            <div class="d-non d-sm-inline-block">
-                                                <div class="input-group input-group-navbar">
-                                                    <input type="text" name="search_query" class="form-control" placeholder="Search buyers ...." aria-label="Search">
-                                                    <div class="input-group-append">
-                                                        <button name="search_items_btn" form="items_actions_form" class="btn" type="submit">
-                                                            <i class="align-middle" data-feather="search"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                    <div class="row mb-2 m-1">
+                                            <div class="col-md-3 form-group">
+                                                <label for="product_name">Search Product Name</label>
+                                                <input type="text" name="product_name" id="product_name" class="filter_data_table form-control" aria-label="Search">
+                                            </div>
+                                            <div class="col-md-3 form-group">
+                                                <label for="manufacture_country">Filter by manufacturer Country</label>
+                                                <select name="manufacture_country[]" multiple="multiple" id="manufacture_country" class="filter_data_table form-control select2">
+                                                    <option value=""> choose country </option>
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
+                                                    @endforeach 
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 form-group">
+                                                <label for="meta_keyword">Filter by Keywords</label>
+                                                <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="filter_data_table form-control select2">
+               
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 form-group">
+                                                <label for="rows_numbers">Numbers of rows</label>
+                                                <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                                    <option value="10"> 10 </option>
+                                                    <option value="100"> 100 </option>
+                                                    <option value="500"> 500 </option>
+                                                    <option value="1000"> 1000 </option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -67,37 +84,10 @@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach($items as $item)
-                                                <tr>
-                                                    <td> <input type="checkbox" name="item_id[]" value="{{ $item->id }}" id=""> </td>
-                                                    <td>{{ $item->id }}</td>
-                                                    <td> {{ $item->title }} </td>
-                                                    <td>
-                                                        @if($item->category)
-                                                        {{ $item->category->en_title }}
-                                                        @endif
-                                                    </td>
-                                                    <td>  
-                                                        <a href="{{ $item->slug }}">{{ $item->slug }}</a>
-                                                    </td>
-                                                    <td>{{ $item->date_added }}</td>
-                                                    <td class="table-action">
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#view_item_{{ $item->id }}"><i class="align-middle" data-feather="eye"></i></a>
-                                                        <a href="#" type="button" data-toggle="modal" data-target="#edit_item_{{ $item->id }}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                        <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_item_{{ $item->id }}" data-feather="trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <!-- include table component -->
-                                                @include('admin.items.components.edit')
-                                                @include('admin.items.components.delete')
-                                                @include('admin.items.components.delete_selected')
-                                                @endforeach
+                                            <tbody id="items_table_body">
+                                              
                                             </tbody>
                                         </table>
-                                        <div class="d-flex justify-content-center">
-                                            {!! $items->links("pagination::bootstrap-4") !!}
-                                        </div>
                                     </div>
                                 </div>
                             </div>

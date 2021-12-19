@@ -1,3 +1,5 @@
+@include('admin.layouts.loader') 
+
 <nav id="sidebar" class="sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="/">

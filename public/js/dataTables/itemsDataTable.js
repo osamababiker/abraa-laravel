@@ -1,0 +1,164 @@
+$(document).ready(function () {
+
+    $("#ajax_loader").css('display', 'block');
+
+    var items_html = '';
+    var item_category = '';
+
+    // filter data
+    var rows_numbers = $('#rows_numbers').val();
+
+    $.ajax({
+        url: "/items/json",
+        type: "get",
+        data: {"rows_numbers": rows_numbers},
+        success: function(response){
+
+            $("#filter_counter").text(response.items_count);
+
+            response.items.forEach(function(item) {
+
+                if(item.category){
+                    item_category = item.category.en_title;
+                }
+
+                items_html = items_html +
+                
+                "<div class=\"modal fade\" id=\"delete_item_"+ item.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                "<div class=\"modal-dialog\" role=\"document\">\n"+
+                    "<div class=\"modal-content\">\n"+
+                        "<form action=\"/items/"+ item.id +"/destroy\" id=\"delete_item_form_"+ item.id +"\" method=\"DELETE\">\n"+
+                        "</form>\n"+
+                        "<div class=\"modal-header\">\n"+
+                            "<h5 class=\"modal-title\">Archive - "+ item.title +"</h5>\n"+
+                            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
+                                "<span aria-hidden=\"true\">&times;</span>\n"+
+                            "</button>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-body m-3\">\n"+
+                            "<p class=\"mb-0\">Are you Sure you want to move , "+ item.en_title +" to archive ??</p>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-footer\">\n"+
+                            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
+                            "<button type=\"submit\" form=\"delete_item_form_"+ item.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                        "</div>\n"+
+                    "</div>\n"+
+                    "</div>\n"+
+                "</div>\n"+
+
+                "<tr>\n"+
+                "<td> <input type=\"checkbox\" name=\"item_id[]\" value=\""+ item.id +"\" ></input> </td>\n" +
+                "<td>"+ item.id +"</td>\n"+
+                "<td>"+ item.title +"</td>\n"+
+                "<td>"+ item_category +"</td>\n"+
+                "<td> <a href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ item.date_added +"</td>\n"+
+                "<td class=\"table-action\">\n"+
+                    "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+
+                        "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
+                    "</a>\n"+
+                    "&nbsp;"+
+                    "<a target=\"_blank\" href=\"/items/"+ item.id +"/edit\">\n"+
+                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
+                    "</a>\n"+
+                    "&nbsp;"+
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_item_"+ item.id +"\">\n"+
+                        "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
+                    "</a>\n"+
+                "</td>\n"+
+                "</tr>\n"
+            });
+
+            $("#items_table_body").html(items_html);
+
+            $("#ajax_loader").css('display', 'none');
+        }
+    });
+});
+
+
+
+$(".filter_data_table").on('change', function () {
+
+    $("#ajax_loader").css('display', 'block');
+
+    var items_html = '';
+
+    // filter data
+    var product_name = $('#product_name').val(); 
+    var manufacture_country = $('#manufacture_country').val(); 
+    var meta_keyword = $('#meta_keyword').val(); 
+    var rows_numbers = $('#rows_numbers').val(); 
+
+    $.ajax({
+        url: "/items/filter",
+        type: "post",
+        data: {
+            'product_name': product_name,
+            'manufacture_country': manufacture_country,
+            'rows_numbers': rows_numbers,
+            'meta_keyword': meta_keyword
+        },
+        success: function(response){
+
+            $("#filter_counter").text(response.items_count);
+
+            response.items.forEach(function(item) {
+
+                if(item.category){
+                    item_category = item.category.en_title;
+                }
+
+                items_html = items_html +
+                
+                "<div class=\"modal fade\" id=\"delete_item_"+ item.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                "<div class=\"modal-dialog\" role=\"document\">\n"+
+                    "<div class=\"modal-content\">\n"+
+                        "<form action=\"/items/"+ item.id +"/destroy\" id=\"delete_item_form_"+ item.id +"\" method=\"DELETE\">\n"+
+                        "</form>\n"+
+                        "<div class=\"modal-header\">\n"+
+                            "<h5 class=\"modal-title\">Archive - "+ item.en_title +"</h5>\n"+
+                            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
+                                "<span aria-hidden=\"true\">&times;</span>\n"+
+                            "</button>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-body m-3\">\n"+
+                            "<p class=\"mb-0\">Are you Sure you want to move , "+ item.title +" to archive ??</p>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-footer\">\n"+
+                            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
+                            "<button type=\"submit\" form=\"delete_item_form_"+ item.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                        "</div>\n"+
+                    "</div>\n"+
+                    "</div>\n"+
+                "</div>\n"+
+
+                "<tr>\n"+
+                "<td> <input type=\"checkbox\" name=\"item_id[]\" value=\""+ item.id +"\" ></input> </td>\n" +
+                "<td>"+ item.id +"</td>\n"+
+                "<td>"+ item.title +"</td>\n"+
+                "<td>"+ item_category +"</td>\n"+
+                "<td> <a href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ item.date_added +"</td>\n"+
+                "<td class=\"table-action\">\n"+
+                    "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+
+                        "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
+                    "</a>\n"+
+                    "&nbsp;"+
+                    "<a target=\"_blank\" href=\"/items/"+ item.id +"/edit\">\n"+
+                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
+                    "</a>\n"+
+                    "&nbsp;"+
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_item_"+ item.id +"\">\n"+
+                        "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
+                    "</a>\n"+
+                "</td>\n"+
+                "</tr>\n"
+            });
+
+            $("#items_table_body").html(items_html);
+
+            $("#ajax_loader").css('display', 'none');
+        }
+    });
+});

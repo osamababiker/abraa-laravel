@@ -276,52 +276,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card flex-fill">
-                        <div class="card-header">
-                            <div class="card-actions float-right">
-                                <div class="dropdown show">
-                                    <a href="#" data-toggle="dropdown" data-display="static">
-                                        <i class="align-middle" data-feather="more-horizontal"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="card-title mb-0">Latest Orders</h5>
-                        </div>
-                        <table id="datatables-dashboard-projects" class="table table-striped my-0">
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th class="d-none d-xl-table-cell">Email</th>
-                                    <th class="d-none d-xl-table-cell">Order Date</th>
-                                    <th>Status</th>
-                                    <th class="d-none d-md-table-cell">Supplier</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Omer Alhamra</td>
-                                    <td class="d-none d-xl-table-cell">omer@abraa.com</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge badge-danger">Cancelled</span></td>
-                                    <td class="d-none d-md-table-cell">Bertha Martin</td>
-                                </tr>
-                                <tr>
-                                    <td>Osama babiker</td>
-                                    <td class="d-none d-xl-table-cell">osama@abraa.com</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2021</td>
-                                    <td><span class="badge badge-success">done</span></td>
-                                    <td class="d-none d-md-table-cell">Bertha Martin</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </main>
 

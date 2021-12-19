@@ -49,8 +49,16 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('suppliers/actions', 
         [SuppliersController::class , 'actions']
     )->name('suppliers.actions');    
-    // custom delete route 
-    Route::get('suppliers/{id}/destroy', [
+    // get suppliers as json route 
+    Route::get('suppliers/json', [
+        SuppliersController::class, 'getSuppliersAsJson'
+    ])->name('suppliers.json');
+       // filter suppliers  route 
+    Route::post('suppliers/filter', [
+        SuppliersController::class, 'filterSuppliers'
+    ])->name('suppliers.filter');
+     // custom delete route 
+     Route::get('suppliers/{id}/destroy', [
         SuppliersController::class, 'destroy'
     ]);
     // organic suppliers route
@@ -105,6 +113,14 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('items/actions', 
         [ItemsController::class , 'actions']
     )->name('items.actions');
+    // get items as json route 
+    Route::get('items/json', [
+        ItemsController::class, 'getItemsAsJson'
+    ])->name('items.json');
+        // filter items  route 
+    Route::post('items/filter', [
+        ItemsController::class, 'filterItems'
+    ])->name('items.filter');
     // custom delete route
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'

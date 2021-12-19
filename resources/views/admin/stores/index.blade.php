@@ -80,7 +80,7 @@
                                             <tr>
                                                 <td> <input type="checkbox" name="store_id[]" value="{{ $store->id }}" id=""> </td>
                                                 <td>{{ $store->id }}</td>
-                                                <td> {{ $store->user->email }}  </td>
+                                                <td> {{ $store->user->email }}  </td> 
                                                 <td> {{ $store->name }} </td>
                                                 <td> <a target="_blank" href="https://www.abraa.com/store/{{ $store->id }}"> https://www.abraa.com/store/{{ $store->id }} </a> </td>
                                                 <td>
