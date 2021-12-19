@@ -143,12 +143,12 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Datatables Responsive
             $("#datatables-reponsive").DataTable({
-                // responsive: true
-                "scrollX": true, 
+                responsive: true,
+                // "scrollX": true, 
                 "bPaginate": false,
                 //"scrollY": 200,
                 "scrollTop": true,
-                "searching": false,
+                "searching": false
                 "aoColumnDefs": [
                     { "bSortable": false, "aTargets": [ 0, 1, 2, 3 ] }, 
                     { "bSearchable": false, "aTargets": [ 0, 1, 2, 3 ] }
@@ -192,6 +192,8 @@
     <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>
 
     <script src="{{ asset('js/dataTables/itemsDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/storesDataTable.js') }}"></script>
 
 </body>
 

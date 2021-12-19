@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/', [
         HomeController::class , 'index'
     ])->name('admin.index');
- 
+  
     // ======================= Suppliers Routes ====================== //
     // table actions route
     Route::post('suppliers/actions', 
@@ -72,7 +72,15 @@ Route::group(['middleware' => 'auth'], function (){
     // table actions route
     Route::post('stores/actions', 
         [StoresController::class , 'actions']
-    )->name('stores.actions');    
+    )->name('stores.actions');
+    // get stores as json route 
+    Route::get('stores/json', [
+        StoresController::class, 'getStoresAsJson'
+    ])->name('stores.json');
+        // filter stores  route 
+    Route::post('stores/filter', [
+        StoresController::class, 'filterStores'
+    ])->name('stores.filter');    
     // custom delete route 
     Route::get('stores/{id}/destroy', [
         StoresController::class, 'destroy'
@@ -96,15 +104,19 @@ Route::group(['middleware' => 'auth'], function (){
      // table actions route
      Route::post('rfq/actions', 
         [RfqsController::class , 'actions']
-    )->name('buyers.actions');    
+    )->name('buyers.actions');  
+     // get rfq as json route 
+     Route::get('rfq/json', [
+        RfqsController::class, 'getRfqsAsJson'
+    ])->name('rfq.json');
+        // filter rfq  route 
+    Route::post('rfq/filter', [
+        RfqsController::class, 'filterRfqs'
+    ])->name('rfq.filter');   
     // custom delete route
     Route::get('rfq/{id}/destroy', [
         RfqsController::class, 'destroy'
     ]);
-    // pending  rfq route
-    Route::get('rfq/pending', [
-        RfqsController::class, 'pending_rfq'
-    ])->name('rfq.pending');
     // resource route
     Route::resource('rfq', RfqsController::class);
 
@@ -125,22 +137,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'
     ]);
-    // active items route
-    Route::get('items/active', [
-        ItemsController::class, 'active_items'
-    ])->name('items.active');
-    // pending items route
-    Route::get('items/pending', [
-        ItemsController::class, 'pending_items'
-    ])->name('items.pending');
-    // rejected items route
-      Route::get('items/rejected', [
-        ItemsController::class, 'rejected_items'
-    ])->name('items.rejected');
-    // home items route
-    Route::get('items/home_items', [
-        ItemsController::class, 'home_items'
-    ])->name('items.home_items');
     // resource route
     Route::resource('items', ItemsController::class, ['except' => ['destroy']]);
     

@@ -3,6 +3,8 @@
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
+        
+        @include('admin.layouts.loader')
 
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
@@ -21,7 +23,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title"> You have {{ $stores_count }} store in this table   </h5>
+                                    <h5 class="card-title"> You have <span id="filter_counter"></span> store in this table   </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;
@@ -41,19 +43,46 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body"> 
 
-                                    <!-- custome search box to search all table  -->
                                     <div class="row mb-2 m-1">
-                                        <div class="d-non d-sm-inline-block">
-                                            <div class="input-group input-group-navbar">
-                                                <input type="text" name="search_query" class="form-control" placeholder="Search buyers ...." aria-label="Search">
-                                                <div class="input-group-append">
-                                                    <button name="search_stores_btn" form="stores_actions_form" class="btn" type="submit">
-                                                        <i class="align-middle" data-feather="search"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="store_name">Store Name</label>
+                                            <input type="text" name="store_name" id="store_name" class="filter_data_table form-control" aria-label="Search">
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="stores_status">Filter by Status</label>
+                                            <select name="stores_status"  id="stores_status" class="filter_data_table form-control select2">
+                                                <option value=""> All Stores </option>   
+                                                <option value="active"> Active Stores </option>
+                                                <option value="pending"> Pending Stores </option>
+                                                <option value="rejected"> Rejected Stores </option>
+                                                <option value="home"> Bulk Stores </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="store_country"> Filter by Country</label>
+                                            <select name="store_country[]" multiple="multiple" id="store_country" class="filter_data_table form-control select2">
+                                                <option value=""> choose country </option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
+                                                @endforeach 
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="meta_keyword">Filter by Keywords</label>
+                                            <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="filter_data_table form-control select2">
+            
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="rows_numbers">Numbers of rows</label>
+                                            <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                                <option value="10"> 10 </option>
+                                                <option value="100"> 100 </option>
+                                                <option value="500"> 500 </option>
+                                                <option value="1000"> 1000 </option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -65,63 +94,19 @@
                                                 <th>Registered Email</th>
                                                 <th>Store Name</th>
                                                 <th>Sub Domain</th>
-                                                <th>Logo</th>
                                                 <th>Visits</th>
                                                 <th>Store Verified</th>
                                                 <th>Contact Count</th>
-                                                <th>Date Added </th>
-                                                <th>Products</th>
+                                                <th>Date Added </th> 
                                                 <th>Reminders Sent</th>
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @foreach($stores as $store)
-                                            <tr>
-                                                <td> <input type="checkbox" name="store_id[]" value="{{ $store->id }}" id=""> </td>
-                                                <td>{{ $store->id }}</td>
-                                                <td> {{ $store->user->email }}  </td> 
-                                                <td> {{ $store->name }} </td>
-                                                <td> <a target="_blank" href="https://www.abraa.com/store/{{ $store->id }}"> https://www.abraa.com/store/{{ $store->id }} </a> </td>
-                                                <td>
-                                                    @if($store->logo_url)
-                                                    <a target="_blank" href="{{ asset('upload/stores/'. $store->logou_url) }}"> <img width="100" height="100" src="{{ asset('upload/stores/'. $store->logou_url) }}" alt="">  </a>
-                                                    @endif
-                                                </td>
-                                                <td> {{ $store->noofvisits }} </td>
-                                                <td>
-                                                    @if($store->store_verified == 1)
-                                                        <i class="fa fa-check" style="color: green"></i>
-                                                    @else 
-                                                        <i class="fa fa-times" style="color: red"></i>
-                                                    @endif
-                                                </td>
-                                                <td> {{ $store->contact_count }} </td>
-                                                <td> {{ $store->date_added }}  </td>
-                                                <td> 
-                                                    @if($store->items)
-                                                    <a target="_blank" href=""> {{ $store->items->count() }} </a> 
-                                                    @endif
-                                                </td>
-                                                <td> 
-                                                   
-                                                </td>
-                                                <td class="table-action">
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#view_store_{{ $store->id }}"><i class="align-middle" data-feather="eye"></i></a>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#edit_store_{{ $store->id }}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_store_{{ $store->id }}" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <!-- include table component -->
-                                            @include('admin.stores.components.edit')
-                                            @include('admin.stores.components.delete')
-                                            @include('admin.stores.components.delete_selected')
-                                            @endforeach
+                                        <tbody id="stores_table_body">
+                                            
                                         </tbody>
                                     </table>
-                                    <div class="d-flex justify-content-center">
-                                        {!! $stores->links("pagination::bootstrap-4") !!}
-                                    </div>
+                                    @include('admin.stores.components.delete_selected')
                                 </div>
                             </div>
                         </div>

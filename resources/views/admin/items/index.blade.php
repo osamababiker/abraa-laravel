@@ -4,6 +4,8 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
 
+        @include('admin.layouts.loader')
+
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
 
@@ -41,13 +43,23 @@
                                     </div>
                                     <div class="card-body">
 
-                                    <div class="row mb-2 m-1">
-                                            <div class="col-md-3 form-group">
+                                        <div class="row mb-2 m-1">
+                                            <div class="col-md-2 form-group">
                                                 <label for="product_name">Search Product Name</label>
                                                 <input type="text" name="product_name" id="product_name" class="filter_data_table form-control" aria-label="Search">
                                             </div>
-                                            <div class="col-md-3 form-group">
-                                                <label for="manufacture_country">Filter by manufacturer Country</label>
+                                            <div class="col-md-2 form-group">
+                                                <label for="item_status">Filter by Status</label>
+                                                <select name="item_status"  id="items_status" class="filter_data_table form-control select2">
+                                                    <option value=""> All Items </option>   
+                                                    <option value="active"> Active Items </option>
+                                                    <option value="pending"> Pending Items </option>
+                                                    <option value="rejected"> Rejected Items </option>
+                                                    <option value="home"> Home Items </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="manufacture_country"> manufacturer Country</label>
                                                 <select name="manufacture_country[]" multiple="multiple" id="manufacture_country" class="filter_data_table form-control select2">
                                                     <option value=""> choose country </option>
                                                     @foreach($countries as $country)
@@ -55,13 +67,13 @@
                                                     @endforeach 
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="meta_keyword">Filter by Keywords</label>
                                                 <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="filter_data_table form-control select2">
                
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="rows_numbers">Numbers of rows</label>
                                                 <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
                                                     <option value="10"> 10 </option>
@@ -88,6 +100,8 @@
                                               
                                             </tbody>
                                         </table>
+
+                                        @include('admin.items.components.delete_selected')
                                     </div>
                                 </div>
                             </div>

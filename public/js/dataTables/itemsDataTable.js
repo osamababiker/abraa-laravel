@@ -7,11 +7,15 @@ $(document).ready(function () {
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
+    var items_status = $('#items_status').val();
 
     $.ajax({
         url: "/items/json",
         type: "get",
-        data: {"rows_numbers": rows_numbers},
+        data: {
+            "rows_numbers": rows_numbers,
+            "items_status": items_status
+        },
         success: function(response){
 
             $("#filter_counter").text(response.items_count);
@@ -36,7 +40,7 @@ $(document).ready(function () {
                             "</button>\n"+
                         "</div>\n"+
                         "<div class=\"modal-body m-3\">\n"+
-                            "<p class=\"mb-0\">Are you Sure you want to move , "+ item.en_title +" to archive ??</p>\n"+
+                            "<p class=\"mb-0\">Are you Sure you want to move , "+ item.title +" to archive ??</p>\n"+
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
@@ -83,12 +87,14 @@ $(".filter_data_table").on('change', function () {
     $("#ajax_loader").css('display', 'block');
 
     var items_html = '';
+    var item_category = '';
 
     // filter data
     var product_name = $('#product_name').val(); 
     var manufacture_country = $('#manufacture_country').val(); 
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
+    var items_status = $('#items_status').val();
 
     $.ajax({
         url: "/items/filter",
@@ -97,7 +103,8 @@ $(".filter_data_table").on('change', function () {
             'product_name': product_name,
             'manufacture_country': manufacture_country,
             'rows_numbers': rows_numbers,
-            'meta_keyword': meta_keyword
+            'meta_keyword': meta_keyword,
+            "items_status": items_status
         },
         success: function(response){
 
@@ -117,7 +124,7 @@ $(".filter_data_table").on('change', function () {
                         "<form action=\"/items/"+ item.id +"/destroy\" id=\"delete_item_form_"+ item.id +"\" method=\"DELETE\">\n"+
                         "</form>\n"+
                         "<div class=\"modal-header\">\n"+
-                            "<h5 class=\"modal-title\">Archive - "+ item.en_title +"</h5>\n"+
+                            "<h5 class=\"modal-title\">Archive - "+ item.title +"</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
                                 "<span aria-hidden=\"true\">&times;</span>\n"+
                             "</button>\n"+

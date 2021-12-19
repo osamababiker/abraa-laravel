@@ -22,14 +22,39 @@ class ItemsController extends Controller
     public function getItemsAsJson(Request $request){
 
         $rows_numbers = $request->rows_numbers;
+        $items_status = $request->items_status;
 
-        $items_obj = Item::where('active',1)
-            ->where('status',1)
-            ->where('rejected',0)
-            ->where('approved',1)->orderBy('id','desc'); 
-            
-        $items_count = $items_obj->count();
-        $items = $items_obj->limit($rows_numbers)->with('category')->get();
+        $item_obj = Item::leftJoin('users', 'users.id', '=', 'items.user_id')
+            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
+            ->where('users_store.trash',0)
+            ->where('users_store.rejected',0);
+
+        if($items_status == 'active'){
+            $item_obj = $item_obj->where('items.status', 1)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 1);
+        } 
+        elseif($items_status == 'pending'){
+            $item_obj = $item_obj->where('items.status', 0)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 0);
+        }
+        elseif($items_status == 'rejected'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        elseif($items_status == 'home'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        else {
+            $item_obj = $item_obj->where('items.active',1)
+                ->where('items.status',1)
+                ->where('items.rejected',0)
+                ->where('items.approved',1); 
+        }
+
+        $items_count = $item_obj->count();
+        $items = $item_obj->limit($rows_numbers)
+            ->with('category')->orderBy('items.id','desc')->get();
         
         return response()->json([
             'items' => $items,
@@ -43,29 +68,54 @@ class ItemsController extends Controller
         $manufacture_country = $request->manufacture_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+        $items_status = $request->items_status;
 
-        $items_obj = Item::where('active',1)
-            ->where('status',1)
-            ->where('rejected',0)
-            ->where('approved',1);
+        $item_obj = Item::leftJoin('users', 'users.id', '=', 'items.user_id')
+            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
+            ->where('users_store.trash',0)
+            ->where('users_store.rejected',0);
 
+        if($items_status == 'active'){
+            $item_obj = $item_obj->where('items.status', 1)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 1);
+        } 
+        elseif($items_status == 'pending'){
+            $item_obj = $item_obj->where('items.status', 0)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 0);
+        }
+        elseif($items_status == 'rejected'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        elseif($items_status == 'home'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        else {
+            $item_obj = $item_obj->where('items.active',1)
+                ->where('items.status',1)
+                ->where('items.rejected',0)
+                ->where('items.approved',1); 
+        }
+        
         if($product_name){
-            $items_obj->where('title', $product_name);
+            $item_obj->where('items.title', $product_name);
         }
 
         if($manufacture_country){
-            $items_obj->whereIn('manufacture_country', $manufacture_country);
+            $item_obj->whereIn('items.manufacture_country', $manufacture_country);
         }
         
         if($meta_keyword){
             foreach($meta_keyword as $word){
-                $items_obj->where('meta_keyword','like', '%' . $word . '%');
+                $item_obj->where('items.meta_keyword','like', '%' . $word . '%');
             }
         }
             
-        $items_count = $items_obj->count();
-        $items = $items_obj->limit($rows_numbers)->with('category')
-            ->orderBy('id','desc')->get();
+        $items_count = $item_obj->count();
+        $items = $item_obj->limit($rows_numbers)->with('category')
+            ->orderBy('items.id','desc')->get();
+
         
         return response()->json([
             'items' => $items,
@@ -73,59 +123,6 @@ class ItemsController extends Controller
         ]);
     }
 
-    // to get approved items (products) only
-    public function active_items()
-    {
-        $items_obj = DB::table('items')
-            ->leftJoin('users', 'users.id', '=', 'items.user_id')
-            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
-            ->where('users_store.trash',0)
-            ->where('users_store.rejected',0)
-            ->where('items.status', 1)
-            ->where('items.rejected', 0)
-            ->where('items.approved', 1);
-
-        $items = $items_obj->paginate(10);
-        $items_count = $items_obj->count();
-        return view('admin.items.active_items', compact(['items','items_count']));
-    }
-
-    // to get pending items (products) only
-    public function pending_items()
-    {
-        $items_obj = DB::table('items')
-            ->leftJoin('users', 'users.id', '=', 'items.user_id')
-            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
-            ->where('users_store.trash',0)
-            ->where('users_store.rejected',0)
-            ->where('items.status', 0)
-            ->where('items.rejected', 0)
-            ->where('items.approved', 0);
-
-        $items = $items_obj->paginate(10);
-        $items_count = $items_obj->count();
-        return view('admin.items.active_items', compact(['items','items_count']));
-    }
-
-    // to get rejected items (products) only 
-    public function rejected_items()
-    {
-        $items_obj = Item::where('rejected',1);
-
-        $items = $items_obj->paginate(10);
-        $items_count = $items_obj->count();
-        return view('admin.items.active_items', compact(['items','items_count']));
-    }
-
-    // to get home items (products) only 
-    public function home_items()
-    {
-        $items_obj = Item::where('rejected',1);
-
-        $items = $items_obj->paginate(10);
-        $items_count = $items_obj->count();
-        return view('admin.items.active_items', compact(['items','items_count']));
-    }
 
     
     public function create()

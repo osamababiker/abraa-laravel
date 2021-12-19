@@ -4,6 +4,8 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
 
+        @include('admin.layouts.loader')
+        
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
 
