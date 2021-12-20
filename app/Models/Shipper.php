@@ -10,12 +10,9 @@ class Shipper extends Model
 {
     use HasFactory; 
     use SoftDeletes;
-    protected $table = "shippers";
+    protected $table = "users";
     protected $guarded = [];
 
-    public function user(){
-        return $this->belongsTo(User::class,'sub_of');
-    }
 
     public function shipper_country() {
         return $this->belongsTo(Country::class,'country','co_code');

@@ -21,12 +21,14 @@ class ShippersController extends Controller
         $rows_numbers = $request->rows_numbers;
         $shippers_status = $request->shippers_status;
 
-        $shipper_obj = Shipper::where('status',1);
+        $shipper_obj = Shipper::where('member_type',4)
+            ->where('user_type',0);
 
         $shippers_count = $shipper_obj->count();
         $shippers = $shipper_obj->limit($rows_numbers)
-            ->with('user')->with('shipper_country')
+            ->with('shipper_country')
             ->orderBy('id','desc')->get();
+
         
         return response()->json([
             'shippers' => $shippers,
@@ -36,26 +38,25 @@ class ShippersController extends Controller
 
     public function filterShippers(Request $request){
         
-        $company_name = $request->company_name;
+        $shipper_name = $request->shipper_name;
         $countries = $request->countries;
         $rows_numbers = $request->rows_numbers; 
 
-        $shipper_obj = Shipper::where('status',1);
+        $shipper_obj = Shipper::where('member_type',4)
+            ->where('user_type',0);
 
-        if($company_name){
-            $shipper_obj->where('company_name','like', '%' . $company_name . '%'); 
+        if($shipper_name){
+            $shipper_obj->where('full_name','like', '%' . $shipper_name . '%'); 
         }
 
         if($countries){
-            $shipper_obj->leftJoin('users', function($join) {
-                $join->on('users.id', '=', 'shippers.sub_of');
-            })->whereIn('users.country', $countries);
+            $shipper_obj->whereIn('country', $countries);
         }
         
             
         $shippers_count = $shipper_obj->count();
         $shippers = $shipper_obj->limit($rows_numbers)
-            ->with('user')->with('shipper_country')
+            ->with('shipper_country')
             ->orderBy('id','desc')->get();
 
         

@@ -50,8 +50,8 @@
 
                                         <div class="row mb-2 m-1">
                                             <div class="col-md-4 form-group">
-                                                <label for="company_name">Search shipper by Name</label>
-                                                <input type="text" name="company_name" id="company_name" class="filter_data_table form-control" aria-label="Search">
+                                                <label for="shipper_name">Search shipper by Name</label>
+                                                <input type="text" name="shipper_name" id="shipper_name" class="filter_data_table form-control" aria-label="Search">
                                             </div>
                                             <div class="col-md-4 form-group">
                                                 <label for="filter_by_country">Filter by Country</label>
