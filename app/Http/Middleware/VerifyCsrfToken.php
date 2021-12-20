@@ -17,7 +17,8 @@ class VerifyCsrfToken extends Middleware
         '/stores/filter',
         '/rfq/filter',
         '/categories/filter',
-        '/buyers/filter'
+        '/buyers/filter',
+        '/shippers/filter'
     ];
 }
  

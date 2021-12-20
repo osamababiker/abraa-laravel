@@ -201,6 +201,8 @@
 
     <script src="<?php echo e(asset('js/dataTables/categoriesDataTable.js')); ?>"></script>
 
+    <script src="<?php echo e(asset('js/dataTables/shippersDataTable.js')); ?>"></script>
+
 </body>
 
 </html>

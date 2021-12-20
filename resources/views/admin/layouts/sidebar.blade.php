@@ -42,6 +42,14 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#shippers" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Shippers</span>
+                </a>
+                <ul id="shippers" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('shippers.index') }}">All shippers</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#stores" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="home"></i> <span class="align-middle">Stores</span>
                 </a>

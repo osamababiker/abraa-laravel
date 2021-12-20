@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ItemsController;
 use App\Http\Controllers\Admin\SuppliersController;
+use App\Http\Controllers\Admin\ShippersController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
@@ -39,11 +40,15 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 
 
 Route::group(['middleware' => 'auth'], function (){
+
+
+
     // ======================= Home Routes ====================== //
     Route::get('/', [
         HomeController::class , 'index'
     ])->name('admin.index');
-  
+
+
     // ======================= Suppliers Routes ====================== //
     // table actions route
     Route::post('suppliers/actions', 
@@ -68,6 +73,28 @@ Route::group(['middleware' => 'auth'], function (){
     // resource route
     Route::resource('suppliers', SuppliersController::class, ['except' => ['destroy']]);
 
+
+    // ======================= Shippers Routes ====================== //
+    // table actions route
+    Route::post('shippers/actions', 
+        [ShippersController::class , 'actions']
+    )->name('shippers.actions');    
+    // get suppliers as json route 
+    Route::get('shippers/json', [
+        ShippersController::class, 'getShippersAsJson'
+    ])->name('shippers.json');
+       // filter shippers  route 
+    Route::post('shippers/filter', [
+        ShippersController::class, 'filterShippers'
+    ])->name('shippers.filter');
+     // custom delete route 
+     Route::get('shippers/{id}/destroy', [ 
+        ShippersController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('shippers', ShippersController::class, ['except' => ['destroy']]);
+
+
     // ======================= Stores Routes ====================== //
     // table actions route
     Route::post('stores/actions', 
@@ -87,6 +114,7 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('stores', StoresController::class, ['except' => ['destroy']]);
+
 
     // ======================= Buyers Routes ====================== //
     // table actions route
@@ -108,6 +136,7 @@ Route::group(['middleware' => 'auth'], function (){
     // resource route
     Route::resource('buyers', BuyersController::class);
 
+
      // ======================= Rfq Routes ====================== //
      // table actions route
      Route::post('rfq/actions', 
@@ -127,6 +156,7 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('rfq', RfqsController::class);
+
 
     // ======================= Items Routes ====================== //
     // table actions route
@@ -148,6 +178,7 @@ Route::group(['middleware' => 'auth'], function (){
     // resource route
     Route::resource('items', ItemsController::class, ['except' => ['destroy']]);
     
+
     // ======================= Categories Routes ====================== //
      // table actions route
     Route::post('categories/actions', 
@@ -165,6 +196,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('categories/{id}/destroy', [
         CategoriesController::class, 'destroy'
     ]);
+
+
     // resource route
     Route::resource('categories', CategoriesController::class);
 

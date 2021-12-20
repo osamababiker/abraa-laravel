@@ -533,6 +533,7 @@ class ComposerStaticInite6f690c597aa2df7665e98c75a787509
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
         'App\\Models\\Item' => __DIR__ . '/../..' . '/app/Models/Item.php',
         'App\\Models\\Rfq' => __DIR__ . '/../..' . '/app/Models/Rfq.php',
+        'App\\Models\\Shipper' => __DIR__ . '/../..' . '/app/Models/Shipper.php',
         'App\\Models\\Store' => __DIR__ . '/../..' . '/app/Models/Store.php',
         'App\\Models\\Supplier' => __DIR__ . '/../..' . '/app/Models/Supplier.php',
         'App\\Models\\Unit' => __DIR__ . '/../..' . '/app/Models/Unit.php',

@@ -201,6 +201,8 @@
 
     <script src="{{ asset('js/dataTables/categoriesDataTable.js') }}"></script>
 
+    <script src="{{ asset('js/dataTables/shippersDataTable.js') }}"></script>
+
 </body>
 
 </html>

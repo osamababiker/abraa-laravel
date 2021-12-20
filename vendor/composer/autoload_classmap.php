@@ -23,6 +23,7 @@ return array(
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
     'App\\Models\\Item' => $baseDir . '/app/Models/Item.php',
     'App\\Models\\Rfq' => $baseDir . '/app/Models/Rfq.php',
+    'App\\Models\\Shipper' => $baseDir . '/app/Models/Shipper.php',
     'App\\Models\\Store' => $baseDir . '/app/Models/Store.php',
     'App\\Models\\Supplier' => $baseDir . '/app/Models/Supplier.php',
     'App\\Models\\Unit' => $baseDir . '/app/Models/Unit.php',
