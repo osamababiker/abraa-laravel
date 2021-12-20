@@ -99,7 +99,7 @@ class ItemsController extends Controller
         }
         
         if($product_name){
-            $item_obj->where('items.title', $product_name);
+            $item_obj->where('items.title','like', '%' . $product_name . '%'); 
         }
 
         if($manufacture_country){
