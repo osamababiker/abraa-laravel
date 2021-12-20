@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function (){
         SuppliersController::class, 'filterSuppliers'
     ])->name('suppliers.filter');
      // custom delete route 
-     Route::get('suppliers/{id}/destroy', [
+     Route::get('suppliers/{id}/destroy', [ 
         SuppliersController::class, 'destroy'
     ]);
     // organic suppliers route
@@ -92,7 +92,15 @@ Route::group(['middleware' => 'auth'], function (){
     // table actions route
     Route::post('buyers/actions', 
         [BuyersController::class , 'actions']
-    )->name('buyers.actions');   
+    )->name('buyers.actions');
+    // get buyers as json route 
+      Route::get('buyers/json', [
+        BuyersController::class, 'getBuyersAsJson'
+    ])->name('buyers.json');
+       // filter buyers  route 
+    Route::post('buyers/filter', [
+        BuyersController::class, 'filterBuyers'
+    ])->name('buyers.filter');   
     // custom delete route 
     Route::get('buyers/{id}/destroy', [
         BuyersController::class, 'destroy'
@@ -141,6 +149,22 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('items', ItemsController::class, ['except' => ['destroy']]);
     
     // ======================= Categories Routes ====================== //
+     // table actions route
+    Route::post('categories/actions', 
+        [CategoriesController::class , 'actions']
+    )->name('items.actions');
+    // get categories as json route 
+    Route::get('categories/json', [
+        CategoriesController::class, 'getCategoriesAsJson'
+    ])->name('categories.json');
+        // filter categories  route 
+    Route::post('categories/filter', [
+        CategoriesController::class, 'filterCategories'
+    ])->name('categories.filter');
+    // custom delete route
+    Route::get('categories/{id}/destroy', [
+        CategoriesController::class, 'destroy'
+    ]);
     // resource route
     Route::resource('categories', CategoriesController::class);
 

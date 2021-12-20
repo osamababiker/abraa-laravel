@@ -7,19 +7,70 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Buyer;
+use App\Models\Country;
 
 class BuyersController extends Controller
 {
     
     public function index()
     { 
-        $buyers = Buyer::whereIn('member_type',[2,3])
-            ->where('user_type',0)->orderBy('id','desc')->paginate(10);
-        $buyers_count = Buyer::whereIn('member_type',[2,3])
-            ->where('user_type',0)->orderBy('id','desc')->count();
-        return view('admin.buyers.index',compact(['buyers','buyers_count']));
+        $countries = Country::all();
+        return view('admin.buyers.index',compact(['countries']));
     }
 
+
+    public function getBuyersAsJson(Request $request){
+
+        $rows_numbers = $request->rows_numbers;
+
+        $buyers_object = Buyer::whereIn('member_type',[2,3])
+            ->where('user_type',0);
+
+        $buyers = $buyers_object->orderBy('id','desc')
+            ->with('buyer_country')->limit($rows_numbers)->get();
+        $buyers_count = $buyers_object->count();
+        
+        return response()->json([
+            'buyers' => $buyers,
+            'buyers_count' => $buyers_count
+        ]);
+    }
+
+    public function filterBuyers(Request $request){
+
+        $countries = $request->countries;
+        $keywords = $request->keywords;
+        $rows_numbers = $request->rows_numbers; 
+        $buyer_name = $request->buyer_name;
+
+        $buyers_object = Buyer::whereIn('member_type',[2,3])
+            ->where('user_type',0);
+
+        if($buyer_name){
+            $buyers_object->where('full_name', $buyer_name);
+        }
+
+        if($countries){
+            $buyers_object->whereIn('country', $countries);
+        }
+        
+        if($keywords){
+            foreach($keywords as $word){
+                $buyers_object->where('interested_keywords','like', '%' . $word . '%');
+            }
+        }
+
+            
+        $buyers_count = $buyers_object->count();
+        $buyers = $buyers_object->limit($rows_numbers)
+            ->orderBy('id','desc')->with('buyer_country')->get();
+        
+        
+        return response()->json([
+            'buyers' => $buyers,
+            'buyers_count' => $buyers_count
+        ]);
+    }
 
     public function create()
     {

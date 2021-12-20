@@ -67,7 +67,7 @@ class ItemsController extends Controller
         $product_name = $request->product_name;
         $manufacture_country = $request->manufacture_country;
         $rows_numbers = $request->rows_numbers; 
-        $meta_keyword = $request->meta_keyword;
+        $meta_keyword = $request->meta_keyword; 
         $items_status = $request->items_status;
 
         $item_obj = Item::leftJoin('users', 'users.id', '=', 'items.user_id')

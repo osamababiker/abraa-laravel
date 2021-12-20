@@ -25,7 +25,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title"> You have <span id="filter_counter"></span> item in this table  </h5>
+                                        <h5 class="card-title"> You have <span id="items_counter"></span> item in this table  </h5>
                                         <div class="row">
                                             <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                             &nbsp; &nbsp;
@@ -66,7 +66,7 @@
                                                         <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
                                                     @endforeach 
                                                 </select>
-                                            </div>
+                                            </div> 
                                             <div class="col-md-2 form-group">
                                                 <label for="meta_keyword">Filter by Keywords</label>
                                                 <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="filter_data_table form-control select2">

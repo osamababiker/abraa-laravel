@@ -3,6 +3,8 @@
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
+        
+        <?php echo $__env->make('admin.layouts.loader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <!-- main sidebar here -->
         <?php echo $__env->make('admin.layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -21,7 +23,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title"> You have <?php echo e($categories_count); ?> category in this table  </h5>
+                                    <h5 class="card-title"> You have <span id="filter_counter"></span> category in this table  </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;
@@ -39,6 +41,27 @@
                                 </div>
                                 <div class="card-body">
 
+                                <div class="row mb-2 m-1">
+                                        <div class="col-md-4 form-group">
+                                            <label for="category_title">Category Title</label>
+                                            <input type="text" name="category_title" id="category_title" class="filter_data_table form-control" aria-label="Search">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="meta_keyword">Filter by Keywords</label>
+                                            <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="filter_data_table form-control select2">
+            
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="rows_numbers">Numbers of rows</label>
+                                            <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                                <option value="10"> 10 </option>
+                                                <option value="100"> 100 </option>
+                                                <option value="500"> 500 </option>
+                                                <option value="1000"> 1000 </option>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                                         <thead>
@@ -52,48 +75,11 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr>
-                                                <td> <input type="checkbox" name="category_id[]" value="<?php echo e($category->id); ?>" id=""> </td>
-                                                <td><?php echo e($category->id); ?></td>
-                                                <td> 
-                                                    <?php if($category->parentCategory): ?>
-                                                    <?php echo e($category->parentCategory->en_title); ?> 
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td><?php echo e($category->en_title); ?></td>
-                                                <td>  
-                                                    <?php if($category->status == 1): ?>
-                                                        <i class="fa fa-check" style="color: green"></i>
-                                                    <?php else: ?> 
-                                                        <i class="fa fa-times" style="color: red"></i>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <?php if($category->is_home_thumb == 1): ?>
-                                                        <i class="fa fa-check" style="color: green"></i>
-                                                    <?php else: ?> 
-                                                        <i class="fa fa-times" style="color: red"></i>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td class="table-action">
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#view_category_<?php echo e($category->id); ?>"><i class="align-middle" data-feather="eye"></i></a>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#edit_category_<?php echo e($category->id); ?>"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_category_<?php echo e($category->id); ?>" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <!-- include table component -->
-                                            <?php echo $__env->make('admin.categories.components.edit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.categories.components.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.categories.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <tbody id="categories_table_body">
+                            
                                         </tbody>
                                     </table>
-                                    <div class="d-flex justify-content-center">
-                                        <?php echo $categories->links("pagination::bootstrap-4"); ?>
-
-                                    </div>
+                                    <?php echo $__env->make('admin.categories.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             </div>
                         </div>

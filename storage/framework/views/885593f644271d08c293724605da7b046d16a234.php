@@ -191,9 +191,15 @@
 
     <script src="<?php echo e(asset('js/dataTables/suppliersDataTable.js')); ?>"></script>
 
+    <script src="<?php echo e(asset('js/dataTables/buyersDataTable.js')); ?>"></script>
+
     <script src="<?php echo e(asset('js/dataTables/itemsDataTable.js')); ?>"></script>
 
     <script src="<?php echo e(asset('js/dataTables/storesDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/rfqsDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/categoriesDataTable.js')); ?>"></script>
 
 </body>
 

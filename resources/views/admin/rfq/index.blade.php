@@ -4,6 +4,8 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
 
+        @include('admin.layouts.loader')
+
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
 
@@ -21,7 +23,7 @@
                         <div class="col-12"> 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title"> You have <span id="filter_counter"></span> Quotes in this table  </h5>
+                                    <h5 class="card-title"> You have <span id="rfqs_counter"></span> Quotes in this table  </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;
@@ -98,10 +100,8 @@
                                                 <th>Unit</th>
                                                 <th>Price</th>
                                                 <th>Total price</th>
-                                                <th>Currency </th>
                                                 <th>Message</th>
                                                 <th>Datetime</th>
-                                                <th>Vat</th>
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>

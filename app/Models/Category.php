@@ -13,7 +13,7 @@ class Category extends Model
     protected $table = "items_cat";
     protected $guarded = [];
 
-    public function parentCategory(){
+    public function parent(){
         return $this->belongsTo(Category::class,'sub_of');
     }
 }

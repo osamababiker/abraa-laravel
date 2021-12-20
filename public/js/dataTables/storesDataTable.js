@@ -19,7 +19,7 @@ $(document).ready(function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.stores_count);
+            $("#stores_counter").text(response.stores_count);
 
             response.stores.forEach(function(store) {
 
@@ -119,7 +119,7 @@ $(".filter_data_table").on('change', function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.stores_count);
+            $("#stores_counter").text(response.stores_count);
 
             response.stores.forEach(function(store) {
 

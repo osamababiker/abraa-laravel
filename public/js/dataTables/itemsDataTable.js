@@ -18,7 +18,7 @@ $(document).ready(function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.items_count);
+            $("#items_counter").text(response.items_count);
 
             response.items.forEach(function(item) {
 
@@ -108,7 +108,7 @@ $(".filter_data_table").on('change', function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.items_count);
+            $("#items_counter").text(response.items_count);
 
             response.items.forEach(function(item) {
 

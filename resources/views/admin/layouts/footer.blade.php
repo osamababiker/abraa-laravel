@@ -191,9 +191,15 @@
 
     <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>
 
+    <script src="{{ asset('js/dataTables/buyersDataTable.js') }}"></script>
+
     <script src="{{ asset('js/dataTables/itemsDataTable.js') }}"></script>
 
     <script src="{{ asset('js/dataTables/storesDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/rfqsDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/categoriesDataTable.js') }}"></script>
 
 </body>
 

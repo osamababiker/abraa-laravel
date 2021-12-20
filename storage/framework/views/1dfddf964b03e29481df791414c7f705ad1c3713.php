@@ -4,6 +4,8 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
 
+        <?php echo $__env->make('admin.layouts.loader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
         <!-- main sidebar here -->
         <?php echo $__env->make('admin.layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
@@ -21,7 +23,7 @@
                         <div class="col-12"> 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title"> You have <?php echo e($buying_requests_count); ?> Quotes in this table  </h5>
+                                    <h5 class="card-title"> You have <span id="filter_counter"></span> Quotes in this table  </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;
@@ -39,19 +41,48 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body"> 
                                     
-                                    <!-- custome search box to search all table  -->
                                     <div class="row mb-2 m-1">
-                                        <div class="d-non d-sm-inline-block">
-                                            <div class="input-group input-group-navbar">
-                                                <input type="text" name="search_query" class="form-control" placeholder="Search buyers ...." aria-label="Search">
-                                                <div class="input-group-append">
-                                                    <button name="search_rfq_btn" form="rfq_actions_form" class="btn" type="submit">
-                                                        <i class="align-middle" data-feather="search"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="product_name">Product Name</label>
+                                            <input type="text" name="product_name" id="product_name" class="filter_data_table form-control" aria-label="Search">
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="buying_requests_status">Filter by Status</label>
+                                            <select name="buying_requests_status"  id="buying_requests_status" class="filter_data_table form-control select2">
+                                                <option value=""> All Items </option>   
+                                                <option value="approved"> Approved request </option>
+                                                <option value="pending"> Pending request </option>
+                                                <option value="completed"> Completed request </option>
+                                                <option value="canceled"> Canceled request </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="shipping_country"> Shipping Country</label>
+                                            <select name="shipping_country[]" multiple="multiple" id="shipping_country" class="filter_data_table form-control select2">
+                                                <option value=""> choose country </option>
+                                                <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($country->co_code); ?>"><?php echo e($country->en_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="request_type">Filter Request Type</label>
+                                            <select name="request_type" id="request_type" class="filter_data_table form-control select2">
+                                                <option value="">  </option>   
+                                                <option value="global"> Global Request </option>
+                                                <option value="normail"> Normal Request </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="rows_numbers">Numbers of rows</label>
+                                            <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                                <option value="10"> 10 </option>
+                                                <option value="100"> 100 </option>
+                                                <option value="500"> 500 </option>
+                                                <option value="1000"> 1000 </option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -69,62 +100,16 @@
                                                 <th>Unit</th>
                                                 <th>Price</th>
                                                 <th>Total price</th>
-                                                <th>Currency </th>
                                                 <th>Message</th>
-                                                <th>Confirmed</th>
                                                 <th>Datetime</th>
-                                                <th>Vat</th>
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php $__currentLoopData = $buying_requests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $buying_request): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr>
-                                                <td> <input type="checkbox" name="buying_request_id[]" value="<?php echo e($buying_request->id); ?>" id=""> </td>
-                                                <td> <?php echo e($buying_request->id); ?> </td>
-                                                <td> <?php echo e($buying_request->product_name); ?> </td>
-                                                <td> 
-                                                    <?php if($buying_request->category): ?>
-                                                    <?php echo e($buying_request->category->en_title); ?> 
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>  </td>
-                                                <td>  </td>
-                                                <td>  </td>
-                                                <td> <?php echo e($buying_request->quantity); ?> </td>
-                                                <td> 
-                                                    <?php if($buying_request->unit): ?>
-                                                    <?php echo e($buying_request->unit->unit_en); ?> 
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td> <?php echo e($buying_request->target_price); ?> </td>
-                                                <td> <?php echo e($buying_request->target_price * $buying_request->quantity); ?> </td>
-                                                <td>  </td>
-                                                <td> <a type="button" data-toggle="modal" data-target="#buying_message_<?php echo e($buying_request->id); ?>"><i class="align-middle" href="javascript:;"> <i class="fa fa-ellipsis-h"></i> </a> </td>
-                                                <td>
-                                                    <i class="fa fa-check" style="color: green"></i>
-                                                </td>
-                                                <td> <?php echo e($buying_request->date_added); ?> </td>
-                                                <td>  </td>
-                                                <td class="table-action">
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#view_buying_request_<?php echo e($buying_request->id); ?>"><i class="align-middle" data-feather="eye"></i></a>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#edit_buying_request_<?php echo e($buying_request->id); ?>"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_buying_request_<?php echo e($buying_request->id); ?>" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <!-- include table component -->
-                                            <?php echo $__env->make('admin.rfq.components.edit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.rfq.components.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.rfq.components.buying_message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.rfq.components.approve', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.rfq.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <tbody id="buying_requests_table_body">
+                                            
                                         </tbody>
                                     </table>
-                                    <div class="d-flex justify-content-center">
-                                        <?php echo $buying_requests->links("pagination::bootstrap-4"); ?>
-
-                                    </div>
+                                    <?php echo $__env->make('admin.rfq.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             </div>
                         </div>

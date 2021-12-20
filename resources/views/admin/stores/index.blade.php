@@ -22,8 +22,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"> You have <span id="filter_counter"></span> store in this table   </h5>
+                                <div class="card-header"> 
+                                    <h5 class="card-title"> You have <span id="stores_counter"></span> store in this table   </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;

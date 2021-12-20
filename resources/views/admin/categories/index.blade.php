@@ -3,6 +3,8 @@
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
+        
+        @include('admin.layouts.loader')
 
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
@@ -20,8 +22,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title"> You have {{ $categories_count }} category in this table  </h5>
+                                <div class="card-header"> 
+                                    <h5 class="card-title"> You have <span id="categories_counter"></span> category in this table  </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;
@@ -39,17 +41,25 @@
                                 </div>
                                 <div class="card-body">
 
-                                    <!-- custome search box to search all table  -->
-                                    <div class="row mb-2 m-1">
-                                        <div class="d-non d-sm-inline-block">
-                                            <div class="input-group input-group-navbar">
-                                                <input type="text" name="search_query" class="form-control" placeholder="Search buyers ...." aria-label="Search">
-                                                <div class="input-group-append">
-                                                    <button name="search_categories_btn" form="categories_actions_form" class="btn" type="submit">
-                                                        <i class="align-middle" data-feather="search"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                <div class="row mb-2 m-1">
+                                        <div class="col-md-4 form-group">
+                                            <label for="category_title">Category Title</label>
+                                            <input type="text" name="category_title" id="category_title" class="filter_data_table form-control" aria-label="Search">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="meta_keyword">Filter by Keywords</label>
+                                            <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="filter_data_table form-control select2">
+            
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="rows_numbers">Numbers of rows</label>
+                                            <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                                <option value="10"> 10 </option>
+                                                <option value="100"> 100 </option>
+                                                <option value="500"> 500 </option>
+                                                <option value="1000"> 1000 </option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -65,47 +75,11 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            @foreach($categories as $category)
-                                            <tr>
-                                                <td> <input type="checkbox" name="category_id[]" value="{{ $category->id }}" id=""> </td>
-                                                <td>{{ $category->id }}</td>
-                                                <td> 
-                                                    @if($category->parentCategory)
-                                                    {{ $category->parentCategory->en_title  }} 
-                                                    @endif
-                                                </td>
-                                                <td>{{ $category->en_title }}</td>
-                                                <td>  
-                                                    @if($category->status == 1)
-                                                        <i class="fa fa-check" style="color: green"></i>
-                                                    @else 
-                                                        <i class="fa fa-times" style="color: red"></i>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if($category->is_home_thumb == 1)
-                                                        <i class="fa fa-check" style="color: green"></i>
-                                                    @else 
-                                                        <i class="fa fa-times" style="color: red"></i>
-                                                    @endif
-                                                </td>
-                                                <td class="table-action">
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#view_category_{{ $category->id }}"><i class="align-middle" data-feather="eye"></i></a>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#edit_category_{{ $category->id }}"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_category_{{ $category->id }}" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <!-- include table component -->
-                                            @include('admin.categories.components.edit')
-                                            @include('admin.categories.components.delete')
-                                            @include('admin.categories.components.delete_selected')
-                                            @endforeach
+                                        <tbody id="categories_table_body">
+                            
                                         </tbody>
                                     </table>
-                                    <div class="d-flex justify-content-center">
-                                        {!! $categories->links("pagination::bootstrap-4") !!}
-                                    </div>
+                                    @include('admin.categories.components.delete_selected')
                                 </div>
                             </div>
                         </div>

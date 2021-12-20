@@ -25,8 +25,8 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title"> You have <span id="filter_counter"></span> supplier in this table </h5>
-                                        
+                                        <h5 class="card-title"> You have <span id="suppliers_counter"></span> supplier in this table </h5>
+                                         
                                         <div class="row ml-1">
                                             <a href="{{ route('suppliers.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </a>
                                             &nbsp; &nbsp;
@@ -48,7 +48,6 @@
                                     </div>
                                     <div class="card-body">
 
-                                        <!-- custome search box to search all table  -->
                                         <div class="row mb-2 m-1">
                                             <div class="col-md-2 form-group">
                                                 <label for="search_by_name">Search suppliers by Name</label>

@@ -16,7 +16,7 @@ $(document).ready(function () {
         data: {"rows_numbers": rows_numbers},
         success: function(response){
 
-            $("#filter_counter").text(response.suppliers_count);
+            $("#suppliers_counter").text(response.suppliers_count);
 
             response.suppliers.forEach(function(supplier) {
                 if(supplier.supplier_country){
@@ -141,7 +141,7 @@ $(".filter_data_table").on('change', function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.suppliers_count);
+            $("#suppliers_counter").text(response.suppliers_count);
             
             response.suppliers.forEach(function(supplier) {
                 if(supplier.supplier_country){

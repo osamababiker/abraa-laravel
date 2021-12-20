@@ -8,10 +8,10 @@ $(document).ready(function () {
     var rows_numbers = $('#rows_numbers').val();
     var buying_requests_status = $('#buying_requests_status').val();
     var buying_request_category = '';
-    var buying_request_unit = '';
+    var buying_request_unit = ''; 
 
     $.ajax({
-        url: "/frq/json",  
+        url: "/rfq/json",  
         type: "get", 
         data: {
             "rows_numbers": rows_numbers,
@@ -19,7 +19,7 @@ $(document).ready(function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.buying_requests_count);
+            $("#rfqs_counter").text(response.buying_requests_count);
 
             response.buying_requests.forEach(function(buying_request) {
 
@@ -70,11 +70,11 @@ $(document).ready(function () {
                 "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ buying_request.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
                 "<td>"+ buying_request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buying_requests/"+ buying_request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buying_requests/"+ buying_request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
@@ -99,7 +99,8 @@ $(".filter_data_table").on('change', function () {
     $("#ajax_loader").css('display', 'block');
 
     var buying_requests_html = '';
-    var buying_request_buying_request = '';
+    var buying_request_category = '';
+    var buying_request_unit = ''; 
 
     // filter data
     var product_name = $('#product_name').val(); 
@@ -110,7 +111,7 @@ $(".filter_data_table").on('change', function () {
     var buying_requests_status = $('#buying_requests_status').val();
 
     $.ajax({
-        url: "/buying_requests/filter",
+        url: "/rfq/filter",
         type: "post",
         data: {
             'product_name': product_name,
@@ -122,7 +123,7 @@ $(".filter_data_table").on('change', function () {
         },
         success: function(response){
 
-            $("#filter_counter").text(response.buying_requests_count);
+            $("#rfqs_counter").text(response.buying_requests_count);
 
             response.buying_requests.forEach(function(buying_request) {
 
@@ -173,11 +174,11 @@ $(".filter_data_table").on('change', function () {
                 "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ buying_request.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
                 "<td>"+ buying_request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buying_requests/"+ buying_request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buying_requests/"+ buying_request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+

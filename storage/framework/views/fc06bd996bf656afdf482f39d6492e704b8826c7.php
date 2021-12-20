@@ -4,6 +4,8 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <div class="wrapper">
 
+        <?php echo $__env->make('admin.layouts.loader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
         <!-- main sidebar here -->
         <?php echo $__env->make('admin.layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
@@ -21,7 +23,7 @@
                         <div class="col-12"> 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title"> You have <?php echo e($buyers_count); ?> buyer in this table  </h5>
+                                    <h5 class="card-title"> You have <span id="buyers_counter"></span> buyer in this table  </h5>
                                     <div class="row">
                                         <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New  </button>
                                         &nbsp; &nbsp;
@@ -43,19 +45,36 @@
                                 </div> 
                                 <div class="card-body">
 
-                                    <!-- custome search box to search all table  -->
-                                    <div class="row mb-2 m-1">
-                                        <div class="d-non d-sm-inline-block">
-                                            <div class="input-group input-group-navbar">
-                                                <input type="text" name="search_query" class="form-control" placeholder="Search buyers ...." aria-label="Search">
-                                                <div class="input-group-append">
-                                                    <button name="search_buyers_btn" form="buyers_actions_form" class="btn" type="submit">
-                                                        <i class="align-middle" data-feather="search"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="row mb-2 m-1">
+                                    <div class="col-md-3 form-group">
+                                        <label for="buyer_name">Search Buyers by Name</label>
+                                        <input type="text" name="buyer_name" id="buyer_name" class="filter_data_table form-control" aria-label="Search">
                                     </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="filter_by_country">Filter by Country</label>
+                                        <select name="country[]" multiple="multiple" id="filter_by_country" class="filter_data_table form-control select2">
+                                            <option value=""> choose country </option>
+                                            <?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($country->co_code); ?>"><?php echo e($country->en_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="filter_by_keywords">Filter by Keywords</label>
+                                        <select name="keywords[]" multiple="multiple" id="filter_by_keywords" class="filter_data_table form-control select2">
+                                            <option value=""> enter keywords </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="rows_numbers">Numbers of rows</label>
+                                        <select name="rows_numbers" id="rows_numbers" class="filter_data_table form-control select2">
+                                            <option value="10"> 10 </option>
+                                            <option value="100"> 100 </option>
+                                            <option value="500"> 500 </option>
+                                            <option value="1000"> 1000 </option>
+                                        </select>
+                                    </div>
+                                </div>
                                     
                                     <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                                         <thead>
@@ -74,54 +93,11 @@
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php $__currentLoopData = $buyers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $buyer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr>
-                                                <td> <input type="checkbox" name="buyer_id[]" value="<?php echo e($buyer->id); ?>" id=""> </td>
-                                                <td> <?php echo e($buyer->id); ?> </td>
-                                                <td> <?php echo e($buyer->full_name); ?> </td>
-                                                <td> <?php echo e($buyer->email); ?> </td>
-                                                <td> <?php echo e($buyer->phone); ?> </td>
-                                                <td> <?php echo e($buyer->date_added); ?> </td>
-                                                <td>
-                                                    <?php if($buyer->verified == 1): ?> 
-                                                        <i class="fa fa-check" style="color: green"></i>
-                                                    <?php else: ?> 
-                                                        <i class="fa fa-times" style="color: red"></i>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <?php if($buyer->buyer_country): ?>
-                                                    <?php echo e($buyer->buyer_country->en_name); ?>
-
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td> <?php echo e($buyer->company); ?> </td>
-                                                <td> 
-                                                    <?php if($buyer->is_organic): ?>
-                                                        <i class="fa fa-check" style="color: green;"></i> 
-                                                    <?php else: ?> 
-                                                        <i class="fa fa-times" style="color: red;"></i>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td> <?php echo e($buyer->getUserSource($buyer->user_source)); ?> </td>
-                                                <td class="table-action">
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#view_buyer_<?php echo e($buyer->id); ?>"><i class="align-middle" data-feather="eye"></i></a>
-                                                    <a href="#" type="button" data-toggle="modal" data-target="#edit_buyer_<?php echo e($buyer->id); ?>"><i class="align-middle" data-feather="edit-2"></i></a>
-                                                    <a href="#"><i class="align-middle" data-toggle="modal" data-target="#delete_buyer_<?php echo e($buyer->id); ?>" data-feather="trash"></i></a>
-                                                </td>
-                                            </tr>
-                                            <!-- include table component -->
-                                            <?php echo $__env->make('admin.buyers.components.edit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.buyers.components.delete', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php echo $__env->make('admin.buyers.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <tbody id="buyers_table_body">
+                                      
                                         </tbody>
                                     </table>
-                                    <div class="d-flex justify-content-center">
-                                        <?php echo $buyers->links("pagination::bootstrap-4"); ?>
-
-                                    </div>
+                                    <?php echo $__env->make('admin.buyers.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                             </div>
                         </div>
