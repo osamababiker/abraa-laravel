@@ -81,7 +81,7 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                     data-toggle="dropdown">
-                    <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle mr-1"
+                    <img src="<?php echo e(asset('img/avatars/avatar.jpg')); ?>" class="avatar img-fluid rounded-circle mr-1"
                         alt="Omer Alhamra" /> <span class="text-dark"><?php echo e(Auth::user()->name); ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">

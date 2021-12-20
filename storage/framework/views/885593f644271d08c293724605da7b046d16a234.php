@@ -183,6 +183,28 @@
         });
     </script>
 
+    <script>
+		document.addEventListener("DOMContentLoaded", function() {
+			if (!window.Quill) {
+				return $("#quill-editor,#quill-toolbar,#quill-bubble-editor,#quill-bubble-toolbar").remove();
+			}
+			var editor = new Quill("#quill-editor", {
+				modules: {
+					toolbar: "#quill-toolbar"
+				},
+				placeholder: "Type something",
+				theme: "snow"
+			});
+			var bubbleEditor = new Quill("#quill-bubble-editor", {
+				placeholder: "Compose an epic...",
+				modules: {
+					toolbar: "#quill-bubble-toolbar"
+				},
+				theme: "bubble"
+			});
+		});
+	</script>
+
     <script src="<?php echo e(asset('js/form_steps.js')); ?>"></script>
 
     <script src="<?php echo e(asset('js/form_steps.js')); ?>"></script>

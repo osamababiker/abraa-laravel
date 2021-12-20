@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\RfqsController;
+use App\Http\Controllers\Admin\MailController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -180,7 +181,7 @@ Route::group(['middleware' => 'auth'], function (){
     
 
     // ======================= Categories Routes ====================== //
-     // table actions route
+    // table actions route
     Route::post('categories/actions', 
         [CategoriesController::class , 'actions']
     )->name('items.actions');
@@ -196,10 +197,13 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('categories/{id}/destroy', [
         CategoriesController::class, 'destroy'
     ]);
-
-
     // resource route
     Route::resource('categories', CategoriesController::class);
+
+    // ======================= Mail Routes ====================== //
+    Route::get('mail/editors', [
+        MailController::class, 'editor'
+    ])->name('mail.editor');
 
 });
 
