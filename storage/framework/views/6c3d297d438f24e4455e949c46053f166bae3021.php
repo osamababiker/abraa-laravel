@@ -32,7 +32,7 @@
                                             &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal" data-target="#delete_selected_confirm" class="btn btn-danger"> <i class="fa fa-trash"></i> Archive Selected  </button>
                                             &nbsp; &nbsp;
-                                            <a target="_blank" href="<?php echo e(route('mail.editor')); ?>"  class="btn btn-info"> <i class="fa fa-envelope"></i> Send Email  </a>
+                                            <button type="button" data-toggle="modal" data-target="#send_emails_to_selected" class="btn btn-info"> <i class="fa fa-envelope"></i> Send Email  </button>
                                             &nbsp; &nbsp;
                                             <button type="button" name="send_sms_multiple" class="btn btn-success"> <i class="fa fa-phone"></i> Send SMS  </button>
                                             &nbsp; &nbsp;
@@ -41,7 +41,7 @@
                                                     Tools
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a href="<?php echo e(route('export.excel')); ?>" target="_blank" class="dropdown-item" href="#">Export to excel</a>
+                                                    <a href="<?php echo e(route('suppliers.export.excel')); ?>" target="_blank" class="dropdown-item" href="#">Export to excel</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,6 +112,7 @@
                                             </tbody>
                                         </table>
                                         
+                                        <?php echo $__env->make('admin.suppliers.components.email_editors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                         <?php echo $__env->make('admin.suppliers.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     </div>
                                 </div>

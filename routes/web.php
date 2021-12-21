@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\RfqsController;
-use App\Http\Controllers\Admin\MailController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -271,14 +270,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('categories', CategoriesController::class);
 
 
-
-
-    // ***************** General Controllers *********************// 
-
-    // ======================= Mail Routes ====================== //
-    Route::get('mail/editors', [
-        MailController::class, 'editor'
-    ])->name('mail.editor');
 
 });
 

@@ -136,9 +136,11 @@ class RfqsController extends Controller
     }
 
 
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        Rfq::where('id',$id)->delete();
+        $message = 'Request hass been deleted successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
     

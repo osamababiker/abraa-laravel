@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
     $("#ajax_loader").css('display', 'block');
@@ -33,12 +34,15 @@ $(document).ready(function () {
                 }else{
                     is_organic = "<i class=\"fa fa-times\" style=\"color: red;\"></i>";
                 }
+
+
                 suppliers_html = suppliers_html +
                 
+                // delete modal
                 "<div class=\"modal fade\" id=\"delete_supplier_"+ supplier.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/suppliers/"+ supplier.id +"/destroy\" id=\"delete_suppplier_form_"+ supplier.id +"\" method=\"DELETE\">\n"+
+                        "<form action=\"/suppliers/"+ supplier.id +"/destroy\"  method=\"DELETE\">\n"+
                         "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive - "+ supplier.full_name +"</h5>\n"+
@@ -51,7 +55,7 @@ $(document).ready(function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_suppplier_form_"+ supplier.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_supplier("+ supplier.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -160,10 +164,12 @@ $(".filter_data_table").on('change', function () {
                 }
                 suppliers_html = suppliers_html + 
 
+                
+                // delete modal
                 "<div class=\"modal fade\" id=\"delete_supplier_"+ supplier.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/suppliers/"+ supplier.id +"/destroy\" id=\"delete_suppplier_form_"+ supplier.id +"\" method=\"DELETE\">\n"+
+                        "<form action=\"/suppliers/"+ supplier.id +"/destroy\"  method=\"DELETE\">\n"+
                         "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive - "+ supplier.full_name +"</h5>\n"+
@@ -176,11 +182,12 @@ $(".filter_data_table").on('change', function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_suppplier_form_"+ supplier.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_supplier("+ supplier.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
                 "</div>\n"+
+                
                 
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"supplier_id[]\" value=\""+ supplier.id +"\" ></input> </td>\n" +
@@ -255,3 +262,17 @@ $(".filter_data_table").on('change', function () {
         }
     });
 });
+
+
+
+// to delete (archive) supplier
+function archive_supplier(supplier_id){
+    $("#ajax_loader").css('display', 'block');
+    $.ajax({
+        url: "/suppliers/" + supplier_id + "/destroy",
+        type: "get",
+        success: function(response){
+            location.reload();
+        }
+    });
+}

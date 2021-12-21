@@ -99,9 +99,11 @@ class ShippersController extends Controller
     }
 
  
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        Shipper::where('id',$id)->delete();
+        $message = 'Shipper hass been deleted successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
     // import & export to excel

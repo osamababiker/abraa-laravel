@@ -35,11 +35,10 @@ $(document).ready(function () {
                 }
 
                 buyers_html = buyers_html +
+
                 "<div class=\"modal fade\" id=\"delete_buyer_"+ buyer.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/buyers/"+ buyer.id +"/destroy\" id=\"delete_suppplier_form_"+ buyer.id +"\" method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive - "+ buyer.full_name +"</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -51,7 +50,7 @@ $(document).ready(function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_suppplier_form_"+ buyer.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_buyer("+ buyer.id  +")\"  class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -139,11 +138,10 @@ $(".filter_data_table").on('change', function () {
                 }
 
                 buyers_html = buyers_html +
+                
                 "<div class=\"modal fade\" id=\"delete_buyer_"+ buyer.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/buyers/"+ buyer.id +"/destroy\" id=\"delete_suppplier_form_"+ buyer.id +"\" method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive - "+ buyer.full_name +"</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -155,7 +153,7 @@ $(".filter_data_table").on('change', function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_suppplier_form_"+ buyer.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_buyer("+ buyer.id  +")\"  class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -195,3 +193,16 @@ $(".filter_data_table").on('change', function () {
         }
     });
 });
+
+
+// to delete (archive) buyer
+function archive_buyer(buyer_id){
+    $("#ajax_loader").css('display', 'block');
+    $.ajax({
+        url: "/buyers/" + buyer_id + "/destroy",
+        type: "get",
+        success: function(response){
+            location.reload();
+        }
+    });
+}

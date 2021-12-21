@@ -10,7 +10,7 @@
             <div class="modal-body m-3">
                 <p class="mb-0">Are you Sure you want to approve those requests ??</p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" form="" class="btn btn-success">Yes Sure</button>
             </div>

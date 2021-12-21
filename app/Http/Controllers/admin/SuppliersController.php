@@ -116,7 +116,6 @@ class SuppliersController extends Controller
     //  or send email , sms to multiple 
     public function actions(Request $request)
     {
-
         if($request->has('delete_selected_btn')){
             $supplier_id = $request->supplier_id;
             if($request->all_colums){
@@ -152,7 +151,6 @@ class SuppliersController extends Controller
 
  
     public function destroy($id){
-
         Supplier::where('id',$id)->delete();
         $message = 'Supplier hass been deleted successfully';
         session()->flash('feedback', $message);

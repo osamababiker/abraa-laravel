@@ -119,9 +119,11 @@ class BuyersController extends Controller
     }
 
   
-    public function destroy(Buyer $buyer)
-    {
-        //
+    public function destroy($id){
+        Buyer::where('id',$id)->delete();
+        $message = 'Buyer hass been deleted successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
     // import & export to excel

@@ -38,8 +38,6 @@ $(document).ready(function () {
                 "<div class=\"modal fade\" id=\"delete_store_"+ store.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/stores/"+ store.id +"/destroy\" id=\"delete_store_form_"+ store.id +"\" method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive - "+ store.name +"</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -51,7 +49,7 @@ $(document).ready(function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_store_form_"+ store.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_store("+ store.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -138,8 +136,6 @@ $(".filter_data_table").on('change', function () {
                 "<div class=\"modal fade\" id=\"delete_store_"+ store.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/stores/"+ store.id +"/destroy\" id=\"delete_store_form_"+ store.id +"\" method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive - "+ store.name +"</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -151,7 +147,7 @@ $(".filter_data_table").on('change', function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_store_form_"+ store.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_store("+ store.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -190,3 +186,16 @@ $(".filter_data_table").on('change', function () {
         }
     });
 });
+
+
+// to delete (archive) store
+function archive_store(store_id){
+    $("#ajax_loader").css('display', 'block');
+    $.ajax({
+        url: "/stores/" + store_id + "/destroy",
+        type: "get",
+        success: function(response){
+            location.reload();
+        }
+    });
+}

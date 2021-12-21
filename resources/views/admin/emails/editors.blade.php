@@ -41,7 +41,7 @@
                               </span>
                               <span class="ql-formats">
                                 <select class="ql-color"></select>
-                                <select class="ql-background"></select>
+                                <select class="ql-background"></select> 
                               </span>
                               <span class="ql-formats">
                                 <button class="ql-script" value="sub"></button>
@@ -78,7 +78,7 @@
                             </div>
                           </form>
                         </div>
-                      </div>
+                      </div> 
                     </div>
                 </div>
               </div>

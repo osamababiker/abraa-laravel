@@ -10,7 +10,7 @@
             <div class="modal-body m-3">
                 <p class="mb-0">Are you Sure you want to archive selected buyers</p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" name="delete_selected_btn" form="stores_actions_form" class="btn btn-danger">Yes Sure</button>
             </div>

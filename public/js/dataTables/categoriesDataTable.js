@@ -44,8 +44,6 @@ $(document).ready(function () {
                 "<div class=\"modal fade\" id=\"delete_category_"+ category.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/categories/"+ category.id +"/destroy\" id=\"delete_category_form_"+ category.id +"\" method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive "+ category.en_title +" </h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -57,7 +55,7 @@ $(document).ready(function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_category_form_"+ category.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_category("+ category.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -145,8 +143,6 @@ $(".filter_data_table").on('change', function () {
                 "<div class=\"modal fade\" id=\"delete_category_"+ category.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/categories/"+ category.id +"/destroy\" id=\"delete_category_form_"+ category.id +"\" method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive "+ category.en_title +" </h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -158,7 +154,7 @@ $(".filter_data_table").on('change', function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"submit\" form=\"delete_category_form_"+ category.id +"\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_category("+ category.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -193,3 +189,18 @@ $(".filter_data_table").on('change', function () {
         }
     });
 });
+
+
+
+
+// to delete (archive) category
+function archive_category(category_id){
+    $("#ajax_loader").css('display', 'block');
+    $.ajax({
+        url: "/categories/" + category_id + "/destroy",
+        type: "get",
+        success: function(response){
+            location.reload();
+        }
+    });
+}
