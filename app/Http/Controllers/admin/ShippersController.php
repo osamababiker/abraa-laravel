@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shipper;
 use App\Models\Country;
+use App\Exports\ShippersExport;
+use App\Imports\ShippersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ShippersController extends Controller
 {
@@ -99,5 +102,18 @@ class ShippersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new ShippersExport, 'shippers.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new ShippersImport,request()->file('file'));
+           
+        return redirect()->back();
     }
 }

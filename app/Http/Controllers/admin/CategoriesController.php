@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Country;
+use App\Exports\CategoriesExport;
+use App\Imports\CategoriesImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class CategoriesController extends Controller
@@ -106,4 +109,18 @@ class CategoriesController extends Controller
     {
         //
     }
+
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new CategoriesExport, 'stores.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new CategoriesImport,request()->file('file'));
+           
+        return redirect()->back();
+    }
+
 }

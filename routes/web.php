@@ -67,6 +67,16 @@ Route::group(['middleware' => 'auth'], function (){
      Route::get('suppliers/{id}/destroy', [ 
         SuppliersController::class, 'destroy'
     ]);
+    // to import & export excel 
+    Route::get('suppliers/export/excel', [
+        SuppliersController::class, 'exportExcel'
+    ])->name('suppliers.export.excel');
+    Route::post('suppliers/import/excel', [
+        SuppliersController::class, 'importExcel'
+    ])->name('suppliers.import.excel');
+    Route::get('suppliers/importExportView',  [
+        SuppliersController::class, 'importExportView'
+    ]);
     // organic suppliers route
     Route::get('suppliers/organic', [
         SuppliersController::class, 'organic_suppliers'
@@ -88,6 +98,16 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('shippers/filter', [
         ShippersController::class, 'filterShippers'
     ])->name('shippers.filter');
+     // to import & export excel 
+     Route::get('shippers/export/excel', [
+        ShippersController::class, 'exportExcel'
+    ])->name('shippers.export.excel');
+    Route::post('shippers/import/excel', [
+        ShippersController::class, 'importExcel'
+    ])->name('shippers.import.excel');
+    Route::get('shippers/importExportView',  [
+        ShippersController::class, 'importExportView'
+    ]);
      // custom delete route 
      Route::get('shippers/{id}/destroy', [ 
         ShippersController::class, 'destroy'
@@ -108,7 +128,17 @@ Route::group(['middleware' => 'auth'], function (){
         // filter stores  route 
     Route::post('stores/filter', [
         StoresController::class, 'filterStores'
-    ])->name('stores.filter');    
+    ])->name('stores.filter'); 
+    // to import & export excel 
+    Route::get('stores/export/excel', [
+        StoresController::class, 'exportExcel'
+    ])->name('stores.export.excel');
+    Route::post('stores/import/excel', [
+        StoresController::class, 'importExcel'
+    ])->name('stores.import.excel');
+    Route::get('stores/importExportView',  [
+        StoresController::class, 'importExportView'
+    ]);   
     // custom delete route 
     Route::get('stores/{id}/destroy', [
         StoresController::class, 'destroy'
@@ -129,7 +159,17 @@ Route::group(['middleware' => 'auth'], function (){
        // filter buyers  route 
     Route::post('buyers/filter', [
         BuyersController::class, 'filterBuyers'
-    ])->name('buyers.filter');   
+    ])->name('buyers.filter');  
+    // to import & export excel 
+    Route::get('buyers/export/excel', [
+        BuyersController::class, 'exportExcel'
+    ])->name('buyers.export.excel');
+    Route::post('buyers/import/excel', [
+        BuyersController::class, 'importExcel'
+    ])->name('buyers.import.excel');
+    Route::get('buyers/importExportView',  [
+        BuyersController::class, 'importExportView'
+    ]); 
     // custom delete route 
     Route::get('buyers/{id}/destroy', [
         BuyersController::class, 'destroy'
@@ -150,7 +190,17 @@ Route::group(['middleware' => 'auth'], function (){
         // filter rfq  route 
     Route::post('rfq/filter', [
         RfqsController::class, 'filterRfqs'
-    ])->name('rfq.filter');   
+    ])->name('rfq.filter');
+    // to import & export excel 
+    Route::get('rfq/export/excel', [
+        RfqsController::class, 'exportExcel'
+    ])->name('rfq.export.excel');
+    Route::post('rfq/import/excel', [
+        RfqsController::class, 'importExcel'
+    ])->name('rfq.import.excel');
+    Route::get('rfq/importExportView',  [
+        RfqsController::class, 'importExportView'
+    ]);    
     // custom delete route
     Route::get('rfq/{id}/destroy', [
         RfqsController::class, 'destroy'
@@ -172,6 +222,16 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('items/filter', [
         ItemsController::class, 'filterItems'
     ])->name('items.filter');
+    // to import & export excel 
+    Route::get('items/export/excel', [
+        ItemsController::class, 'exportExcel'
+    ])->name('items.export.excel');
+    Route::post('items/import/excel', [
+        ItemsController::class, 'importExcel'
+    ])->name('items.import.excel');
+    Route::get('items/importExportView',  [
+        ItemsController::class, 'importExportView'
+    ]);
     // custom delete route
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'
@@ -193,12 +253,27 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('categories/filter', [
         CategoriesController::class, 'filterCategories'
     ])->name('categories.filter');
+    // to import & export excel 
+    Route::get('categories/export/excel', [
+        CategoriesController::class, 'exportExcel'
+    ])->name('categories.export.excel');
+    Route::post('categories/import/excel', [
+        CategoriesController::class, 'importExcel'
+    ])->name('categories.import.excel');
+    Route::get('categories/importExportView',  [
+        CategoriesController::class, 'importExportView'
+    ]);
     // custom delete route
     Route::get('categories/{id}/destroy', [
         CategoriesController::class, 'destroy'
     ]);
     // resource route
     Route::resource('categories', CategoriesController::class);
+
+
+
+
+    // ***************** General Controllers *********************// 
 
     // ======================= Mail Routes ====================== //
     Route::get('mail/editors', [

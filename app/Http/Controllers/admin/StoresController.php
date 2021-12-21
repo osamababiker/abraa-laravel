@@ -7,7 +7,10 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Store;
-use App\Models\Country;
+use App\Models\Country; 
+use App\Exports\StoresExport;
+use App\Imports\StoresImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StoresController extends Controller
 {
@@ -129,5 +132,18 @@ class StoresController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new StoresExport, 'stores.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new StoresImport,request()->file('file'));
+           
+        return redirect()->back();
     }
 }

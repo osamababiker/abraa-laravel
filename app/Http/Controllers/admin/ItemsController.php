@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Country;
+use App\Exports\ItemsExport;
+use App\Imports\ItemsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ItemsController extends Controller
 {
@@ -179,6 +182,20 @@ class ItemsController extends Controller
 
         $message = 'Item hass been deleted successfully';
         session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new ItemsExport, 'stores.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new ItemsImport,request()->file('file'));
+           
         return redirect()->back();
     }
 }

@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Country;
+use App\Exports\SuppliersExport;
+use App\Imports\SuppliersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SuppliersController extends Controller
 {
@@ -153,6 +156,20 @@ class SuppliersController extends Controller
         Supplier::where('id',$id)->delete();
         $message = 'Supplier hass been deleted successfully';
         session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new SuppliersExport, 'suppliers.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new SuppliersImport,request()->file('file'));
+           
         return redirect()->back();
     }
 

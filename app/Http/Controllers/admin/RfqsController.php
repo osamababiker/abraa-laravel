@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 use App;
-use Auth;
+use Auth; 
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Rfq;
 use App\Models\Country;
+use App\Exports\RfqsExport;
+use App\Imports\RfqsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RfqsController extends Controller
 {
@@ -136,5 +139,19 @@ class RfqsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new RfqsExport, 'stores.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new RfqsImport,request()->file('file'));
+           
+        return redirect()->back();
     }
 }

@@ -41,7 +41,7 @@
                                                     Tools
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Export to excel</a>
+                                                    <a class="dropdown-item" href="{{ route('shippers.export.excel') }}" target="_blank">Export to excel</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -7,7 +7,10 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Buyer;
-use App\Models\Country;
+use App\Models\Country; 
+use App\Exports\BuyersExport;
+use App\Imports\BuyersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BuyersController extends Controller
 {
@@ -119,5 +122,18 @@ class BuyersController extends Controller
     public function destroy(Buyer $buyer)
     {
         //
+    }
+
+    // import & export to excel
+    public function exportExcel() 
+    {
+        return Excel::download(new BuyersExport, 'stores.xlsx'); 
+    }
+   
+    public function importExcel() 
+    {
+        Excel::import(new BuyersImport,request()->file('file'));
+           
+        return redirect()->back();
     }
 }
