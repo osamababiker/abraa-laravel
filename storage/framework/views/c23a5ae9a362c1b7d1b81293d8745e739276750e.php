@@ -83,7 +83,7 @@
                     <i class="align-middle" data-feather="list"></i> <span class="align-middle">Request For Quotation</span>
                 </a>
                 <ul id="rfq" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('rfq.index')); ?>">All Quotation</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('rfqs.index')); ?>">All Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Global Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Product Buying Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Closed Buying Quotation</a></li>

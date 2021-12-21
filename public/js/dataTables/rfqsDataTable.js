@@ -11,7 +11,7 @@ $(document).ready(function () {
     var buying_request_unit = ''; 
 
     $.ajax({
-        url: "/rfq/json",  
+        url: "/rfqs/json",  
         type: "get", 
         data: {
             "rows_numbers": rows_numbers,
@@ -109,7 +109,7 @@ $(".filter_data_table").on('change', function () {
     var buying_requests_status = $('#buying_requests_status').val();
 
     $.ajax({
-        url: "/rfq/filter",
+        url: "/rfqs/filter",
         type: "post",
         data: {
             'product_name': product_name,

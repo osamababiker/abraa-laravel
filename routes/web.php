@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\ShippersController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
-use App\Http\Controllers\Admin\RfqsController;
+use App\Http\Controllers\Admin\rfqsController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -177,35 +177,35 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('buyers', BuyersController::class);
 
 
-     // ======================= Rfq Routes ====================== //
+     // ======================= rfqs Routes ====================== //
      // table actions route
-     Route::post('rfq/actions', 
-        [RfqsController::class , 'actions']
+     Route::post('rfqs/actions', 
+        [rfqsController::class , 'actions']
     )->name('buyers.actions');  
-     // get rfq as json route 
-     Route::get('rfq/json', [
-        RfqsController::class, 'getRfqsAsJson'
-    ])->name('rfq.json');
-        // filter rfq  route 
-    Route::post('rfq/filter', [
-        RfqsController::class, 'filterRfqs'
-    ])->name('rfq.filter');
+     // get rfqs as json route 
+     Route::get('rfqs/json', [
+        rfqsController::class, 'getrfqsAsJson'
+    ])->name('rfqs.json');
+        // filter rfqs  route 
+    Route::post('rfqs/filter', [
+        rfqsController::class, 'filterrfqs'
+    ])->name('rfqs.filter');
     // to import & export excel 
-    Route::get('rfq/export/excel', [
-        RfqsController::class, 'exportExcel'
-    ])->name('rfq.export.excel');
-    Route::post('rfq/import/excel', [
-        RfqsController::class, 'importExcel'
-    ])->name('rfq.import.excel');
-    Route::get('rfq/importExportView',  [
-        RfqsController::class, 'importExportView'
+    Route::get('rfqs/export/excel', [
+        rfqsController::class, 'exportExcel'
+    ])->name('rfqs.export.excel');
+    Route::post('rfqs/import/excel', [
+        rfqssController::class, 'importExcel'
+    ])->name('rfqs.import.excel');
+    Route::get('rfqs/importExportView',  [
+        rfqsController::class, 'importExportView'
     ]);    
     // custom delete route
-    Route::get('rfq/{id}/destroy', [
-        RfqsController::class, 'destroy'
+    Route::get('rfqs/{id}/destroy', [
+        rfqsController::class, 'destroy'
     ]);
     // resource route
-    Route::resource('rfq', RfqsController::class);
+    Route::resource('rfqs', rfqsController::class);
 
 
     // ======================= Items Routes ====================== //

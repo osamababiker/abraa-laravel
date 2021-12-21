@@ -179,7 +179,6 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         Item::where('id',$id)->delete();
-
         $message = 'Item hass been deleted successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
