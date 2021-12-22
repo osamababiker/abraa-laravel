@@ -152,7 +152,7 @@ class SuppliersController extends Controller
  
     public function destroy($id){
         Supplier::where('id',$id)->delete();
-        $message = 'Supplier hass been deleted successfully';
+        $message = 'Supplier hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

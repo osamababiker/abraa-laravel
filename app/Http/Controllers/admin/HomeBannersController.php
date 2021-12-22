@@ -88,7 +88,7 @@ class HomeBannersController extends Controller
     public function destroy($id)
     {
         HomeBanner::where('id',$id)->delete();
-        $message = 'Banner hass been deleted successfully';
+        $message = 'Banner hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

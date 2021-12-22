@@ -86,7 +86,7 @@ class HomeSlidersController extends Controller
     public function destroy($id)
     {
         HomeSlider::where('id',$id)->delete();
-        $message = 'Slider hass been deleted successfully';
+        $message = 'Slider hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

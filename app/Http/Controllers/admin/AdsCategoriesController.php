@@ -99,7 +99,7 @@ class AdsCategoriesController extends Controller
     public function destroy($id)
     {
         AdsCategory::where('id',$id)->delete();
-        $message = 'Category hass been deleted successfully';
+        $message = 'Category hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

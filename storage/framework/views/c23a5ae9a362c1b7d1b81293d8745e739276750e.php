@@ -103,18 +103,29 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="#charts" data-toggle="collapse" class="sidebar-link collapsed">
-                    <i class="align-middle" data-feather="pie-chart"></i> <span class="align-middle">Charts</span>
+                <a href="#memberships" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Memberships</span>
                 </a>
-                <ul id="charts" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="charts-chartjs.html">Chart.js</a>
-                    </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="charts-apexcharts.html">ApexCharts
+                <ul id="memberships" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('membershipsPlans.index')); ?>"> Plans </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"> Subscriptions </a> </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('membershipsTransactions.index')); ?>"> Transactions </a> </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"> Call Requests </a> </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="notifications.html">
+                <a href="#charts" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="pie-chart"></i> <span class="align-middle">Reports</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="#">
                     <i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="#">
+                    <i class="align-middle" data-feather="trash"></i> <span class="align-middle">Clear Cache</span>
                 </a>
             </li>
         </ul>

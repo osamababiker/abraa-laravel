@@ -232,6 +232,10 @@
     <script src="<?php echo e(asset('js/dataTables/adsCategoriesDataTable.js')); ?>"></script>
 
     <script src="<?php echo e(asset('js/dataTables/adsDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/membershipsPlansDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/membershipsTransactionsDataTable.js')); ?>"></script>
     
 
 </body>

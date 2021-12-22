@@ -1,10 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App;
-use Auth;
-use DB;
-use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
@@ -179,7 +175,7 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         Item::where('id',$id)->delete();
-        $message = 'Item hass been deleted successfully';
+        $message = 'Item hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

@@ -22,7 +22,9 @@ class VerifyCsrfToken extends Middleware
         '/homeSliders/filter',
         '/homeBanners/filter',
         '/adsCategories/filter',
-        '/ads/filter'
+        '/ads/filter',
+        '/membershipsPlans/filter',
+        '/membershipsTransactions/filter'
     ];
 }
  

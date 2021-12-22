@@ -121,7 +121,7 @@ class BuyersController extends Controller
   
     public function destroy($id){
         Buyer::where('id',$id)->delete();
-        $message = 'Buyer hass been deleted successfully';
+        $message = 'Buyer hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

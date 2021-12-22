@@ -98,7 +98,7 @@ class AdsController extends Controller
     public function destroy($id)
     {
         Ads::where('id',$id)->delete();
-        $message = 'Category hass been deleted successfully';
+        $message = 'Category hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }

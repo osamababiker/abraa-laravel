@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\HomeSlidersController;
 use App\Http\Controllers\Admin\HomeBannersController;
 use App\Http\Controllers\Admin\AdsCategoriesController;
 use App\Http\Controllers\Admin\AdsController;
+use App\Http\Controllers\Admin\MembershipsPlansController;
+use App\Http\Controllers\Admin\MembershipsTransactionsController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -392,6 +394,66 @@ Route::group(['middleware' => 'auth'], function (){
         AdsController::class, 'destroy'
     ]);
     Route::resource('ads', AdsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Memberships Plans Routes ====================== //
+    // table actions route
+    Route::post('membershipsPlans/actions', 
+        [MembershipsPlansController::class , 'actions']
+    )->name('membershipsPlans.actions');
+    // get memberships Plans as json route 
+    Route::get('membershipsPlans/json', [
+        MembershipsPlansController::class, 'getMembershipsPlansAsJson'
+    ])->name('membershipsPlans.json');
+        // filter memberships Plans  route 
+    Route::post('membershipsPlans/filter', [
+        MembershipsPlansController::class, 'filterMembershipsPlansPlans'
+    ])->name('membershipsPlans.filter');
+    // to import & export excel 
+    Route::get('membershipsPlans/export/excel', [
+        MembershipsPlansController::class, 'exportExcel'
+    ])->name('membershipsPlans.export.excel');
+    Route::post('membershipsPlans/import/excel', [
+        MembershipsPlansController::class, 'importExcel'
+    ])->name('membershipsPlans.import.excel');
+    Route::get('membershipsPlans/importExportView',  [
+        MembershipsPlansController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('membershipsPlans/{id}/destroy', [
+        MembershipsPlansController::class, 'destroy'
+    ]);
+    Route::resource('membershipsPlans', MembershipsPlansController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Memberships Transactions Routes ====================== //
+    // table actions route
+    Route::post('membershipsTransactions/actions', 
+        [MembershipsTransactionsController::class , 'actions']
+    )->name('membershipsTransactions.actions');
+    // get memberships Plans as json route 
+    Route::get('membershipsTransactions/json', [
+        MembershipsTransactionsController::class, 'getMembershipsTransactionsAsJson'
+    ])->name('membershipsTransactions.json');
+        // filter memberships Plans  route 
+    Route::post('membershipsTransactions/filter', [
+        MembershipsTransactionsController::class, 'filterMembershipsTransactions'
+    ])->name('membershipsTransactions.filter');
+    // to import & export excel 
+    Route::get('membershipsTransactions/export/excel', [
+        MembershipsTransactionsController::class, 'exportExcel'
+    ])->name('membershipsTransactions.export.excel');
+    Route::post('membershipsTransactions/import/excel', [
+        MembershipsTransactionsController::class, 'importExcel'
+    ])->name('membershipsTransactions.import.excel');
+    Route::get('membershipsTransactions/importExportView',  [
+        MembershipsTransactionsController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('membershipsTransactions/{id}/destroy', [
+        MembershipsTransactionsController::class, 'destroy'
+    ]);
+    Route::resource('membershipsTransactions', MembershipsTransactionsController::class, ['except' => ['destroy']]);
 
 
 });

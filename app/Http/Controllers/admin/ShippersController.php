@@ -101,7 +101,7 @@ class ShippersController extends Controller
  
     public function destroy($id){
         Shipper::where('id',$id)->delete();
-        $message = 'Shipper hass been deleted successfully';
+        $message = 'Shipper hass been Archived successfully';
         session()->flash('feedback', $message);
         return redirect()->back();
     }
