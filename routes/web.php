@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\rfqsController;
+use App\Http\Controllers\Admin\HomeSlidersController;
+use App\Http\Controllers\Admin\HomeBannersController;
+use App\Http\Controllers\Admin\AdsCategoriesController;
+use App\Http\Controllers\Admin\AdsController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -269,6 +273,125 @@ Route::group(['middleware' => 'auth'], function (){
     // resource route
     Route::resource('categories', CategoriesController::class);
 
+
+    // ======================= Home Sliders Routes ====================== //
+    // table actions route
+    Route::post('homeSliders/actions', 
+        [HomeSlidersController::class , 'actions']
+    )->name('homeSliders.actions');
+    // get sliders as json route 
+    Route::get('homeSliders/json', [
+        HomeSlidersController::class, 'getSlidersAsJson'
+    ])->name('homeSliders.json');
+        // filter sliders  route 
+    Route::post('homeSliders/filter', [
+        HomeSlidersController::class, 'filterSliders'
+    ])->name('homeSliders.filter');
+    // to import & export excel 
+    Route::get('homeSliders/export/excel', [
+        HomeSlidersController::class, 'exportExcel'
+    ])->name('homeSliders.export.excel');
+    Route::post('homeSliders/import/excel', [
+        HomeSlidersController::class, 'importExcel'
+    ])->name('homeSliders.import.excel');
+    Route::get('homeSliders/importExportView',  [
+        HomeSlidersController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('homeSliders/{id}/destroy', [
+        HomeSlidersController::class, 'destroy'
+    ]);
+    Route::resource('homeSliders', HomeSlidersController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Home banners Routes ====================== //
+    // table actions route
+    Route::post('homeBanners/actions', 
+        [HomeBannersController::class , 'actions']
+    )->name('homeBanners.actions');
+    // get Banners as json route 
+    Route::get('homeBanners/json', [
+        HomeBannersController::class, 'getBannersAsJson'
+    ])->name('homeBanners.json');
+        // filter Banners  route 
+    Route::post('homeBanners/filter', [
+        HomeBannersController::class, 'filterBanners'
+    ])->name('homeBanners.filter');
+    // to import & export excel 
+    Route::get('homeBanners/export/excel', [
+        HomeBannersController::class, 'exportExcel'
+    ])->name('homeBanners.export.excel');
+    Route::post('homeBanners/import/excel', [
+        HomeBannersController::class, 'importExcel'
+    ])->name('homeBanners.import.excel');
+    Route::get('homeBanners/importExportView',  [
+        HomeBannersController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('homeBanners/{id}/destroy', [
+        HomeBannersController::class, 'destroy'
+    ]);
+    Route::resource('homeBanners', HomeBannersController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Ads Categories Routes ====================== //
+    // table actions route
+    Route::post('adsCategories/actions', 
+        [AdsCategoriesController::class , 'actions']
+    )->name('adsCategories.actions');
+    // get AdsCategories as json route 
+    Route::get('adsCategories/json', [
+        AdsCategoriesController::class, 'getadsCategoriesAsJson'
+    ])->name('adsCategories.json');
+        // filter AdsCategories  route 
+    Route::post('adsCategories/filter', [
+        AdsCategoriesController::class, 'filterAdsCategories'
+    ])->name('adsCategories.filter');
+    // to import & export excel 
+    Route::get('adsCategories/export/excel', [
+        AdsCategoriesController::class, 'exportExcel'
+    ])->name('adsCategories.export.excel');
+    Route::post('adsCategories/import/excel', [
+        AdsCategoriesController::class, 'importExcel'
+    ])->name('adsCategories.import.excel');
+    Route::get('adsCategories/importExportView',  [
+        AdsCategoriesController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('adsCategories/{id}/destroy', [
+        AdsCategoriesController::class, 'destroy'
+    ]);
+    Route::resource('adsCategories', AdsCategoriesController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Ads Routes ====================== //
+    // table actions route
+    Route::post('ads/actions', 
+        [AdsController::class , 'actions']
+    )->name('ads.actions');
+    // get ads as json route 
+    Route::get('ads/json', [
+        AdsController::class, 'getadsAsJson'
+    ])->name('ads.json');
+        // filter ads  route 
+    Route::post('ads/filter', [
+        AdsController::class, 'filterAds'
+    ])->name('ads.filter');
+    // to import & export excel 
+    Route::get('ads/export/excel', [
+        AdsController::class, 'exportExcel'
+    ])->name('ads.export.excel');
+    Route::post('ads/import/excel', [
+        AdsController::class, 'importExcel'
+    ])->name('ads.import.excel');
+    Route::get('ads/importExportView',  [
+        AdsController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('ads/{id}/destroy', [
+        AdsController::class, 'destroy'
+    ]);
+    Route::resource('ads', AdsController::class, ['except' => ['destroy']]);
 
 
 });

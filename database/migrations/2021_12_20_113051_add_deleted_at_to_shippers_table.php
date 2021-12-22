@@ -14,7 +14,7 @@ class AddDeletedAtToShippersTable extends Migration
     public function up()
     {
         Schema::table('shippers', function (Blueprint $table) {
-            //
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddDeletedAtToShippersTable extends Migration
     public function down()
     {
         Schema::table('shippers', function (Blueprint $table) {
-            //
+            $table->dropColumn('deleted_at');
         });
     }
 }

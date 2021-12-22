@@ -14,7 +14,7 @@ class AddUpdatedAtToAdminUsersTable extends Migration
     public function up()
     {
         Schema::table('admin_users', function (Blueprint $table) {
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

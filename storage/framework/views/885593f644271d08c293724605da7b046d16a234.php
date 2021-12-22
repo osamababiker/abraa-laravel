@@ -225,6 +225,15 @@
 
     <script src="<?php echo e(asset('js/dataTables/shippersDataTable.js')); ?>"></script>
 
+    <script src="<?php echo e(asset('js/dataTables/homeSlidersDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/homeBannersDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/adsCategoriesDataTable.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('js/dataTables/adsDataTable.js')); ?>"></script>
+    
+
 </body>
 
 </html>

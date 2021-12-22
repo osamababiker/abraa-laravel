@@ -90,7 +90,18 @@
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Abandoned  Buying Quotation</a></li>
                 </ul>
             </li>
-
+            <li class="sidebar-item">
+                <a href="#advertisement" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="flag"></i> <span class="align-middle">Advertisement</span>
+                </a>
+                <ul id="advertisement" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('homeSliders.index')); ?>">Home Slider</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('homeBanners.index')); ?>"> Home Banners </a> </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="charts-apexcharts.html"> RFQ Slider </a> </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('adsCategories.index')); ?>"> Ads Area </a> </li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('ads.index')); ?>"> Ads </a> </li>
+                </ul>
+            </li>
             <li class="sidebar-item">
                 <a href="#charts" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="pie-chart"></i> <span class="align-middle">Charts</span>

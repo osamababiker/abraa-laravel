@@ -14,7 +14,7 @@ class AddUpdatedAtToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('updated_at');
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

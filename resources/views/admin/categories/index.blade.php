@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="card-body">
 
-                                <div class="row mb-2 m-1">
+                                    <div class="row mb-2 m-1">
                                         <div class="col-md-4 form-group">
                                             <label for="category_title">Category Title</label>
                                             <input type="text" name="category_title" id="category_title" class="filter_data_table form-control" aria-label="Search">

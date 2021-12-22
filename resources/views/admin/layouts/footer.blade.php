@@ -225,6 +225,15 @@
 
     <script src="{{ asset('js/dataTables/shippersDataTable.js') }}"></script>
 
+    <script src="{{ asset('js/dataTables/homeSlidersDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/homeBannersDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/adsCategoriesDataTable.js') }}"></script>
+
+    <script src="{{ asset('js/dataTables/adsDataTable.js') }}"></script>
+    
+
 </body>
 
 </html>

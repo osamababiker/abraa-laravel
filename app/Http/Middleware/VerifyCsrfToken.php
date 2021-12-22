@@ -15,10 +15,14 @@ class VerifyCsrfToken extends Middleware
         '/suppliers/filter',
         '/items/filter',
         '/stores/filter',
-        '/rfq/filter',
+        '/rfqs/filter',
         '/categories/filter',
         '/buyers/filter',
-        '/shippers/filter'
+        '/shippers/filter',
+        '/homeSliders/filter',
+        '/homeBanners/filter',
+        '/adsCategories/filter',
+        '/ads/filter'
     ];
 }
  
