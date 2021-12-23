@@ -33,7 +33,7 @@ class MembershipsPlansController extends Controller
         ]); 
     }
 
-    public function filterMembershipsPlansPlans(Request $request){
+    public function filterMembershipsPlans(Request $request){
 
         
         $memberships_plan_name = $request->memberships_plan_name;

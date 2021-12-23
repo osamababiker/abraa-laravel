@@ -91,6 +91,14 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#members" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Members</span>
+                </a>
+                <ul id="members" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('members.index')); ?>">Users Activites</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#advertisement" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="flag"></i> <span class="align-middle">Advertisement</span>
                 </a>

@@ -96,5 +96,8 @@
                 </div>
             </main>
 
+            <!-- scripts is here -->
+            @include('admin.layouts.scripts')
+            <script src="{{ asset('js/dataTables/membershipsPlansDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

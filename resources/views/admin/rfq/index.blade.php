@@ -118,5 +118,8 @@
                 </div>
             </main>
 
+            <!-- scripts is here -->
+            @include('admin.layouts.scripts')
+            <script src="{{ asset('js/dataTables/rfqsDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

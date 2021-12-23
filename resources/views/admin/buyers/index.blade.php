@@ -38,7 +38,7 @@
                                                 Tools
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{{ route('shippers.export.excel') }}" target="_blank">Export to excel</a>
+                                                <a class="dropdown-item" href="{{ route('buyers.export.excel') }}" target="_blank">Export to excel</a>
                                             </div>
                                         </div>
                                     </div>
@@ -106,5 +106,8 @@
                 </div>
             </main>
 
+            <!-- scripts is here -->
+            @include('admin.layouts.scripts')
+            <script src="{{ asset('js/dataTables/buyersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

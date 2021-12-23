@@ -18,7 +18,7 @@ class SuppliersController extends Controller
     public function index(){
         $countries = Country::all();
         return view('admin.suppliers.index', compact(['countries']));
-    }
+    } 
 
     public function getSuppliersAsJson(Request $request){
 

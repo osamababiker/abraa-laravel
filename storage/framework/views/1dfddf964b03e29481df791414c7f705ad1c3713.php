@@ -118,6 +118,9 @@
                 </div>
             </main>
 
+            <!-- scripts is here -->
+            <?php echo $__env->make('admin.layouts.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <script src="<?php echo e(asset('js/dataTables/rfqsDataTable.js')); ?>"></script>
             <!-- footer is here -->
             <?php echo $__env->make('admin.layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php /**PATH C:\wamp64\www\abraa-dash\resources\views/admin/rfq/index.blade.php ENDPATH**/ ?>

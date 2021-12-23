@@ -123,5 +123,8 @@
                 </div>
             </main>
 
+            <!-- scripts is here -->
+            @include('admin.layouts.scripts')
+            <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

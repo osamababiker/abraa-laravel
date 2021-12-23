@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdsCategoriesController;
 use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\MembershipsPlansController;
 use App\Http\Controllers\Admin\MembershipsTransactionsController;
+use App\Http\Controllers\Admin\MembersController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -407,7 +408,7 @@ Route::group(['middleware' => 'auth'], function (){
     ])->name('membershipsPlans.json');
         // filter memberships Plans  route 
     Route::post('membershipsPlans/filter', [
-        MembershipsPlansController::class, 'filterMembershipsPlansPlans'
+        MembershipsPlansController::class, 'filterMembershipsPlans'
     ])->name('membershipsPlans.filter');
     // to import & export excel 
     Route::get('membershipsPlans/export/excel', [
@@ -454,6 +455,36 @@ Route::group(['middleware' => 'auth'], function (){
         MembershipsTransactionsController::class, 'destroy'
     ]);
     Route::resource('membershipsTransactions', MembershipsTransactionsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Members Routes ====================== //
+    // table actions route
+    Route::post('members/actions', 
+        [MembersController::class , 'actions']
+    )->name('members.actions');
+    // get members as json route 
+    Route::get('members/json', [
+        MembersController::class, 'getMembersAsJson'
+    ])->name('members.json');
+        // filter members  route 
+    Route::post('members/filter', [
+        MembersController::class, 'filterMembers'
+    ])->name('members.filter');
+    // to import & export excel 
+    Route::get('members/export/excel', [
+        MembersController::class, 'exportExcel'
+    ])->name('members.export.excel');
+    Route::post('members/import/excel', [
+        MembersController::class, 'importExcel'
+    ])->name('members.import.excel');
+    Route::get('members/importExportView',  [
+        MembersController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('members/{id}/destroy', [
+        MembersController::class, 'destroy'
+    ]);
+    Route::resource('members', MembersController::class, ['except' => ['destroy']]);
 
 
 });

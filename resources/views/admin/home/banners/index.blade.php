@@ -84,5 +84,8 @@
                 </div>
             </main>
 
+            <!-- scripts is here -->
+            @include('admin.layouts.scripts')
+            <script src="{{ asset('js/dataTables/homeBannersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')
