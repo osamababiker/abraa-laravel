@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App;
-use Auth;
-use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -115,7 +112,7 @@ class CategoriesController extends Controller
     // import & export to excel
     public function exportExcel() 
     {
-        return Excel::download(new CategoriesExport, 'stores.xlsx'); 
+        return Excel::download(new CategoriesExport, 'categories.xlsx'); 
     }
    
     public function importExcel() 

@@ -25,7 +25,14 @@ class VerifyCsrfToken extends Middleware
         '/ads/filter',
         '/membershipsPlans/filter',
         '/membershipsTransactions/filter',
-        '/members/filter'
+        '/members/filter',
+        '/configs/filter',
+        '/countries/filter',
+        '/states/filter',
+        '/currencies/filter',
+        '/units/filter',
+        '/paymentOptions/filter',
+        '/rfqInvoices/filter'
     ];
 }
  

@@ -91,7 +91,7 @@
                                             </div>
                                         </div>
                                        
-                                        <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                        <table id="" class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th> <input type="checkbox" name="all_colums" class="select_all_colums"> </th>

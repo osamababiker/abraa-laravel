@@ -2,38 +2,68 @@ $(document).ready(function () {
 
     $("#ajax_loader").css('display', 'block');
 
-    var buying_requests_html = '';
+    var buying_request_html = '';
+    var category = '';
+    var country = '';
+    var buyer_name = '';
+    var buyer_email = '';
+    var buyer_phone = '';
+    var unit = '';
+    var status = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
-    var buying_requests_status = $('#buying_requests_status').val();
-    var buying_request_category = '';
-    var buying_request_unit = ''; 
+    var buying_request_status = $('#buying_request_status').val();
+
 
     $.ajax({
-        url: "/rfqs/json",  
+        url: "/rfqs/json",   
         type: "get", 
         data: {
             "rows_numbers": rows_numbers,
-            "buying_requests_status": buying_requests_status
+            "buying_request_status": buying_request_status
         },
         success: function(response){
 
-            $("#rfqs_counter").text(response.buying_requests_count);
+            $("#buying_request_counter").text(response.buying_requests_count);
 
-            response.buying_requests.forEach(function(buying_request) {
+            response.buying_requests.forEach(function(request) {
 
-                if(buying_request.category){
-                    buying_request_category = buying_request.category.en_title;
+                if(request.unit){
+                    unit = request.unit.unit_en;
                 }
 
-                if(buying_request.unit){
-                    buying_request_unit = buying_request.unit.unit_en;
+                if(request.category){
+                    category = request.category.en_title;
                 }
 
-                buying_requests_html = buying_requests_html +
-                
-                "<div class=\"modal fade\" id=\"delete_buying_request_"+ buying_request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                if(request.buyer){
+                    buyer_name = request.buyer.full_name;
+                    buyer_email = request.buyer.email;
+                    buyer_phone = request.buyer.phone;
+                }
+
+                if(request.country){
+                    country = request.country.en_name;
+                }
+
+
+                if(request.status == 1){
+                    status = "<span style=\"color: gold\">Pending</span>";
+                }else if(request.status == 2) {
+                    status = "<span style=\"color: green\">Approved</span>";
+                }else if(request.status == 3){
+                    status = "<span style=\"color: green\">Completed</span>";
+                }else if(request.status == 4){
+                    status = "<span style=\"\">Lost</span>";
+                }else if(request.status == 5){
+                    status = "<span style=\"color: red\">Cancelled</span>";
+                }
+
+                buying_request_html = buying_request_html +
+
+                // archive confirmation modal
+                "<div class=\"modal fade\" id=\"delete_buyingRequestInvoice_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
                         "<div class=\"modal-header\">\n"+
@@ -47,43 +77,44 @@ $(document).ready(function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_rfq("+ buying_request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_buyingRequestInvoice("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
                 "</div>\n"+
 
+
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buying_request_id[]\" value=\""+ buying_request.id +"\" ></input> </td>\n" +
-                "<td>"+ buying_request.id +"</td>\n"+
-                "<td>"+ buying_request.product_name +"</td>\n"+
-                "<td>"+ buying_request_category +"</td>\n"+
-                "<td></td>\n"+
-                "<td></td>\n"+
-                "<td></td>\n"+
-                "<td>"+ buying_request.quantity +"</td>\n"+
-                "<td>"+ buying_request_unit +"</td>\n"+
-                "<td>"+ buying_request.target_price +"</td>\n"+
-                "<td>"+ buying_request.target_price * buying_request.quantity +"</td>\n"+
-                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ buying_request.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
-                "<td>"+ buying_request.date_added +"</td>\n"+
+                "<td> <input type=\"checkbox\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
+                "<td>"+ request.id +"</td>\n"+
+                "<td>  </td>\n"+
+                "<td>"+ buyer_name +"</td>\n"+
+                "<td>"+ buyer_phone +"</td>\n"+
+                "<td>"+ country +"</td>\n"+
+                "<td>"+ buyer_email +"</td>\n"+
+                "<td>"+ category +"</td>\n"+
+                "<td>"+ request.product_name +"</td>\n"+
+                "<td>"+ request.quantity +"</td>\n"+ 
+                "<td>"+ unit +"</td>\n"+
+                "<td>"+ status +"</td>\n"+
+                "<td>"+ request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buying_request_"+ buying_request.id +"\">\n"+
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buyingRequestInvoice_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"
             });
 
-            $("#buying_requests_table_body").html(buying_requests_html);
+            $("#buying_requests_table_body").html(buying_request_html);
 
             $("#ajax_loader").css('display', 'none');
         }
@@ -96,17 +127,22 @@ $(".filter_data_table").on('change', function () {
 
     $("#ajax_loader").css('display', 'block');
 
-    var buying_requests_html = '';
-    var buying_request_category = '';
-    var buying_request_unit = ''; 
+    var buying_request_html = '';
+    var category = '';
+    var country = '';
+    var buyer_name = '';
+    var buyer_email = '';
+    var buyer_phone = '';
+    var unit = '';
+    var status = '';
+
 
     // filter data
     var product_name = $('#product_name').val(); 
     var shipping_country = $('#shipping_country').val(); 
-    var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var request_type = $("#request_type").val();
-    var buying_requests_status = $('#buying_requests_status').val();
+    var buying_request_status = $('#buying_request_status').val();
 
     $.ajax({
         url: "/rfqs/filter",
@@ -115,27 +151,50 @@ $(".filter_data_table").on('change', function () {
             'product_name': product_name,
             'shipping_country': shipping_country,
             'request_type': request_type,
-            'meta_keyword': meta_keyword,
-            "buying_requests_status": buying_requests_status,
+            "buying_request_status": buying_request_status,
             "rows_numbers": rows_numbers
         },
         success: function(response){
 
-            $("#rfqs_counter").text(response.buying_requests_count);
+            $("#buying_request_counter").text(response.buying_requests_count);
 
-            response.buying_requests.forEach(function(buying_request) {
+            response.buying_requests.forEach(function(request) {
 
-                if(buying_request.category){
-                    buying_request_category = buying_request.category.en_title;
+                if(request.unit){
+                    unit = request.unit.unit_en;
                 }
 
-                if(buying_request.unit){
-                    buying_request_unit = buying_request.unit.unit_en;
+                if(request.category){
+                    category = request.category.en_title;
                 }
 
-                buying_requests_html = buying_requests_html +
-                
-                "<div class=\"modal fade\" id=\"delete_buying_request_"+ buying_request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                if(request.buyer){
+                    buyer_name = request.buyer.full_name;
+                    buyer_email = request.buyer.email;
+                    buyer_phone = request.buyer.phone;
+                }
+
+                if(request.country){
+                    country = request.country.en_name;
+                }
+
+
+                if(request.status == 1){
+                    status = "<span style=\"color: yellow\">Pending</span>";
+                }else if(request.status == 2) {
+                    status = "<span style=\"color: green\">Approved</span>";
+                }else if(request.status == 3){
+                    status = "<span style=\"color: green\">Completed</span>";
+                }else if(request.status == 4){
+                    status = "<span style=\"\">Lost</span>";
+                }else if(request.status == 5){
+                    status = "<span style=\"color: red\">Cancelled</span>";
+                }
+
+                buying_request_html = buying_request_html +
+
+                // archive confirmation modal
+                "<div class=\"modal fade\" id=\"delete_buyingRequestInvoice_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
                         "<div class=\"modal-header\">\n"+
@@ -149,43 +208,44 @@ $(".filter_data_table").on('change', function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_rfq("+ buying_request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_buyingRequestInvoice("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
                 "</div>\n"+
 
+
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buying_request_id[]\" value=\""+ buying_request.id +"\" ></input> </td>\n" +
-                "<td>"+ buying_request.id +"</td>\n"+
-                "<td>"+ buying_request.product_name +"</td>\n"+
-                "<td>"+ buying_request_category +"</td>\n"+
-                "<td></td>\n"+
-                "<td></td>\n"+
-                "<td></td>\n"+
-                "<td>"+ buying_request.quantity +"</td>\n"+
-                "<td>"+ buying_request_unit +"</td>\n"+
-                "<td>"+ buying_request.target_price +"</td>\n"+
-                "<td>"+ buying_request.target_price * buying_request.quantity +"</td>\n"+
-                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ buying_request.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
-                "<td>"+ buying_request.date_added +"</td>\n"+
+                "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
+                "<td>"+ request.id +"</td>\n"+
+                "<td>  </td>\n"+
+                "<td>"+ buyer_name +"</td>\n"+
+                "<td>"+ buyer_phone +"</td>\n"+
+                "<td>"+ country +"</td>\n"+
+                "<td>"+ buyer_email +"</td>\n"+
+                "<td>"+ category +"</td>\n"+
+                "<td>"+ request.product_name +"</td>\n"+
+                "<td>"+ request.quantity +"</td>\n"+ 
+                "<td>"+ unit +"</td>\n"+
+                "<td>"+ status +"</td>\n"+
+                "<td>"+ request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/rfq/"+ buying_request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buying_request_"+ buying_request.id +"\">\n"+
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buyingRequestInvoice_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"
             });
 
-            $("#buying_requests_table_body").html(buying_requests_html);
+            $("#buying_requests_table_body").html(buying_request_html);
 
             $("#ajax_loader").css('display', 'none');
         }
@@ -194,11 +254,11 @@ $(".filter_data_table").on('change', function () {
 
 
 
-// to delete (archive) rfq
-function archive_rfq(rfq_id){
+// to delete (archive) buying Request Invoice
+function archive_buyingRequestInvoice(request_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
-        url: "/rfqs/" + rfq_id + "/destroy",
+        url: "/rfqs/" + request_id + "/destroy",
         type: "get",
         success: function(response){
             location.reload();

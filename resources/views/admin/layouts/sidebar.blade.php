@@ -18,6 +18,19 @@
 
         <ul class="sidebar-nav">
             <li class="sidebar-item">
+                <a href="#settings" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Configs</span>
+                </a>
+                <ul id="settings" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('configs.index') }}">Website Config</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('countries.index') }}">Website Countries</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('states.index') }}">Countries States</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('currencies.index') }}">Website Currencies</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('units.index') }}">Website Units</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('paymentOptions.index') }}">Payment Options</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#suppliers" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Suppliers</span>
                 </a>
@@ -80,11 +93,11 @@
             </li>
             <li class="sidebar-item">
                 <a href="#rfq" data-toggle="collapse" class="sidebar-link collapsed">
-                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Request For Quotation</span>
+                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Quotation </span>
                 </a>
                 <ul id="rfq" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqs.index') }}">All Quotation</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Global Quotation</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqInvoices.index') }}">Rfq Invoices</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqs.index') }}">All Rfq</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Product Buying Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Closed Buying Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Abandoned  Buying Quotation</a></li>

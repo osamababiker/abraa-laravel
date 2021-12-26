@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App;
-use Auth;
 use DB;
-use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;

@@ -278,7 +278,8 @@
                     </div>
                 </div>
             </main>
-
+            
+            @include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')
 

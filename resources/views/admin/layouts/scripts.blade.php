@@ -107,21 +107,35 @@
     });
 </script>
 
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Datatables Responsive
         $("#datatables-reponsive").DataTable({
-            "responsive": true,
+            responsive: true,
             "scrollX": true, 
             "bPaginate": false,
             //"scrollY": 200, 
-            "scrollTop": true,
-            "searching": false
-            "aoColumnDefs": [
-                { "bSortable": false, "aTargets": [ 0, 1, 2, 3 ] }, 
-                { "bSearchable": false, "aTargets": [ 0, 1, 2, 3 ] }
-            ] 
+            "searching": false,
+            "ordering": false,
+            "bInfo": false,
         });
+    });
+</script>
+
+
+<script>
+    $(function () {
+        $('.table_wrapper_1').on('scroll', function (e) {
+            $('.table_wrapper_2').scrollLeft($('.table_wrapper_1').scrollLeft());
+        }); 
+        $('.table_wrapper_2').on('scroll', function (e) {
+            $('.table_wrapper_1').scrollLeft($('.table_wrapper_2').scrollLeft());
+        });
+    });
+    $(window).on('load', function (e) {
+        $('.table_div_1').width($('table').width());
+        $('.table_div_2').width($('table').width());
     });
 </script>
 
@@ -170,6 +184,12 @@
             },
             theme: "bubble"
         });
+    });
+</script>
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#feedback_modal').modal('show');
     });
 </script>
 

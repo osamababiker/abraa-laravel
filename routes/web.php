@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\ShippersController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
-use App\Http\Controllers\Admin\rfqsController;
+use App\Http\Controllers\Admin\RfqInvoicesController;
+use App\Http\Controllers\Admin\RfqsController;
 use App\Http\Controllers\Admin\HomeSlidersController;
 use App\Http\Controllers\Admin\HomeBannersController;
 use App\Http\Controllers\Admin\AdsCategoriesController;
@@ -17,6 +18,13 @@ use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\MembershipsPlansController;
 use App\Http\Controllers\Admin\MembershipsTransactionsController;
 use App\Http\Controllers\Admin\MembersController;
+use App\Http\Controllers\Admin\ConfigsController;
+use App\Http\Controllers\Admin\CountriesController;
+use App\Http\Controllers\Admin\StatesController;
+use App\Http\Controllers\Admin\CurrenciesController;
+use App\Http\Controllers\Admin\UnitsController;
+use App\Http\Controllers\Admin\PaymentOptionsController;
+
 
 /* 
 |--------------------------------------------------------------------------
@@ -184,35 +192,67 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('buyers', BuyersController::class);
 
 
-     // ======================= rfqs Routes ====================== //
-     // table actions route
-     Route::post('rfqs/actions', 
-        [rfqsController::class , 'actions']
-    )->name('buyers.actions');  
+
+    // ======================= rfqs Routes ====================== //
+    // table actions route
+    Route::post('rfqs/actions', 
+        [RfqsController::class , 'actions']
+    )->name('rfqs.actions');  
      // get rfqs as json route 
      Route::get('rfqs/json', [
-        rfqsController::class, 'getrfqsAsJson'
+        RfqsController::class, 'getRfqsAsJson'
     ])->name('rfqs.json');
-        // filter rfqs  route 
+        // filter rfqInvoices  route 
     Route::post('rfqs/filter', [
-        rfqsController::class, 'filterrfqs'
+        RfqsController::class, 'filterRfqs'
     ])->name('rfqs.filter');
     // to import & export excel 
     Route::get('rfqs/export/excel', [
-        rfqsController::class, 'exportExcel'
+        RfqsController::class, 'exportExcel'
     ])->name('rfqs.export.excel');
     Route::post('rfqs/import/excel', [
-        rfqssController::class, 'importExcel'
+        RfqsController::class, 'importExcel'
     ])->name('rfqs.import.excel');
     Route::get('rfqs/importExportView',  [
-        rfqsController::class, 'importExportView'
+        RfqsController::class, 'importExportView'
     ]);    
     // custom delete route
     Route::get('rfqs/{id}/destroy', [
-        rfqsController::class, 'destroy'
+        RfqsController::class, 'destroy'
     ]);
     // resource route
-    Route::resource('rfqs', rfqsController::class);
+    Route::resource('rfqs', RfqsController::class);
+
+
+    // ======================= rfqs Invoices Routes ====================== //
+    // table actions route
+    Route::post('rfqInvoices/actions', 
+        [RfqInvoicesController::class , 'actions']
+    )->name('rfqInvoices.actions');  
+     // get rfqs as json route 
+     Route::get('rfqInvoices/json', [
+        RfqInvoicesController::class, 'getRfqInvoicesAsJson'
+    ])->name('rfqInvoices.json');
+        // filter rfqInvoices  route 
+    Route::post('rfqInvoices/filter', [
+        RfqInvoicesController::class, 'filterRfqInvoices'
+    ])->name('rfqInvoices.filter');
+    // to import & export excel 
+    Route::get('rfqInvoices/export/excel', [
+        RfqInvoicesController::class, 'exportExcel'
+    ])->name('rfqInvoices.export.excel');
+    Route::post('rfqInvoices/import/excel', [
+        RfqInvoicesController::class, 'importExcel'
+    ])->name('rfqInvoices.import.excel');
+    Route::get('rfqInvoices/importExportView',  [
+        RfqInvoicesController::class, 'importExportView'
+    ]);    
+    // custom delete route
+    Route::get('rfqInvoices/{id}/destroy', [
+        RfqInvoicesController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('rfqInvoices', RfqInvoicesController::class);
 
 
     // ======================= Items Routes ====================== //
@@ -466,7 +506,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('members/json', [
         MembersController::class, 'getMembersAsJson'
     ])->name('members.json');
-        // filter members  route 
+    // filter members  route 
     Route::post('members/filter', [
         MembersController::class, 'filterMembers'
     ])->name('members.filter');
@@ -486,6 +526,188 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     Route::resource('members', MembersController::class, ['except' => ['destroy']]);
 
+
+    // ======================= Configs Routes ====================== //
+    // table actions route
+    Route::post('configs/actions', 
+        [ConfigsController::class , 'actions']
+    )->name('configs.actions');
+    // get configs as json route 
+    Route::get('configs/json', [
+        ConfigsController::class, 'getConfigsAsJson'
+    ])->name('configs.json');
+    // filter configs  route 
+    Route::post('configs/filter', [
+        ConfigsController::class, 'filterConfigs'
+    ])->name('configs.filter');
+    // to import & export excel 
+    Route::get('configs/export/excel', [
+        ConfigsController::class, 'exportExcel'
+    ])->name('configs.export.excel');
+    Route::post('configs/import/excel', [
+        ConfigsController::class, 'importExcel'
+    ])->name('configs.import.excel');
+    Route::get('configs/importExportView',  [
+        ConfigsController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('configs/{id}/destroy', [
+        ConfigsController::class, 'destroy'
+    ]);
+    Route::resource('configs', ConfigsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Countries Routes ====================== //
+    // table actions route
+    Route::post('countries/actions', 
+        [CountriesController::class , 'actions']
+    )->name('countries.actions');
+    // get countries as json route 
+    Route::get('countries/json', [
+        CountriesController::class, 'getCountriesAsJson'
+    ])->name('countries.json');
+    // filter countries  route 
+    Route::post('countries/filter', [
+        CountriesController::class, 'filterCountries'
+    ])->name('countries.filter');
+    // to import & export excel 
+    Route::get('countries/export/excel', [
+        CountriesController::class, 'exportExcel'
+    ])->name('countries.export.excel');
+    Route::post('countries/import/excel', [
+        CountriesController::class, 'importExcel'
+    ])->name('countries.import.excel');
+    Route::get('countries/importExportView',  [
+        CountriesController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('countries/{id}/destroy', [
+        CountriesController::class, 'destroy'
+    ]);
+    Route::resource('countries', CountriesController::class, ['except' => ['destroy']]);
+
+
+    // ======================= States Routes ====================== //
+    // table actions route
+    Route::post('states/actions', 
+        [StatesController::class , 'actions']
+    )->name('states.actions');
+    // get states as json route 
+    Route::get('states/json', [
+        StatesController::class, 'getStatesAsJson'
+    ])->name('states.json');
+    // filter states  route 
+    Route::post('states/filter', [
+        StatesController::class, 'filterStates'
+    ])->name('states.filter');
+    // to import & export excel 
+    Route::get('states/export/excel', [
+        StatesController::class, 'exportExcel'
+    ])->name('states.export.excel');
+    Route::post('states/import/excel', [
+        StatesController::class, 'importExcel'
+    ])->name('states.import.excel');
+    Route::get('states/importExportView',  [
+        StatesController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('states/{id}/destroy', [
+        StatesController::class, 'destroy'
+    ]);
+    Route::resource('states', StatesController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Currencies Routes ====================== //
+    // table actions route
+    Route::post('currencies/actions', 
+        [CurrenciesController::class , 'actions']
+    )->name('currencies.actions');
+    // get currencies as json route 
+    Route::get('currencies/json', [
+        CurrenciesController::class, 'getCurrenciesAsJson'
+    ])->name('currencies.json');
+    // filter currencies  route 
+    Route::post('currencies/filter', [
+        CurrenciesController::class, 'filterCurrencies'
+    ])->name('currencies.filter');
+    // to import & export excel 
+    Route::get('currencies/export/excel', [
+        CurrenciesController::class, 'exportExcel'
+    ])->name('currencies.export.excel');
+    Route::post('currencies/import/excel', [
+        CurrenciesController::class, 'importExcel'
+    ])->name('currencies.import.excel');
+    Route::get('currencies/importExportView',  [
+        CurrenciesController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('currencies/{id}/destroy', [
+        CurrenciesController::class, 'destroy'
+    ]);
+    Route::resource('currencies', CurrenciesController::class, ['except' => ['destroy']]);
+
+
+    // ======================= units Routes ====================== //
+    // table actions route
+    Route::post('units/actions', 
+        [UnitsController::class , 'actions']
+    )->name('units.actions');
+    // get units as json route 
+    Route::get('units/json', [
+        UnitsController::class, 'getUnitsAsJson'
+    ])->name('units.json');
+    // filter units  route 
+    Route::post('units/filter', [
+        UnitsController::class, 'filterUnits'
+    ])->name('units.filter');
+    // to import & export excel 
+    Route::get('units/export/excel', [
+        UnitsController::class, 'exportExcel'
+    ])->name('units.export.excel');
+    Route::post('units/import/excel', [
+        UnitsController::class, 'importExcel'
+    ])->name('units.import.excel');
+    Route::get('units/importExportView',  [
+        UnitsController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('units/{id}/destroy', [
+        UnitsController::class, 'destroy'
+    ]);
+    Route::resource('units', UnitsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= units Routes ====================== //
+    // table actions route
+    Route::post('paymentOptions/actions', 
+        [PaymentOptionsController::class , 'actions']
+    )->name('paymentOptions.actions');
+    // get paymentOptions as json route 
+    Route::get('paymentOptions/json', [
+        PaymentOptionsController::class, 'getpaymentOptionsAsJson'
+    ])->name('paymentOptions.json');
+    // filter paymentOptions  route 
+    Route::post('paymentOptions/filter', [
+        PaymentOptionsController::class, 'filterpaymentOptions'
+    ])->name('paymentOptions.filter');
+    // to import & export excel 
+    Route::get('paymentOptions/export/excel', [
+        PaymentOptionsController::class, 'exportExcel'
+    ])->name('paymentOptions.export.excel');
+    Route::post('paymentOptions/import/excel', [
+        PaymentOptionsController::class, 'importExcel'
+    ])->name('paymentOptions.import.excel');
+    Route::get('paymentOptions/importExportView',  [
+        PaymentOptionsController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('paymentOptions/{id}/destroy', [
+        PaymentOptionsController::class, 'destroy'
+    ]);
+    Route::resource('paymentOptions', PaymentOptionsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= General Classes Routes ====================== //
 
 });
 
