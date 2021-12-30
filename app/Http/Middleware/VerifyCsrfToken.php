@@ -32,7 +32,9 @@ class VerifyCsrfToken extends Middleware
         '/currencies/filter',
         '/units/filter',
         '/paymentOptions/filter',
-        '/rfqInvoices/filter'
+        '/rfqInvoices/filter',
+        '/globalRfqs/filter',
+        '/globalRfqs/suppliers/filter'
     ];
 }
  

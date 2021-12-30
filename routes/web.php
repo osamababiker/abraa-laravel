@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\RfqInvoicesController;
 use App\Http\Controllers\Admin\RfqsController;
+use App\Http\Controllers\Admin\GlobalRfqsController;
 use App\Http\Controllers\Admin\HomeSlidersController;
 use App\Http\Controllers\Admin\HomeBannersController;
 use App\Http\Controllers\Admin\AdsCategoriesController;
@@ -230,6 +231,47 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('rfqs', RfqsController::class);
+
+
+    // ======================= global rfqs Routes ====================== //
+    // table actions route
+    Route::post('globalRfqs/actions', 
+        [GlobalRfqsController::class , 'actions']
+    )->name('globalRfqs.actions');  
+    // get globalRfqs as json route 
+     Route::get('globalRfqs/json', [
+        GlobalRfqsController::class, 'getGlobalRfqsAsJson'
+    ])->name('globalRfqs.json');
+    // filter globalRfqs  route 
+    Route::post('globalRfqs/filter', [
+        GlobalRfqsController::class, 'filterGlobalRfqs'
+    ])->name('globalRfqs.filter');
+    // to import & export excel 
+    Route::get('globalRfqs/export/excel', [
+        GlobalRfqsController::class, 'exportExcel'
+    ])->name('globalRfqs.export.excel');
+    Route::post('globalRfqs/import/excel', [
+        GlobalRfqsController::class, 'importExcel'
+    ])->name('globalRfqs.import.excel');
+    Route::get('globalRfqs/importExportView',  [
+        GlobalRfqsController::class, 'importExportView'
+    ]);  
+    // to send rfq to suppliers 
+    Route::get('globalRfqs/{id}/send', [
+        GlobalRfqsController::class, 'sendToSupploersPage'
+    ]);
+    Route::post('globalRfqs/suppliers/filter', [
+        GlobalRfqsController::class, 'filterSuppliers'
+    ]);
+    Route::post('globalRfqs/{id}/send', [
+        GlobalRfqsController::class, 'sendToSupploers'
+    ])->name('globalRfqs.sendToSupploers');
+    // custom delete route
+    Route::get('globalRfqs/{id}/destroy', [
+        GlobalRfqsController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('globalRfqs', GlobalRfqsController::class);
 
 
     // ======================= rfqs Invoices Routes ====================== //

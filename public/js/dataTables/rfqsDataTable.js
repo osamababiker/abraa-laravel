@@ -9,11 +9,9 @@ $(document).ready(function () {
     var buyer_email = '';
     var buyer_phone = '';
     var unit = '';
-    var status = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
-    var buying_request_status = $('#buying_request_status').val();
 
 
     $.ajax({
@@ -21,7 +19,6 @@ $(document).ready(function () {
         type: "get", 
         data: {
             "rows_numbers": rows_numbers,
-            "buying_request_status": buying_request_status
         },
         success: function(response){
 
@@ -49,24 +46,10 @@ $(document).ready(function () {
                 }
 
 
-                if(request.status == 1){
-                    status = "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
-                            "<i  class=\"align-middle fa fa-check\" ></i>\n"+
-                        "</a>\n";
-                }else if(request.status == 2) {
-                    status = "<span style=\"color: #4bbf73\">Approved</span>";
-                }else if(request.status == 3){
-                    status = "<span style=\"color: #4bbf73\">Completed</span>";
-                }else if(request.status == 4){
-                    status = "<span style=\"\">Lost</span>";
-                }else if(request.status == 5){
-                    status = "<span style=\"color: #d9534f\">Cancelled</span>";
-                }
-
                 buying_request_html = buying_request_html +
 
                 // archive confirmation modal
-                "<div class=\"modal fade\" id=\"delete_buyingRequestInvoice_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                "<div class=\"modal fade\" id=\"delete_buyingRequest_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
                         "<div class=\"modal-header\">\n"+
@@ -80,7 +63,7 @@ $(document).ready(function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_buyingRequestInvoice("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_buyingRequest("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -143,6 +126,11 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
+                "<td>\n"+ 
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                        "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                    "</a>\n"+ 
+                "</td>\n"+
                 "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
@@ -152,7 +140,6 @@ $(document).ready(function () {
                 "<td>"+ request.product_name +"</td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
-                "<td>"+ status +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
@@ -163,7 +150,7 @@ $(document).ready(function () {
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buyingRequestInvoice_"+ request.id +"\">\n"+
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buyingRequest_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
@@ -194,15 +181,12 @@ $(".filter_data_table").on('change', function () {
     var buyer_email = '';
     var buyer_phone = '';
     var unit = '';
-    var status = '';
 
 
     // filter data
     var product_name = $('#product_name').val(); 
     var shipping_country = $('#shipping_country').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
-    var request_type = $("#request_type").val();
-    var buying_request_status = $('#buying_request_status').val();
 
     $.ajax({
         url: "/rfqs/filter",
@@ -210,8 +194,6 @@ $(".filter_data_table").on('change', function () {
         data: {
             'product_name': product_name,
             'shipping_country': shipping_country,
-            'request_type': request_type,
-            "buying_request_status": buying_request_status,
             "rows_numbers": rows_numbers
         },
         success: function(response){
@@ -240,24 +222,10 @@ $(".filter_data_table").on('change', function () {
                 }
 
 
-                if(request.status == 1){
-                    status = "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
-                            "<i  class=\"align-middle fa fa-check\" ></i>\n"+
-                        "</a>\n";
-                }else if(request.status == 2) {
-                    status = "<span style=\"color: #4bbf73\">Approved</span>";
-                }else if(request.status == 3){
-                    status = "<span style=\"color: #4bbf73\">Completed</span>";
-                }else if(request.status == 4){
-                    status = "<span style=\"\">Lost</span>";
-                }else if(request.status == 5){
-                    status = "<span style=\"color: #d9534f\">Cancelled</span>";
-                }
-
                 buying_request_html = buying_request_html +
 
                 // archive confirmation modal
-                "<div class=\"modal fade\" id=\"delete_buyingRequestInvoice_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                "<div class=\"modal fade\" id=\"delete_buyingRequest_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
                         "<div class=\"modal-header\">\n"+
@@ -271,7 +239,7 @@ $(".filter_data_table").on('change', function () {
                         "</div>\n"+
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_buyingRequestInvoice("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_buyingRequest("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -335,6 +303,11 @@ $(".filter_data_table").on('change', function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
+                "<td>\n"+ 
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                        "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                    "</a>\n"+ 
+                "</td>\n"+
                 "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
@@ -344,7 +317,6 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ request.product_name +"</td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
-                "<td>"+ status +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
@@ -355,7 +327,7 @@ $(".filter_data_table").on('change', function () {
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buyingRequestInvoice_"+ request.id +"\">\n"+
+                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_buyingRequest_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
@@ -488,7 +460,7 @@ $(function(){
 
 
 // to delete (archive) buying Request Invoice
-function archive_buyingRequestInvoice(request_id){
+function archive_buyingRequest(request_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
         url: "/rfqs/" + request_id + "/destroy",

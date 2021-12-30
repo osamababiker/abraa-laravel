@@ -97,8 +97,8 @@
                 </a>
                 <ul id="rfq" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqInvoices.index') }}">Rfq Invoices</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqs.index') }}">All Rfq</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Product Buying Quotation</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqs.index') }}">Pending Rfq</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('globalRfqs.index') }}">Global Rfq</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Closed Buying Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Abandoned  Buying Quotation</a></li>
                 </ul>

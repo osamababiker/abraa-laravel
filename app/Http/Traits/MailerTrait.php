@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use App\Models\Buyer;
 
 trait MailerTrait {
     
@@ -253,6 +254,450 @@ trait MailerTrait {
 
          return $message;
     }
+
+    public function buy_request_email_format($supplier, $buying_request, $strmImages, $lang = 'en', $external = 0)
+    {
+
+        $user_id = $supplier->id;
+
+        $encryptIds = $this->__encryptors('encrypt', $user_id . '-' . $buying_request->id);
+        $inqueryLink = config('global.public_url')  .'external-login/' . $encryptIds;
+
+        $buyer_name = '';
+        $buyer_country = '';
+        $buyer = Buyer::find($buying_request->buyer_id);
+        if($buyer){
+            $buyer_name = $buyer->full_name;
+            if($buyer->buyer_country){
+                $buyer_country = $buyer->buyer_country->en_name;
+            }
+        }
+
+        if ($buying_request->quantity < 10)
+            $title = 'buyer';
+        else
+            $title = 'wholesale buyer';
+
+        $phone = $supplier->phone;
+
+        $params['title'] = $title;
+
+        $params['name'] = $supplier->full_name;
+        $params['country'] = $buyer_country;
+        $params['product_name'] = $buying_request->product_name;
+        $params['qty'] = $buying_request->quantity . ' ' . $buying_request->unit->unit_en;
+        $params['link'] = $inqueryLink;
+        
+
+        $updateUrl = config('global.public_url')  . '/questionnaire/' . $encryptIds;
+        $login = config('global.public_url')  . '/login';
+        $register = config('global.public_url')  . '/register';
+
+        $message = $lang == 'en' ? '<table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailBody" style="background:#FFFFFF; border-radius:4px; -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+                            <tbody><tr>
+                                <td align="center" valign="top" style="padding: 0;">
+                                    <table border="0" cellpadding="20" cellspacing="0" width="100%" style="padding:20px;">
+                                        <tbody><tr>
+                                            <td align="center" valign="top" style="padding: 0;">
+                                                <a target="_blank" href="' . $inqueryLink . '" style="float:right;padding: 7px 14px;border-radius:6px;background: #4da1ff;color:#FFFFFF;font-size:11px;text-decoration:none;font-family:\'Roboto\', Helvetica, Arial, sans-serif;">REQUEST FOR QUOTATION</a>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="padding:0;">
+
+                                    <table border="0" cellpadding="20" cellspacing="0" width="100%" style="padding:0 73px 60px 73px; text-align:left; font-family:\'Roboto\', Helvetica, Arial, sans-serif; color:#617083; line-height: 20px;">
+                                        <tbody><tr>
+                                            <td align="center" valign="top" style="padding: 0;">
+                                                <h3 style="color:#585e66;font-size: 20px;margin: 0;padding-bottom: 25px;text-align: left;font-weight:normal;font-family:\'Roboto\', Helvetica, Arial, sans-serif;">Hi <span style="font-weight: bold;">' . $supplier['supplier_name'] . ',</span></h3>
+                                            </td>
+                                        </tr>                                       
+                                        <tr>
+                                            <td align="center" valign="top" style="padding: 0; text-align: left; font-family:\'Roboto\', Helvetica, Arial, sans-serif;">
+                                                     
+  
+     
+    <p style="font-size:14px;padding:0;margin:0;text-align:left;">A ' . $title . ' is looking for the below product:</p>
+    
+    
+    
+    
+    
+	<br><br>
+	
+             <table  border="1" cellpadding="10" cellspacing="1" width="100%" style="text-align:left;font-family:Roboto, Helvetica, Arial, sans-serif;color:#617083;line-height:5px;">
+             
+              <tr>
+			 <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+        
+    line-height: 200%;
+    width: 220px;">
+			 Item Name
+			 </td>
+			  <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+        
+    line-height: 200%;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buying_request->product_name . '
+			 </td>			 
+			 </tr>
+			 <tr>
+			  <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+        
+    line-height: 200%;
+    width: 220px;">
+			 Details
+			 </td>
+			  <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+        
+    line-height: 200%;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buying_request->product_detail . '
+			 </td>			 
+			 </tr>
+             
+             
+			 <tr>
+			 <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 220px;
+    display: inline-block;">
+			 Quantity Required
+			 </td>
+			  <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buying_request->quantity . ' ' . $buying_request->unit->unit_en . '
+			 </td>			 
+			 </tr>
+			 
+			 <tr>
+			 <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 220px;">
+			Buying Frequency
+			 </td>
+			   <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buying_request->buying_frequency_id . '
+			 </td>			 
+			 </tr>
+			 
+			 <tr>
+			<td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;">
+			Shipping Country
+			 </td>
+			   <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buyer_country . '
+			 </td>			 
+			 </tr>
+			 
+			 </table>
+			 
+			 <br>
+			 <p style="text-align:left;font-family:Roboto, Helvetica, Arial, sans-serif;color:#617083;line-height:5px;">Please submit your quotation by <a href="' . $inqueryLink . '" target="_blank" style="padding: 10px 18px;text-decoration: none;color: #4da1ff;font-size: 12px;text-align: center;font-weight: 400;">Clicking Here</a>
+			  
+			 </p>
+			 
+			 <p>
+                Or by replying this email.
+                <br>
+                <br>
+                Or to Whatsapp number <a href="https://api.whatsapp.com/send?phone=971505346880"
+                                                   style="
+    text-decoration: none;
+    background-color: #4da1ff;
+    color: #ebf4fe !important;
+    font-weight: 400;
+    border-color: #4da1ff !important;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;">0971505346880</a>
+                </p>
+
+    <br>
+    <p>' . $strmImages . '</p>
+    <br>
+
+' .
+//                                        <p>
+//<a href="https://www.youtube.com/watch?v=VJiCqEgCfj4">
+//<img src="https://www.abraa.com/assets/images/rsz_img-video.png" /></a></p>
+            '
+	<p style="text-align:justify;font-size:12px; padding:20px 0px; margin: 0px; color: black; font-family:Roboto, Helvetica, Arial, sans-serif; line-height: 20px; font-weight: 500;">
+			If you are selling different products ,Please
+			<span
+				style="color:rgb(17, 128, 176);text-decoration:none:rgb(17, 128, 176); font-family:Arial, sans-serif, Arial; font-weight:700; font-style:normal;">
+				update&nbsp;
+			</span>
+			your account info by visiting
+			<a href="' . $updateUrl . '">www.abraa.com</a>
+			<a style="text-decoration:none;color:rgb(17, 128, 176);font-family:Arial, sans-serif, Arial; font-weight:700; font-style:normal;"
+					href="' . $login . '">
+					Login&nbsp;
+			</a>
+			if you have an account or
+			<a style="text-decoration:none;color:rgb(242, 133, 0);font-family:Arial, sans-serif, Arial; font-weight:700; font-style:normal;"
+					href="' . $register . '">
+					Signup
+			</a>
+			if you are new to abraa Also you can click
+			<span
+				style="color:rgb(17, 128, 176); font-family:Arial, sans-serif, Arial; font-weight:400; font-style:normal;">
+				unsubscribe
+			</span>
+			if wish to remove your email from our list &nbsp;of suppliers.
+	  </p>
+		<br />
+		<br />
+<p style="font-size: 15px;padding-top: 25px;margin: 0;color:#3c495b;text-align: left;"> 
+                                               
+                                                   Abraa RFQ Team
+                                                    <br><br>
+                                                    <a target="_blank" href="https://www.abraa.com/" style="color:#4da1ff; text-decoration:none;">abraa.com</a>
+                                                    </p>
+                                             </td>
+                                        </tr>
+                                    </tbody></table>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>' : '<table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailBody" style="background:#FFFFFF; border-radius:4px; -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+                            <tbody>
+                            <tr>
+                                <td align="center" valign="top" style="padding: 0;">
+                                    <table border="0" cellpadding="20" cellspacing="0" width="100%" style="padding:20px;">
+                                        <tbody><tr>
+                                            <td align="center" valign="top" style="padding: 0;">
+                                                <a target="_blank" href="' . config('global.public_url') . 'tr/buying-inquiry/' . $buying_request->hash . '/' . encryptor('encrypt', $sup['supplier_id']) . ' " style="float:right;padding: 7px 14px;border-radius:6px;background: #4da1ff;color:#FFFFFF;font-size:11px;text-decoration:none;font-family:\'Roboto\', Helvetica, Arial, sans-serif;">REQUEST FOR QUOTATION</a>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="padding:0;">
+
+                                    <table border="0" cellpadding="20" cellspacing="0" width="100%" style="padding:0 73px 60px 73px; text-align:left; font-family:\'Roboto\', Helvetica, Arial, sans-serif; color:#617083; line-height: 20px;">
+                                        <tbody>
+                                        <tr>
+                                            <td align="center" valign="top" style="padding: 0;">
+                                                <h3 style="color:#585e66;font-size: 20px;margin: 0;padding-bottom: 25px;text-align: left;font-weight:normal;font-family:\'Roboto\', Helvetica, Arial, sans-serif;">Merhaba <span style="font-weight: bold;">' . $sup['supplier_name'] . ',</span></h3>
+                                            </td>
+                                        </tr>                                       
+                                        <tr>
+                                            <td align="center" valign="top" style="padding: 0; text-align: left; font-family:\'Roboto\', Helvetica, Arial, sans-serif;">
+                                                     
+
+     
+    <p style="font-size:14px;padding:0;margin:0;text-align:left;">Bir alıcı aşağıda belirtilen ürünü arıyor:</p>
+    
+    
+    
+    
+    
+	<br><br>
+	
+             <table  border="1" cellpadding="10" cellspacing="1" width="100%" style="text-align:left;font-family:Roboto, Helvetica, Arial, sans-serif;color:#617083;line-height:5px;">
+             
+              <tr>
+			 <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+        
+    line-height: 200%;
+    font-weight: 400;
+    width: 220px;">
+			 Ürün Adı
+			 </td>
+			  <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+        
+    line-height: 200%;
+    vertical-align: middle;">
+    ' . $buying_request->product_name . '
+			 </td>			 
+			 </tr>
+             
+             
+			 <tr>
+			 <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 220px;">
+			 Gerekli Miktar
+			 </td>
+			  <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buying_request->quantity . ' ' . $buying_request->unit->unit_en . '
+			 </td>			 
+			 </tr>
+			 
+			 <tr>
+			 <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    width: 220px;">
+			Alım sıklığı 
+			 </td>
+			   <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    vertical-align: middle;">
+    ' . $buying_request->buying_frequency_id . '
+			 </td>			 
+			 </tr>
+			 
+			 <tr>
+			<td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;">
+			Nakliye ülkesi 
+			 </td>
+			   <td style="    color: #617083;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: middle;">
+    ' . $buyer_country . '
+			 </td>			 
+			 </tr>
+			 
+			 </table>
+			 
+			 <br>
+			 <p style="text-align:left;font-family:Roboto, Helvetica, Arial, sans-serif;color:#617083;line-height:5px;">Lütfen teklifinizi <a href="' . config('global.public_url') . 'tr/buying-inquiry/' . $buying_request->hash . '/' . encryptor('encrypt', $sup['supplier_id']) . '" target="_blank" style="padding: 10px 18px;text-decoration: none;color: #4da1ff;font-size: 12px;text-align: center;font-weight: 400;">gönderiniz.</a>
+			  
+			 </p>
+			 <p><br/>yada aşağıda belirtilen url ‘yi tarayıcınıza kopyalayıp yapıştırınız. <br/>' . config('global.public_url') . 'tr/buying-inquiry/' . $buying_request->hash . '/' . encryptor('encrypt', $sup['supplier_id']) . '</p>
+
+<br>
+<p>' . $strmImages . '</p>
+<br>
+
+' .
+//                                        <p>
+//<a href="https://www.youtube.com/watch?v=VJiCqEgCfj4">
+//<img src="https://www.abraa.com/assets/images/rsz_img-video.png" /></a></p>
+            '
+	<p style="text-align:justify;font-size:12px; padding:20px 0px; margin: 0px; color: black; font-family:Roboto, Helvetica, Arial, sans-serif; line-height: 20px; font-weight: 500;">
+			If you are selling different products ,Please
+			<span
+				style="color:rgb(17, 128, 176);text-decoration:none:rgb(17, 128, 176); font-family:Arial, sans-serif, Arial; font-weight:700; font-style:normal;">
+				update&nbsp;
+			</span>
+			your account info by visiting
+			<a href="' . $updateUrl . '">www.abraa.com</a>
+			<a style="text-decoration:none;color:rgb(17, 128, 176);font-family:Arial, sans-serif, Arial; font-weight:700; font-style:normal;"
+					href="' . $login . '">
+					Login&nbsp;
+			</a>
+			if you have an account or
+			<a style="text-decoration:none;color:rgb(242, 133, 0);font-family:Arial, sans-serif, Arial; font-weight:700; font-style:normal;"
+					href="' . $register . '">
+					Signup
+			</a>
+			if you are new to abraa Also you can click
+			<span
+				style="color:rgb(17, 128, 176); font-family:Arial, sans-serif, Arial; font-weight:400; font-style:normal;">
+				unsubscribe
+			</span>
+			if wish to remove your email from our list &nbsp;of suppliers.
+	  </p>
+		<br />
+		<br />
+<p style="font-size: 15px;padding-top: 25px;margin: 0;color:#3c495b;text-align: left;"> 
+                                               
+                                                   Abraa RFQ Team
+                                                    <br><br>
+                                                    <a target="_blank" href="' . config('global.public_url') . '" style="color:#4da1ff; text-decoration:none;">abraa.com</a>
+                                                    </p>
+                                             </td>
+                                        </tr>
+                                    </tbody></table>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>';
+        return $message;
+
+    }
+
+
+    function __encryptors($action, $string)
+    {
+        $output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        //pls set your unique hashing key
+        $secret_key = 'prtcl';
+        $secret_iv = 'e4rt6mk';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        //do the encyption given text/string/number
+        if ($action == 'encrypt') {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        } else if ($action == 'decrypt') {
+            //decrypt the given text/string/number
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
+    }
+
 
 }
 

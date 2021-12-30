@@ -54,8 +54,9 @@ class SuppliersController extends Controller
         }
         
         if($keywords){
-            foreach($keywords as $word){
-                $suppliers_obj->where('interested_keywords','like', '%' . $word . '%');
+            $suppliers_obj->where('users.interested_keywords', 'like', '%'. $keywords[0] .'%');
+            for($i = 1; $i < count($keywords); $i++) {
+               $suppliers_obj->orWhere('users.interested_keywords', 'like', '%'. $keywords[$i] .'%');      
             }
         }
 

@@ -52,24 +52,12 @@
                                 <div class="card-body">
 
                                     <div class="row mb-2 m-1">
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-4 form-group">
                                             <label for="product_name">Product Name</label>
                                             <input type="text" name="product_name" id="product_name"
                                                 class="filter_data_table form-control" aria-label="Search">
                                         </div>
-                                        <div class="col-md-2 form-group">
-                                            <label for="buying_request_status">Filter by Status</label>
-                                            <select name="buying_request_status" id="buying_request_status"
-                                                class="filter_data_table form-control select2">
-                                                <option value=""> </option>
-                                                <option value="pending"> Pending request </option>
-                                                <option value="approved"> Approved request </option>
-                                                <option value="completed"> Completed request </option>
-                                                <option value="lost"> Losted request </option>
-                                                <option value="canceled"> Canceled request </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-4 form-group">
                                             <label for="shipping_country"> Shipping Country</label>
                                             <select name="shipping_country[]" multiple="multiple" id="shipping_country"
                                                 class="filter_data_table form-control select2">
@@ -79,16 +67,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-2 form-group">
-                                            <label for="request_type">Filter Request Type</label>
-                                            <select name="request_type" id="request_type"
-                                                class="filter_data_table form-control select2">
-                                                <option value=""> </option>
-                                                <option value="global"> Global Request </option>
-                                                <option value="normal"> Normal Request </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-4 form-group">
                                             <label for="rows_numbers">Numbers of rows</label>
                                             <select name="rows_numbers" id="rows_numbers"
                                                 class="filter_data_table form-control select2">
@@ -112,6 +91,7 @@
                                                         <tr>
                                                             <th> <input type="checkbox" class="select_all_colums"> </th>
                                                             <th>Id</th>
+                                                            <th>Approve</th>
                                                             <th>Type</th>
                                                             <th>Buyer Name</th>
                                                             <th>Phone</th>
@@ -120,8 +100,7 @@
                                                             <th>Category</th>
                                                             <th>Product</th>
                                                             <th>Quantity</th>
-                                                            <th>Unit</th>
-                                                            <th>Status</th> 
+                                                            <th>Unit</th> 
                                                             <th> Date Added </th>
                                                             <th> Actions </th>
                                                         </tr>
