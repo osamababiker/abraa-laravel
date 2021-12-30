@@ -38,6 +38,7 @@ $(document).ready(function () {
                 }
 
                 if(request.buyer){
+                    buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
                     buyer_email = request.buyer.email;
                     buyer_phone = request.buyer.phone;
@@ -49,15 +50,17 @@ $(document).ready(function () {
 
 
                 if(request.status == 1){
-                    status = "<span style=\"color: gold\">Pending</span>";
+                    status = "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                            "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                        "</a>\n";
                 }else if(request.status == 2) {
-                    status = "<span style=\"color: green\">Approved</span>";
+                    status = "<span style=\"color: #4bbf73\">Approved</span>";
                 }else if(request.status == 3){
-                    status = "<span style=\"color: green\">Completed</span>";
+                    status = "<span style=\"color: #4bbf73\">Completed</span>";
                 }else if(request.status == 4){
                     status = "<span style=\"\">Lost</span>";
                 }else if(request.status == 5){
-                    status = "<span style=\"color: red\">Cancelled</span>";
+                    status = "<span style=\"color: #d9534f\">Cancelled</span>";
                 }
 
                 buying_request_html = buying_request_html +
@@ -83,6 +86,59 @@ $(document).ready(function () {
                     "</div>\n"+
                 "</div>\n"+
 
+                // approve single request modal
+                "<div class=\"modal fade\" id=\"approve_buying_request_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                "<div class=\"modal-dialog\" role=\"document\">\n"+
+                    "<div class=\"modal-content\">\n"+
+                        "<div class=\"modal-header\">\n"+
+                            "<h5 class=\"modal-title\">Archive this buying request</h5>\n"+
+                            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
+                                "<span aria-hidden=\"true\">&times;</span>\n"+
+                            "</button>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-body\">\n"+
+                            "<div class=\"form-row mt-4\">\n"+
+                                "<div class=\"form-group col-md-12 autocomplete-category\">\n"+
+                                    "<label for=\"category_search\">Suppliers by Category</label>\n"+
+                                    "<input type=\"text\" name=\"category_search\" class=\"form-control category_search\" id=\"category_search_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"product_search\">Suppliers by Products</label>\n"+
+                                    "<input type=\"text\" name=\"product_search\" class=\"form-control product_search\" id=\"product_search_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-6\">\n"+
+                                    "<label for=\"buyer_name\">Buyer Name</label>\n"+
+                                    "<input type=\"text\" name=\"buyer_name\" value=\""+ buyer_name +"\" class=\"form-control\" id=\"buyer_name_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-6\">\n"+
+                                    "<label for=\"buyer_phone\">Buyer Phone</label>\n"+
+                                    "<input type=\"text\" name=\"buyer_phone\" value=\""+ buyer_phone +"\" class=\"form-control\" id=\"buyer_phone_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"buyer_keywords\">Buyer Keywords</label>\n"+
+                                    "<select name=\"buyer_keywords\" multiple=\"multiple\" id=\"buyer_keywords_"+ request.id +"\" class=\"form-control select2\">\n"+
+                                        "<option value=\"\"></option>\n"+
+                                    "</select>\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"rfq_name\">RFQ Name</label>\n"+
+                                    "<input type=\"text\" name=\"rfq_name\" value=\""+ request.product_name +"\" class=\"form-control\" id=\"rfq_name_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"rfq_details\">RFQ Details</label>\n"+
+                                    "<textarea rows=\"8\" cols=\"8\" name=\"rfq_details\" class=\"form-control\" id=\"rfq_details_"+ request.id +"\">"+  request.product_detail +"</textarea>\n"+
+                                "</div>\n"+
+                                "<input type=\"hidden\" id=\"request_id\" value=\""+ request.id +"\" />\n"+
+                                "<input type=\"hidden\" id=\"buyer_id_"+ request.id +"\" value=\""+ buyer_id +"\" />\n"+
+                            "</div>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
+                            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
+                            "<button type=\"button\" onclick=\"getSuppliersDetails()\" name=\"approve_btn\" id=\"approve_btn\" class=\"btn btn-success\">Approve</button>\n"+
+                        "</div>\n"+
+                    "</div>\n"+
+                    "</div>\n"+
+                "</div>\n"+
 
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
@@ -114,7 +170,11 @@ $(document).ready(function () {
                 "</tr>\n"
             });
 
+            
             $("#buying_requests_table_body").html(buying_request_html);
+            $(".select2").select2({
+                tags: true,
+            });
 
             $("#ajax_loader").css('display', 'none');
         }
@@ -169,6 +229,7 @@ $(".filter_data_table").on('change', function () {
                 }
 
                 if(request.buyer){
+                    buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
                     buyer_email = request.buyer.email;
                     buyer_phone = request.buyer.phone;
@@ -180,15 +241,17 @@ $(".filter_data_table").on('change', function () {
 
 
                 if(request.status == 1){
-                    status = "<span style=\"color: yellow\">Pending</span>";
+                    status = "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                            "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                        "</a>\n";
                 }else if(request.status == 2) {
-                    status = "<span style=\"color: green\">Approved</span>";
+                    status = "<span style=\"color: #4bbf73\">Approved</span>";
                 }else if(request.status == 3){
-                    status = "<span style=\"color: green\">Completed</span>";
+                    status = "<span style=\"color: #4bbf73\">Completed</span>";
                 }else if(request.status == 4){
                     status = "<span style=\"\">Lost</span>";
                 }else if(request.status == 5){
-                    status = "<span style=\"color: red\">Cancelled</span>";
+                    status = "<span style=\"color: #d9534f\">Cancelled</span>";
                 }
 
                 buying_request_html = buying_request_html +
@@ -209,6 +272,60 @@ $(".filter_data_table").on('change', function () {
                         "<div class=\"modal-footer\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_buyingRequestInvoice("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                        "</div>\n"+
+                    "</div>\n"+
+                    "</div>\n"+
+                "</div>\n"+
+
+                // approve single request modal
+                "<div class=\"modal fade\" id=\"approve_buying_request_"+ request.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                "<div class=\"modal-dialog\" role=\"document\">\n"+
+                    "<div class=\"modal-content\">\n"+
+                        "<div class=\"modal-header\">\n"+
+                            "<h5 class=\"modal-title\">Archive this buying request</h5>\n"+
+                            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
+                                "<span aria-hidden=\"true\">&times;</span>\n"+
+                            "</button>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-body\">\n"+
+                            "<div class=\"form-row mt-4\">\n"+
+                                "<div class=\"form-group col-md-12 autocomplete-category\">\n"+
+                                    "<label for=\"category_search\">Suppliers by Category</label>\n"+
+                                    "<input type=\"text\" name=\"category_search\" class=\"form-control category_search\" id=\"category_search_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"product_search\">Suppliers by Products</label>\n"+
+                                    "<input type=\"text\" name=\"product_search\" class=\"form-control product_search\" id=\"product_search_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-6\">\n"+
+                                    "<label for=\"buyer_name\">Buyer Name</label>\n"+
+                                    "<input type=\"text\" name=\"buyer_name\" value=\""+ buyer_name +"\" class=\"form-control\" id=\"buyer_name_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-6\">\n"+
+                                    "<label for=\"buyer_phone\">Buyer Phone</label>\n"+
+                                    "<input type=\"text\" name=\"buyer_phone\" value=\""+ buyer_phone +"\" class=\"form-control\" id=\"buyer_phone_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"buyer_keywords\">Buyer Keywords</label>\n"+
+                                    "<select name=\"buyer_keywords\" multiple=\"multiple\" id=\"buyer_keywords_"+ request.id +"\" class=\"form-control select2\">\n"+
+                                        "<option value=\"\"></option>\n"+
+                                    "</select>\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"rfq_name\">RFQ Name</label>\n"+
+                                    "<input type=\"text\" name=\"rfq_name\" value=\""+ request.product_name +"\" class=\"form-control\" id=\"rfq_name_"+ request.id +"\">\n"+
+                                "</div>\n"+
+                                "<div class=\"form-group col-md-12\">\n"+
+                                    "<label for=\"rfq_details\">RFQ Details</label>\n"+
+                                    "<textarea rows=\"8\" cols=\"8\" name=\"rfq_details\" class=\"form-control\" id=\"rfq_details_"+ request.id +"\">"+  request.product_detail +"</textarea>\n"+
+                                "</div>\n"+
+                                "<input type=\"hidden\" id=\"request_id\" value=\""+ request.id +"\" />\n"+
+                                "<input type=\"hidden\" id=\"buyer_id_"+ request.id +"\" value=\""+ buyer_id +"\" />\n"+
+                            "</div>\n"+
+                        "</div>\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
+                            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
+                            "<button type=\"button\"  name=\"approve_btn\" id=\"approve_btn\" class=\"btn btn-success\">Approve</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
@@ -247,11 +364,127 @@ $(".filter_data_table").on('change', function () {
 
             $("#buying_requests_table_body").html(buying_request_html);
 
+            $(".select2").select2({
+                tags: true,
+            });
+
             $("#ajax_loader").css('display', 'none');
         }
     });
 });
 
+
+
+window.global_category = 0;
+
+// to get suppliers details to approve rfq
+$(function(){ 
+    $("#buying_requests_table_body").on('click', '.category_search', function() {
+        $(".category_search").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    url: "/rfqs/approve/getSuppliersDetails",
+                    dataType: "json",
+                    data: {term: request.term},
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value,
+                                id: item.id
+                            };
+                        }));
+                    },
+                });
+            },
+            select: function (event, ui) {
+                global_category = ui.item.id;
+                $('.product_search').attr('disabled', true);
+
+            }
+        });
+
+        $(".category_search").autocomplete("option", "appendTo", ".autocomplete-category");
+
+        $(".product_search").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                var is_description = $('#is_description').is(':checked');
+
+                $.ajax({
+                    url: "<?php {{ route('rfqs.getSuppliersDetails') }} ?>",
+                    dataType: "json",
+                    data: {term: request.term, is_description: is_description},
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value,
+                                id: item.id
+                            };
+                        }));
+                    },
+                });
+            },
+            select: function (event, ui) {
+                $.ajax({
+                    url: "<?php {{ route('rfqs.getSuppliersDetails') }} ?>",
+                    data: {product_id: ui.item.id},
+                    success: function (data) {
+                        if (data != 0) {
+                            global_category = data;
+                            $('.category_search').attr('disabled', true);
+                        } else {
+                            swal("No category associated with the product.");
+                        }
+                    },
+                    error: function (xhr, textStatus, error) {
+                        swal("Something went wrong. If problem persist, contact administrator.");
+                        //swal(xhr.statusText);
+                    }
+                });
+            }
+        });
+        $(".product_search").autocomplete("option", "appendTo", ".autocomplete-product");
+    });
+});
+
+
+// to approve rfq
+$(function(){ 
+    $("#buying_requests_table_body").on('click', '#approve_btn', function() {
+
+        var rfq_id = $('#request_id').val();
+        var buyer_id = $('#buyer_id_' + rfq_id).val();
+        var buyer_name = $('#buyer_name_' + rfq_id).val();
+        var buyer_phone = $('#buyer_phone_' + rfq_id).val();
+        var buyer_email = $('#buyer_email_' + rfq_id).val();
+        var buyer_keywords = $('#buyer_keywords_' + rfq_id).val();
+        var rfq_name = $('#rfq_name_' + rfq_id).val();
+        var rfq_details = $('#rfq_details_' + rfq_id).val();
+
+        $("#ajax_loader").css('display', 'block');
+        $.ajax({
+            url: "/rfqs/" + rfq_id + "/approve",
+            type: "get",
+            data: {
+                "buyer_id": buyer_id,
+                "buyer_name": buyer_name,
+                "buyer_phone": buyer_phone,
+                "buyer_email": buyer_email,
+                "buyer_keywords": buyer_keywords,
+                "category_id": global_category,
+                "rfq_name": rfq_name,
+                "rfq_details": rfq_details,
+                "rfq_id": rfq_id
+            },
+            success: function(response){
+                location.reload();
+            }
+        });
+    });
+});
 
 
 // to delete (archive) buying Request Invoice

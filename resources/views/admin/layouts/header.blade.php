@@ -20,6 +20,9 @@
     <link class="js-stylesheet" href="{{ asset('css/style.css') }}" rel="stylesheet"> 
 
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+
     
 
 </head>

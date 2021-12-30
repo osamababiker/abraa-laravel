@@ -1,6 +1,8 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Bar chart
@@ -192,8 +194,6 @@
         $('#feedback_modal').modal('show');
     });
 </script>
-
-<script src="{{ asset('js/form_steps.js') }}"></script>
 
 <script src="{{ asset('js/form_steps.js') }}"></script>
 

@@ -1,10 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Rfq;
+use App\Models\Buyer;
 use App\Models\Country;
+use App\Models\AdminEmail;
+use App\Models\Item;
+use App\Models\Category;
 use App\Models\BuyingRequestStatus;
 use App\Exports\BuyingRequestInvoicesExport;
 use App\Imports\BuyingRequestInvoicesImport;
@@ -159,22 +165,28 @@ class RfqsController extends Controller
             foreach($request->rfqs_id as $request_id){
                 $rfq = Rfq::find($request_id);
                 $rfq->status = 2;
+                $rfq->approved_by = Auth::user()->id;
                 $rfq->save();
-                $message = 'buying requests hass been approved successfully';
-                
+
                 // to send email to user 
                 $buyer_name = $rfq->buyer->full_name;
                 $buyer_email = $rfq->buyer->email;
-                $subject = '';
-                $message = '';
-                $this->composeEmail();
+                $product_name = $rfq->product_name;
+                $product_link = config('global.public_url') . 'new-dashboard-buyer/buying-requests/' . $rfq->id;
+                $subject = AdminEmail::find(25)->subject;
+                $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
+                $email_templete = $this->getEmailTemplete($email_content);
+                $this->sendEmail($email_templete, $buyer_email, $subject);
+                
 
+                $message = 'buying requests hass been approved successfully';
                 session()->flash('success', 'true');
                 session()->flash('feedback_title', 'Success');
                 session()->flash('feedback', $message);
                 return redirect()->back();
             }
         }
+
         // to delete (archived) selected
         if($request->has('delete_selected_btn')){
             foreach($request->rfqs_id as $request_id){
@@ -187,5 +199,64 @@ class RfqsController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    // to get suppliers details to approve
+    public function getSuppliersDetails(Request $request){
+        $results = Category::where('en_title', 'like', '%'. $request->term . '%')
+            ->orWhere('ar_title', 'like', '%'. $request->term . '%')
+            ->orWhere('ar_title', 'like', '%'. $request->term . '%')
+            ->orWhere('cn_title', 'like', '%'. $request->term . '%')
+            ->orWhere('ru_title', 'like', '%'. $request->term . '%')
+            ->orWhere('tr_title', 'like', '%'. $request->term . '%')
+            ->orWhere('pr_title', 'like', '%'. $request->term . '%')->get();
+        $i = 0;
+        foreach ($results as $r) {
+            $categories[$i]['id'] = $r['id'];
+            $categories[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
+            $categories[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
+            $i++;
+        }
+        echo json_encode($categories);
+    }
+
+    // to approve single rfq
+    public function approve(Request $request){
+
+        // to update rfq info
+        $rfq = Rfq::find($request->rfq_id);
+        $rfq->status = 2;
+        $rfq->product_name = $request->rfq_name;
+        $rfq->product_detail = $request->rfq_details;
+        $rfq->category_id = $request->category_id;
+        $rfq->save();
+
+        // to update buyer info
+        $buyer = Buyer::find($request->buyer_id);
+        $buyer->full_name = $request->buyer_name;
+        $buyer->phone = $request->buyer_phone;
+        $buyer_keywords = '';
+        foreach($request->buyer_keywords as $keyword){
+            $buyer_keywords .= $keyword . ',' ;
+        }
+        $buyer->interested_keywords = $buyer_keywords;
+        $buyer->save();
+
+        // to send email to buyer 
+        $buyer_name = $rfq->buyer->full_name;
+        $buyer_email = $rfq->buyer->email;
+        $product_name = $rfq->product_name;
+        $product_link = config('global.public_url') . 'new-dashboard-buyer/buying-requests/' . $rfq->id;
+        $subject = AdminEmail::find(25)->subject;
+        $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
+        $email_templete = $this->getEmailTemplete($email_content);
+        $this->sendEmail($email_templete, $buyer_email, $subject);
+
+        $message = 'buying requests hass been approved successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+        
     }
 }

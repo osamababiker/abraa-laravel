@@ -198,11 +198,11 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('rfqs/actions', 
         [RfqsController::class , 'actions']
     )->name('rfqs.actions');  
-     // get rfqs as json route 
+    // get rfqs as json route 
      Route::get('rfqs/json', [
         RfqsController::class, 'getRfqsAsJson'
     ])->name('rfqs.json');
-        // filter rfqInvoices  route 
+    // filter rfqs  route 
     Route::post('rfqs/filter', [
         RfqsController::class, 'filterRfqs'
     ])->name('rfqs.filter');
@@ -215,7 +215,15 @@ Route::group(['middleware' => 'auth'], function (){
     ])->name('rfqs.import.excel');
     Route::get('rfqs/importExportView',  [
         RfqsController::class, 'importExportView'
-    ]);    
+    ]);  
+    // to get suppliers details for approve rfqs  
+    Route::get('rfqs/approve/getSuppliersDetails', [
+        RfqsController::class, 'getSuppliersDetails'
+    ])->name('rfqs.getSuppliersDetails');  
+    // to approve single rfq 
+    Route::get('rfqs/{id}/approve', [
+        RfqsController::class, 'approve'
+    ]);
     // custom delete route
     Route::get('rfqs/{id}/destroy', [
         RfqsController::class, 'destroy'

@@ -121,7 +121,7 @@
                                                             <th>Product</th>
                                                             <th>Quantity</th>
                                                             <th>Unit</th>
-                                                            <th>Status</th>
+                                                            <th>Status</th> 
                                                             <th> Date Added </th>
                                                             <th> Actions </th>
                                                         </tr>
@@ -152,6 +152,4 @@
             <!-- footer is here -->
             @include('admin.layouts.footer')
 
-
-            @include('admin.layouts.header')
 
