@@ -5,8 +5,9 @@ $(document).ready(function () {
 
     var members_html = '';
     var member_country = '';
-    var is_login = '';
+    var is_loggedin = '';
     var is_returning = '';
+    var full_name = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -21,21 +22,27 @@ $(document).ready(function () {
 
             response.members.forEach(function(member) {
 
-                if(member.member_country){
-                    member_country = member.member_country.en_name;
+                if(member.user_country){
+                    member_country = member.user_country.en_name;
                 }
 
-                if(member.is_login == 1){
-                    is_login = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
-                }else {
-                    is_login = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
+                if(member.user){
+                    full_name = member.user.full_name;
                 }
 
-                if(member.is_login == 1){
-                    is_login = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
+                if(member.is_loggedin == 1){
+                    is_loggedin = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                 }else {
-                    is_login = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
+                    is_loggedin = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
                 }
+
+                if(member.is_returning == 1){
+                    is_returning = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
+                }else {
+                    is_returning = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
+                }
+
+                
 
                 members_html = members_html +
                 
@@ -65,17 +72,17 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"member_id[]\" value=\""+ member.id +"\" ></input> </td>\n" +
                 "<td>"+ member.id +"</td>\n"+
-                "<td>"+ member.full_name +"</td>\n"+
-                "<td>"+ member.last_ip +"</td>\n"+
+                "<td>"+ full_name +"</td>\n"+
+                "<td>"+ member.user_ip +"</td>\n"+
                 "<td>"+ member_country +"</td>\n"+
-                "<td>"+ is_login +"</td>\n"+
+                "<td>"+ is_loggedin +"</td>\n"+
                 "<td>"+ is_returning +"</td>\n"+
-                "<td> </td>"+
-                "<td> </td>"+
-                "<td> </td>"+
-                "<td> </td>"+
-                "<td> </td>"+
-                "<td> </td>"+
+                "<td>"+ member.visits_count +"</td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ member.page_url +"\"> "+ member.page_url +" </a> </td>"+
+                "<td> "+ member.total_time_inseconds +" </td>"+
+                "<td> "+ member.searched_items +" </td>"+
+                "<td> "+ member.datevsiited +" </td>"+
+                "<td> "+ member.timevisited +" </td>"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/members/"+ member.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+

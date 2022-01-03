@@ -62,7 +62,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"supplier_id[]\" value=\""+ supplier.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"supplier_id\" name=\"supplier_id[]\" value=\""+ supplier.id +"\" ></input> </td>\n" +
                 "<td>"+ supplier.id +"</td>\n"+
                 "<td>"+ supplier.full_name +"</td>\n"+
                 "<td>"+ supplier.email +"</td>\n"+
@@ -127,7 +127,7 @@ $(".filter_data_table").on('change', function () {
     // filter data
     var countries = $('#filter_by_country').val(); 
     var keywords = $('#filter_by_keywords').val(); 
-    var level = $('#filter_by_level').val(); 
+    var supplier_type = $('#supplier_type').val(); 
     var product_title = $('#filter_by_products_title').val(); 
     var supplier_name = $('#supplier_name').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
@@ -139,7 +139,7 @@ $(".filter_data_table").on('change', function () {
             'countries': countries,
             'keywords': keywords,
             'rows_numbers': rows_numbers,
-            'level': level,
+            'supplier_type': supplier_type,
             'product_title': product_title,
             'supplier_name': supplier_name
         },
@@ -190,7 +190,7 @@ $(".filter_data_table").on('change', function () {
                 
                 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"supplier_id[]\" value=\""+ supplier.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"supplier_id\"  name=\"supplier_id[]\" value=\""+ supplier.id +"\" ></input> </td>\n" +
                 "<td>"+ supplier.id +"</td>\n"+
                 "<td>"+ supplier.full_name +"</td>\n"+
                 "<td>"+ supplier.email +"</td>\n"+
@@ -276,3 +276,33 @@ function archive_supplier(supplier_id){
         }
     });
 }
+
+
+
+// to send custome message to suppliers
+$(function(){ 
+    $("#send_message_btn").on('click', function() {
+        var suppliers_ids = [];
+        var subject = $("#subject").val();
+        var message = $("#quill-editor p").text();
+        var send_message_btn = $("#send_message_btn").val();
+
+        $(':checkbox:checked').each(function(i){
+            suppliers_ids[i] = $(this).val();
+        });
+
+        $.ajax({
+            url: "/suppliers/actions",
+            type: "post",
+            data: {
+                "suppliers_ids": suppliers_ids,
+                "subject": subject,
+                "message": message,
+                "send_message_btn": send_message_btn
+            },
+            success: function(response){
+                location.reload();
+            }
+        });
+    });
+});

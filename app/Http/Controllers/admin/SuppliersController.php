@@ -8,9 +8,12 @@ use App\Models\Country;
 use App\Exports\SuppliersExport;
 use App\Imports\SuppliersImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Traits\MailerTrait;
 
 class SuppliersController extends Controller
 {
+
+    use MailerTrait; 
  
     public function index(){
         $countries = Country::all();
@@ -38,12 +41,12 @@ class SuppliersController extends Controller
         $countries = $request->countries;
         $keywords = $request->keywords;
         $rows_numbers = $request->rows_numbers; 
-        $level = $request->level;
+        $supplier_type = $request->supplier_type;
         $product_title = $request->product_title;
         $supplier_name = $request->supplier_name;
 
         $suppliers_obj = Supplier::whereIn('member_type',[1,3])
-            ->where('user_type',0);
+            ->where('user_type',0); 
 
         if($supplier_name){
             $suppliers_obj->where('full_name', $supplier_name);
@@ -54,9 +57,9 @@ class SuppliersController extends Controller
         }
         
         if($keywords){
-            $suppliers_obj->where('users.interested_keywords', 'like', '%'. $keywords[0] .'%');
+            $suppliers_obj->where('interested_keywords', 'like', '%'. $keywords[0] .'%');
             for($i = 1; $i < count($keywords); $i++) {
-               $suppliers_obj->orWhere('users.interested_keywords', 'like', '%'. $keywords[$i] .'%');      
+               $suppliers_obj->orWhere('interested_keywords', 'like', '%'. $keywords[$i] .'%');      
             }
         }
 
@@ -68,7 +71,13 @@ class SuppliersController extends Controller
                     ->where('title','like', '%' . $title . '%');
             }
         }
-            
+        
+        if($supplier_type == 'organic'){
+            $suppliers_obj->where('is_organic',1);
+        }else if($supplier_type == 'no_keywords'){
+            $suppliers_obj->where('interested_keywords','');
+        }
+
         $suppliers_count = $suppliers_obj->count();
         $suppliers = $suppliers_obj->limit($rows_numbers)->with('supplier_country')->get();
         
@@ -78,17 +87,6 @@ class SuppliersController extends Controller
         ]);
     }
 
-    // to get all organic suppliers 
-    public function organic_suppliers()
-    {
-        $suppliers = Supplier::whereIn('member_type',[1,3])
-            ->where('user_type',0)->orderBy('id','desc')->where('is_organic',1)->paginate(10); 
-            
-        $suppliers_count = Supplier::whereIn('member_type',[1,3])
-            ->where('user_type',0)->orderBy('id','desc')->where('is_organic',1)->count();
-
-        return view('admin.suppliers.organic', compact(['suppliers','suppliers_count']));   
-    }
 
     public function create()
     {
@@ -124,6 +122,25 @@ class SuppliersController extends Controller
                     Supplier::where('id',$id)->delete();
                 }
             }
+            $message = 'suppliers has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+
+        if($request->has('send_message_btn')){
+            $suppliers_ids = $request->suppliers_ids;
+            $subject = $request->subject;
+            $message = $request->message;
+            foreach($suppliers_ids as $supplier_id){
+                $supplier = Supplier::find($supplier_id);
+                $email_content = $this->send_custom_email_to_suppliers($supplier, $message);
+                $email_templete = $this->getEmailTemplete($email_content);
+                $this->sendEmail($email_templete, $supplier->email, $subject);
+            }
+
+            return response()->json([
+                'message' => 'Email has been send successfuly'
+            ],200);
         }
         
     }
@@ -157,13 +174,11 @@ class SuppliersController extends Controller
 
 
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new SuppliersExport, 'suppliers.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new SuppliersImport,request()->file('file'));
            
         return redirect()->back();

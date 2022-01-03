@@ -28,12 +28,12 @@
                                 <hr>
                                 <div class="card-body">
                                     <div class="row mb-2 m-1">
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label for="keywords">By KeyWords</label>
                                             <select name="keywords" multiple="multiple" id="keywords" class="form-control filter_data_table select2">
                                             </select>
                                         </div>
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label for="countries"> By Country</label>
                                             <select name="countries[]" multiple="multiple" id="countries"
                                                 class="form-control filter_data_table select2">
@@ -43,17 +43,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-2 form-group">
-                                            <label for="categories">By Category</label>
-                                            <select name="categories[]" multiple="multiple" id="categories" class="form-control select2 filter_data_table">
-                                            </select>
+                                        <div class="col-md-3 form-group autocomplete-product">
+                                            <label for="product_search">By Product</label>
+                                            <input type="text" name="product_search" id="product_search" class="form-control autocomplete filter_data_table">
                                         </div>
-                                        <div class="col-md-2 form-group">
-                                            <label for="products">By Product</label>
-                                            <select name="products[]" multiple="multiple" id="products" class="form-control select2 filter_data_table">
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label for="supplier_name">By Supplier name</label>
                                             <input name="supplier_name" id="supplier_name" class="form-control filter_data_table">
                                         </div>

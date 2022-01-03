@@ -14,19 +14,10 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable , SoftDeletes;
 
     protected $table = "admin_users";
-    protected $fillable = [
-        'name',
-        'email',
-        'username',
-        'userlevel',
-        'added_by',
-        'permissions',
-        'password',
-    ];
+    protected $guarded = [];
 
  
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 

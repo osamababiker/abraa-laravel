@@ -84,10 +84,12 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-2 form-group">
-                                                <label for="filter_by_level">Filter by level</label>
-                                                <select name="level[]" multiple="multiple" id="filter_by_level"
+                                                <label for="supplier_type">Filter by Type</label>
+                                                <select name="supplier_type"  id="supplier_type"
                                                     class="filter_data_table form-control select2">
-                                                    <option value=""> choose level </option>
+                                                    <option value=""></option>
+                                                    <option value="organic"> Organic Suppliers </option>
+                                                    <option value="no_keywords"> has no Keywords </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2 form-group">
@@ -96,7 +98,7 @@
                                                     id="filter_by_products_title"
                                                     class="filter_data_table form-control select2">
                                                     <option value=""> enter words </option>
-                                                </select>
+                                                </select> 
                                             </div>
                                             <div class="col-md-2 form-group">
                                                 <label for="rows_numbers">Numbers of rows</label>
@@ -144,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </form> 
 
                 </div>
             </main>

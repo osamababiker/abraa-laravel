@@ -31,7 +31,7 @@ class AuthController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'userlevel' => 1,
+            'userlevel' => $request->user_level,
             'permissions' => json_encode([]),
         ]);
         $credentials = $request->only('username', 'password');

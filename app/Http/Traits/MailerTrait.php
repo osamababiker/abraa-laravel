@@ -255,6 +255,8 @@ trait MailerTrait {
          return $message;
     }
 
+
+    // to send new buying request to suppliers 
     public function buy_request_email_format($supplier, $buying_request, $strmImages, $lang = 'en', $external = 0)
     {
 
@@ -668,6 +670,37 @@ trait MailerTrait {
                         </table>';
         return $message;
 
+    }
+
+
+    public function send_custom_email_to_suppliers($supplier, $msg){
+        
+        $message = ' <table border="0" cellpadding="20" cellspacing="0" width="100%" style="background: #FFFFFF; padding:30px 73px 30px 73px; text-align:left; font-family:Roboto, Helvetica, Arial, sans-serif; color:#617083; line-height: 20px;">
+
+            <tr>
+                <td align="center" valign="top" style="color:#585e66; font-size: 22px; padding:0px; text-align: left;  
+                    ">
+                    
+                    <h3 style="font-weight:normal; font-family:Roboto, Helvetica, Arial, sans-serif;">
+                    Dear <span style=" font-weight: bold;">' . $supplier->full_name . ',</span>
+                    </h3>
+                    <br>
+            </td>
+            </tr>
+
+            <tr>
+                <td align="center" valign="top" style="color:#585e66; font-size: 22px; padding:0px; text-align: left;  
+                    ">
+            
+                    <p style="font-size:16px; padding: 0px; margin: 0px; text-align: left; color:#3c495b; font-family:Roboto, Helvetica, Arial, sans-serif;">
+                        ' . $msg . '
+                    </p>
+                    <br>
+                </td>
+            </tr>
+        </table>';
+
+        return $message;
     }
 
 

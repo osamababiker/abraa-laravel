@@ -125,7 +125,7 @@
     });
 </script>
 
-
+ 
 <script>
     $(function () {
         $('.table_wrapper_1').on('scroll', function (e) {
@@ -139,7 +139,7 @@
         $('.table_div_1').width($('table').width());
         $('.table_div_2').width($('table').width());
     });
-</script>
+</script> 
 
 <script>
     $('.select2').select2({

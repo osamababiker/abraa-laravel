@@ -11,7 +11,7 @@ class Store extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "users_store";
-    protected $guarded = [];
+    protected $guarded = []; 
 
     public function user(){
         return $this->belongsTo(Supplier::class,'sub_of');

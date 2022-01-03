@@ -91,43 +91,39 @@ class GlobalRfqsController extends Controller
     public function filterSuppliers(Request $request){
         
         $supplier_name = $request->supplier_name;
-        $products = $request->products;
-        $categories = $request->categories;
+        $product_search = $request->product_search;
         $countries = $request->countries;
         $keywords = $request->keywords;
 
-        $suppliers_obj = Supplier::with('supplier_country')
-            ->leftJoin('items', 'users.id', '=', 'items.user_id')
-            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
-            ->where('users_store.trash',0)
-            ->where('users_store.rejected',0); 
+        $suppliers_obj = Supplier::whereIn('member_type',[1,3])
+            ->where('user_type',0)->with('supplier_country')
+            ->with('store'); 
         
         if($supplier_name){
-            $suppliers_obj->where('users.full_name', 'like', '%'. $supplier_name . '%');
+            $suppliers_obj->where('full_name', 'like', '%'. $supplier_name . '%');
         }
 
         if($countries){
-            $suppliers_obj->whereIn('users.country', $countries);
+            $suppliers_obj->whereIn('country', $countries);
         }
 
         if($keywords){
-            $suppliers_obj->where('users.interested_keywords', 'like', '%'. $keywords[0] .'%');
+            $suppliers_obj->where('interested_keywords', 'like', '%'. $keywords[0] .'%');
             for($i = 1; $i < count($keywords); $i++) {
-               $suppliers_obj->orWhere('users.interested_keywords', 'like', '%'. $keywords[$i] .'%');      
+               $suppliers_obj->orWhere('interested_keywords', 'like', '%'. $keywords[$i] .'%');      
             }
         }
 
-        if($products){
-            $suppliers_obj->where('items.meta_keyword', 'like', '%'. $products[0] .'%')
-                ->orWhere('items.title', 'like', '%'. $products[0] .'%');
-            for($i = 1; $i < count($products); $i++) {
-               $suppliers_obj->orWhere('items.meta_keyword', 'like', '%'. $products[$i] .'%')
-                    ->orWhere('items.title', 'like', '%'. $products[$i] . '%');      
-            }
+        if($product_search){
+            $suppliers_obj->leftJoin('items', function($join) {
+                $join->on('users.id', '=', 'items.user_id');
+                })
+                ->where('items.title', 'like', '%'. $product_search .'%')
+                ->orWhere('items.meta_keyword', 'like', '%'. $product_search .'%');
         }
 
-        $suppliers = $suppliers_obj->orderBy('users.id','desc')->get();
-   
+        $suppliers = $suppliers_obj->get();
+
         return response()->json([
             'suppliers' => $suppliers,
         ]);
@@ -151,32 +147,36 @@ class GlobalRfqsController extends Controller
 
         foreach($supplier_email as $email){
             $supplier = Supplier::where('email',$email)->first();
-
             $email_content = $this->buy_request_email_format($supplier, $rfq, $strmImages);
             $email_templete = $this->getEmailTemplete($email_content);
             $subject = $rfq->product_name;
             $this->sendEmail($email_templete, $supplier->email, $subject);
         }
-
+ 
+        $message = 'Message has been send successfuly';
+        session()->flash('feedback',$message);
         return redirect()->back();
-
-        //send Email to omar first
-        $omarQuote = array(
-            'supplier_id' => '50920',
-            'supplier_name' => 'Omar Al Hamra',
-            'supplier_email' => 'omar@abraa.com'
-        );
-        //send Email to mohammad
-        $mhdQuote = array(
-            'supplier_id' => '99',
-            'supplier_name' => 'Mohammad Al Hamra',
-            'supplier_email' => 'sales@webselectronics.com'
-        );
-
-
         
     }
 
+
+    // to get suppliers details to approve
+    public function getSuppliersDetails(Request $request){
+        
+        if($request->has('is_product')){
+            $results = Item::where('title', 'like', '%'. $request->term . '%')
+                ->orWhere('meta_keyword', 'like', '%'. $request->term . '%')->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $items[$i]['id'] = $r['id'];
+                $items[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['title']));
+                $items[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['title']));
+                $i++;
+            }
+            echo json_encode($items);
+        }
+        
+    }
 
     public function create()
     {

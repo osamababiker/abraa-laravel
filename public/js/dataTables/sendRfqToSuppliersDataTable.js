@@ -5,11 +5,11 @@ $(".filter_data_table").on('change', function () {
 
     var supplier_html = '';
     var supplier_country = '';
+    var supplier_store = '';
 
     // filter data
     var supplier_name = $('#supplier_name').val(); 
-    var products = $('#products').val(); 
-    var categories = $('#categories').val(); 
+    var product_search = $('#product_search').val(); 
     var countries = $('#countries').val(); 
     var keywords = $('#keywords').val();
     var rows_numbers = $('#rows_numbers').val(); 
@@ -18,8 +18,7 @@ $(".filter_data_table").on('change', function () {
         url: "/globalRfqs/suppliers/filter",
         type: "post",
         data: {
-            'products': products,
-            'categories': categories,
+            'product_search': product_search,
             'countries': countries,
             'supplier_name': supplier_name,
             'keywords': keywords,
@@ -33,10 +32,14 @@ $(".filter_data_table").on('change', function () {
                     supplier_country = supplier.supplier_country.en_name;
                 }
 
+                if(supplier.store){
+                    supplier_store = supplier.store.name;
+                }
+
                 supplier_html = supplier_html +
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"supplier_email[]\" value=\""+ supplier.email +"\" ></input> </td>\n" +
-                "<td>\n"+supplier.name +"</td>\n"+
+                "<td>\n"+ supplier_store +"</td>\n"+
                 "<td>\n"+ supplier.full_name +"</td>\n"+
                 "<td>"+ supplier.email +"</td>\n"+
                 "<td>"+ supplier.phone +"</td>\n"+
@@ -53,3 +56,78 @@ $(".filter_data_table").on('change', function () {
     });
 });
 
+
+
+
+window.global_category = 0; 
+
+// to get suppliers details to approve rfq
+$(function(){ 
+    $(".autocomplete").on('click', function() {
+        $("#category_search").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                var is_category = 1;
+                $.ajax({
+                    url: "/rfqs/send/getSuppliersDetails",
+                    dataType: "json",
+                    data: {term: request.term, is_category: is_category},
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value,
+                                id: item.id
+                            };
+                        }));
+                    },
+                });
+            },
+            select: function (event, ui) {
+                global_category = ui.item.id;
+            }
+        });
+
+        $("#category_search").autocomplete("option", "appendTo", ".autocomplete-category");
+
+        $("#product_search").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                var is_product = 1;
+
+                $.ajax({
+                    url: "/rfqs/send/getSuppliersDetails",
+                    dataType: "json",
+                    data: {term: request.term, is_product: is_product},
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.value,
+                                value: item.value,
+                                id: item.id
+                            };
+                        }));
+                    },
+                });
+            },
+            select: function (event, ui) {
+                $.ajax({
+                    url: "/rfqs/send/getSuppliersDetails",
+                    data: {product_id: ui.item.id},
+                    success: function (data) {
+                        if (data != 0) {
+                            global_category = data;
+                        } else {
+                            swal("No category associated with the product.");
+                        }
+                    },
+                    error: function (xhr, textStatus, error) {
+                        swal("Something went wrong. If problem persist, contact administrator.");
+                        //swal(xhr.statusText);
+                    }
+                });
+            }
+        });
+        $("#product_search").autocomplete("option", "appendTo", ".autocomplete-product");
+    });
+});

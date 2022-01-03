@@ -75,7 +75,7 @@ $(document).ready(function () {
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
                     "<a href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
-                        "<i class=\"align-middle fa fa-envelope\" ></i>\n"+
+                        "<i class=\"align-middle fa fa-link\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
                 "<td>  </td>\n"+
@@ -198,7 +198,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
                     "<a href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
-                        "<i class=\"align-middle fa fa-envelope\" ></i>\n"+
+                        "<i class=\"align-middle fa fa-link\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
                 "<td>  </td>\n"+

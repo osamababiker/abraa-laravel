@@ -19,7 +19,6 @@ use App\Http\Traits\MailerTrait;
 
 class RfqsController extends Controller
 {   
-    // so we can send emails useing PHPMailer
     use MailerTrait; 
 
     public function index() {
@@ -194,7 +193,7 @@ class RfqsController extends Controller
             $i++;
         }
         echo json_encode($categories);
-    }
+    } 
 
     // to approve single rfq
     public function approve(Request $request){

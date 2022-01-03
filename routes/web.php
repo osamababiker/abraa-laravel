@@ -25,6 +25,8 @@ use App\Http\Controllers\Admin\StatesController;
 use App\Http\Controllers\Admin\CurrenciesController;
 use App\Http\Controllers\Admin\UnitsController;
 use App\Http\Controllers\Admin\PaymentOptionsController;
+use App\Http\Controllers\Admin\AdminUsersController;
+use App\Http\Controllers\Admin\ModeratorsController;
 
 
 /* 
@@ -74,11 +76,11 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('suppliers/json', [
         SuppliersController::class, 'getSuppliersAsJson'
     ])->name('suppliers.json');
-       // filter suppliers  route 
+    // filter suppliers  route 
     Route::post('suppliers/filter', [
         SuppliersController::class, 'filterSuppliers'
     ])->name('suppliers.filter');
-     // custom delete route 
+    // custom delete route 
      Route::get('suppliers/{id}/destroy', [ 
         SuppliersController::class, 'destroy'
     ]);
@@ -92,10 +94,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('suppliers/importExportView',  [
         SuppliersController::class, 'importExportView'
     ]);
-    // organic suppliers route
-    Route::get('suppliers/organic', [
-        SuppliersController::class, 'organic_suppliers'
-    ])->name('suppliers.organic');
     // resource route
     Route::resource('suppliers', SuppliersController::class, ['except' => ['destroy']]);
 
@@ -266,6 +264,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('globalRfqs/{id}/send', [
         GlobalRfqsController::class, 'sendToSupploers'
     ])->name('globalRfqs.sendToSupploers');
+    // to get suppliers details for approve rfqs  
+    Route::get('rfqs/send/getSuppliersDetails', [
+        GlobalRfqsController::class, 'getSuppliersDetails'
+    ])->name('rfqs.getSuppliersDetails');  
     // custom delete route
     Route::get('globalRfqs/{id}/destroy', [
         GlobalRfqsController::class, 'destroy'
@@ -755,6 +757,66 @@ Route::group(['middleware' => 'auth'], function (){
         PaymentOptionsController::class, 'destroy'
     ]);
     Route::resource('paymentOptions', PaymentOptionsController::class, ['except' => ['destroy']]);
+
+    
+    // ======================= moderators Routes ====================== //
+    // table actions route
+    Route::post('moderators/actions', 
+        [ModeratorsController::class , 'actions']
+    )->name('moderators.actions');
+    // get moderators as json route 
+    Route::get('moderators/json', [
+        ModeratorsController::class, 'getModeratorsAsJson'
+    ])->name('moderators.json');
+    // filter moderators  route 
+    Route::post('moderators/filter', [
+        ModeratorsController::class, 'filterModerators'
+    ])->name('moderators.filter');
+    // to import & export excel 
+    Route::get('moderators/export/excel', [
+        ModeratorsController::class, 'exportExcel'
+    ])->name('moderators.export.excel');
+    Route::post('moderators/import/excel', [
+        ModeratorsController::class, 'importExcel'
+    ])->name('moderators.import.excel');
+    Route::get('moderators/importExportView',  [
+        ModeratorsController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('moderators/{id}/destroy', [
+        ModeratorsController::class, 'destroy'
+    ]);
+    Route::resource('moderators', ModeratorsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Admin Users Routes ====================== //
+    // table actions route
+    Route::post('users/actions', 
+        [AdminUsersController::class , 'actions']
+    )->name('users.actions');
+    // get users as json route 
+    Route::get('users/json', [
+        AdminUsersController::class, 'getUsersAsJson'
+    ])->name('users.json');
+    // filter users  route 
+    Route::post('users/filter', [
+        AdminUsersController::class, 'filterUsers'
+    ])->name('users.filter');
+    // to import & export excel 
+    Route::get('users/export/excel', [
+        AdminUsersController::class, 'exportExcel'
+    ])->name('users.export.excel');
+    Route::post('users/import/excel', [
+        AdminUsersController::class, 'importExcel'
+    ])->name('users.import.excel');
+    Route::get('users/importExportView',  [
+        AdminUsersController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('users/{id}/destroy', [
+        AdminUsersController::class, 'destroy'
+    ]);
+    Route::resource('users', AdminUsersController::class, ['except' => ['destroy']]);
 
 
     // ======================= General Classes Routes ====================== //

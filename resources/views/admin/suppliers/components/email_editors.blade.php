@@ -8,7 +8,12 @@
                 </button>
             </div>
             <div class="modal-body m-3">
-                <div class="clearfix">
+                <div class="form-group">
+                    <label for="subject"> Email Subject </label>
+                    <input type="text" name="subject" class="form-control" id="subject">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="subject"> Email Content </label>
                     <div id="quill-toolbar">
                         <span class="ql-formats">
                             <select class="ql-font"></select>
@@ -58,7 +63,7 @@
             </div>
             <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" name="send_email_to_selected_btn" form="suppliers_actions_form"
+                <button type="button" id="send_message_btn" name="send_message_btn" form="suppliers_actions_form"
                     class="btn btn-success">Send Email</button>
             </div>
         </div>

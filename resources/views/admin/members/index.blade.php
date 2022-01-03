@@ -23,7 +23,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title"> You have <span id="members_counter"></span> member in this
+                                    <h5 class="card-title"> You have <span id="members_counter"></span> activites in this
                                         table </h5>
                                     <div class="row">
                                         <button class="btn btn-secondary"> Send Questionnaire </button>
@@ -76,7 +76,7 @@
                                     </div>
 
                                     <div class="table_wrapper_1">
-                                        <div class="table_div_1"></div>
+                                        <div class="table_div_1"></div> 
                                     </div>
                                     <div class="table_wrapper_2">
                                         <div class="table_div_2">
@@ -86,7 +86,7 @@
                                                         <th> <input type="checkbox" class="select_all_colums"> </th>
                                                         <th>Id</th>
                                                         <th>Name</th>
-                                                        <th>User ip</th>
+                                                        <th>User ip</th> 
                                                         <th>Country</th>
                                                         <th>Is Loggedin</th>
                                                         <th>Returning</th>

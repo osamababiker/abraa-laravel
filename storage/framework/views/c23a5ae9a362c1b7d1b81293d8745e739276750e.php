@@ -35,15 +35,16 @@
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Suppliers</span>
                 </a>
                 <ul id="suppliers" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('suppliers.index')); ?>">All supplier</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('suppliers.organic')); ?>">Suppliers (Organic)</a>
-                    </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Suppliers (No
-                            Keywords)</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Suppliers Visits</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Pricing</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-tasks.html">Suppliers By Category /
-                            Country</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('suppliers.index')); ?>">All suppliers</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a href="#admins" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="lock"></i> <span class="align-middle">Admin Users</span>
+                </a>
+                <ul id="admins" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('users.index')); ?>"> Admins</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('moderators.index')); ?>"> moderators</a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

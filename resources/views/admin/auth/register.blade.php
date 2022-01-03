@@ -61,6 +61,15 @@
 												<input class="form-control form-control-lg" type="password"
 													name="password_confirmation" placeholder="Re-Enter password" />
 											</div>
+											<div class="form-group">
+												<label for="user_level"> Users Level </label>
+												<select name="user_level" id="userlevel" class="form-control select2">
+													<option value=""></option>
+													@foreach($users_level as $level)
+														<option value="{{ $level->type }}"> {{ $level->levelname }} </option>
+													@endforeach
+												</select>
+											</div>
 											<div class="text-center mt-3">
 												<button type="submit" class="btn btn-lg btn-primary">Sign up</button>
 											</div>
