@@ -37,6 +37,7 @@ class VerifyCsrfToken extends Middleware
         '/globalRfqs/suppliers/filter',
         '/users/filter',
         '/moderators/filter',
+        '/productRfqs/filter',
 
         '/suppliers/actions'
     ];

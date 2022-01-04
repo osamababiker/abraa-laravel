@@ -12,8 +12,8 @@ use App\Models\AdminEmail;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\BuyingRequestStatus;
-use App\Exports\BuyingRequestInvoicesExport;
-use App\Imports\BuyingRequestInvoicesImport;
+use App\Exports\RfqsExport;
+use App\Imports\RfqsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
 
@@ -122,12 +122,12 @@ class RfqsController extends Controller
     // import & export to excel
     public function exportExcel() 
     {
-        return Excel::download(new BuyingRequestInvoicesExport, 'stores.xlsx'); 
+        return Excel::download(new RfqsExport, 'stores.xlsx'); 
     }
    
     public function importExcel() 
     {
-        Excel::import(new BuyingRequestInvoicesImport,request()->file('file'));
+        Excel::import(new RfqsImport,request()->file('file'));
            
         return redirect()->back();
     }

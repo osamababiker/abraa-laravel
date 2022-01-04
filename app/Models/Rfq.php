@@ -24,6 +24,10 @@ class Rfq extends Model
     public function buyer(){
         return $this->belongsTo(Buyer::class,'buyer_id');
     }
+
+    public function approved_by_admin(){
+        return $this->belongsTo(User::class,'approved_by','id');
+    }
  
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');

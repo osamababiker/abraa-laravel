@@ -106,9 +106,6 @@ $(document).ready(function () {
 
             
             $("#buying_requests_table_body").html(buying_request_html);
-            $(".select2").select2({
-                tags: true,
-            });
 
             $("#ajax_loader").css('display', 'none');
         }
@@ -229,10 +226,6 @@ $(".filter_data_table").on('change', function () {
 
             $("#buying_requests_table_body").html(buying_request_html);
 
-            $(".select2").select2({
-                tags: true,
-            });
-
             $("#ajax_loader").css('display', 'none');
         }
     });
@@ -244,7 +237,7 @@ $(".filter_data_table").on('change', function () {
 function archive_buyingRequest(request_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
-        url: "/rfqs/" + request_id + "/destroy",
+        url: "/globalRfqs/" + request_id + "/destroy",
         type: "get",
         success: function(response){
             location.reload();

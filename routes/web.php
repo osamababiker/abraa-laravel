@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\RfqInvoicesController;
 use App\Http\Controllers\Admin\RfqsController;
 use App\Http\Controllers\Admin\GlobalRfqsController;
+use App\Http\Controllers\Admin\ProductRfqsController;
 use App\Http\Controllers\Admin\HomeSlidersController;
 use App\Http\Controllers\Admin\HomeBannersController;
 use App\Http\Controllers\Admin\AdsCategoriesController;
@@ -274,6 +275,51 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('globalRfqs', GlobalRfqsController::class);
+
+
+    // ======================= products rfqs Routes ====================== //
+    // table actions route
+    Route::post('productRfqs/actions', 
+        [ProductRfqsController::class , 'actions']
+    )->name('productRfqs.actions');  
+    // get productRfqs as json route 
+     Route::get('productRfqs/json', [
+        ProductRfqsController::class, 'getproductRfqsAsJson'
+    ])->name('productRfqs.json');
+    // filter productRfqs  route 
+    Route::post('productRfqs/filter', [
+        ProductRfqsController::class, 'filterproductRfqs'
+    ])->name('productRfqs.filter');
+    // to import & export excel 
+    Route::get('productRfqs/export/excel', [
+        GlobalRfqsController::class, 'exportExcel'
+    ])->name('productRfqs.export.excel');
+    Route::post('productRfqs/import/excel', [
+        ProductRfqsController::class, 'importExcel'
+    ])->name('productRfqs.import.excel');
+    Route::get('productRfqs/importExportView',  [
+        ProductRfqsController::class, 'importExportView'
+    ]);  
+    // to send rfq to suppliers 
+    Route::get('productRfqs/{id}/send', [
+        ProductRfqsController::class, 'sendToSupploersPage'
+    ]);
+    Route::post('productRfqs/suppliers/filter', [
+        ProductRfqsController::class, 'filterSuppliers'
+    ]);
+    Route::post('productRfqs/{id}/send', [
+        ProductRfqsController::class, 'sendToSupploers'
+    ])->name('productRfqs.sendToSupploers');
+    // to get suppliers details for approve rfqs  
+    Route::get('rfqs/send/getSuppliersDetails', [
+        ProductRfqsController::class, 'getSuppliersDetails'
+    ])->name('rfqs.getSuppliersDetails');  
+    // custom delete route
+    Route::get('productRfqs/{id}/destroy', [
+        ProductRfqsController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('productRfqs', ProductRfqsController::class);
 
 
     // ======================= rfqs Invoices Routes ====================== //

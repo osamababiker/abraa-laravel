@@ -100,6 +100,7 @@
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('rfqInvoices.index')); ?>">Rfq Invoices</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('rfqs.index')); ?>">Pending Rfq</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('globalRfqs.index')); ?>">Global Rfq</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('productRfqs.index')); ?>">Product Rfq</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Closed Buying Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Abandoned  Buying Quotation</a></li>
                 </ul>

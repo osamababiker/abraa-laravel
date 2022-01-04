@@ -14,8 +14,8 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\BuyingRequestStatus;
-use App\Exports\BuyingRequestInvoicesExport;
-use App\Imports\BuyingRequestInvoicesImport;
+use App\Exports\RfqsExport;
+use App\Imports\RfqsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
 
@@ -209,7 +209,7 @@ class GlobalRfqsController extends Controller
 
 
     public function destroy($id){
-        BuyingRequestInvoice::where('id',$id)->delete();
+        Rfq::where('id',$id)->delete();
         $message = 'Request hass been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
@@ -221,12 +221,12 @@ class GlobalRfqsController extends Controller
     // import & export to excel
     public function exportExcel() 
     {
-        return Excel::download(new BuyingRequestInvoicesExport, 'stores.xlsx'); 
+        return Excel::download(new RfqsExport, 'buying_requests.xlsx'); 
     }
    
     public function importExcel() 
     {
-        Excel::import(new BuyingRequestInvoicesImport,request()->file('file'));
+        Excel::import(new RfqsImport,request()->file('file'));
            
         return redirect()->back();
     }

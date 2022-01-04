@@ -17,7 +17,7 @@
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3 mb-3">Manage Pending Quotes Table</h1>
+                    <h1 class="h3 mb-3">Manage Global Quotes Table</h1>
 
                     <div class="row">
                         <div class="col-12">
@@ -39,7 +39,7 @@
                                                 Tools
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{{ route('rfqInvoices.export.excel') }}"
+                                                <a class="dropdown-item" href="{{ route('globalRfqs.export.excel') }}"
                                                     target="_blank">Export to excel</a>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
 
-                                    <form action="{{ route('rfqs.actions') }}" id="buying_request_actions_form" method="post">
+                                    <form action="{{ route('globalRfqs.actions') }}" id="buying_request_actions_form" method="post">
                                         @csrf
                                         <div class="table_wrapper_1">
                                             <div class="table_div_1"></div>
@@ -108,10 +108,10 @@
                                             </div>
                                         </div>
                                         @if(session()->has('feedback'))
-                                            @include('admin.rfqs.buying_requets.components.feedback')
+                                            @include('admin.rfqs.global_buying_requests.components.feedback')
                                         @endif
-                                        @include('admin.rfqs.buying_requets.components.delete_selected')
-                                        @include('admin.rfqs.buying_requets.components.approve_selected')
+                                        @include('admin.rfqs.global_buying_requests.components.delete_selected')
+                                        @include('admin.rfqs.global_buying_requests.components.approve_selected')
                                     </form>
                                 </div>
                             </div>

@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RfqInvoice;
 use App\Models\Country;
-use App\Exports\BuyingRequestInvoicesExport;
-use App\Imports\BuyingRequestInvoicesImport;
+use App\Exports\RfqsInvoiceExport;
+use App\Imports\RfqsInvoiceImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RfqInvoicesController extends Controller
@@ -145,12 +145,12 @@ class RfqInvoicesController extends Controller
     // import & export to excel
     public function exportExcel() 
     {
-        return Excel::download(new BuyingRequestInvoicesExport, 'stores.xlsx'); 
+        return Excel::download(new RfqsInvoiceExport, 'stores.xlsx'); 
     }
    
     public function importExcel() 
     {
-        Excel::import(new BuyingRequestInvoicesImport,request()->file('file'));
+        Excel::import(new RfqsInvoiceImport,request()->file('file'));
            
         return redirect()->back();
     }

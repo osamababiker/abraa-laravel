@@ -114,7 +114,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         // Datatables Responsive
         $("#datatables-reponsive").DataTable({
-            responsive: true,
+            "responsive": true,
             "scrollX": true, 
             "bPaginate": false,
             //"scrollY": 200, 
