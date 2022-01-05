@@ -53,7 +53,7 @@ $(document).ready(function () {
                 "<td>"+ item.id +"</td>\n"+
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
-                "<td> <a href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+
@@ -102,7 +102,8 @@ $(".filter_data_table").on('change', function () {
             'manufacture_country': manufacture_country,
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
-            "items_status": items_status
+            "items_status": items_status,
+            "_token": csrf_token
         },
         success: function(response){
 
@@ -141,7 +142,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ item.id +"</td>\n"+
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
-                "<td> <a href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+

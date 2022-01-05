@@ -21,117 +21,175 @@
                     <div class="col-12 col-xl-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Users: #58741 </h5>
+									<h5 class="card-title">Users: #{{ $supplier->id }} </h5>
 								</div>
 								<table class="table show-details-table">
 									<tbody>
 										<tr class="table-primary">
-											<td>id</td>
-											<td>2458</td>
+											<th>id</th>
+											<td>{{ $supplier->id }}</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Full Name</td>
-											<td>Omer Alhamra</td>
+											<th>Full Name</th>
+											<td>{{ $supplier->full_name }}</td>
 										</tr>
                                         <tr class="table-success">
-											<td>Email</td>
-											<td>omer@abraa.com</td>
+											<th>Email</th>
+											<td>{{ $supplier->email }}</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Profile Picture</td>
-											<td> <img src="img/avatars/avatar-5.jpg"
-                                                class="avatar img-fluid rounded-circle" alt="Ashley Briggs">
+											<th>Profile Picture</th>
+											<td> <img src="{{ $supplier->pic_url }}"
+                                                class="avatar img-fluid rounded-circle" alt="{{ $supplier->full_name }}">
                                             </td>
 										</tr>
                                         <tr class="table-info">
-											<td>Phone</td>
-											<td>0542178966</td>
+											<th>Phone</th>
+											<td>{{ $supplier->phone }}</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Date Registered</td>
-											<td>2021-12-05 09:01:04 </td>
+											<th>Date Registered</th>
+											<td> {{ $supplier->date_added }} </td>
 										</tr>
                                         <tr class="table-primary">
-											<td>Verified</td>
-											<td> Yes </td>
+											<th>Verified</th>
+											<td>
+												@if($supplier->verified == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Search Log</td>
-											<td>  </td>
+											<th>Search Log</th>
+											<td> {{ $supplier->search_log }} </td>
 										</tr>
                                         <tr class="table-secondary">
-											<td>Country</td>
-											<td> UAE </td>
+											<th>Country</th>
+											<td> 
+												@if($supplier->supplier_country)
+												{{ $supplier->supplier_country->en_name }} 
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
-											<td>City</td>
-											<td> Dubai  </td>
+											<th>City</th>
+											<td> 
+												@if($supplier->supplier_city)
+												{{ $supplier->supplier_city->en_name }} 
+												@endif 
+											</td>
 										</tr>
                                         <tr class="table-danger">
-											<td>Company</td>
-											<td> Proverde Cleaning Equipment Trading LLC  </td>
+											<th>Company</th>
+											<td> {{ $supplier->company }}  </td>
 										</tr>
                                         <tr class="table-default">
-											<td>Is Organic</td>
-											<td> Yes </td>
+											<th>Is Organic</th>
+											<td>
+												@if($supplier->is_organic == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 	
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-primary">
-											<td>Source</td>
-											<td>  </td>
+											<th>Source</th> 
+											<td> {{ $supplier->getUserSource($supplier->user_source) }} </td>
 										</tr>
                                         <tr class="table-default">
-											<td>Interested Keywords</td>
-											<td> Proverde,SINTAN  </td>
+											<th>Interested Keywords</th>
+											<td> {{ $supplier->interested_keywords }}  </td>
 										</tr>
                                         <tr class="table-success">
-											<td>Disabled</td>
-											<td> No </td>
+											<th>Disabled</td>
+											<td>
+												@if($supplier->active == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 	
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Prod Count</td>
-											<td> 0 </td>
+											<th>Prod Count</th>
+											<td> {{ $supplier->prod_count }} </td>
 										</tr>
                                         <tr class="table-secondary">
-											<td>External</td>
-											<td> No </td>
+											<th>External</th>
+											<td>
+												@if($supplier->external == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Reference Url</td>
-											<td>  </td>
+											<th>Reference Url</th>
+											<td> <a target="_blank" href="{{ $supplier->reference_url }}"> {{ $supplier->reference_url }} </a> </td>
 										</tr>
                                         <tr class="table-info">
-											<td>External Categories</td>
-											<td>  </td>
+											<th>External Categories</th>
+											<td> 
+												@if($supplier->external_categories == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 	
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
-											<td>Lead Assigned</td>
-											<td>  0 </td>
+											<th>Lead Assigned</th>
+											<td> 
+												@if($supplier->lead_assigned == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 	
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-danger">
-											<td>External Buyer</td>
-											<td>  0 </td>
+											<th>External Buyer</th>
+											<td> 
+												@if($supplier->external_buyer == 1)
+													<i class="fa fa-check" style="color: green"></i>
+												@else 	
+													<i class="fa fa-times" style="color: red"></i>
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Date Added</td>
-											<td>   	2021-12-05 09:01:04  </td>
+											<td>  {{ $supplier->date_added }}  </td>
 										</tr>
                                         <tr class="table-success">
 											<td>Added By</td>
-											<td>   </td>
+											<td> 
+												@if($supplier->added_by > 0)
+												{{ \App\Models\User::find($supplier->added_by)->full_name }}  
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Date Updated</td>
-											<td>  2021-12-05 10:34:18  </td>
+											<td> {{ $supplier->date_updated }} </td>
 										</tr>
                                         <tr class="table-info">
 											<td>Updated By</td>
-											<td>  </td>
+											<td> 
+												@if($supplier->updated_by > 0)
+												{{ \App\Models\User::find($supplier->updated_by)->full_name }} 
+												@endif
+											</td>
 										</tr>
 									</tbody>
 								</table>
                                 <div class="m-4">
-                                    This user doesn't sent a buy request till now
-                                    <button class="btn btn-secondary"> Back </button>
+                                    <p>This user doesn't sent a buy request till now</p>
+                                    <a href="{{ route('suppliers.index') }}" class="btn btn-secondary"> Back </a>
                                 </div>
 							</div>
 						</div>
@@ -140,5 +198,6 @@
                 </div>
             </main>
 
+			@include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')

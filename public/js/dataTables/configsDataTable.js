@@ -85,7 +85,8 @@ $(".filter_data_table").on('change', function () {
         url: "/configs/filter",
         type: "post",
         data: {
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 

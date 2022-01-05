@@ -10,6 +10,7 @@ $(document).ready(function () {
     var buyer_phone = '';
     var unit = '';
     var approved_by  = '';
+    
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -49,7 +50,7 @@ $(document).ready(function () {
                 if(request.approved_by != 0 && request.approved_by_admin){
                     approved_by  = request.approved_by_admin.name;
                 }
-
+                
                 buying_request_html = buying_request_html +
 
                 // archive confirmation modal
@@ -82,7 +83,7 @@ $(document).ready(function () {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td>"+ request.product_name +"</td>\n"+
+                "<td> <a href=\""+ response.site_url +"item/"+ request.id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ approved_by +"</td>\n"+
@@ -138,7 +139,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'product_name': product_name,
             'shipping_country': shipping_country,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 
@@ -164,11 +166,11 @@ $(".filter_data_table").on('change', function () {
                 if(request.country){
                     country = request.country.en_name;
                 }
-
+                
                 if(request.approved_by != 0 && request.approved_by_admin){
                     approved_by  = request.approved_by_admin.name;
                 }
-
+                
                 buying_request_html = buying_request_html +
 
                 // archive confirmation modal
@@ -201,7 +203,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td>"+ request.product_name +"</td>\n"+
+                "<td> <a href=\""+ response.site_url +"item/"+ request.id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ approved_by +"</td>\n"+

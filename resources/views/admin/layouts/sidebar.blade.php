@@ -48,6 +48,14 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#home_items" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="home"></i> <span class="align-middle"> Home Items </span>
+                </a>
+                <ul id="home_items" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('services.index') }}"> Services</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#buyers" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Buyers</span>
                 </a>

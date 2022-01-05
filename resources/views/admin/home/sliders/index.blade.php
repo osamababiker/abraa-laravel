@@ -65,30 +65,25 @@
                                         </div>
                                     </div>
 
-                                    <div class="table_wrapper_1">
-                                        <div class="table_div_1"></div>
-                                    </div>
-                                    <div class="table_wrapper_2">
-                                        <div class="table_div_2">
-                                            <table id="" class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th> <input type="checkbox" class="select_all_colums"> </th>
-                                                        <th>Slider</th>
-                                                        <th>Link</th>
-                                                        <th>Alt Text</th>
-                                                        <th>For language</th>
-                                                        <th>Created at</th>
-                                                        <th> Added by </th>
-                                                        <th> Status </th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="home_sliders_table_body">
+                                    <div class="table-container">
+                                        <table id="" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" class="select_all_colums"> </th>
+                                                    <th>Slider</th>
+                                                    <th>Link</th>
+                                                    <th>Alt Text</th>
+                                                    <th>For language</th>
+                                                    <th>Created at</th>
+                                                    <th> Added by </th>
+                                                    <th> Status </th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="home_sliders_table_body">
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     @include('admin.home.sliders.components.delete_selected')
                                 </div>
@@ -101,6 +96,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/homeSlidersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

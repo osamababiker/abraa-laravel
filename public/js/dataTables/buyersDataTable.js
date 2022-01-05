@@ -115,7 +115,8 @@ $(".filter_data_table").on('change', function () {
             'countries': countries,
             'keywords': keywords,
             'rows_numbers': rows_numbers,
-            'buyer_name': buyer_name
+            'buyer_name': buyer_name,
+            "_token": csrf_token
         },
         success: function(response){
 

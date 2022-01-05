@@ -113,7 +113,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'category_title': category_title,
             'meta_keyword': meta_keyword,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 

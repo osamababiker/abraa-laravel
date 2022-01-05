@@ -14,6 +14,7 @@ $(document).ready(function () {
     $.ajax({
         url: "/suppliers/json",
         type: "get",
+        cache: false,
         data: {"rows_numbers": rows_numbers},
         success: function(response){
 
@@ -88,7 +89,7 @@ $(document).ready(function () {
                     "<a class=\"dropdown\">\n"+
                         "<a class=\"dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"></a>\n"+
                         "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n"+
-                            "<a class=\"dropdown-item\" type=\"button\" data-toggle=\"modal\" data-target=\"#supplier_items_"+ supplier.id +"\"><i class=\"align-middle\">Items</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/items\">Items</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Users store</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Buying request suppliers</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Users files</a>\n"+
@@ -141,7 +142,8 @@ $(".filter_data_table").on('change', function () {
             'rows_numbers': rows_numbers,
             'supplier_type': supplier_type,
             'product_title': product_title,
-            'supplier_name': supplier_name
+            'supplier_name': supplier_name,
+            "_token": csrf_token
         },
         success: function(response){
 
@@ -216,7 +218,7 @@ $(".filter_data_table").on('change', function () {
                     "<a class=\"dropdown\">\n"+
                         "<a class=\"dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"></a>\n"+
                         "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n"+
-                            "<a class=\"dropdown-item\" type=\"button\" data-toggle=\"modal\" data-target=\"#supplier_items_"+ supplier.id +"\"><i class=\"align-middle\">Items</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/items\">Items</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Users store</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Buying request suppliers</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Users files</a>\n"+

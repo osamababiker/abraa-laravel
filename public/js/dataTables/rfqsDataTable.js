@@ -194,7 +194,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'product_name': product_name,
             'shipping_country': shipping_country,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 

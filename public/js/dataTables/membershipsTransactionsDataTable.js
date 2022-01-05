@@ -106,7 +106,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'subscription_status': subscription_status,
             'payment_status': payment_status,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
             

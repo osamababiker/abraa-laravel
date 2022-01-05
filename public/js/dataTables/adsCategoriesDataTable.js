@@ -104,7 +104,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'filter_by_category': filter_by_category,
             'ads_category_name': ads_category_name,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
             

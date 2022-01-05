@@ -116,7 +116,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'moderator_name': moderator_name,
             'countries': countries,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 

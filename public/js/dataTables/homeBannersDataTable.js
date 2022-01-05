@@ -112,7 +112,8 @@ $(".filter_data_table").on('change', function () {
         type: "post",
         data: {
             'banner_title': banner_title,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 

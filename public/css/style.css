@@ -21,19 +21,17 @@ table{
     width: 100%!important;
 }
 
-.table_wrapper_1, .table_wrapper_2 { width: 100%; overflow-x: scroll; overflow-y: hidden; }
-.table_wrapper_1 { height: 20px; }
-.table_div_1 { height: 20px; }
-.table_div_2 { overflow: none; }
+.table-container {
+    overflow-x: scroll;
+    overflow-y: auto;
+    /*transform:rotateX(180deg);*/
+}
+
+/* .table-container table {
+    transform:rotateX(180deg);
+} */
 
 
-.table-action{
-    display: contents!important;
-}
-.table-action a{
-    padding-top: 30px!important;
-    display: inline-block;
-}
 
 
 .feedback_status {

@@ -75,35 +75,30 @@
                                         </div>
                                     </div>
 
-                                    <div class="table_wrapper_1">
-                                        <div class="table_div_1"></div> 
-                                    </div>
-                                    <div class="table_wrapper_2">
-                                        <div class="table_div_2">
-                                            <table id="" class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th> <input type="checkbox" class="select_all_colums"> </th>
-                                                        <th>Id</th>
-                                                        <th>Name</th>
-                                                        <th>User ip</th> 
-                                                        <th>Country</th>
-                                                        <th>Is Loggedin</th>
-                                                        <th>Returning</th>
-                                                        <th>Visits Count</th>
-                                                        <th>Visits Page</th>
-                                                        <th>Visit time in secound</th>
-                                                        <th>Searched items</th>
-                                                        <th>Date vsiited</th>
-                                                        <th>Time vsiited</th>
-                                                        <th> Actions </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="members_table_body">
+                                    <div class="table-container">
+                                        <table id="" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" class="select_all_colums"> </th>
+                                                    <th>Id</th>
+                                                    <th>Name</th>
+                                                    <th>User ip</th> 
+                                                    <th>Country</th>
+                                                    <th>Is Loggedin</th>
+                                                    <th>Returning</th>
+                                                    <th>Visits Count</th>
+                                                    <th>Visits Page</th>
+                                                    <th>Visit time in secound</th>
+                                                    <th>Searched items</th>
+                                                    <th>Date vsiited</th>
+                                                    <th>Time vsiited</th>
+                                                    <th> Actions </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="members_table_body">
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     @include('admin.members.components.delete_selected')
                                 </div>
@@ -116,6 +111,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/membersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

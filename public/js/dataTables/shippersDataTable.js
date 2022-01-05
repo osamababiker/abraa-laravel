@@ -119,7 +119,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'countries': countries,
             'rows_numbers': rows_numbers,
-            'shipper_name': shipper_name
+            'shipper_name': shipper_name,
+            "_token": csrf_token
         },
         success: function(response){
 

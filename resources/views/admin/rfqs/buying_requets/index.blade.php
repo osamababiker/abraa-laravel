@@ -81,35 +81,30 @@
 
                                     <form action="{{ route('rfqs.actions') }}" id="buying_request_actions_form" method="post">
                                         @csrf
-                                        <div class="table_wrapper_1">
-                                            <div class="table_div_1"></div>
-                                        </div>
-                                        <div class="table_wrapper_2">
-                                            <div class="table_div_2">
-                                                <table id="" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th> <input type="checkbox" class="select_all_colums"> </th>
-                                                            <th>Id</th>
-                                                            <th>Approve</th>
-                                                            <th>Type</th>
-                                                            <th>Buyer Name</th>
-                                                            <th>Phone</th>
-                                                            <th>Country</th>
-                                                            <th>Buyer Email</th>
-                                                            <th>Category</th>
-                                                            <th>Product</th>
-                                                            <th>Quantity</th>
-                                                            <th>Unit</th> 
-                                                            <th> Date Added </th>
-                                                            <th> Actions </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="buying_requests_table_body">
+                                        <div class="table-container">
+                                            <table id="" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th> <input type="checkbox" class="select_all_colums"> </th>
+                                                        <th>Id</th>
+                                                        <th>Approve</th>
+                                                        <th>Type</th>
+                                                        <th>Buyer Name</th>
+                                                        <th>Phone</th>
+                                                        <th>Country</th>
+                                                        <th>Buyer Email</th>
+                                                        <th>Category</th>
+                                                        <th>Product</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit</th> 
+                                                        <th> Date Added </th>
+                                                        <th> Actions </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="buying_requests_table_body">
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                         @if(session()->has('feedback'))
                                             @include('admin.rfqs.buying_requets.components.feedback')
@@ -127,6 +122,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/rfqsDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

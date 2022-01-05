@@ -80,34 +80,29 @@
                                             </div>
                                         </div>
 
-                                        <div class="table_wrapper_1">
-                                            <div class="table_div_1"></div>
-                                        </div>
-                                        <div class="table_wrapper_2">
-                                            <div class="table_div_2">
-                                                <table id="" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th> <input type="checkbox" name="all_colums"
-                                                                    class="select_all_colums"> </th>
-                                                            <th>Id</th>
-                                                            <th>Code</th>
-                                                            <th>Name</th>
-                                                            <th>Short Description</th>
-                                                            <th>Price</th>
-                                                            <th>Duration</th>
-                                                            <th>Sales</th>
-                                                            <th> Country </th>
-                                                            <th>Created at</th>
-                                                            <th>Updated at</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="memberships_plans_table_body">
+                                        <div class="table-container">
+                                            <table id="" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th> <input type="checkbox" name="all_colums"
+                                                                class="select_all_colums"> </th>
+                                                        <th>Id</th>
+                                                        <th>Code</th>
+                                                        <th>Name</th>
+                                                        <th>Short Description</th>
+                                                        <th>Price</th>
+                                                        <th>Duration</th>
+                                                        <th>Sales</th>
+                                                        <th> Country </th>
+                                                        <th>Created at</th>
+                                                        <th>Updated at</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="memberships_plans_table_body">
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                         @include('admin.memberships.plans.components.delete_selected')
                                     </div>
@@ -121,6 +116,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/membershipsPlansDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

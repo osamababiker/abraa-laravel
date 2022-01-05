@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\UnitsController;
 use App\Http\Controllers\Admin\PaymentOptionsController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\ModeratorsController;
+use App\Http\Controllers\Admin\ServicesController;
 
 
 /* 
@@ -81,8 +82,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('suppliers/filter', [
         SuppliersController::class, 'filterSuppliers'
     ])->name('suppliers.filter');
+    // custom update route 
+     Route::post('suppliers/update', [ 
+        SuppliersController::class, 'update'
+    ])->name('suppliers.update');
     // custom delete route 
-     Route::get('suppliers/{id}/destroy', [ 
+    Route::get('suppliers/{id}/destroy', [ 
         SuppliersController::class, 'destroy'
     ]);
     // to import & export excel 
@@ -95,8 +100,35 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('suppliers/importExportView',  [
         SuppliersController::class, 'importExportView'
     ]);
+    /**********************************************/
+    // to list items has been added by supplier
+    // supplier items actions route
+    Route::post('suppliers/{id}/items/actions', 
+        [SuppliersController::class , 'supplierItemsActions']
+    )->name('suppliers.items.actions');    
+    // get supplier items as json route 
+    Route::get('suppliers/{id}/items/json', [
+        SuppliersController::class, 'getSuppliersItemsAsJson'
+    ])->name('suppliers.items.json');
+    // filter supplier items  route 
+    Route::post('suppliers/{id}/items/filter', [
+        SuppliersController::class, 'filterSuppliersItems'
+    ])->name('suppliers.items.filter');
+    Route::get('suppliers/items/{id}/export/excel', [
+        SuppliersController::class, 'exportExcel'
+    ])->name('suppliers.items.export.excel');
+    Route::post('suppliers/items/{id}/import/excel', [
+        SuppliersController::class, 'importExcel'
+    ])->name('suppliers.items.import.excel');
+    Route::get('suppliers/items/{id}/importExportView',  [
+        SuppliersController::class, 'importExportView'
+    ]);
+    Route::get('suppliers/{id}/items',  [
+        SuppliersController::class, 'supplierItems'
+    ])->name('suppliers.items');
+    /**********************************************/
     // resource route
-    Route::resource('suppliers', SuppliersController::class, ['except' => ['destroy']]);
+    Route::resource('suppliers', SuppliersController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Shippers Routes ====================== //
@@ -533,6 +565,36 @@ Route::group(['middleware' => 'auth'], function (){
         AdsController::class, 'destroy'
     ]);
     Route::resource('ads', AdsController::class, ['except' => ['destroy']]);
+
+
+    // ======================= services Routes ====================== //
+    // table actions route
+    Route::post('services/actions', 
+        [ServicesController::class , 'actions']
+    )->name('services.actions');
+    // get services as json route 
+    Route::get('services/json', [
+        ServicesController::class, 'getServicesAsJson'
+    ])->name('services.json');
+        // filter services  route 
+    Route::post('services/filter', [
+        ServicesController::class, 'filterServices'
+    ])->name('services.filter');
+    // to import & export excel 
+    Route::get('services/export/excel', [
+        ServicesController::class, 'exportExcel'
+    ])->name('services.export.excel');
+    Route::post('services/import/excel', [
+        ServicesController::class, 'importExcel'
+    ])->name('services.import.excel');
+    Route::get('services/importExportView',  [
+        ServicesController::class, 'importExportView'
+    ]);
+    // custom delete route
+    Route::get('services/{id}/destroy', [
+        ServicesController::class, 'destroy'
+    ]);
+    Route::resource('services', ServicesController::class, ['except' => ['destroy']]);
 
 
     // ======================= Memberships Plans Routes ====================== //

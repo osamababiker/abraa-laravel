@@ -96,7 +96,8 @@ $(".filter_data_table").on('change', function () {
         type: "post",
         data: {
             "rows_numbers": rows_numbers,
-            "currency_name": currency_name
+            "currency_name": currency_name,
+            "_token": csrf_token
         },
         success: function(response){
 

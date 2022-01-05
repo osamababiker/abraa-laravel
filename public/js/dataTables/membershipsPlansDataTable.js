@@ -93,7 +93,8 @@ $(".filter_data_table").on('change', function () {
         type: "post",
         data: {
             'memberships_plan_name': memberships_plan_name,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
             

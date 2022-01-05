@@ -97,33 +97,28 @@
                                         </div>
                                     </div>
 
-                                    <div class="table_wrapper_1">
-                                        <div class="table_div_1"></div>
-                                    </div>
-                                    <div class="table_wrapper_2">
-                                        <div class="table_div_2">
-                                            <table id="" class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th> <input type="checkbox" name="all_colums"
-                                                                class="select_all_colums"> </th>
-                                                        <th>Id</th>
-                                                        <th>Registered Email</th>
-                                                        <th>Store Name</th>
-                                                        <th>Sub Domain</th>
-                                                        <th>Visits</th>
-                                                        <th>Store Verified</th>
-                                                        <th>Contact Count</th>
-                                                        <th>Date Added </th>
-                                                        <th>Reminders Sent</th>
-                                                        <th> Actions </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="stores_table_body">
+                                    <div class="table-container">
+                                        <table id="" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" name="all_colums"
+                                                            class="select_all_colums"> </th>
+                                                    <th>Id</th>
+                                                    <th>Registered Email</th>
+                                                    <th>Store Name</th>
+                                                    <th>Sub Domain</th>
+                                                    <th>Visits</th>
+                                                    <th>Store Verified</th>
+                                                    <th>Contact Count</th>
+                                                    <th>Date Added </th>
+                                                    <th>Reminders Sent</th>
+                                                    <th> Actions </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="stores_table_body">
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     @include('admin.stores.components.delete_selected')
                                 </div>
@@ -136,6 +131,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/storesDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

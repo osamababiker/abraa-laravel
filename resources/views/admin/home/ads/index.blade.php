@@ -74,35 +74,30 @@
                                         </div>
                                     </div>
 
-                                    <div class="table_wrapper_1">
-                                        <div class="table_div_1"></div>
-                                    </div>
-                                    <div class="table_wrapper_2">
-                                        <div class="table_div_2">
-                                            <table id="" class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th> <input type="checkbox" class="select_all_colums"> </th>
-                                                        <th>Name</th>
-                                                        <th>Category</th>
-                                                        <th>Ads Picture</th>
-                                                        <th>Link</th>
-                                                        <th>Start On</th>
-                                                        <th>End On</th>
-                                                        <th>Views</th>
-                                                        <th>Clicks</th>
-                                                        <th>Is Active</th>
-                                                        <th>Alt Text</th>
-                                                        <th>Lanaguage</th>
-                                                        <th>Create at</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="ads_categories_table_body">
+                                    <div class="table-container">
+                                        <table id="" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" class="select_all_colums"> </th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Ads Picture</th>
+                                                    <th>Link</th>
+                                                    <th>Start On</th>
+                                                    <th>End On</th>
+                                                    <th>Views</th>
+                                                    <th>Clicks</th>
+                                                    <th>Is Active</th>
+                                                    <th>Alt Text</th>
+                                                    <th>Lanaguage</th>
+                                                    <th>Create at</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ads_categories_table_body">
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     @include('admin.home.ads.components.delete_selected')
                                 </div>
@@ -115,6 +110,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/adsDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

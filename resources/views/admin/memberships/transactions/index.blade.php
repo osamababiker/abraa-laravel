@@ -90,33 +90,28 @@
                                             </div>
                                         </div>
 
-                                        <div class="table_wrapper_1">
-                                            <div class="table_div_1"></div>
-                                        </div>
-                                        <div class="table_wrapper_2">
-                                            <div class="table_div_2">
-                                                <table id="" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th> <input type="checkbox" name="all_colums"
-                                                                    class="select_all_colums"> </th>
-                                                            <th>Id</th>
-                                                            <th>User</th>
-                                                            <th>Plan</th>
-                                                            <th>Total Amount</th>
-                                                            <th>Payment Status</th>
-                                                            <th>Subscription Status</th>
-                                                            <th>Start Date</th>
-                                                            <th> End Date </th>
-                                                            <th>Payment Date</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="memberships_transactions_table_body">
+                                        <div class="table-container">
+                                            <table id="" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th> <input type="checkbox" name="all_colums"
+                                                                class="select_all_colums"> </th>
+                                                        <th>Id</th>
+                                                        <th>User</th>
+                                                        <th>Plan</th>
+                                                        <th>Total Amount</th>
+                                                        <th>Payment Status</th>
+                                                        <th>Subscription Status</th>
+                                                        <th>Start Date</th>
+                                                        <th> End Date </th>
+                                                        <th>Payment Date</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="memberships_transactions_table_body">
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                         @include('admin.memberships.transactions.components.delete_selected')
                                     </div>
@@ -130,6 +125,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/membershipsTransactionsDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

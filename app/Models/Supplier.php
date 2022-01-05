@@ -9,12 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes; 
     protected $table = "users";
     protected $guarded = [];
 
     public function supplier_country() {
         return $this->belongsTo(Country::class,'country','co_code');
+    }
+
+    public function supplier_city() {
+        return $this->belongsTo(State::class,'city');
     }
 
     public function items() {

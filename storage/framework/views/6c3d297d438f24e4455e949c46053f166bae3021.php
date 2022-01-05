@@ -112,33 +112,28 @@
                                             </div>
                                         </div>
 
-                                        <div class="table_wrapper_1">
-                                            <div class="table_div_1"></div>
-                                        </div>
-                                        <div class="table_wrapper_2">
-                                            <div class="table_div_2">
-                                                <table id="" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th> <input type="checkbox" name="all_colums"
-                                                                    class="select_all_colums"> </th>
-                                                            <th>Id</th>
-                                                            <th>Full Name</th>
-                                                            <th>Email</th>
-                                                            <th>Phone</th>
-                                                            <th>Date Registered</th>
-                                                            <th>Verified</th>
-                                                            <th>Country</th>
-                                                            <th>Company</th>
-                                                            <th>Is Organic</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="suppliers_table_body">
+                                        <div class="table-container">
+                                            <table id="" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th> <input type="checkbox" name="all_colums"
+                                                                class="select_all_colums"> </th>
+                                                        <th>Id</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Date Registered</th>
+                                                        <th>Verified</th>
+                                                        <th>Country</th>
+                                                        <th>Company</th>
+                                                        <th>Is Organic</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="suppliers_table_body">
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                         <?php echo $__env->make('admin.suppliers.components.email_editors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                         <?php echo $__env->make('admin.suppliers.components.delete_selected', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

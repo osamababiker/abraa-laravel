@@ -40,12 +40,14 @@ class ProductRfqsController extends Controller
 
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj->limit($rows_numbers)
-            ->with('category')->with('country')->with('buyer')->with('unit')->orderBy('id','desc')->get();
-
+            ->with('category')->with('country')->with('buyer')->with('unit')->orderBy('id','desc')->get();    
+        
+        $site_url = config('global.public_url');
         
         return response()->json([
             'buying_requests' => $buying_requests,
-            'buying_requests_count' => $buying_requests_count
+            'buying_requests_count' => $buying_requests_count,
+            'site_url' => $site_url
         ]); 
     }
 
@@ -73,10 +75,13 @@ class ProductRfqsController extends Controller
         $buying_requests = $buying_request_obj->limit($rows_numbers)
             ->with('category')->with('country')->with('buyer')
             ->with('unit')->orderBy('id','desc')->get();
+
+        $site_url = config('global.public_url');
    
         return response()->json([
             'buying_requests' => $buying_requests,
-            'buying_requests_count' => $buying_requests_count
+            'buying_requests_count' => $buying_requests_count,
+            'site_url' => $site_url
         ]);
     }
    

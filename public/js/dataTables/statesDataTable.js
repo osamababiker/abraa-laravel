@@ -105,7 +105,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             "rows_numbers": rows_numbers,
             "state_name": state_name,
-            "state_countries": state_countries
+            "state_countries": state_countries,
+            "_token": csrf_token
         },
         success: function(response){
 

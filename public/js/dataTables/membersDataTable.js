@@ -128,7 +128,8 @@ $(".filter_data_table").on('change', function () {
         data: {
             'countries': countries,
             'rows_numbers': rows_numbers,
-            'member_name': member_name
+            'member_name': member_name,
+            "_token": csrf_token
         },
         success: function(response){
 

@@ -100,7 +100,8 @@ $(".filter_data_table").on('change', function () {
         type: "post",
         data: {
             "rows_numbers": rows_numbers,
-            "unit_name": unit_name
+            "unit_name": unit_name,
+            "_token": csrf_token
         },
         success: function(response){
 

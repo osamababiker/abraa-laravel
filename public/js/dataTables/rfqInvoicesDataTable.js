@@ -162,7 +162,8 @@ $(".filter_data_table").on('change', function () {
             'shipping_country': shipping_country,
             'request_type': request_type,
             "buying_request_status": buying_request_status,
-            "rows_numbers": rows_numbers
+            "rows_numbers": rows_numbers,
+            "_token": csrf_token
         },
         success: function(response){
 

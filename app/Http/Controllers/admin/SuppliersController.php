@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use App\Models\Item;
 use App\Models\Country;
 use App\Exports\SuppliersExport;
 use App\Imports\SuppliersImport;
@@ -87,6 +88,93 @@ class SuppliersController extends Controller
         ]);
     }
 
+    /**********************************************/
+    // to get supplier items
+    public function supplierItems($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        $countries = Country::get();
+        return view('admin.suppliers.items.index', compact(['supplier','countries']));
+    }
+
+    public function getSuppliersItemsAsJson(Request $request,$supplier_id){
+
+        $rows_numbers = $request->rows_numbers; 
+        $items_obj = Item::where('user_id', $supplier_id)
+            ->leftJoin('users', 'users.id', '=', 'items.user_id')
+            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
+            ->where('users_store.trash',0)
+            ->where('users_store.rejected',0);
+
+        $items = $items_obj->limit($rows_numbers)->get();
+        $items_counter = $items_obj->count();
+        return response()->json([
+            'items' => $items,
+            'items_counter' => $items_counter
+        ]);
+    }
+ 
+    public function filterSuppliersItems(Request $request, $supplier_id){
+
+        $product_name = $request->product_name;
+        $manufacture_country = $request->manufacture_country;
+        $rows_numbers = $request->rows_numbers; 
+        $meta_keyword = $request->meta_keyword; 
+        $items_status = $request->items_status;
+
+        $item_obj = Item::where('user_id', $supplier_id)
+            ->leftJoin('users', 'users.id', '=', 'items.user_id')
+            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
+            ->where('users_store.trash',0)
+            ->where('users_store.rejected',0);
+
+        if($items_status == 'active'){
+            $item_obj = $item_obj->where('items.status', 1)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 1);
+        } 
+        elseif($items_status == 'pending'){
+            $item_obj = $item_obj->where('items.status', 0)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 0);
+        }
+        elseif($items_status == 'rejected'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        elseif($items_status == 'home'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        else {
+            $item_obj = $item_obj->where('items.active',1)
+                ->where('items.status',1)
+                ->where('items.rejected',0)
+                ->where('items.approved',1); 
+        }
+        
+        if($product_name){
+            $item_obj->where('items.title','like', '%' . $product_name . '%'); 
+        }
+
+        if($manufacture_country){
+            $item_obj->whereIn('items.manufacture_country', $manufacture_country);
+        }
+        
+        if($meta_keyword){
+            foreach($meta_keyword as $word){
+                $item_obj->where('items.meta_keyword','like', '%' . $word . '%');
+            }
+        }
+            
+        $items_count = $item_obj->count();
+        $items = $item_obj->limit($rows_numbers)->with('category')
+            ->orderBy('items.id','desc')->get();
+
+        
+        return response()->json([
+            'items' => $items,
+            'items_count' => $items_count
+        ]);
+    }
 
     public function create()
     {
@@ -149,19 +237,51 @@ class SuppliersController extends Controller
  
     public function show($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        return view('admin.suppliers.show', compact(['supplier']));
     }
 
  
     public function edit($id){
         $supplier = Supplier::find($id);
-        return view('admin.suppliers.edit', compact(['supplier']));
+        $countries = Country::all();
+        return view('admin.suppliers.edit', compact(['supplier','countries']));
     }
 
    
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $supplier = Supplier::find($request->supplier_id);
+
+        // to update primary contact info
+        $interested_keywords = '';
+        foreach($request->interested_keywords as $keywords){
+            $interested_keywords .= ',' .$keywords;
+        }
+        $supplier->business_name = $request->business_name;
+        $supplier->country = $request->country;
+        $supplier->interested_keywords = $interested_keywords;
+        $supplier->full_name = $request->primary_name;
+        $supplier->email = $request->primary_email;
+        $supplier->phone = $request->primary_m_phone;
+        $supplier->primary_position = $request->primary_position;
+        $supplier->primary_whatsapp = $request->primary_whatsapp;
+        $supplier->primary_line_number = $request->primary_line_number;
+
+        // to update secoundry contact info
+        $supplier->secondary_contact_person = $request->secondary_name;
+        $supplier->secondary_email = $request->secondary_email;
+        $supplier->secondary_phone = $request->secondary_m_phone;
+        $supplier->secondary_position = $request->secondary_position;
+        $supplier->secondary_whatsapp = $request->secondary_whatsapp;
+        $supplier->secondary_line_number = $request->secondary_line_number;
+
+        $supplier->save();
+        $message = "supplier has been updated successfully";
+        session()->flash('feedback', $message);
+        session()->flash('feedback_title', 'updated successfully');
+        session()->flash('success', 'true');
+        return redirect()->back();
     }
 
  

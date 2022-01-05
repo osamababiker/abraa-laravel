@@ -76,32 +76,27 @@
                                         </div>
                                     </div>
 
-                                    <div class="table_wrapper_1">
-                                        <div class="table_div_1"></div>
-                                    </div>
-                                    <div class="table_wrapper_2">
-                                        <div class="table_div_2">
-                                            <table id="" class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th> <input type="checkbox" class="select_all_colums"> </th>
-                                                        <th>Id</th>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Phone</th>
-                                                        <th>Registration Date</th>
-                                                        <th>is Verified</th>
-                                                        <th>Country</th>
-                                                        <th>Company</th>
-                                                        <th>is Organic</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="moderators_table_body">
+                                    <div class="table-container">
+                                        <table id="" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" class="select_all_colums"> </th>
+                                                    <th>Id</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Registration Date</th>
+                                                    <th>is Verified</th>
+                                                    <th>Country</th>
+                                                    <th>Company</th>
+                                                    <th>is Organic</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="moderators_table_body">
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     @include('admin.moderators.components.delete_selected')
                                 </div>
@@ -114,6 +109,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/moderatorsDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

@@ -124,22 +124,7 @@
         });
     });
 </script>
-
  
-<script>
-    $(function () {
-        $('.table_wrapper_1').on('scroll', function (e) {
-            $('.table_wrapper_2').scrollLeft($('.table_wrapper_1').scrollLeft());
-        }); 
-        $('.table_wrapper_2').on('scroll', function (e) {
-            $('.table_wrapper_1').scrollLeft($('.table_wrapper_2').scrollLeft());
-        });
-    });
-    $(window).on('load', function (e) {
-        $('.table_div_1').width($('table').width());
-        $('.table_div_2').width($('table').width());
-    });
-</script> 
 
 <script>
     $('.select2').select2({
