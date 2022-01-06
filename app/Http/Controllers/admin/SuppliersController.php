@@ -6,8 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Item;
 use App\Models\Country;
+use App\Models\Store;
+use App\Models\BuyerMessage;
 use App\Exports\SuppliersExport;
 use App\Imports\SuppliersImport;
+use App\Exports\SupplierItemsExport;
+use App\Imports\SupplierItemsImport;
+use App\Exports\SupplierStoresExport;
+use App\Imports\SupplierStoresImport;
+use App\Exports\SupplierBuyersMessagesExport;
+use App\Imports\SupplierBuyersMessagesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
 
@@ -176,11 +184,123 @@ class SuppliersController extends Controller
         ]);
     }
 
-    public function create()
-    {
+
+    /**********************************************/
+    // to get supplier stores
+    public function supplierStores($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        $countries = Country::all();
+        return view('admin.suppliers.stores.index', compact(['supplier','countries']));
+    }
+
+    public function getSuppliersStoresAsJson(Request $request, $supplier_id){
+
+        $rows_numbers = $request->rows_numbers;
+        $stores_status = $request->stores_status;
+
+        $store_obj = Store::where('sub_of', $supplier_id)->where('rejected',0);
+
+        $stores_count = $store_obj->count();
+        $stores = $store_obj->limit($rows_numbers)
+            ->with('user')->orderBy('id','desc')->get();
+        
+        return response()->json([
+            'stores' => $stores,
+            'stores_count' => $stores_count
+        ]);
+    }
+
+    public function filterSuppliersStores(Request $request, $supplier_id){
+        
+        $store_name = $request->store_name;
+        $store_country = $request->store_country;
+        $rows_numbers = $request->rows_numbers; 
+        $meta_keyword = $request->meta_keyword;
+        $stores_status = $request->stores_status;
+
+        $store_obj = Store::where('sub_of', $supplier_id)->where('rejected',0);
+        
+        if($store_name){
+            $store_obj->where('name', 'like',  '%'. $store_name .'%');
+        }
+
+        if($store_country){
+            $store_obj->whereIn('country', $store_country);
+        }
+        
+        if($meta_keyword){
+            foreach($meta_keyword as $word){
+                $store_obj->where('meta_keywords','like', '%' . $word . '%');
+            }
+        }
+            
+        $stores_count = $store_obj->count();
+        $stores = $store_obj->limit($rows_numbers)->with('user')
+            ->orderBy('id','desc')->get();
+
+   
+        return response()->json([
+            'stores' => $stores,
+            'stores_count' => $stores_count
+        ]);
+    }
+
+
+    /**********************************************/
+    // to get supplier stores
+    public function supplierBuyersMessages($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        $countries = Country::all();
+        return view('admin.suppliers.buyersMessages.index', compact(['supplier','countries']));
+    }
+
+    public function getSuppliersBuyersMessagesAsJson(Request $request, $supplier_id){
+
+        $rows_numbers = $request->rows_numbers;
+
+        $buyers_messages_obj = BuyerMessage::where('sub_of', $supplier_id)->where('rejected',0);
+
+        $buyers_messages_count = $buyers_messages_obj->count();
+        $buyers_messages = $buyers_messages_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+        
+        return response()->json([
+            'buyers_messages' => $buyers_messages,
+            'buyers_messages_count' => $buyers_messages_count
+        ]);
+    }
+
+    public function filterSuppliersBuyersMessages(Request $request, $supplier_id){
+        
+        $rows_numbers = $request->rows_numbers; 
+
+        $buyers_messages_obj = Store::where('sub_of', $supplier_id)->where('rejected',0);
+            
+        $buyers_messages_count = $buyers_messages_obj->count();
+        $buyers_messages = $buyers_messages_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+
+   
+        return response()->json([
+            'buyers_messages' => $buyers_messages,
+            'buyers_messages_count' => $buyers_messages_count
+        ]);
+    }
+
+
+    public function create(){
         return view('admin.suppliers.create');
     }
 
+    // **********************************************/
+    // supplier create items 
+    public function createSupplierItems($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        return view('admin.suppliers.items.create', compact(['supplier']));
+    }
 
     public function store(Request $request)
     {
@@ -233,6 +353,25 @@ class SuppliersController extends Controller
         
     }
 
+    // **********************************************/
+    // supplier items action
+    public function supplierItemsActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $item_id = $request->item_id;
+            if($request->all_colums){
+                Item::delete();
+            }
+            elseif($item_id){
+                foreach($item_id as $id){
+                    Item::where('id',$id)->delete();
+                }
+            }
+            $message = 'items has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
 
  
     public function show($id)
@@ -293,6 +432,34 @@ class SuppliersController extends Controller
     }
 
 
+    // **********************************************/
+    // destroy supplier item
+    public function destroySupplierItems($id){
+        Item::where('id',$id)->delete();
+        $message = 'Item hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // destroy supplier store
+    public function destroySupplierStores($id){
+        Store::where('id',$id)->delete();
+        $message = 'store hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // destroy supplier buyers messages
+    public function destroySupplierBuyersMessages($id){
+        BuyerMessage::where('id',$id)->delete();
+        $message = 'message hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+
     // import & export to excel
     public function exportExcel() {
         return Excel::download(new SuppliersExport, 'suppliers.xlsx'); 
@@ -300,7 +467,39 @@ class SuppliersController extends Controller
    
     public function importExcel() {
         Excel::import(new SuppliersImport,request()->file('file'));
-           
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // import & export to excel for supplier items
+    public function supplierItemsExportExcel() {
+        return Excel::download(new SupplierItemsExport, 'supplier_items.xlsx'); 
+    }
+   
+    public function supplierItemsImportExcel() {
+        Excel::import(new SupplierItemsImport,request()->file('file'));
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // import & export to excel for supplier stores
+    public function supplierStoresExportExcel() {
+        return Excel::download(new SupplierStoresExport, 'supplier_stores.xlsx'); 
+    }
+   
+    public function supplierStoresImportExcel() {
+        Excel::import(new SupplierStoresImport,request()->file('file'));
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // import & export to excel for supplier buyers messages
+    public function supplierBuyersMessagesExportExcel() {
+        return Excel::download(new SupplierBuyersMessagesExport, 'supplier_buyers_messages.xlsx'); 
+    }
+   
+    public function supplierBuyersMessagesImportExcel() {
+        Excel::import(new SupplierBuyersMessagesImport,request()->file('file'));
         return redirect()->back();
     }
 

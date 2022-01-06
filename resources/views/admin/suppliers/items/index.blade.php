@@ -27,8 +27,8 @@
                                     <div class="card-header">
                                         <h5 class="card-title"> {{ $supplier->full_name }} Has <span id="items_counter"></span> item  </h5>
                                         <div class="row">
-                                            <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New
-                                            </button>
+                                            <a href="{{ route('suppliers.items.create',['id' => $supplier->id]) }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New
+                                            </a>
                                             &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal"
                                                 data-target="#delete_selected_confirm" class="btn btn-danger"> <i

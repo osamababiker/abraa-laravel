@@ -72,7 +72,7 @@ class StoresController extends Controller
         }
         
         if($store_name){
-            $store_obj->where('name', $store_name);
+            $store_obj->where('name', 'like',  '%'. $store_name .'%');
         }
 
         if($store_country){

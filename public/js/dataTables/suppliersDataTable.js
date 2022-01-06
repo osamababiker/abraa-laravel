@@ -90,7 +90,7 @@ $(document).ready(function () {
                         "<a class=\"dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"></a>\n"+
                         "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n"+
                             "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/items\">Items</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Users store</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/stores\">Users store</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Buying request suppliers</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Users files</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Buy request views</a>\n"+
