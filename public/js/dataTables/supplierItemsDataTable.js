@@ -173,7 +173,7 @@ $(".filter_data_table").on('change', function () {
 function archive_item(item_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
-        url: "/items/" + item_id + "/destroy",
+        url: "/suppliers/items/" + item_id + "/destroy",
         type: "get",
         success: function(response){
             location.reload();

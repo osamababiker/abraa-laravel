@@ -22,6 +22,10 @@ class RfqInvoice extends Model
         return $this->belongsTo(Unit::class,'unit_id');
     }
 
+    public function currency(){
+        return $this->belongsTo(Currency::class,'currency_id');
+    }
+
     public function buying_request()
     {
         return $this->belongsTo(Rfq::class, 'buying_request_id');

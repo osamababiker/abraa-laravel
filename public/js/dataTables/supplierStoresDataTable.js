@@ -193,7 +193,7 @@ $(".filter_data_table").on('change', function () {
 function archive_store(store_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
-        url: "/stores/" + store_id + "/destroy",
+        url: "/suppliers/stores/" + store_id + "/destroy",
         type: "get",
         success: function(response){
             location.reload();

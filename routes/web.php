@@ -208,10 +208,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('suppliers/buyersMessages/{id}/import/excel', [
         SuppliersController::class, 'supplierBuyersMessagesImportExcel'
     ])->name('suppliers.buyersMessages.import.excel');
-    // custom create route for supplier buyersMessages
-    Route::get('suppliers/buyersMessages/{id}/create', [ 
-        SuppliersController::class, 'createSupplierBuyersMessages'
-    ])->name('suppliers.buyersMessages.create');
     // custom store route for supplier buyersMessages
     Route::get('suppliers/buyersMessages/{id}/store', [ 
         SuppliersController::class, 'createSupplierBuyersMessages'
@@ -224,6 +220,167 @@ Route::group(['middleware' => 'auth'], function (){
         SuppliersController::class, 'supplierBuyersMessages'
     ])->name('suppliers.buyersMessages');
     /**********************************************/
+
+    /**********************************************/
+    // to get supplier Buying requests   
+    // supplier Buying requests actions route
+    Route::post('suppliers/{id}/buyingRequests/actions', 
+        [SuppliersController::class , 'supplierBuyingRequestsActions']
+    )->name('suppliers.buyingRequests.actions');    
+    // get supplier buyingRequests as json route 
+    Route::get('suppliers/{id}/buyingRequests/json', [
+        SuppliersController::class, 'getSuppliersBuyingRequestsAsJson'
+    ])->name('suppliers.buyingRequests.json');
+    // filter supplier buyingRequests  route 
+    Route::post('suppliers/{id}/buyingRequests/filter', [
+        SuppliersController::class, 'filterSuppliersBuyingRequests'
+    ])->name('suppliers.buyingRequests.filter'); 
+    // export supplier buyingRequests
+    Route::get('suppliers/buyingRequests/{id}/export/excel', [
+        SuppliersController::class, 'supplierBuyingRequestsExportExcel'
+    ])->name('suppliers.buyingRequests.export.excel');
+    // import supplier buyingRequests
+    Route::get('suppliers/buyingRequests/{id}/importExportView',  [
+        SuppliersController::class, 'supplierBuyingRequestsImportExportView'
+    ]);
+    Route::post('suppliers/buyingRequests/{id}/import/excel', [
+        SuppliersController::class, 'supplierBuyingRequestsImportExcel'
+    ])->name('suppliers.buyingRequests.import.excel');
+    // custom create route for supplier buyingRequests
+    Route::get('suppliers/buyingRequests/{id}/create', [ 
+        SuppliersController::class, 'createSupplierBuyingRequests'
+    ])->name('suppliers.buyingRequests.create');
+    // custom store route for supplier buyingRequests
+    Route::get('suppliers/buyingRequests/{id}/store', [ 
+        SuppliersController::class, 'createSupplierBuyingRequests'
+    ])->name('suppliers.buyingRequests.store');
+    // custom destroy route for supplier buyingRequests
+    Route::get('suppliers/buyingRequests/{id}/destroy', [ 
+        SuppliersController::class, 'destroySupplierBuyingRequests'
+    ]);
+    Route::get('suppliers/{id}/buyingRequests',  [
+        SuppliersController::class, 'supplierBuyingRequests'
+    ])->name('suppliers.buyingRequests');
+    /**********************************************/
+
+    /**********************************************/
+    // to get supplier files   
+    // supplier files actions route
+    Route::post('suppliers/{id}/files/actions', 
+        [SuppliersController::class , 'supplierFilesActions']
+    )->name('suppliers.files.actions');    
+    // get supplier files as json route 
+    Route::get('suppliers/{id}/files/json', [
+        SuppliersController::class, 'getSuppliersFilesAsJson'
+    ])->name('suppliers.files.json');
+    // filter supplier files  route 
+    Route::post('suppliers/{id}/files/filter', [
+        SuppliersController::class, 'filterSuppliersFiles'
+    ])->name('suppliers.files.filter'); 
+    // export supplier files
+    Route::get('suppliers/files/{id}/export/excel', [
+        SuppliersController::class, 'supplierFilesExportExcel'
+    ])->name('suppliers.files.export.excel');
+    // import supplier files
+    Route::get('suppliers/files/{id}/importExportView',  [
+        SuppliersController::class, 'supplierFilesImportExportView'
+    ]);
+    Route::post('suppliers/files/{id}/import/excel', [
+        SuppliersController::class, 'supplierFilesImportExcel'
+    ])->name('suppliers.files.import.excel');
+    // custom store route for supplier files
+    Route::get('suppliers/files/{id}/store', [ 
+        SuppliersController::class, 'createSupplierFiles'
+    ])->name('suppliers.files.store');
+    // custom destroy route for supplier files
+    Route::get('suppliers/files/{id}/destroy', [ 
+        SuppliersController::class, 'destroySupplierFiles'
+    ]);
+    Route::get('suppliers/{id}/files',  [
+        SuppliersController::class, 'supplierFiles'
+    ])->name('suppliers.files');
+    /**********************************************/
+
+    /**********************************************/
+    // to get supplier invoices   
+    // supplier invoices actions route
+    Route::post('suppliers/{id}/invoices/actions', 
+        [SuppliersController::class , 'supplierInvoicesActions']
+    )->name('suppliers.invoices.actions');    
+    // get supplier invoices as json route 
+    Route::get('suppliers/{id}/invoices/json', [
+        SuppliersController::class, 'getSuppliersInvoicesAsJson'
+    ])->name('suppliers.invoices.json');
+    // filter supplier invoices  route 
+    Route::post('suppliers/{id}/invoices/filter', [
+        SuppliersController::class, 'filterSuppliersInvoices'
+    ])->name('suppliers.invoices.filter'); 
+    // export supplier invoices
+    Route::get('suppliers/invoices/{id}/export/excel', [
+        SuppliersController::class, 'supplierInvoicesExportExcel'
+    ])->name('suppliers.invoices.export.excel');
+    // import supplier invoices
+    Route::get('suppliers/invoices/{id}/importExportView',  [
+        SuppliersController::class, 'supplierInvoicesImportExportView'
+    ]);
+    Route::post('suppliers/invoices/{id}/import/excel', [
+        SuppliersController::class, 'supplierInvoicesImportExcel'
+    ])->name('suppliers.invoices.import.excel');
+    // custom create route for supplier invoices
+    Route::get('suppliers/invoices/{id}/create', [ 
+        SuppliersController::class, 'createSupplierInvoices'
+    ])->name('suppliers.invoices.create');
+    // custom store route for supplier invoices
+    Route::get('suppliers/invoices/{id}/store', [ 
+        SuppliersController::class, 'createSupplierInvoices'
+    ])->name('suppliers.invoices.store');
+    // custom destroy route for supplier invoices
+    Route::get('suppliers/invoices/{id}/destroy', [ 
+        SuppliersController::class, 'destroySupplierInvoices'
+    ]);
+    Route::get('suppliers/{id}/invoices',  [
+        SuppliersController::class, 'supplierInvoices'
+    ])->name('suppliers.invoices');
+    /**********************************************/
+
+    /**********************************************/
+    // to get supplier verifications   
+    // supplier verifications actions route
+    Route::post('suppliers/{id}/verifications/actions', 
+        [SuppliersController::class , 'supplierVerificationsActions']
+    )->name('suppliers.verifications.actions');    
+    // get supplier verifications as json route 
+    Route::get('suppliers/{id}/verifications/json', [
+        SuppliersController::class, 'getSuppliersVerificationsAsJson'
+    ])->name('suppliers.verifications.json');
+    // filter supplier verifications  route 
+    Route::post('suppliers/{id}/verifications/filter', [
+        SuppliersController::class, 'filterSuppliersVerifications'
+    ])->name('suppliers.verifications.filter'); 
+    // export supplier verifications
+    Route::get('suppliers/verifications/{id}/export/excel', [
+        SuppliersController::class, 'suppliersVerificationsExportExcel'
+    ])->name('suppliers.verifications.export.excel');
+    // import supplier verifications
+    Route::get('suppliers/verifications/{id}/importExportView',  [
+        SuppliersController::class, 'suppliersVerificationsImportExportView'
+    ]);
+    Route::post('suppliers/verifications/{id}/import/excel', [
+        SuppliersController::class, 'suppliersVerificationsImportExcel'
+    ])->name('suppliers.verifications.import.excel');
+    // custom store route for supplier verifications
+    Route::get('suppliers/verifications/{id}/store', [ 
+        SuppliersController::class, 'createSuppliersVerifications'
+    ])->name('suppliers.verifications.store');
+    // custom destroy route for supplier verifications
+    Route::get('suppliers/verifications/{id}/destroy', [ 
+        SuppliersController::class, 'destroySuppliersVerifications'
+    ]);
+    Route::get('suppliers/{id}/verifications',  [
+        SuppliersController::class, 'suppliersVerifications'
+    ])->name('suppliers.verifications');
+    /**********************************************/
+
     // resource route
     Route::resource('suppliers', SuppliersController::class, ['except' => ['destroy','update']]);
 

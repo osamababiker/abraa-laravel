@@ -91,16 +91,17 @@ $(document).ready(function () {
                         "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n"+
                             "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/items\">Items</a>\n"+
                             "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/stores\">Users store</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Buying request suppliers</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Users files</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/buyersMessages\">Buyers Messages</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/buyingRequests\">Buying request</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/files\">User files</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Buy request views</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Buying request invoice</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/invoices\">Buying request invoice</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Marketing store activities </a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Call center activities</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Rfq pending suppliers</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Store marketing docs</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Rfq supplier log</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Supplier verification</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/verifications\">Supplier verification</a>\n"+
                         "</div>\n"+
                     "</a>\n"+
                 "</td>\n"+
@@ -219,17 +220,18 @@ $(".filter_data_table").on('change', function () {
                         "<a class=\"dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"></a>\n"+
                         "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n"+
                             "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/items\">Items</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Users store</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Buying request suppliers</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Users files</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/stores\">Users store</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/buyersMessages\">Buyers Messages</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/buyingRequests\">Buying request</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/files\">User files</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Buy request views</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Buying request invoice</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/invoices\">Buying request invoice</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Marketing store activities </a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Call center activities</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Rfq pending suppliers</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Store marketing docs</a>\n"+
                             "<a class=\"dropdown-item\" href=\"#\">Rfq supplier log</a>\n"+
-                            "<a class=\"dropdown-item\" href=\"#\">Supplier verification</a>\n"+
+                            "<a class=\"dropdown-item\" target=\"_blank\" href=\"suppliers/"+ supplier.id +"/verifications\">Supplier verification</a>\n"+
                         "</div>\n"+
                     "</a>\n"+
                 "</td>\n"+

@@ -129,6 +129,7 @@
 
             <!-- scripts is here -->
             <?php echo $__env->make('admin.layouts.scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="<?php echo e(asset('js/dataTables/itemsDataTable.js')); ?>"></script>
             <!-- footer is here -->
             <?php echo $__env->make('admin.layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\abraa-dash\resources\views/admin/items/index.blade.php ENDPATH**/ ?>

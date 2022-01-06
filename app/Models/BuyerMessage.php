@@ -10,4 +10,12 @@ class BuyerMessage extends Model
     use HasFactory;
     protected $table = "buyer_messages";
     protected $guarded = [];
+
+    public function supplier(){
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function buyer(){
+        return $this->belongsTo(Buyer::class, 'buyer_id');
+    }
 }

@@ -8,6 +8,10 @@ use App\Models\Item;
 use App\Models\Country;
 use App\Models\Store;
 use App\Models\BuyerMessage;
+use App\Models\SupplierBuyingRequest;
+use App\Models\SupplierFile;
+use App\Models\RfqInvoice;
+use App\Models\SupplierVerification;
 use App\Exports\SuppliersExport;
 use App\Imports\SuppliersImport;
 use App\Exports\SupplierItemsExport;
@@ -16,6 +20,14 @@ use App\Exports\SupplierStoresExport;
 use App\Imports\SupplierStoresImport;
 use App\Exports\SupplierBuyersMessagesExport;
 use App\Imports\SupplierBuyersMessagesImport;
+use App\Exports\SupplierBuyingRequestsExport;
+use App\Imports\SupplierBuyingRequestsImport;
+use App\Imports\SupplierFilesImport;
+use App\Exports\SupplierFilesExport;
+use App\Imports\SupplierInvoicesImport;
+use App\Exports\SupplierInvoicesExport;
+use App\Imports\SupplierVerificationsImport;
+use App\Exports\SupplierVerificationsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
 
@@ -252,15 +264,15 @@ class SuppliersController extends Controller
     public function supplierBuyersMessages($supplier_id){
 
         $supplier = Supplier::find($supplier_id);
-        $countries = Country::all();
-        return view('admin.suppliers.buyersMessages.index', compact(['supplier','countries']));
+        return view('admin.suppliers.buyersMessages.index', compact(['supplier']));
     }
 
     public function getSuppliersBuyersMessagesAsJson(Request $request, $supplier_id){
 
         $rows_numbers = $request->rows_numbers;
 
-        $buyers_messages_obj = BuyerMessage::where('sub_of', $supplier_id)->where('rejected',0);
+        $buyers_messages_obj = BuyerMessage::where('supplier_id', $supplier_id)
+                                ->with('supplier')->with('buyer');
 
         $buyers_messages_count = $buyers_messages_obj->count();
         $buyers_messages = $buyers_messages_obj->limit($rows_numbers)
@@ -270,13 +282,14 @@ class SuppliersController extends Controller
             'buyers_messages' => $buyers_messages,
             'buyers_messages_count' => $buyers_messages_count
         ]);
-    }
+    } 
 
     public function filterSuppliersBuyersMessages(Request $request, $supplier_id){
         
         $rows_numbers = $request->rows_numbers; 
 
-        $buyers_messages_obj = Store::where('sub_of', $supplier_id)->where('rejected',0);
+        $buyers_messages_obj = BuyerMessage::where('supplier_id', $supplier_id)
+                                ->with('supplier')->with('buyer');
             
         $buyers_messages_count = $buyers_messages_obj->count();
         $buyers_messages = $buyers_messages_obj->limit($rows_numbers)
@@ -290,6 +303,233 @@ class SuppliersController extends Controller
     }
 
 
+    /**********************************************/
+    // to get supplier buying Requests
+    public function supplierbuyingRequests($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        return view('admin.suppliers.buyingRequests.index', compact(['supplier']));
+    }
+
+    public function getSuppliersbuyingRequestsAsJson(Request $request, $supplier_id){
+
+        $rows_numbers = $request->rows_numbers;
+
+        $buying_requests_obj = SupplierBuyingRequest::where('supplier_id', $supplier_id)
+                                ->with('supplier')->with('buying_request');
+
+        $buying_requests_count = $buying_requests_obj->count();
+        $buying_requests = $buying_requests_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+        
+        return response()->json([
+            'buying_requests' => $buying_requests,
+            'buying_requests_count' => $buying_requests_count
+        ]);
+    } 
+
+    public function filterSuppliersbuyingRequests(Request $request, $supplier_id){
+        
+        $rows_numbers = $request->rows_numbers; 
+
+        $buying_requests_obj = SupplierBuyingRequest::where('supplier_id', $supplier_id)
+                                ->with('supplier')->with('buying_request');
+            
+        $buying_requests_count = $buying_requests_obj->count();
+        $buying_requests = $buying_requests_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+
+   
+        return response()->json([
+            'buying_requests' => $buying_requests,
+            'buying_requests_count' => $buying_requests_count
+        ]);
+    }
+
+
+    /**********************************************/
+    // to get supplier files
+    public function supplierFiles($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        return view('admin.suppliers.files.index', compact(['supplier']));
+    }
+
+    public function getSuppliersFilesAsJson(Request $request, $supplier_id){
+
+        $rows_numbers = $request->rows_numbers;
+
+        $files_obj = SupplierFile::where('sub_of', $supplier_id)
+                        ->with('supplier');
+
+        $files_count = $files_obj->count();
+        $files = $files_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+        
+        return response()->json([
+            'files' => $files,
+            'files_count' => $files_count
+        ]);
+    } 
+
+    public function filterSuppliersFiles(Request $request, $supplier_id){
+        
+        $rows_numbers = $request->rows_numbers; 
+
+        $files_obj = SupplierFile::where('sub_of', $supplier_id)
+                        ->with('supplier');
+            
+        $files_count = $files_obj->count();
+        $files = $files_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+
+   
+        return response()->json([
+            'files' => $files,
+            'files_count' => $files_count
+        ]);
+    }
+    
+
+    /**********************************************/
+    // to get supplier invoices
+    public function supplierInvoices($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        $countries = Country::all();
+        return view('admin.suppliers.invoices.index', compact(['supplier','countries']));
+    }
+
+    public function getSuppliersInvoicesAsJson(Request $request, $supplier_id){
+
+        $rows_numbers = $request->rows_numbers;
+        $buying_request_status = $request->buying_request_status;
+
+        $buying_request_obj = RfqInvoice::where('supplier_id', $supplier_id);
+
+     
+        if($buying_request_status == 'approvel'){    
+            $buying_request_obj = $buying_request_obj->where('status',2);
+        }
+        elseif($buying_request_status == 'completed'){
+            $buying_request_obj = $buying_request_obj->where('status',3);
+        }
+        elseif($buying_request_status == 'canceled'){
+            $buying_request_obj = $buying_request_obj->where('status',5);
+        }
+        elseif($buying_request_status == 'pending'){
+            $buying_request_obj = $buying_request_obj->where('status',1);
+        }
+      
+
+        $buying_requests_count = $buying_request_obj->count();
+        $buying_requests = $buying_request_obj->limit($rows_numbers)
+            ->with('buying_request')->with('supplier')->with('unit')
+            ->with('currency')->orderBy('id','desc')->get();
+
+        
+        return response()->json([
+            'buying_requests' => $buying_requests,
+            'buying_requests_count' => $buying_requests_count
+        ]); 
+    }
+
+    public function filterSuppliersInvoices(Request $request, $supplier_id){
+
+        
+        $product_name = $request->product_name;
+        $shipping_country = $request->shipping_country;
+        $rows_numbers = $request->rows_numbers; 
+        $request_type = $request->request_type;
+        $buying_request_status = $request->buying_request_status;
+        
+        $buying_request_obj =  RfqInvoice::where('supplier_id', $supplier_id)
+                        ->leftJoin('buying_requests', 'buying_requests.id', 'buying_request_invoices.buying_request_id');
+
+        if($buying_request_status == 'approvel'){    
+            $buying_request_obj = $buying_request_obj->where('buying_requests.status',2);
+        }
+        elseif($buying_request_status == 'completed'){
+            $buying_request_obj = $buying_request_obj->where('buying_requests.status',3);
+        }
+        elseif($buying_request_status == 'canceled'){
+            $buying_request_obj = $buying_request_obj->where('buying_requests.status',5);
+        }
+        elseif($buying_request_status == 'pending'){
+            $buying_request_obj = $buying_request_obj
+                ->where('buying_request_invoices.approved', '<>', 1);
+        }
+        
+        if($product_name){
+            $buying_request_obj->where('buying_requests.product_name','like', '%' . $product_name . '%');
+        }
+
+        if($request_type == 'global'){
+            $buying_request_obj->where('buying_requests.item_id', 0);
+        }
+
+        if($shipping_country){
+            $buying_request_obj->whereIn('buying_requests.country_code', $shipping_country);
+        }
+
+    
+            
+        $buying_requests_count = $buying_request_obj->count();
+        $buying_requests = $buying_request_obj->limit($rows_numbers)
+            ->with('buying_request')->with('supplier')->with('currency')
+            ->with('unit')->orderBy('buying_request_invoices.id','desc')->get();
+
+   
+        return response()->json([
+            'buying_requests' => $buying_requests,
+            'buying_requests_count' => $buying_requests_count
+        ]);
+    }
+
+
+    /**********************************************/
+    // to get supplier verifications
+    public function suppliersVerifications($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        return view('admin.suppliers.verifications.index', compact(['supplier']));
+    }
+
+    public function getSuppliersVerificationsAsJson(Request $request, $supplier_id){
+
+        $rows_numbers = $request->rows_numbers;
+
+        $verifications_obj = SupplierVerification::where('user_id', $supplier_id)
+                        ->with('supplier');
+
+        $verifications_count = $verifications_obj->count();
+        $verifications = $verifications_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+        
+        return response()->json([
+            'verifications' => $verifications,
+            'verifications_count' => $verifications_count
+        ]);
+    } 
+
+    public function filterSuppliersVerifications(Request $request, $supplier_id){
+        
+        $rows_numbers = $request->rows_numbers; 
+
+        $verifications_obj = SupplierVerification::where('user_id', $supplier_id)
+                        ->with('supplier');
+            
+        $verifications_count = $verifications_obj->count();
+        $verifications = $verifications_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
+
+   
+        return response()->json([
+            'verifications' => $verifications,
+            'verifications_count' => $verifications_count
+        ]);
+    }
+
     public function create(){
         return view('admin.suppliers.create');
     }
@@ -300,6 +540,22 @@ class SuppliersController extends Controller
 
         $supplier = Supplier::find($supplier_id);
         return view('admin.suppliers.items.create', compact(['supplier']));
+    }
+
+    // **********************************************/
+    // supplier create stores 
+    public function createSupplierStores($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        return view('admin.suppliers.stores.create', compact(['supplier']));
+    }
+
+    // **********************************************/
+    // supplier create buying Requests 
+    public function createSupplierbuyingRequests($supplier_id){
+
+        $supplier = Supplier::find($supplier_id);
+        return view('admin.suppliers.buyingRequests.create', compact(['supplier']));
     }
 
     public function store(Request $request)
@@ -373,6 +629,125 @@ class SuppliersController extends Controller
         }
     }
 
+    // **********************************************/
+    // supplier stores action
+    public function supplierStoresActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $store_id = $request->store_id;
+            if($request->all_colums){
+                Store::delete();
+            }
+            elseif($store_id){
+                foreach($store_id as $id){
+                    Store::where('id',$id)->delete();
+                }
+            }
+            $message = 'stores has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
+    // **********************************************/
+    // supplier buers messages action
+    public function supplierbuyersMessagesActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $message_id = $request->message_id;
+            if($request->all_colums){
+                BuyerMessage::delete();
+            }
+            elseif($message_id){
+                foreach($message_id as $id){
+                    BuyerMessage::where('id',$id)->delete();
+                }
+            }
+            $message = 'messages  has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
+    // **********************************************/
+    // supplier buying requests action
+    public function supplierbuyingRequestsActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $request_id = $request->request_id;
+            if($request->all_colums){
+                SupplierBuyingRequest::delete();
+            }
+            elseif($request_id){
+                foreach($request_id as $id){
+                    SupplierBuyingRequest::where('id',$id)->delete();
+                }
+            }
+            $message = 'request has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
+    // **********************************************/
+    // supplier files action
+    public function supplierFilesActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $file_id = $request->file_id;
+            if($request->all_colums){
+                SupplierFiles::delete();
+            }
+            elseif($file_id){
+                foreach($file_id as $id){
+                    SupplierFiles::where('id',$id)->delete();
+                }
+            }
+            $message = 'file has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
+    // **********************************************/
+    // supplier invoices action
+    public function supplierInvoicesActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $invoice_id = $request->invoice_id;
+            if($request->all_colums){
+                RfqInvoice::delete();
+            }
+            elseif($invoice_id){
+                foreach($invoice_id as $id){
+                    RfqInvoice::where('id',$id)->delete();
+                }
+            }
+            $message = 'invoices has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
+    // **********************************************/
+    // supplier verifications action
+    public function supplierVerificationsActions(Request $request)
+    {
+        if($request->has('delete_selected_btn')){
+            $verification_id = $request->verification_id;
+            if($request->all_colums){
+                SupplierVerification::delete();
+            }
+            elseif($verification_id){
+                foreach($verification_id as $id){
+                    SupplierVerification::where('id',$id)->delete();
+                }
+            }
+            $message = 'verifications has been archived successfully';
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
  
     public function show($id)
     {
@@ -459,6 +834,41 @@ class SuppliersController extends Controller
         return redirect()->back();
     }
 
+    // **********************************************/
+    // destroy supplier buying requests
+    public function destroySupplierBuyingRequests($id){
+        SupplierBuyingRequest::where('id',$id)->delete();
+        $message = 'request hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // destroy supplier files
+    public function destroySupplierFiles($id){
+        SupplierFile::where('id',$id)->delete();
+        $message = 'file hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // destroy supplier invoices
+    public function destroySupplierInvoices($id){
+        RfqInvoice::where('id',$id)->delete();
+        $message = 'invoice hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // destroy supplier verifications
+    public function destroySupplierVerifications($id){
+        SupplierVerification::where('id',$id)->delete();
+        $message = 'verification hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
 
     // import & export to excel
     public function exportExcel() {
@@ -500,6 +910,51 @@ class SuppliersController extends Controller
    
     public function supplierBuyersMessagesImportExcel() {
         Excel::import(new SupplierBuyersMessagesImport,request()->file('file'));
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // import & export to excel for supplier buying requests
+    public function supplierBuyingRequestsExportExcel() {
+        return Excel::download(new SupplierBuyingRequestsExport, 'supplier_buying_requests.xlsx'); 
+    }
+   
+    public function supplierBuyingRequestsImportExcel() {
+        Excel::import(new SupplierBuyingRequestsImport,request()->file('file'));
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // import & export to excel for supplier files
+    public function supplierFilesExportExcel() {
+        return Excel::download(new SupplierFilesExport, 'supplier_files.xlsx'); 
+    }
+   
+    public function supplierFilesImportExcel() {
+        Excel::import(new SupplierFilesImport,request()->file('file'));
+        return redirect()->back();
+    }
+
+    // **********************************************/
+    // import & export to excel for supplier files
+    public function supplierInvoicesExportExcel() {
+        return Excel::download(new SupplierInvoicesExport, 'supplier_invoices.xlsx'); 
+    }
+   
+    public function supplierInvoicesImportExcel() {
+        Excel::import(new SupplierInvoicesImport,request()->file('file'));
+        return redirect()->back();
+    }
+
+
+    // **********************************************/
+    // import & export to excel for supplier verifications
+    public function supplierVerificationsExportExcel() {
+        return Excel::download(new SupplierVerificationsExport, 'supplier_verifications.xlsx'); 
+    }
+   
+    public function supplierVerificationsImportExcel() {
+        Excel::import(new SupplierVerificationsImport,request()->file('file'));
         return redirect()->back();
     }
 

@@ -97,7 +97,7 @@ $(document).ready(function () {
                             "</div>\n"+
                         "</div>\n"+
                     "</div>\n"+
-                "</div>\n"+
+                "</div>\n"+ 
 
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +

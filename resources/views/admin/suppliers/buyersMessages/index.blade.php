@@ -19,17 +19,14 @@
 
                     <h1 class="h3 mb-3">{{ $supplier->full_name }} buyers messagess Table</h1>
 
-                    <form action="{{ route('suppliers.buyersMessagess.actions',['id' => $supplier->id]) }}" id="supplier_buyersMessagess_actions_form" method="post">
+                    <form action="{{ route('suppliers.buyersMessages.actions',['id' => $supplier->id]) }}" id="supplier_buyersMessages_actions_form" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title"> {{ $supplier->full_name }} Has <span id="buyersMessagess_counter"></span> buyersMessages  </h5>
+                                        <h5 class="card-title"> {{ $supplier->full_name }} Has <span id="buyersMessages_counter"></span> buyersMessages  </h5>
                                         <div class="row">
-                                            <a href="{{ route('suppliers.buyersMessagess.create',['id' => $supplier->id]) }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New
-                                            </a>
-                                            &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal"
                                                 data-target="#delete_selected_confirm" class="btn btn-danger"> <i
                                                     class="fa fa-trash"></i> Delete Selected </button>
@@ -41,7 +38,7 @@
                                                     Tools
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-supplier_buyersMessages" href="{{ route('suppliers.buyersMessagess.export.excel',['id' => $supplier->id]) }}"
+                                                    <a class="dropdown-supplier_buyersMessages" href="{{ route('suppliers.buyersMessages.export.excel',['id' => $supplier->id]) }}"
                                                         target="_blank">Export to excel</a>
                                                 </div>
                                             </div>
@@ -50,11 +47,6 @@
                                     <div class="card-body">
 
                                         <div class="row mb-2 m-1">
-                                            <div class="col-md-2 form-group">
-                                                <label for="buyersMessages_name">buyersMessages Name</label>
-                                                <input type="text" name="buyersMessages_name" id="buyersMessages_name"
-                                                    class="filter_data_table form-control" aria-label="Search">
-                                            </div>
                                          
                                             <div class="col-md-2 form-group">
                                                 <label for="rows_numbers">Numbers of rows</label>
@@ -74,24 +66,19 @@
                                                     <tr>
                                                         <th> <input type="checkbox" name="all_colums"
                                                                 class="select_all_colums"> </th>
-                                                        <th>Id</th>
-                                                        <th>Registered Email</th>
-                                                        <th>buyersMessages Name</th>
-                                                        <th>Sub Domain</th>
-                                                        <th>Visits</th>
-                                                        <th>buyersMessages Verified</th>
-                                                        <th>Contact Count</th>
-                                                        <th>Date Added </th>
-                                                        <th>Reminders Sent</th>
+                                                        <th>Buyer Id</th>
+                                                        <th>Buyer Name</th>
+                                                        <th>Supplier Name</th>
+                                                        <th>Message</th>
                                                         <th> Actions </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="buyersMessagess_table_body">
+                                                <tbody id="buyersMessages_table_body">
 
                                                 </tbody>
                                             </table>
                                         </div>
-                                        @include('admin.suppliers.buyersMessagess.components.delete_selected')
+                                        @include('admin.suppliers.buyersMessages.components.delete_selected')
                                     </div>
                                 </div>
                             </div>
@@ -105,6 +92,6 @@
             @include('admin.layouts.scripts')
             <script type="text/javascript">var supplier_id = "<?= $supplier->id ?>";</script>
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
-            <script src="{{ asset('js/dataTables/supplierbuyersMessagessDataTable.js') }}"></script>
+            <script src="{{ asset('js/dataTables/supplierBuyersMessagesDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')
