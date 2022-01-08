@@ -77,11 +77,11 @@
                 </a>
                 <ul id="stores" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('stores.index')); ?>">All stores</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-settings.html">Active Stores</a>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('stores.active.index')); ?>">Active Stores</a>
                     </li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-clients.html">Waiting Stores</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-invoice.html">Bulk Stores</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Rejected Stores</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('stores.pending.index')); ?>">Waiting Stores</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('stores.bulk.index')); ?>">Bulk Stores</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('stores.rejected.index')); ?>">Rejected Stores</a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

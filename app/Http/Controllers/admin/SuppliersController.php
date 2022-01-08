@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 use App\Models\Supplier;
 use App\Models\Item;
 use App\Models\Country;
@@ -30,11 +31,12 @@ use App\Imports\SupplierVerificationsImport;
 use App\Exports\SupplierVerificationsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
+use App\Http\Traits\RandomStringTrait;
 
 class SuppliersController extends Controller
 {
 
-    use MailerTrait; 
+    use MailerTrait, RandomStringTrait; 
  
     public function index(){
         $countries = Country::all();
@@ -531,7 +533,8 @@ class SuppliersController extends Controller
     }
 
     public function create(){
-        return view('admin.suppliers.create');
+        $countries = Country::all();
+        return view('admin.suppliers.create', compact(['countries']));
     }
 
     // **********************************************/
@@ -557,19 +560,98 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($supplier_id);
         return view('admin.suppliers.buyingRequests.create', compact(['supplier']));
     }
-
+    
     public function store(Request $request)
     {
         $this->validate($request, [
             'business_name' => 'required',
-            'business_keywords' => 'required',
+            'country' => 'required',
+            'interested_keywords' => 'required',
             'primary_name' => 'required',
-            'primary_m_phone' => 'required',
-            'position' => 'required',
+            'email' => 'required|unique:users',
+            'phone' => 'required|unique:users',
+            'primary_position' => 'required',
             'primary_whatsapp' => 'required',
+            'primary_line_number' => 'required'
         ]);
 
+        $salt = $this->getRandomString(3);
+        $register_on = date('Y-m-d H:i:s');
+        $verified = 1;
+        $verification_token = md5(time() . rand(10000, 99999));
+        $trash = 0;
+        $user_source = 22;
+        $added_by = Auth::user()->id;
+        $user_type = 0;
+        $member_type = 1;
+        $is_organic = 0;
+        $register_level = 3;
+        $is_login = 0;
+
+        $interested_keywords = '';
+        foreach($request->interested_keywords as $keywords){
+            $interested_keywords .= $keywords . ',' ;
+        }
+
+        if($request->secondary_position){
+            $secondary_position = $request->secondary_position;
+        }else $secondary_position = 0;
+
         $supplier = new Supplier();
+
+        $supplier->salt = $salt;
+        $supplier->register_on = $register_on;
+        $supplier->verified = $verified;
+        $supplier->verification_token = $verification_token;
+        $supplier->trash = $trash;
+        $supplier->user_source = $user_source;
+        $supplier->added_by = $added_by;
+        $supplier->user_type = $user_type;
+        $supplier->member_type = $member_type;
+        $supplier->is_organic = $is_organic;
+        $supplier->register_level = $register_level;
+        $supplier->is_login = $is_login;
+
+        $supplier->business_name = $request->business_name;
+        $supplier->country = $request->country;
+        $supplier->interested_keywords = $interested_keywords;
+        $supplier->full_name = $request->primary_name;
+        $supplier->email = $request->email;
+        $supplier->phone = $request->phone;
+        $supplier->primary_position = $request->primary_position;
+        $supplier->primary_whatsapp = $request->primary_whatsapp;
+        $supplier->primary_line_number = $request->primary_line_number;
+
+        $supplier->secondary_contact_person = $request->secondary_name;
+        $supplier->secondary_email = $request->secondary_email;
+        $supplier->secondary_phone = $request->secondary_m_phone;
+        $supplier->secondary_position = $secondary_position;
+        $supplier->secondary_whatsapp = $request->secondary_whatsapp;
+        $supplier->secondary_line_number = $request->secondary_line_number;
+        $supplier->save();
+
+        // to create new store for this supplier
+        $store = new Store();
+        $store->sub_of = $supplier->id;
+        $store->save();
+
+        // to send email to supplier
+        $subject = 'Abraa registration verification';
+        $message='
+        <p>Dear '.$supplier->full_name.'</p>
+        <p>We have received your request to join Abraa.com,</p>
+        <p>Kindly click the below link in order to verify your email and create your password.</p>
+        <a target="_blank" href="' . config('global.public_url') . 'register/verify-link/' . $verification_token . '" style="float:right;padding: 7px 14px;border-radius:6px;background: #46d4e6;color:#FFFFFF;font-size:11px;text-decoration:none;font-family:\'Roboto\', Helvetica, Arial, sans-serif;">www.abraa.com/verification_link</a>
+        ';
+        $email_templete = $this->getEmailTemplete($message);
+        $this->sendEmail($email_templete, $request->email, $subject, 'membership@abraa.com');
+        
+        $message = 'Supplier hass been Added successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+        
     }   
 
     // to handel some sort of actions , like delete multiple ,

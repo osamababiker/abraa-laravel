@@ -443,6 +443,107 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('stores/{id}/destroy', [
         StoresController::class, 'destroy'
     ]);
+
+    // ****************************************************//
+    // active activeStores routs
+    // get activeStores route 
+     Route::get('stores/active', [
+        StoresController::class, 'getActiveStores'
+    ])->name('stores.active.index');
+    // get activeStores as json route 
+    Route::get('activeStores/json', [
+        StoresController::class, 'getActiveStoresAsJson'
+    ])->name('activeStores.json');
+        // filter activeStores  route 
+    Route::post('activeStores/filter', [
+        StoresController::class, 'filterActiveStores'
+    ])->name('activeStores.filter'); 
+    // to import & export excel 
+    Route::get('activeStores/export/excel', [
+        StoresController::class, 'activeStoresexportExcel'
+    ])->name('activeStores.export.excel');
+    Route::post('activeStores/import/excel', [
+        StoresController::class, 'activeStoresimportExcel'
+    ])->name('activeStores.import.excel');
+    Route::get('activeStores/importExportView',  [
+        StoresController::class, 'activeStoresimportExportView'
+    ]);
+    
+    // ****************************************************//
+    // pending activeStores routs
+    // get pendingStores route 
+    Route::get('stores/pending', [
+        StoresController::class, 'getPendingStores'
+    ])->name('stores.pending.index');
+    // get pendingStores as json route 
+    Route::get('pendingStores/json', [
+        StoresController::class, 'getPendingStoresAsJson'
+    ])->name('pendingStores.json');
+        // filter pendingStores  route 
+    Route::post('pendingStores/filter', [
+        StoresController::class, 'filterPendingStores'
+    ])->name('pendingStores.filter'); 
+    // to import & export excel 
+    Route::get('pendingStores/export/excel', [
+        StoresController::class, 'pendingStoresexportExcel'
+    ])->name('pendingStores.export.excel');
+    Route::post('pendingStores/import/excel', [
+        StoresController::class, 'pendingStoresimportExcel'
+    ])->name('pendingStores.import.excel');
+    Route::get('pendingStores/importExportView',  [
+        StoresController::class, 'pendingStoresimportExportView'
+    ]);
+
+    // ****************************************************//
+    // rejected Stores routs
+    // get rejectedStores route 
+    Route::get('stores/rejected', [
+        StoresController::class, 'getRejectedStores'
+    ])->name('stores.rejected.index');
+    // get pendingStores as json route 
+    Route::get('rejectedStores/json', [
+        StoresController::class, 'getRejectedStoresAsJson'
+    ])->name('rejectedStores.json');
+        // filter rejectedStores  route 
+    Route::post('rejectedStores/filter', [
+        StoresController::class, 'filterRejectedStores'
+    ])->name('rejectedStores.filter'); 
+    // to import & export excel 
+    Route::get('rejectedStores/export/excel', [
+        StoresController::class, 'RejectedStoresexportExcel'
+    ])->name('rejectedStores.export.excel');
+    Route::post('rejectedStores/import/excel', [
+        StoresController::class, 'RejectedStoresimportExcel'
+    ])->name('rejectedStores.import.excel');
+    Route::get('rejectedStores/importExportView',  [
+        StoresController::class, 'RejectedStoresimportExportView'
+    ]);
+
+    // ****************************************************//
+    // bulk Stores routs
+    // get bulk Stores route 
+    Route::get('stores/bulk', [
+        StoresController::class, 'getBulkStores'
+    ])->name('stores.bulk.index');
+    // get pendingStores as json route 
+    Route::get('bulkStores/json', [
+        StoresController::class, 'getBulkStoresAsJson'
+    ])->name('bulkStores.json');
+        // filter bulkStores  route 
+    Route::post('bulkStores/filter', [
+        StoresController::class, 'filterBulkStores'
+    ])->name('bulkStores.filter'); 
+    // to import & export excel 
+    Route::get('bulkStores/export/excel', [
+        StoresController::class, 'BulkStoresexportExcel'
+    ])->name('bulkStores.export.excel');
+    Route::post('bulkStores/import/excel', [
+        StoresController::class, 'BulkStoresimportExcel'
+    ])->name('bulkStores.import.excel');
+    Route::get('bulkStores/importExportView',  [
+        StoresController::class, 'BulkStoresimportExportView'
+    ]);
+
     // resource route
     Route::resource('stores', StoresController::class, ['except' => ['destroy']]);
 

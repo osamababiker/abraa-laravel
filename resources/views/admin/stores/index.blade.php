@@ -61,11 +61,11 @@
                                             <label for="stores_status">Filter by Status</label>
                                             <select name="stores_status" id="stores_status"
                                                 class="filter_data_table form-control select2">
-                                                <option value=""> All Stores </option>
+                                                <option value=""> Select Status </option>
                                                 <option value="active"> Active Stores </option>
                                                 <option value="pending"> Pending Stores </option>
                                                 <option value="rejected"> Rejected Stores </option>
-                                                <option value="home"> Bulk Stores </option>
+                                                <option value="bulk"> Bulk Stores </option>
                                             </select>
                                         </div>
                                         <div class="col-md-2 form-group">
@@ -107,7 +107,7 @@
                                                     <th>Registered Email</th>
                                                     <th>Store Name</th>
                                                     <th>Sub Domain</th>
-                                                    <th>Visits</th>
+                                                    <th>visiters</th>
                                                     <th>Store Verified</th>
                                                     <th>Contact Count</th>
                                                     <th>Date Added </th>
@@ -132,6 +132,7 @@
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
+            <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
             <script src="{{ asset('js/dataTables/storesDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

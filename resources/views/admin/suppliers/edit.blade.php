@@ -56,7 +56,7 @@
                                                 <div class="form-group col-md-6">
                                                     <label for="counter">Country</label>
                                                     <select name="country"  id="country" class="form-control select2">
-                                                        <option value="">Select country</option>
+                                                        <option value="{{ $supplier->country }}">Select country</option>
                                                         @foreach($countries as $country)
                                                             <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
                                                         @endforeach
@@ -129,7 +129,7 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="secondary_m_phone">Primary Mobile Number</label>
+                                                    <label for="secondary_m_phone">Secondary Mobile Number</label>
                                                     <input type="number" value="{{ $supplier->secondary_phone }}" name="secondary_m_phone" class="form-control" id="secondary_m_phone">
                                                 </div>
                                                 <div class="form-group col-md-6">

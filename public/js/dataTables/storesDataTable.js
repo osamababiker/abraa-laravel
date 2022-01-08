@@ -5,6 +5,7 @@ $(document).ready(function () {
     var stores_html = '';
     var user_email = '';
     var store_verified = '';
+    var is_reminder_sent = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -12,7 +13,7 @@ $(document).ready(function () {
 
     $.ajax({
         url: "/stores/json",
-        type: "get",
+        type: "get", 
         data: {
             "rows_numbers": rows_numbers,
             "stores_status": stores_status
@@ -25,6 +26,9 @@ $(document).ready(function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    if(store.user.is_reminder_sent == 1){
+                        is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
+                    }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
                 }
 
                 if(store.store_verified == 1){
@@ -60,12 +64,12 @@ $(document).ready(function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a href=\"https://www.abraa.com/store/"+ store.id +"\"> https://www.abraa.com/store/"+ store.id +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
-                "<td>  ggg</td>\n"+
+                "<td>"+ is_reminder_sent +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
@@ -97,6 +101,7 @@ $(".filter_data_table").on('change', function () {
 
     var stores_html = '';
     var store_verified = '';
+    var is_reminder_sent = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -124,6 +129,9 @@ $(".filter_data_table").on('change', function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    if(store.user.is_reminder_sent == 1){
+                        is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
+                    }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
                 }
 
                 if(store.store_verified == 1){
@@ -159,12 +167,12 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a href=\"https://www.abraa.com/store/"+ store.id +"\"> https://www.abraa.com/store/"+ store.id +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
-                "<td>  </td>\n"+
+                "<td>"+ is_reminder_sent +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
