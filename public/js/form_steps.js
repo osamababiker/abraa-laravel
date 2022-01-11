@@ -56,7 +56,7 @@
             .smartWizard({
                 autoAdjustHeight: false,
                 backButtonSupport: false,
-                useURLhash: false, 
+                useURLhash: false,  
                 showStepURLhash: false,
                 toolbarSettings: {
                     toolbarExtraButtons: [$("<button class=\"btn btn-submit btn-primary\" type=\"button\">Finish</button>")]
@@ -73,6 +73,6 @@
                 return;
             }
             alert("Great! The form is valid and ready to submit.");
-            return false;
+            $("#smartwizard-validation").submit();
         });
     });

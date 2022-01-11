@@ -1,128 +1,101 @@
-Dropzone.autoDiscover = false;
-// var acceptedFileTypes = "image/*"; //dropzone requires this param be a comma separated list
-// imageDataArray variable to set value in crud form
-// var acceptedFileTypes = "image/*"; //dropzone requires this param be a comma separated list
-// imageDataArray variable to set value in crud form
-var fileDataArray = new Array;
-// fileList variable to store current files index and name
-var fileList = new Array;
-var i = 0;
-$(function(){
-
-    var route_url = '/';
-    var form = $('#my-dropzone').serialize();
-
-    logo_dropzone = new Dropzone("#logo_dropzone",{
-        url: route_url,
-        data: form,
-        uploadMultiple :false,
-        acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-        addRemoveLinks: true,
-        forceFallback: false,
-        maxFilesize: 256, // Set the maximum file size to 256 MB
-        parallelUploads: 100,
-    });//end drop zone
-
-    banner_dropzone = new Dropzone("#banner_dropzone",{
-        url: route_url,
-        data: form,
-        uploadMultiple :false,
-        acceptedFiles: ".jpeg,.jpg,.png,.pdf",
-        addRemoveLinks: true,
-        forceFallback: false,
-        maxFilesize: 256, // Set the maximum file size to 256 MB
-        parallelUploads: 100,
-    });//end drop zone
-
-    // handel banner dropzone
-    banner_dropzone.on("success", function(file,response) {
-        if(i!=0){
-            fileDataArray = parseInt(i+1) +' files';
-        }else{
-            fileDataArray.push(file.name);
-        }
-        fileList[i] = {
-            "serverFileName": file.name,
-            "fileName": file.name,
-            "Id": response.id,
-            "fileId": i
-        };
-        i += 1;
-    });
-    banner_dropzone.on("removedfile", function(file) {
-        var rmvFile = "";
-        for (var f = 0; f < fileList.length; f++) {
-            if (fileList[f].fileName == file.name) {
-                // remove file from original array by database image name
-                fileDataArray = parseInt(fileList.length-1) +' files';
-                // fileDataArray.splice(fileDataArray.indexOf(fileList[f].serverFileName), 1);
-                // get removed database file name
-                rmvFile = fileList[f].serverFileName;
-                var rmvFileId = fileList[f].Id;
-                // ajax information
-                var dataInfo = {
-                    id: rmvFileId
-                };
-                var url = "/";
-                url = url.replace(':id', rmvFileId);
-                $.get(url)
-                .done(function( data ) {
-
-                });
+// to upload logo 
+$(document).on('change', '#logo-input', function () {
+    if (typeof (FileReader) != "undefined") {
+        var dvPreview = $("#logo_preview");
+        dvPreview.html("");
+        $($(this)[0].files).each(function () {
+            var file = $(this);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = $("<img />");
+                img.attr("style", "width: 150px; height:100px; padding: 10px");
+                img.attr("src", e.target.result);
+                dvPreview.append(img);
             }
-        }
-    });
-
-    // handel logo dropzone
-    logo_dropzone.on("success", function(file,response) {
-        if(i!=0){
-            fileDataArray = parseInt(i+1) +' files';
-        }else{
-            fileDataArray.push(file.name);
-        }
-        fileList[i] = {
-            "serverFileName": file.name,
-            "fileName": file.name,
-            "Id": response.id,
-            "fileId": i
-        };
-        i += 1;
-    });
-    logo_dropzone.on("removedfile", function(file) {
-        var rmvFile = "";
-        for (var f = 0; f < fileList.length; f++) {
-            if (fileList[f].fileName == file.name) {
-                // remove file from original array by database image name
-                fileDataArray = parseInt(fileList.length-1) +' files';
-                // fileDataArray.splice(fileDataArray.indexOf(fileList[f].serverFileName), 1);
-                // get removed database file name
-                rmvFile = fileList[f].serverFileName;
-                var rmvFileId = fileList[f].Id;
-                // ajax information
-                var dataInfo = {
-                    id: rmvFileId
-                };
-                var url = "/";
-                url = url.replace(':id', rmvFileId);
-                $.get(url)
-                .done(function( data ) {
-
-                });
-            }
-        }
-    });
+            reader.readAsDataURL(file[0]);
+        });
+    } else {
+        alert("This browser does not support HTML5 FileReader.");
+    }
 });
 
+// to upload banner 1
+$(document).on('change', '#banner1-input', function () {
+    if (typeof (FileReader) != "undefined") {
+        var dvPreview = $("#banner1_preview");
+        dvPreview.html("");
+        $($(this)[0].files).each(function () {
+            var file = $(this);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = $("<img />");
+                img.attr("style", "width: 150px; height:100px; padding: 10px");
+                img.attr("src", e.target.result);
+                dvPreview.append(img);
+            }
+            reader.readAsDataURL(file[0]);
+        });
+    } else {
+        alert("This browser does not support HTML5 FileReader.");
+    }
+});
+
+// to upload banner 2
+$(document).on('change', '#banner2-input', function () {
+    if (typeof (FileReader) != "undefined") {
+        var dvPreview = $("#banner2_preview");
+        dvPreview.html("");
+        $($(this)[0].files).each(function () {
+            var file = $(this);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = $("<img />");
+                img.attr("style", "width: 150px; height:100px; padding: 10px");
+                img.attr("src", e.target.result);
+                dvPreview.append(img);
+            }
+            reader.readAsDataURL(file[0]);
+        });
+    } else {
+        alert("This browser does not support HTML5 FileReader.");
+    }
+});
+
+// to upload banner 3
+$(document).on('change', '#banner3-input', function () {
+    if (typeof (FileReader) != "undefined") {
+        var dvPreview = $("#banner3_preview");
+        dvPreview.html("");
+        $($(this)[0].files).each(function () {
+            var file = $(this);
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = $("<img />");
+                img.attr("style", "width: 150px; height:100px; padding: 10px");
+                img.attr("src", e.target.result);
+                dvPreview.append(img);
+            }
+            reader.readAsDataURL(file[0]);
+        });
+    } else {
+        alert("This browser does not support HTML5 FileReader.");
+    }
+});
 
 
 $('#membership_date').hide();
 $('input:radio[name="membership"]').change(
-function(){
+function () {
     if ($(this).is(':checked')) {
-        if($(this).val() == 'silver' || $(this).val() == 'gold' || $(this).val() == 'platinum'){
+        if ($(this).val() == 'silver' || $(this).val() == 'gold' || $(this).val() == 'platinum') {
             $('#membership_date').show();
-        }else {
+        } else {
             $('#membership_date').hide();
         }
     }
 });
+
+
+
+
+

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Supplier;
 use App\Models\Country;
 use App\Exports\ItemsExport;
 use App\Imports\ItemsImport;
@@ -23,37 +25,12 @@ class ItemsController extends Controller
         $rows_numbers = $request->rows_numbers;
         $items_status = $request->items_status;
 
-        $item_obj = Item::leftJoin('users', 'users.id', '=', 'items.user_id')
-            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
-            ->where('users_store.trash',0)
-            ->where('users_store.rejected',0);
-
-        if($items_status == 'active'){
-            $item_obj = $item_obj->where('items.status', 1)
-                ->where('items.rejected', 0)
-                ->where('items.approved', 1);
-        } 
-        elseif($items_status == 'pending'){
-            $item_obj = $item_obj->where('items.status', 0)
-                ->where('items.rejected', 0)
-                ->where('items.approved', 0);
-        }
-        elseif($items_status == 'rejected'){
-            $item_obj = $item_obj->where('items.rejected',1);
-        }
-        elseif($items_status == 'home'){
-            $item_obj = $item_obj->where('items.rejected',1);
-        }
-        else {
-            $item_obj = $item_obj->where('items.active',1)
-                ->where('items.status',1)
-                ->where('items.rejected',0)
-                ->where('items.approved',1); 
-        }
+        $item_obj = new Item();
 
         $items_count = $item_obj->count();
         $items = $item_obj->limit($rows_numbers)
-            ->with('category')->orderBy('items.id','desc')->get();
+            ->orderBy('id','DESC')->with('category')
+            ->with('supplier')->get();
         
         return response()->json([
             'items' => $items,
@@ -69,51 +46,43 @@ class ItemsController extends Controller
         $meta_keyword = $request->meta_keyword; 
         $items_status = $request->items_status;
 
-        $item_obj = Item::leftJoin('users', 'users.id', '=', 'items.user_id')
-            ->leftJoin('users_store', 'users.id', '=', 'users_store.sub_of')
-            ->where('users_store.trash',0)
-            ->where('users_store.rejected',0);
+        $item_obj = Item::with('category')->with('supplier');
 
         if($items_status == 'active'){
-            $item_obj = $item_obj->where('items.status', 1)
-                ->where('items.rejected', 0)
-                ->where('items.approved', 1);
+            $item_obj = $item_obj->where('status', 1)
+                ->where('rejected', 0)
+                ->where('approved', 1);
         } 
         elseif($items_status == 'pending'){
-            $item_obj = $item_obj->where('items.status', 0)
-                ->where('items.rejected', 0)
-                ->where('items.approved', 0);
+            $item_obj = $item_obj->where('status', 0)
+                ->where('rejected', 0)
+                ->where('approved', 0);
         }
         elseif($items_status == 'rejected'){
-            $item_obj = $item_obj->where('items.rejected',1);
+            $item_obj = $item_obj->where('rejected',1);
         }
         elseif($items_status == 'home'){
-            $item_obj = $item_obj->where('items.rejected',1);
+            $item_obj = $item_obj->where('show_homepage',1);
         }
-        else {
-            $item_obj = $item_obj->where('items.active',1)
-                ->where('items.status',1)
-                ->where('items.rejected',0)
-                ->where('items.approved',1); 
-        }
+       
         
         if($product_name){
-            $item_obj->where('items.title','like', '%' . $product_name . '%'); 
+            $item_obj->where('title','like', '%' . $product_name . '%'); 
         }
 
         if($manufacture_country){
-            $item_obj->whereIn('items.manufacture_country', $manufacture_country);
+            $item_obj->whereIn('manufacture_country', $manufacture_country);
         }
         
         if($meta_keyword){
             foreach($meta_keyword as $word){
-                $item_obj->where('items.meta_keyword','like', '%' . $word . '%');
+                $item_obj->where('meta_keyword','like', '%' . $word . '%');
             }
         }
             
         $items_count = $item_obj->count();
-        $items = $item_obj->limit($rows_numbers)->with('category')
-            ->orderBy('items.id','desc')->get();
+        $items = $item_obj->limit($rows_numbers)
+            ->orderBy('id','desc')->get();
 
         
         return response()->json([
@@ -181,16 +150,31 @@ class ItemsController extends Controller
     }
 
     
-    // import & export to excel
-    public function exportExcel() 
-    {
+    // import & export to excel 
+    public function exportExcel() {
         return Excel::download(new ItemsExport, 'stores.xlsx'); 
     }
-   
-    public function importExcel() 
-    {
-        Excel::import(new ItemsImport,request()->file('file'));
-           
+    
+    public function importView(){
+        $suppliers = Supplier::whereIn('member_type',[1,3])
+            ->where('user_type',0)->orderBy('id','desc')->get();
+        $categories = Category::all();
+        return view('admin.items.import_csv',compact(['suppliers','categories']));    
+    }
+
+    public function importExcel(Request $request) {
+
+        $csv_file = $request->csv_file;
+        $supplier = Supplier::find($request->supplier_id);
+        $data['supplier_id'] = $supplier->id;
+        $data['supplier_phone'] = $supplier->phone;
+        $data['category_id'] = $request->category_id;
+        Excel::import(new ItemsImport($data),$csv_file);
+ 
+        $message = 'Items hass been imported successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
         return redirect()->back();
     }
 }

@@ -16,4 +16,8 @@ class Item extends Model
     public function category(){
         return $this->belongsTo(Category::class,'sub_of');
     }
+
+    public function supplier(){
+        return $this->belongsTo(Supplier::class, 'user_id');
+    }
 }

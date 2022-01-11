@@ -28,7 +28,7 @@
                                         <h5 class="card-title"> You have <span id="stores_counter"></span> pending store in this
                                             table </h5>
                                         <div class="row">
-                                            <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </button>
+                                            <a href="{{ route('stores.create') }}" target="_blank" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
                                             <button class="btn btn-secondary"> Send Questionnaire </button>
                                             &nbsp; &nbsp;

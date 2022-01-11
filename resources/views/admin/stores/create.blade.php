@@ -12,12 +12,13 @@
             <!-- main nav here -->
             @include('admin.layouts.nav')
 
-            <main class="content">
+            <main class="content"> 
                 <div class="container-fluid p-0">
 
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Store </h1>
                     <div class="col-12">
-                        <form id="smartwizard-validation" class="wizard wizard-primary" action="javascript:void(0)">
+                        <form id="smartwizard-validation" action="{{ route('stores.store') }}" method="post" class="wizard wizard-primary" enctype='multipart/form-data'>
+                            @csrf
                             <ul class="nav">
                                 <li class="nav-item"><a class="nav-link" href="#step-1">First
                                         Step<br /><small>Account Info</small></a></li>
@@ -41,36 +42,37 @@
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Full name</label>
-                                            <input type="text" name="full_name" class="form-control required"
-                                                placeholder="Full Name">
+                                            <input type="text" name="full_name" class="form-control required">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Email address</label>
-                                            <input type="email" name="email" class="form-control required" placeholder="Email">
+                                            <input type="email" name="email" class="form-control required" >
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control required" placeholder="Password">
+                                            <input type="password" name="password" class="form-control required" >
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Country</label>
                                             <select name="country" id="country" class="form-control required select2">
                                                 <option value="">Select Country</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="form-label">City</label>
                                             <select name="city" id="city" class="form-control required select2">
                                                 <option value="">Select City</option>
+                                                @foreach($states as $state)
+                                                    <option value="{{ $state->id }}">{{ $state->en_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Phone</label>
                                             <input type="number" class="form-control required" name="phone">
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="form-label">Password</label>
-                                            <input type="password" class="form-control required" name="password">
                                         </div>
                                     </div>
                                 </div>
@@ -82,12 +84,12 @@
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Store Name</label>
                                             <input type="text" name="store_name" class="form-control required"
-                                                placeholder="Store Name">
+                                                >
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Sub Domain</label>
                                             <input type="text" name="sub_domain" class="form-control required"
-                                                placeholder="Sub domain">
+                                                >
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">Contact Address</label>
@@ -117,18 +119,18 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">Meta Title</label>
-                                            <textarea name="meta_title" cols="4" rows="4"
-                                                class="form-control required"></textarea>
+                                            <select name="meta_title[]" multiple="multiple" id="meta_title" class="form-control select2">
+                                            </select>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">Meta Description</label>
-                                            <textarea name="meta_description" cols="4" rows="4"
-                                                class="form-control required"></textarea>
+                                            <select name="meta_description[]" multiple="multiple" id="meta_description" class="form-control select2">
+                                            </select>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">Meta Keywords</label>
-                                            <textarea name="meta_keywords" cols="4" rows="4"
-                                                class="form-control required"></textarea>
+                                            <select name="meta_keywords[]" multiple="multiple" id="meta_keywords" class="form-control select2">
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -136,14 +138,37 @@
                                     <div class="text-center mb-5 mt-5">
                                         <h3> Provide Logo and Banner(s) </h3>
                                     </div>
-                                    <div class="row" id="my-dropzone">
-                                        <div class="form-group col-md-12">
-                                            <h5> Please verify the logo before uploading as belonging to the same store/supplier. The logo file should be optimized for web use. Logo should be in square resolution i.e 200x200 </h5>
-                                            <div id="logo_dropzone" style="width: 200px" class="dropzone mt-3"></div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="file-drop-area"> 
+                                                <span class="choose-file-button">Choose Logo File</span> 
+                                                <input type="file" name="logo" id="logo-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
+                                            </div>
+                                            <div id="logo_preview"></div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <h5> Please verify the banner(s) before uploading as belonging to the same store/supplier. The banner file(s) should be optimized for web use. Banner should be in Rectangles </>
-                                            <div id="banner_dropzone" class="dropzone mt-3"></div>
+
+                                        <div class="col-md-12">
+                                            <div class="file-drop-area"> 
+                                                <span class="choose-file-button">Choose Banner 1 Files</span> 
+                                                <input type="file" name="banner1" id="banner1-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
+                                            </div>
+                                            <div id="banner1_preview"></div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="file-drop-area"> 
+                                                <span class="choose-file-button">Choose Banner 2 Files</span> 
+                                                <input type="file" name="banner2" id="banner2-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
+                                            </div>
+                                            <div id="banner2_preview"></div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="file-drop-area"> 
+                                                <span class="choose-file-button">Choose Banner 3 Files</span> 
+                                                <input type="file" name="banner3" id="banner3-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
+                                            </div>
+                                            <div id="banner3_preview"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -151,16 +176,16 @@
                                     <div class="text-center mb-5 mt-5">
                                         <h3> Select Membership </h3>
                                     </div>
-                                    <div class="row" id="my-dropzone">
+                                    <div class="row">
                                         <div class="form-group col-md-12">
                                             <div class="form-row" id="membership_date">
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label">Start Date</label>
-                                                    <input class="form-control datepicker" type="text" name="datesingle" />
+                                                    <input class="form-control datepicker" name="membership_start_date" type="text" name="datesingle" />
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="form-label">End Date</label>
-                                                    <input class="form-control datepicker" type="text" name="datesingle" />
+                                                    <input class="form-control datepicker" name="membership_end_date" type="text" name="datesingle" />
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -196,7 +221,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label for=""> Disable the Store </label>
-                                                    <select name="disable_store" id="disable_store" class="form-control required select2">
+                                                    <select name="trash" id="trash" class="form-control required select2">
                                                         <option value=""></option>
                                                         <option value="1">Yes</option>
                                                         <option value="0">No</option>
@@ -204,7 +229,7 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for=""> Store Verified </label>
-                                                    <select name="verified_store" id="verified_store" class="form-control required select2">
+                                                    <select name="store_verified" id="store_verified" class="form-control required select2">
                                                         <option value=""></option>
                                                         <option value="1">Yes</option>
                                                         <option value="0">No</option>
@@ -241,6 +266,10 @@
                     </div>
                 </div>
             </main>
-
+            
+            @if(session()->has('feedback'))
+                @include('admin.stores.components.feedback')
+            @endif
+            @include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')

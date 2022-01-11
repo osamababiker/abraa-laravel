@@ -543,7 +543,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('bulkStores/importExportView',  [
         StoresController::class, 'BulkStoresimportExportView'
     ]);
-
+    
     // resource route
     Route::resource('stores', StoresController::class, ['except' => ['destroy']]);
 
@@ -760,9 +760,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('items/import/excel', [
         ItemsController::class, 'importExcel'
     ])->name('items.import.excel');
-    Route::get('items/importExportView',  [
-        ItemsController::class, 'importExportView'
-    ]);
+    Route::get('items/import/excel',  [
+        ItemsController::class, 'importView'
+    ])->name('items.import.excel'); 
     // custom delete route
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'

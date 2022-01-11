@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use DB;
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Member;
 use App\Models\Store;
-use App\Models\Country; 
+use App\Models\Country;
+use App\Models\State; 
 use App\Exports\StoresExport;
 use App\Imports\StoresImport;
 use App\Exports\ActiveStoresExport;
@@ -16,9 +20,13 @@ use App\Imports\RejectedStoresImport;
 use App\Exports\BulkStoresExport;
 use App\Imports\BulkStoresImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Traits\RandomStringTrait;
+use App\Http\Traits\FilesUploadTrait;
 
 class StoresController extends Controller
 {
+
+    use RandomStringTrait, FilesUploadTrait;
     
     public function index()
     {
@@ -336,15 +344,149 @@ class StoresController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        //
+    public function create(){
+        $countries = Country::all();
+        $states = State::all();
+        return view('admin.stores.create', compact(['countries','states']));
     }
 
  
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+
+        $this->validate($request, [
+            'full_name' => 'required',
+            'email' => 'required|unique:users',
+            'phone' => 'required|unique:users',
+            'password' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'store_name' => 'required',
+            'sub_domain' => 'required|unique:users_store',
+        ]);
+
+        DB::beginTransaction();
+        try {
+
+            $user = new Member();
+            $store = new Store();
+
+            $salt = $this->getRandomString(3);
+            $password = md5($request->password . $salt);
+            $register_on = date('Y-m-d H:i:s');
+            $verified = 1;
+            $verification_token = md5(time() . rand(10000, 99999));
+            $trash = 0;
+            $user_source = 25;
+            $added_by = Auth::user()->id;
+            $user_type = 0;
+            $member_type = 1;
+            $is_organic = 0;
+            $register_level = 3;
+            $is_login = 0;
+
+            // to save user info
+            $user->full_name = $request->full_name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->password = $password;
+            $user->salt = $salt;
+            $user->register_on = $register_on;
+            $user->verified = $verified;
+            $user->verification_token = $verification_token;
+            $user->country = $request->country;
+            $user->city = $request->city;
+            $user->user_type = $user_type;
+            $user->member_type = $member_type;
+            $user->is_organic = $is_organic;
+            $user->register_level = $register_level;
+            $user->added_by = $added_by;
+            $user->user_source = $user_source;
+            $user->is_login = $is_login;
+            $user->save();
+
+            // to save store info
+            $meta_title = '';
+            foreach($request->meta_title as $title){
+                $meta_title .= $title . ',';
+            }
+            $meta_description = '';
+            foreach($request->meta_description as $description){
+                $meta_description .= $description . ',';
+            }
+            $meta_keywords = '';
+            foreach($request->meta_keywords as $keywords){
+                $meta_keywords .= $keywords . ',';
+            }
+
+            // to logo file
+            $logo_url = '';
+            if($request->has('logo')){
+                $image = $request->file('logo');
+                $image_name = time().'.'.$image->extension();
+                $temp_dir = $image->getPathName();
+                $logo_url = $this->upload_image($image_name, $temp_dir, 'files');
+            }
+
+            // to upload banner 1 files
+            $banner1_url = '';
+            if($request->has('banner1')){
+                $banner = $request->file('banner1');
+                $banner_name = time().'.'.$banner->extension();
+                $temp_dir = $banner->getPathName();
+                $banner1_url = $this->upload_image($banner_name, $temp_dir, 'files');
+            }
+
+            // to upload banner 2 files
+            $banner2_url = '';
+            if($request->has('banner2')){
+                $banner = $request->file('banner2');
+                $banner_name = time().'.'.$banner->extension();
+                $temp_dir = $banner->getPathName();
+                $banner2_url = $this->upload_image($banner_name, $temp_dir, 'files');
+            }
+
+            // to upload banner 3 files
+            $banner3_url = '';
+            if($request->has('banner3')){
+                $banner = $request->file('banner3');
+                $banner_name = time().'.'.$banner->extension();
+                $temp_dir = $banner->getPathName();
+                $banner3_url = $this->upload_image($banner_name, $temp_dir, 'files');
+            }
+
+            if($request->show_home_page){
+                $show_home_page = 1;
+            }else $show_home_page = 0;
+
+
+            $store->sub_of = $user->id;
+            $store->name = $request->store_name;
+            $store->sub_domain = $request->sub_domain;
+            $store->contact_address = $request->contact_address;
+            $store->weburl = $request->website_url;
+            $store->aboutpage = $request->about_store;
+            $store->facebook_url = $request->facebook_url;
+            $store->twitter_url = $request->twitter_url;
+            $store->instagram_url = $request->instagram_url;
+            $store->store_verified = $request->store_verified;
+            $store->trash = $request->trash;
+            $store->show_homepage = $show_home_page;
+            $store->meta_title = $meta_title;
+            $store->meta_description = $meta_description;
+            $store->meta_keywords = $meta_keywords;
+            $store->logo_url = $logo_url;
+            $store->banner_url = $banner1_url;
+            $store->banner_url1 = $banner2_url;
+            $store->banner_url2 = $banner3_url;
+            $store->save();
+
+            DB::commit();
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            echo $e;
+        }
+        
     }
 
   

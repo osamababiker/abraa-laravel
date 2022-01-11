@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
     <meta name="author" content="Bootlab">
+    <meta name="_token" content="<?php echo e(csrf_token()); ?>">
 
     <title>Abraa Dashboard</title>
 

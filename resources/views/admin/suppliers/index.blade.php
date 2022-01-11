@@ -146,6 +146,9 @@
             </main>
 
             <!-- scripts is here -->
+            @if(session()->has('feedback'))
+                @include('admin.suppliers.components.feedback')
+            @endif
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>

@@ -575,7 +575,7 @@ class SuppliersController extends Controller
             'primary_line_number' => 'required'
         ]);
 
-        $salt = $this->getRandomString(3);
+        $salt = $this->getRandomString(3); 
         $register_on = date('Y-m-d H:i:s');
         $verified = 1;
         $verification_token = md5(time() . rand(10000, 99999));

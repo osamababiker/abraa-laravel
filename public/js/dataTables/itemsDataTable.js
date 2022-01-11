@@ -21,7 +21,7 @@ $(document).ready(function () {
             $("#items_counter").text(response.items_count);
 
             response.items.forEach(function(item) {
-
+                
                 if(item.category){
                     item_category = item.category.en_title;
                 }
