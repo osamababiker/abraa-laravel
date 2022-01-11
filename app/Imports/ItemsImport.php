@@ -18,7 +18,7 @@ class ItemsImport implements ToModel
     public function model(array $row){ 
 
         $lastid = Item::orderBy('id','DESC')->first()->id;
-        $slug = str_replace(' ', '-', substr($row[0] ,0,10)) . '-' . ($lastid + 1);
+        $slug = str_replace(' ', '-', substr($row[0] ,0,30)) . '-' . ($lastid + 1);
         if($row[0]){
             $title = $row[0];
         }else $title = ' ';

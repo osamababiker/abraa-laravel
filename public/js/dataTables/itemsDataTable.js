@@ -53,7 +53,7 @@ $(document).ready(function () {
                 "<td>"+ item.id +"</td>\n"+
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\"http://localhost/abraa/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+
