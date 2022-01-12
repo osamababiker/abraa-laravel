@@ -8,14 +8,12 @@ $(document).ready(function () {
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
-    var items_status = $('#items_status').val();
 
     $.ajax({
         url: "/items/json",
         type: "get",
         data: {
             "rows_numbers": rows_numbers,
-            "items_status": items_status
         },
         success: function(response){
 
@@ -105,6 +103,7 @@ $(".filter_data_table").on('change', function () {
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var items_status = $('#items_status').val();
+    var store_status = $("#store_status").val();
 
     $.ajax({
         url: "/items/filter",
@@ -115,6 +114,7 @@ $(".filter_data_table").on('change', function () {
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
             "items_status": items_status,
+            "store_status": store_status,
             "_token": csrf_token
         },
         success: function(response){

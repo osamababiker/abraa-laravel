@@ -68,11 +68,20 @@
                                                 <label for="item_status">Filter by Status</label>
                                                 <select name="item_status" id="items_status"
                                                     class="filter_data_table form-control select2">
-                                                    <option value=""> All Items </option>
+                                                    <option value="">  </option>
                                                     <option value="active"> Active Items </option>
                                                     <option value="pending"> Pending Items </option>
                                                     <option value="rejected"> Rejected Items </option>
                                                     <option value="home"> Home Items </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 form-group">
+                                                <label for="store_status">Filter by Store Status</label>
+                                                <select name="store_status" id="store_status"
+                                                    class="filter_data_table form-control select2">
+                                                    <option value="">  </option>
+                                                    <option value="active_stores"> Active Stores </option>
+                                                    <option value="pending_stores"> Pending Stores </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2 form-group">
