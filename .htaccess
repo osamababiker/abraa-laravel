@@ -1,3 +1,5 @@
 RewriteEngine on
-RewriteCond %{REQUEST_URI} !^public
-RewriteRule ^(.*)$ public/$1 [L]
+RewriteCond %{HTTP_HOST} ^stagingacp.abraa.com/$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^stagingacp.abraa.com$
+RewriteCond %{REQUEST_URI} !abraa-dash/public/
+RewriteRule (.*) /abraa-dash/public/$1 [L]
