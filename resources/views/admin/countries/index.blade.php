@@ -83,6 +83,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @if(session()->has('feedback'))
+                                        @include('admin.layouts.feedback')
+                                    @endif
                                     @include('admin.countries.components.delete_selected')
                                 </div>
                             </div>

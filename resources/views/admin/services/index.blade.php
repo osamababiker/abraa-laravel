@@ -80,6 +80,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @if(session()->has('feedback'))
+                                        @include('admin.layouts.feedback')
+                                    @endif
                                     @include('admin.services.components.delete_selected')
                                 </div>
                             </div>

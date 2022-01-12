@@ -58,7 +58,12 @@ class StoresController extends Controller
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
 
-        $store_obj = Store::leftJoin('users', 'users.id', '=', 'users_store.sub_of');
+        
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
+            ->leftJoin('users', function($join) {
+            $join->on('users.id', '=', 'users_store.sub_of');
+        });
 
         if($stores_status == 'active'){
             $store_obj->where('users_store.trash', 0); 
@@ -91,7 +96,7 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)->with('user')
+        $stores = $store_obj->limit($rows_numbers)
             ->orderBy('users_store.id','desc')->get();
 
    
@@ -132,8 +137,20 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
-        $store_obj = Store::leftJoin('users', 'users.id', '=', 'users_store.sub_of')
-                        ->where('users_store.trash', 0);
+        
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
+            ->leftJoin('users', function($join) {
+            $join->on('users.id', '=', 'users_store.sub_of');
+        });
+
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
+            ->where('users_store.trash', 0)
+            ->leftJoin('users', function($join) {
+                $join->on('users.id', '=', 'users_store.sub_of');
+            });
+        
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
@@ -150,7 +167,7 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)->with('user')
+        $stores = $store_obj->limit($rows_numbers)
             ->orderBy('users_store.id','desc')->get();
 
    
@@ -192,9 +209,13 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
-        $store_obj = Store::leftJoin('users', 'users.id', '=', 'users_store.sub_of')
-                        ->where('users_store.trash', 1)
-                        ->where('users_store.rejected', 0);
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
+            ->where('users_store.trash', 1)
+            ->where('users_store.rejected', 0)
+            ->leftJoin('users', function($join) {
+                $join->on('users.id', '=', 'users_store.sub_of');
+            });
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
@@ -211,7 +232,7 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)->with('user')
+        $stores = $store_obj->limit($rows_numbers)
             ->orderBy('users_store.id','desc')->get();
 
    
@@ -253,9 +274,14 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
-        $store_obj = Store::leftJoin('users', 'users.id', '=', 'users_store.sub_of')
-                ->where('users_store.trash', 1)
-                ->where('users_store.rejected', 1);
+
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
+            ->where('users_store.trash', 1)
+            ->where('users_store.rejected', 1)
+            ->leftJoin('users', function($join){
+                $join->on('users.id', '=', 'users_store.sub_of');
+            });
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
@@ -272,7 +298,7 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)->with('user')
+        $stores = $store_obj->limit($rows_numbers)
             ->orderBy('users_store.id','desc')->get();
 
    
@@ -294,13 +320,17 @@ class StoresController extends Controller
 
         $rows_numbers = $request->rows_numbers;
 
-        $store_obj = Store::leftJoin('users', 'users.id', '=', 'users_store.sub_of')
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
             ->where('users_store.trash', 1)
+            ->leftJoin('users', function($join) {
+                $join->on('users.id', '=', 'users_store.sub_of');
+            })
             ->whereIn('users.user_source', [29, 35]);
 
         $stores_count = $store_obj->count();
         $stores = $store_obj->limit($rows_numbers)
-            ->with('user')->orderBy('users_store.id','desc')->get();
+            ->orderBy('users_store.id','desc')->get();
         
         return response()->json([
             'stores' => $stores,
@@ -315,9 +345,13 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
-        $store_obj = Store::leftJoin('users', 'users.id', '=', 'users_store.sub_of')
-                ->where('users_store.trash', 1)
-                ->whereIn('users.user_source', [29, 35]);
+        $store_obj = Store::with('user')
+            ->select('users_store.*')
+            ->where('users_store.trash', 1)
+            ->leftJoin('users', function($join) {
+                $join->on('users.id', '=', 'users_store.sub_of');
+            })
+            ->whereIn('users.user_source', [29, 35]);
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');

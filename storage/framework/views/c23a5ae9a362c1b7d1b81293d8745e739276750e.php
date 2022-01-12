@@ -89,8 +89,8 @@
                     <i class="align-middle" data-feather="list"></i> <span class="align-middle">Products</span>
                 </a>
                 <ul id="products" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('items.index')); ?>">All Products</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('items.import.excel')); ?>">Import Products</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('items.index')); ?>">All Items</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="<?php echo e(route('items.import.excel')); ?>">Import Items</a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

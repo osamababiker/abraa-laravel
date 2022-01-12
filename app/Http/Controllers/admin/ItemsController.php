@@ -25,7 +25,7 @@ class ItemsController extends Controller
         $rows_numbers = $request->rows_numbers;
         $items_status = $request->items_status;
 
-        $item_obj = new Item();
+        $item_obj = new Item(); 
 
         $items_count = $item_obj->count();
         $items = $item_obj->limit($rows_numbers)
@@ -104,21 +104,66 @@ class ItemsController extends Controller
         //
     }
 
-    // to handel some sort of actions , like delete multiple 
+    // to handel some sort of actions  
     public function actions(Request $request)
     {
-        $item_id = $request->item_id;
-        if($request->all_colums){
-            Item::delete();
-        }
-        elseif($item_id){
-            foreach($item_id as $id){
-                Item::where('id',$id)->delete();
+        // to move selected Items to archived
+        if($request->has('delete_selected_btn')){
+            foreach($request->item_id as $id){
+                $item = Item::find($id);
+                $item->delete();
             }
+            $message = 'Items hass been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }else 
+        // to approve selected Items 
+        if($request->has('approve_selected_btn')){
+            foreach($request->item_id as $id){
+                $item = Item::find($id);
+                $item->status = 1;
+                $item->rejected = 0;
+                $item->approved = 1;
+                $item->save();
+            }
+            $message = 'Items hass been approved successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }else
+        // to reject selectd items
+        if($request->has('reject_selected_btn')){
+            foreach($request->item_id as $id){
+                $item = Item::find($id);
+                $item->status = 0;
+                $item->rejected = 1;
+                $item->approved = 0;
+                $item->save();
+            }
+            $message = 'Items hass been rejected successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
         }
-        $message = 'Items hass been deleted successfully';
-        session()->flash('feedback', $message);
-        return redirect()->back();
+        else 
+        // to approve single Item
+        if($request->has('approve_single_item_btn')){
+           $item = Item::find($request->item_id);
+           $item->status = 1;
+           $item->rejected = 0;
+           $item->approved = 1;
+           $item->save();
+           
+           $message = 'Item hass been approved successfully';
+           session()->flash('success', 'true');
+           session()->flash('feedback_title', 'Success');
+           session()->flash('feedback', $message);
+           return redirect()->back();
+        }
         
     }
    

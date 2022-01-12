@@ -87,7 +87,7 @@
                                             </div>
                                         </div>
                                         @if(session()->has('feedback'))
-                                            @include('admin.rfqs.buying_requets.components.feedback')
+                                            @include('admin.layouts.feedback')
                                         @endif
                                     </form>
                                 </div>

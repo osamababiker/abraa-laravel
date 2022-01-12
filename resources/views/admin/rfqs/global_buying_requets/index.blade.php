@@ -103,7 +103,7 @@
                                             </table>
                                         </div>
                                         @if(session()->has('feedback'))
-                                            @include('admin.rfqs.global_buying_requests.components.feedback')
+                                            @include('admin.layouts.feedback')
                                         @endif
                                         @include('admin.rfqs.global_buying_requests.components.delete_selected')
                                         @include('admin.rfqs.global_buying_requests.components.approve_selected')

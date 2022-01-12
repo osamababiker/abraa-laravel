@@ -116,7 +116,7 @@
                                             </table>
                                         </div>
                                         @if(session()->has('feedback'))
-                                            @include('admin.stores.components.feedback')
+                                            @include('admin.layouts.feedback')
                                         @endif
                                         @include('admin.stores.bulk.components.approve_selected')
                                         @include('admin.stores.bulk.components.delete_selected')

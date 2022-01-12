@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     var items_html = '';
     var item_category = '';
+    var item_status = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -25,6 +26,15 @@ $(document).ready(function () {
                 if(item.category){
                     item_category = item.category.en_title;
                 }
+
+                if(item.status == 1){
+                    item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
+                }else if(item.status == 0){
+                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending - </i> </button>";
+                } 
+                if(item.status == 0 && item.rejected == 1){
+                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\"> <i style=\"color: red\">rejected - <i class=\"fa fa-times\"></i> </button>";
+                } 
 
                 items_html = items_html +
                 
@@ -54,6 +64,7 @@ $(document).ready(function () {
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
                 "<td> <a target=\"_blank\" href=\"http://localhost/abraa/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+
@@ -86,6 +97,7 @@ $(".filter_data_table").on('change', function () {
 
     var items_html = '';
     var item_category = '';
+    var item_status = '';
 
     // filter data
     var product_name = $('#product_name').val(); 
@@ -110,10 +122,16 @@ $(".filter_data_table").on('change', function () {
             $("#items_counter").text(response.items_count);
 
             response.items.forEach(function(item) {
-
+                
                 if(item.category){
                     item_category = item.category.en_title;
                 }
+
+                if(item.status == 1){
+                    item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
+                }else if(item.status == 0){
+                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\"> <i style=\"color: red\">rejected - <i class=\"fa fa-times\"></i> </button>";
+                } 
 
                 items_html = items_html +
                 
@@ -142,7 +160,8 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ item.id +"</td>\n"+
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\"https://www.abraa.com/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\"http://localhost/abraa/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/items/"+ item.id +"\">\n"+
@@ -175,6 +194,23 @@ function archive_item(item_id){
     $.ajax({
         url: "/items/" + item_id + "/destroy",
         type: "get",
+        success: function(response){
+            location.reload();
+        }
+    });
+}
+
+// to approve single item
+function approve_item(item_id){
+    $("#ajax_loader").css('display', 'block');
+    $.ajax({
+        url: "/items/actions",
+        type: "post",
+        data: {
+            "_token": csrf_token,
+            'item_id': item_id, 
+            'approve_single_item_btn': ''
+        },
         success: function(response){
             location.reload();
         }

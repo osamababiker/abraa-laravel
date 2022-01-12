@@ -775,7 +775,7 @@ Route::group(['middleware' => 'auth'], function (){
     // table actions route
     Route::post('categories/actions', 
         [CategoriesController::class , 'actions']
-    )->name('items.actions');
+    )->name('categories.actions');
     // get categories as json route 
     Route::get('categories/json', [
         CategoriesController::class, 'getCategoriesAsJson'

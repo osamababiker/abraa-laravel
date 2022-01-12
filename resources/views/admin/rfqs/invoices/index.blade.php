@@ -125,6 +125,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @if(session()->has('feedback'))
+                                        @include('admin.layouts.feedback')
+                                    @endif
                                     @include('admin.rfqs.invoices.components.delete_selected')
                                 </div>
                             </div>
