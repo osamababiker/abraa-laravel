@@ -22,11 +22,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header ml-3">
                                     <h5 class="card-title"> You have <span id="moderators_counter"></span> moderator in
                                         this table </h5>
                                     <div class="row">
-                                        <a href="{{ route('moderators.create') }}" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
+                                        <a href="{{ route('moderators.create') }}" target="_blank" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                         &nbsp; &nbsp;
                                         <button type="button" data-toggle="modal" data-target="#delete_selected_confirm"
                                             class="btn btn-danger"> <i class="fa fa-trash"></i> Archive Selected

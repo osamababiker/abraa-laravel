@@ -7,11 +7,15 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Country;
+use App\Models\Unit;
+use App\Models\State;
+use App\Models\Currency;
+use App\Models\PaymentOption;
 use App\Exports\ItemsExport;
 use App\Imports\ItemsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ItemsController extends Controller
+class ItemsController extends Controller 
 {
 
     public function index()
@@ -71,6 +75,9 @@ class ItemsController extends Controller
         elseif($items_status == 'home'){
             $item_obj = $item_obj->where('items.show_homepage',1);
         }
+        elseif($items_status == 'featured'){
+            $item_obj = $item_obj->where('items.featured',1);
+        }
 
         // filter by store status
         if($store_status == 'active_stores'){
@@ -109,14 +116,21 @@ class ItemsController extends Controller
 
 
     
-    public function create()
-    {
-        //
+    public function create(){
+        $categories = Category::all();
+        $countries = Country::all();
+        $suppliers = Supplier::all();
+        $units = Unit::all();
+        $states = State::all();
+        $paymentOptions = PaymentOption::all();
+        $currencies = Currency::all();
+        return view('admin.items.create', compact(
+            ['categories','suppliers','units','states','countries','paymentOptions']
+        ));
     }
 
    
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -160,6 +174,37 @@ class ItemsController extends Controller
                 $item->save();
             }
             $message = 'Items hass been rejected successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+        else
+        // to make selected items featured
+        if($request->has('feature_selected_btn')){
+            foreach($request->item_id as $id){
+                $item = Item::find($id);
+                $item->status = 1;
+                $item->rejected = 0;
+                $item->approved = 1;
+                $item->featured = 1;
+                $item->save();
+            }
+            $message = 'Items hass been featured successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+        else
+        // to make selected items unfeatured
+        if($request->has('unfeature_selected_btn')){
+            foreach($request->item_id as $id){
+                $item = Item::find($id);
+                $item->featured = 0;
+                $item->save();
+            }
+            $message = 'Items hass been un featured successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);

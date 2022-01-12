@@ -22,11 +22,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header ml-3">
                                     <h5 class="card-title"> You have <span id="buying_request_counter"></span>
                                         Quotes in this table </h5>
                                     <div class="row">
-                                        <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </button>
+                                        <a href="{{ route('rfqs.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                         &nbsp; &nbsp;
                                         <button type="button" data-toggle="modal"
                                             data-target="#approve_selected_confirm" class="btn btn-success">

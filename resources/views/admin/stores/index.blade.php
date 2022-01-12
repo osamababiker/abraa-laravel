@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header ml-3">
                                     <h5 class="card-title"> You have <span id="stores_counter"></span> store in this
                                         table </h5>
                                     <div class="row">

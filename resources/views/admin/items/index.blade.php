@@ -24,12 +24,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header ml-3">
                                         <h5 class="card-title"> You have <span id="items_counter"></span> item in this
                                             table </h5>
-                                        <div class="row">
-                                            <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New
-                                            </button>
+                                        <div class="row"> 
+                                            <a href="{{ route('items.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New
+                                            </a>
                                             &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal"
                                                 data-target="#delete_selected_confirm" class="btn btn-danger"> <i
@@ -41,6 +41,14 @@
                                             &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal" data-target="#reject_selected_confirm"
                                                 class="btn btn-warning"> <i class="fa fa-times"></i> Reject Selected
+                                            </button> 
+                                            &nbsp; &nbsp;
+                                            <button type="button" data-toggle="modal" data-target="#feature_selected_confirm"
+                                                class="btn btn-success"> <i class="fa fa-star"></i> Feature Selected
+                                            </button> 
+                                            &nbsp; &nbsp;
+                                            <button type="button" data-toggle="modal" data-target="#unfeature_selected_confirm"
+                                                class="btn btn-warning"> <i class="fa fa-star"></i> UnFeature Selected
                                             </button> 
                                             &nbsp; &nbsp; 
                                             <div class="dropdown">
@@ -73,6 +81,7 @@
                                                     <option value="pending"> Pending Items </option>
                                                     <option value="rejected"> Rejected Items </option>
                                                     <option value="home"> Home Items </option>
+                                                    <option value="featured"> Featured Items </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2 form-group">
@@ -137,6 +146,8 @@
                                         @include('admin.items.components.delete_selected')
                                         @include('admin.items.components.approve_selected')
                                         @include('admin.items.components.reject_selected')
+                                        @include('admin.items.components.feature_selected')
+                                        @include('admin.items.components.unfeature_selected')
                                         @if(session()->has('feedback'))
                                             @include('admin.layouts.feedback')
                                         @endif

@@ -25,12 +25,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header ml-3">
                                         <h5 class="card-title"> You have <span id="memberships_plans_counter"></span>
                                             memberships Plan in this table </h5>
 
                                         <div class="row ml-1">
-                                            <a href="{{ route('membershipsPlans.create') }}" class="btn btn-primary"> <i
+                                            <a href="{{ route('membershipsPlans.create') }}" target="_blank" class="btn btn-primary"> <i
                                                     class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal"

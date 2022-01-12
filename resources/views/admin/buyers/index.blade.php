@@ -22,11 +22,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header ml-3">
                                     <h5 class="card-title"> You have <span id="buyers_counter"></span> buyer in this
                                         table </h5>
                                     <div class="row">
-                                        <button class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </button>
+                                        <a href="{{ route('buyers.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                         &nbsp; &nbsp;
                                         <button class="btn btn-secondary"> Send Questionnaire </button>
                                         &nbsp; &nbsp;
