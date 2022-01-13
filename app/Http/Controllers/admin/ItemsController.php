@@ -13,10 +13,14 @@ use App\Models\Currency;
 use App\Models\PaymentOption;
 use App\Exports\ItemsExport;
 use App\Imports\ItemsImport;
+use App\Http\Requests\ItemsRequest;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Traits\FilesUploadTrait;
+
 
 class ItemsController extends Controller 
 {
+    use FilesUploadTrait;
 
     public function index()
     {
@@ -125,14 +129,115 @@ class ItemsController extends Controller
         $paymentOptions = PaymentOption::all();
         $currencies = Currency::all();
         return view('admin.items.create', compact(
-            ['categories','suppliers','units','states','countries','paymentOptions']
+            ['categories','suppliers','units','states','countries','paymentOptions','currencies']
         ));
     }
 
    
-    public function store(Request $request){
+    public function store(ItemsRequest $request){
+
+        $meta_keyword = '';
+        foreach($request->meta_keyword as $keyword){
+            $meta_keyword .= $keyword . ',';
+        }
+
+        $meta_description = '';
+        foreach($request->meta_description as $description){
+            $meta_description .= $description . ',';
+        }
+
+        // to be changed latter 
+        // to upload default image file
+        $default_image_url = '';
+        if($request->has('default_image')){
+            $image = $request->file('logo');
+            $image_name = time().'.'.$image->extension();
+            $temp_dir = $image->getPathName();
+            $default_image_url = $this->upload_image($image_name, $temp_dir, 'files');
+        }
+        //uploads/product/682526/pout-case-foundation_58262.jpeg 
+
+        $item = new Item();
+        $item->title = $request->title;
+        $item->user_id = $request->user_id;
+        $item->sub_of = $request->sub_of;
+        $item->unit = $request->unit;
+        $item->details = $request->details;
+        $item->price = $request->price;
+        $item->old_price = $request->old_price;
+        $item->youtube_video = $request->youtube_video;
+        $item->deliver_per = $request->deliver_per;
+        $item->item_type = $request->item_type;
+        $item->quantity = $request->quantity;
+        $item->manufacture_country = $request->manufacture_country;
+        $item->active = $request->active;
+        $item->status = $request->status;
+        $item->rejected = $request->rejected;
+        $item->is_sold = $request->is_sold;
+        $item->featured = $request->featured;
+        $item->accept_offers = $request->accept_offers;
+        $item->accept_min_offer = $request->accept_min_offer;
+        $item->sort_order = $request->sort_order;
+        $item->part_number = $request->part_number;
+        $item->meta_description = $meta_description;
+        $item->meta_keyword = $meta_keyword;
+        $item->phone_count = $request->phone_count;
+        $item->email_count = $request->email_count;
+        $item->chat_count = $request->chat_count;
+        $item->min_order = $request->min_order;
+        $item->payment_option_ids = $request->payment_option_ids;
+        $item->rating = $request->rating;
+        $item->currency = $request->currency;
+        $item->approved = $request->approved;
+        $item->is_bulk = $request->is_bulk;
+        $item->is_global = $request->is_global;
+        $item->is_customized = $request->is_customized;
+        $item->default_image = $default_image;
+        $item->save();
+
+        $message = 'Item hass been Saved successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+
+    }
+
+   
+    public function show($id){
         //
     }
+
+ 
+    public function edit($id){
+        $item = Item::find($id);
+        $categories = Category::all();
+        $countries = Country::all();
+        $suppliers = Supplier::all();
+        $units = Unit::all();
+        $states = State::all();
+        $paymentOptions = PaymentOption::all();
+        $currencies = Currency::all();
+        return view('admin.items.edit', compact(
+            ['item', 'categories', 'countries', 
+            'suppliers', 'units', 'states', 'paymentOptions', 'currencies']
+        ));
+    }
+
+   
+    public function update(Request $request){
+        dd($request->item_id);
+    }
+
+   
+    public function destroy($id)
+    {
+        Item::where('id',$id)->delete();
+        $message = 'Item hass been Archived successfully';
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
 
     // to handel some sort of actions  
     public function actions(Request $request)
@@ -226,33 +331,6 @@ class ItemsController extends Controller
            return redirect()->back();
         }
         
-    }
-   
-    public function show($id)
-    {
-        dd($id);
-        //
-    }
-
- 
-    public function edit($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-   
-    public function destroy($id)
-    {
-        Item::where('id',$id)->delete();
-        $message = 'Item hass been Archived successfully';
-        session()->flash('feedback', $message);
-        return redirect()->back();
     }
 
     

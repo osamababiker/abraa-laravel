@@ -17,6 +17,14 @@ class Item extends Model
         return $this->belongsTo(Category::class,'sub_of');
     }
 
+    public function item_unit(){
+        return $this->belongsTo(Unit::class,'unit');
+    }
+
+    public function item_currency(){
+        return $this->belongsTo(Currency::class,'currency');
+    }
+
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'user_id');
     }

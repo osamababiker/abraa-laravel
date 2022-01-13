@@ -458,7 +458,7 @@ class StoresController extends Controller
                 $image = $request->file('logo');
                 $image_name = time().'.'.$image->extension();
                 $temp_dir = $image->getPathName();
-                $logo_url = $this->upload_image($image_name, $temp_dir, 'files');
+                $logo_url = $this->upload_image($image_name, $temp_dir, 'files'); 
             }
 
             // to upload banner 1 files

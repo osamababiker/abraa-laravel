@@ -26,7 +26,7 @@
                                         <div class="form-row mt-4">
                                             <div class="form-group col-md-6">
                                                 <label for="title">Item Name</label>
-                                                <input type="text" class="form-control" id="title">
+                                                <input type="text" name="title" class="form-control" id="title">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="user_id">Select User</label>
@@ -262,9 +262,9 @@
                                             </div>
                                         </div>
                                         <div class="form-row d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success">Save Supplier</button>
+                                            <button type="submit" class="btn btn-success">Save Item</button>
                                             &nbsp; &nbsp;
-                                            <button type="submit" class="btn btn-primary">Add Secondary Contact Person</button>
+                                            <a href="{{ route('items.index') }}" type="button" class="btn btn-primary">Go Back</a>
                                         </div>
                                     </form>
                                 </div>
@@ -275,5 +275,6 @@
                 </div>
             </main>
 
+            @include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')

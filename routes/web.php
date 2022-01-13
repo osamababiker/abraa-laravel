@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth'], function (){
         SuppliersController::class, 'filterSuppliers'
     ])->name('suppliers.filter');
     // custom update route 
-     Route::post('suppliers/update', [ 
+    Route::post('suppliers/update', [ 
         SuppliersController::class, 'update'
     ])->name('suppliers.update');
     // custom delete route 
@@ -767,8 +767,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'
     ]);
+    // custom update route 
+    Route::post('items/update', [ 
+        ItemsController::class, 'update'
+    ])->name('items.update');
     // resource route
-    Route::resource('items', ItemsController::class, ['except' => ['destroy']]);
+    Route::resource('items', ItemsController::class, ['except' => ['destroy','update']]);
     
 
     // ======================= Categories Routes ====================== //
