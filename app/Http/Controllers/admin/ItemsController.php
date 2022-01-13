@@ -22,14 +22,12 @@ class ItemsController extends Controller
 {
     use FilesUploadTrait;
 
-    public function index()
-    {
+    public function index(){
         $countries = Country::all();
         return view('admin.items.index', compact(['countries']));
     }
 
     public function getItemsAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
         $item_obj = new Item(); 
 
@@ -45,7 +43,6 @@ class ItemsController extends Controller
     }
 
     public function filterItems(Request $request){
-        
         $product_name = $request->product_name;
         $manufacture_country = $request->manufacture_country;
         $rows_numbers = $request->rows_numbers; 
@@ -118,7 +115,6 @@ class ItemsController extends Controller
         ]);
     }
 
-
     
     public function create(){
         $categories = Category::all();
@@ -135,7 +131,6 @@ class ItemsController extends Controller
 
    
     public function store(ItemsRequest $request){
-
         $meta_keyword = '';
         foreach($request->meta_keyword as $keyword){
             $meta_keyword .= $keyword . ',';
@@ -145,6 +140,9 @@ class ItemsController extends Controller
         foreach($request->meta_description as $description){
             $meta_description .= $description . ',';
         }
+
+        $lastId = Item::orderBy('id','DESC')->first()->id;
+        $slug = substr($request->title,0, 6) . '-' . $lastId + 1;
 
         // to be changed latter 
         // to upload default image file
@@ -205,7 +203,8 @@ class ItemsController extends Controller
 
    
     public function show($id){
-        //
+        $item = Item::find($id);
+        return view('admin.items.show', compact(['item']));
     }
 
  
@@ -225,13 +224,66 @@ class ItemsController extends Controller
     }
 
    
-    public function update(Request $request){
-        dd($request->item_id);
-    }
+    public function update(ItemsRequest $request){
+        $meta_keyword = '';
+        foreach($request->meta_keyword as $keyword){
+            $meta_keyword .= $keyword . ',';
+        }
+        $meta_description = '';
+        foreach($request->meta_description as $description){
+            $meta_description .= $description . ',';
+        }
+        // to upload default image
+        if($request->has('default_image')){
+            // to be added later
+        }
+        $item = Item::find($request->item_id);
+        $item->title = $request->title;
+        $item->user_id = $request->user_id;
+        $item->sub_of = $request->sub_of;
+        $item->unit = $request->unit;
+        $item->details = $request->details;
+        $item->price = $request->price;
+        $item->old_price = $request->old_price;
+        $item->youtube_video = $request->youtube_video;
+        $item->deliver_per = $request->deliver_per;
+        $item->item_type = $request->item_type;
+        $item->quantity = $request->quantity;
+        $item->manufacture_country = $request->manufacture_country;
+        $item->part_number = $request->part_number;
+        $item->active = $request->active;
+        $item->status = $request->status;
+        $item->rejected = $request->rejected;
+        $item->is_sold = $request->is_sold;
+        $item->featured = $request->featured;
+        $item->accept_offers = $request->accept_offers;
+        $item->accept_min_offer = $request->accept_min_offer;
+        $item->sort_order = $request->sort_order;
+        $item->meta_keyword = $meta_keyword;
+        $item->meta_description = $meta_description;
+        $item->phone_count = $request->phone_count;
+        $item->email_count = $request->email_count;
+        $item->chat_count = $request->chat_count;
+        $item->min_order = $request->min_order;
+        $item->payment_option_ids = $request->payment_option_ids;
+        $item->default_image = $default_image;
+        $item->rating = $request->rating;
+        $item->currency = $request->currency;
+        $item->approved = $request->approved;
+        $item->is_bulk = $request->is_bulk;
+        $item->is_global = $request->is_global;
+        $item->is_customized = $request->is_customized;
+        $item->save();
+
+        $message = 'Item hass been Updated successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }   
 
    
-    public function destroy($id)
-    {
+    public function destroy($id){
         Item::where('id',$id)->delete();
         $message = 'Item hass been Archived successfully';
         session()->flash('feedback', $message);
@@ -240,8 +292,7 @@ class ItemsController extends Controller
 
 
     // to handel some sort of actions  
-    public function actions(Request $request)
-    {
+    public function actions(Request $request){
         // to move selected Items to archived
         if($request->has('delete_selected_btn')){
             foreach($request->item_id as $id){
@@ -347,7 +398,6 @@ class ItemsController extends Controller
     }
 
     public function importExcel(Request $request) {
-
         $csv_file = $request->csv_file;
         $supplier = Supplier::find($request->supplier_id);
         $data['supplier_id'] = $supplier->id;

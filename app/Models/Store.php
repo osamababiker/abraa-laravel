@@ -16,6 +16,7 @@ class Store extends Model
     public function user(){
         return $this->belongsTo(Supplier::class,'sub_of');
     }
+    
 
     public function items(){
         return $this->hasMany(Item::class, 'user_id');

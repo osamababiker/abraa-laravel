@@ -22,20 +22,19 @@ use App\Imports\BulkStoresImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\RandomStringTrait;
 use App\Http\Traits\FilesUploadTrait;
+use App\Http\Requests\StoresRequest;
 
 class StoresController extends Controller
 {
 
     use RandomStringTrait, FilesUploadTrait;
     
-    public function index()
-    {
+    public function index(){
         $countries = Country::all();
         return view('admin.stores.index', compact(['countries']));
     }
     
     public function getStoresAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
         $stores_status = $request->stores_status;
 
@@ -51,7 +50,6 @@ class StoresController extends Controller
         ]);
     }
     public function filterStores(Request $request){
-        
         $store_name = $request->store_name;
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
@@ -115,7 +113,6 @@ class StoresController extends Controller
     }
     // get active stores as json
     public function getActiveStoresAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
 
         $store_obj = Store::where('users_store.trash', 0);
@@ -131,7 +128,6 @@ class StoresController extends Controller
     }
     // filter active stores
     public function filterActiveStores(Request $request){
-        
         $store_name = $request->store_name;
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
@@ -186,7 +182,6 @@ class StoresController extends Controller
     }
     // get pending stores as json
     public function getPendingStoresAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
 
         $store_obj = Store::where('trash', 1)
@@ -203,7 +198,6 @@ class StoresController extends Controller
     }
     // filter pending stores
     public function filterPendingStores(Request $request){
-        
         $store_name = $request->store_name;
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
@@ -385,18 +379,7 @@ class StoresController extends Controller
     }
 
  
-    public function store(Request $request){
-
-        $this->validate($request, [
-            'full_name' => 'required',
-            'email' => 'required|unique:users',
-            'phone' => 'required|unique:users',
-            'password' => 'required',
-            'country' => 'required',
-            'city' => 'required',
-            'store_name' => 'required',
-            'sub_domain' => 'required|unique:users_store',
-        ]);
+    public function store(StoresRequest $request){
 
         DB::beginTransaction();
         try {
@@ -524,15 +507,19 @@ class StoresController extends Controller
     }
 
   
-    public function show($id)
-    {
-        //
+    public function show($id){
+        $store = Store::find($id);
+        return view('admin.stores.show', compact(['store']));
     }
 
 
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        $store = Store::find($id);
+        $countries = Country::all();
+        $states = State::all();
+        return view('admin.stores.edit', compact(
+            ['store', 'countries', 'states']
+        ));
     }
 
  

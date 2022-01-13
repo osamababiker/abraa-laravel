@@ -443,6 +443,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('stores/{id}/destroy', [
         StoresController::class, 'destroy'
     ]);
+     // custom update route 
+    Route::post('stores/update', [ 
+        StoresController::class, 'update'
+    ])->name('stores.update');
 
     // ****************************************************//
     // active activeStores routs
@@ -545,7 +549,7 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     
     // resource route
-    Route::resource('stores', StoresController::class, ['except' => ['destroy']]);
+    Route::resource('stores', StoresController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Buyers Routes ====================== //

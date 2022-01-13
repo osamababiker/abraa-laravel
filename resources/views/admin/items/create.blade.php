@@ -275,6 +275,9 @@
                 </div>
             </main>
 
+            @if(session()->has('feedback'))
+                @include('admin.layouts.feedback')
+            @endif
             @include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')
