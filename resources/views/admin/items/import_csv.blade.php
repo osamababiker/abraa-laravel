@@ -25,11 +25,11 @@
                                         @csrf
                                         <div class="form-row">
                                             <div class="form-group col-md-6 autocomplete-supplier">
-                                                <label for="supplier_search">Select Supplier</label>
+                                                <label for="supplier_search">Search For Supplier</label>
                                                 <input type="text" id="supplier_search" class="form-control autocomplete">
                                             </div>
                                             <div class="form-group col-md-6 autocomplete-category">
-                                                <label for="category_search">Select Category</label>
+                                                <label for="category_search">Search For Category</label>
                                                 <input type="text" id="category_search" class="form-control autocomplete">
                                             </div>
                                             <div class="form-group col-md-12">
@@ -40,7 +40,7 @@
                                         
                                         <input type="hidden" name="supplier_id" id="supplier_id">
                                         <input type="hidden" name="category_id" id="category_id">
-                                        
+
                                         <div class="form-row d-flex justify-content-center">
                                             <button type="submit" class="btn btn-primary">Import</button>
                                         </div>
