@@ -55,7 +55,7 @@ $(document).ready(function () {
                 "<td>"+ currency.name_ar +"</td>\n"+
                 "<td>"+ currency.name_en +"</td>\n"+
                 "<td>"+ currency_status +"</td>\n"+
-                "<td class=\"table-action\">\n"+
+                "<td class=\"table-action\" style=\"justify-content: center;\">\n"+
                     "<a target=\"_blank\" href=\"/currencies/"+ currency.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
@@ -140,7 +140,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ currency.name_ar +"</td>\n"+
                 "<td>"+ currency.name_en +"</td>\n"+
                 "<td>"+ currency_status +"</td>\n"+
-                "<td class=\"table-action\">\n"+
+                "<td class=\"table-action\" style=\"justify-content: center;\">\n"+
                     "<a target=\"_blank\" href=\"/currencies/"+ currency.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+

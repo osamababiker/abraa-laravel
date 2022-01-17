@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StatesRequest;
 use App\Models\State;
 use App\Models\Country;
 use App\Exports\StateExport;
@@ -12,14 +13,12 @@ use Maatwebsite\Excel\Facades\Excel;
 class StatesController extends Controller
 {
   
-    public function index()
-    {
+    public function index(){
         $countries = Country::all();
         return view('admin.states.index', compact(['countries']));
     } 
 
-    public function getstatesAsJson(Request $request)
-    {
+    public function getstatesAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
 
         $state_obj = new State();
@@ -35,8 +34,7 @@ class StatesController extends Controller
     }
 
 
-    public function filterstates(Request $request)
-    {
+    public function filterstates(Request $request){
         $rows_numbers = $request->rows_numbers; 
         $state_name = $request->state_name;
         $state_countries = $request->state_countries;
@@ -62,52 +60,87 @@ class StatesController extends Controller
     }
 
   
-    public function create()
-    {
-        //
+    public function create(){
+        $countries = Country::all();
+        return view('admin.states.create', compact(['countries']));
     }
 
   
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(StatesRequest $request){
+        $state = new State();
+        $state->capital = $request->capital;
+        $state->sub_of = $request->sub_of;
+        $state->ar_name = $request->ar_name;
+        $state->en_name = $request->en_name;
+        $state->tr_name = $request->tr_name;
+        $state->ru_name = $request->ru_name;
+        $state->save();
 
+        $message = 'States hass been Added successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
    
-    public function show($id)
-    {
-        //
+    public function show($id){
+        $state = State::find($id);
+        return view('admin.states.show', compact(['state']));
     }
 
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        $state = State::find($id);
+        $countries = Country::all();
+        return view('admin.states.edit', compact(['state','countries']));
     }
 
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function update(Request $request){
+        $state = State::find($request->state_id);
+        $state->capital = $request->capital;
+        $state->sub_of = $request->sub_of;
+        $state->ar_name = $request->ar_name;
+        $state->en_name = $request->en_name;
+        $state->tr_name = $request->tr_name;
+        $state->ru_name = $request->ru_name;
+        $state->save();
 
- 
-    public function destroy($id){
-        State::where('id',$id)->delete();
-        $message = 'State hass been Archived successfully';
+        $message = 'States hass been Updated successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
 
+    public function destroy($id){
+        State::where('id',$id)->delete();
+        $message = 'States hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+    // to handel actions in states table
+    public function actions(Request $request){
+        if($request->has('delete_selected_btn')){
+            foreach($request->state_id as $id){
+                State::where('id',$id)->delete();
+            }
+            $message = 'States hass been Archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new StateExport, 'states.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new StateImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }

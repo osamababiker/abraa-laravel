@@ -26,12 +26,6 @@
                                     <h5 class="card-title"> You have <span id="home_banners_counter"></span> banner in
                                         this table </h5>
                                     <div class="row">
-                                        <a href="{{ route('homeBanners.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
-                                        &nbsp; &nbsp;
-                                        <button type="button" data-toggle="modal" data-target="#delete_selected_confirm"
-                                            class="btn btn-danger"> <i class="fa fa-trash"></i> Archive Selected
-                                        </button>
-                                        &nbsp; &nbsp;
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -100,6 +94,7 @@
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
+            <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
             <script src="{{ asset('js/dataTables/homeBannersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

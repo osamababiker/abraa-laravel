@@ -833,11 +833,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('homeSliders/importExportView',  [
         HomeSlidersController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('homeSliders/update', [
+        HomeSlidersController::class, 'update'
+    ])->name('homeSliders.update');
     // custom delete route
     Route::get('homeSliders/{id}/destroy', [
         HomeSlidersController::class, 'destroy'
     ]);
-    Route::resource('homeSliders', HomeSlidersController::class, ['except' => ['destroy']]);
+    Route::resource('homeSliders', HomeSlidersController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Home banners Routes ====================== //
@@ -863,11 +867,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('homeBanners/importExportView',  [
         HomeBannersController::class, 'importExportView'
     ]);
-    // custom delete route
-    Route::get('homeBanners/{id}/destroy', [
+    // custom update route
+    Route::post('homeBanners/update', [
+        HomeBannersController::class, 'update'
+    ])->name('homebanners.update');
+     // custom delete route
+     Route::get('homeBanners/{id}/destroy', [
         HomeBannersController::class, 'destroy'
     ]);
-    Route::resource('homeBanners', HomeBannersController::class, ['except' => ['destroy']]);
+    Route::resource('homeBanners', HomeBannersController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Ads Categories Routes ====================== //
@@ -923,11 +931,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('ads/importExportView',  [
         AdsController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('ads/update', [
+        AdsController::class, 'update'
+    ])->name('ads.update');
     // custom delete route
     Route::get('ads/{id}/destroy', [
         AdsController::class, 'destroy'
     ]);
-    Route::resource('ads', AdsController::class, ['except' => ['destroy']]);
+    Route::resource('ads', AdsController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= services Routes ====================== //
@@ -1059,7 +1071,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('configs/json', [
         ConfigsController::class, 'getConfigsAsJson'
     ])->name('configs.json');
-    // filter configs  route 
+    // filter configs  route  
     Route::post('configs/filter', [
         ConfigsController::class, 'filterConfigs'
     ])->name('configs.filter');
@@ -1077,7 +1089,11 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('configs/{id}/destroy', [
         ConfigsController::class, 'destroy'
     ]);
-    Route::resource('configs', ConfigsController::class, ['except' => ['destroy']]);
+    // custom update route
+    Route::post('configs/update', [
+        ConfigsController::class, 'update'
+    ])->name('configs.update');
+    Route::resource('configs', ConfigsController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Countries Routes ====================== //
@@ -1103,11 +1119,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('countries/importExportView',  [
         CountriesController::class, 'importExportView'
     ]);
-    // custom delete route
-    Route::get('countries/{id}/destroy', [
+    // custom update route
+    Route::post('countries/update', [
+        CountriesController::class, 'update'
+    ])->name('countries.update');
+     // custom delete route
+     Route::get('countries/{id}/destroy', [
         CountriesController::class, 'destroy'
     ]);
-    Route::resource('countries', CountriesController::class, ['except' => ['destroy']]);
+    Route::resource('countries', CountriesController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= States Routes ====================== //
@@ -1133,11 +1153,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('states/importExportView',  [
         StatesController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('states/update', [
+        StatesController::class, 'update'
+    ])->name('states.update');
     // custom delete route
     Route::get('states/{id}/destroy', [
         StatesController::class, 'destroy'
     ]);
-    Route::resource('states', StatesController::class, ['except' => ['destroy']]);
+    Route::resource('states', StatesController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Currencies Routes ====================== //
@@ -1163,11 +1187,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('currencies/importExportView',  [
         CurrenciesController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('currencies/update', [
+        CurrenciesController::class, 'update'
+    ])->name('currencies.update');
     // custom delete route
     Route::get('currencies/{id}/destroy', [
         CurrenciesController::class, 'destroy'
     ]);
-    Route::resource('currencies', CurrenciesController::class, ['except' => ['destroy']]);
+    Route::resource('currencies', CurrenciesController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= units Routes ====================== //

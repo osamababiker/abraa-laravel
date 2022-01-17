@@ -64,14 +64,6 @@ $(document).ready(function () {
                     "<a target=\"_blank\" href=\"/adsCategories/"+ adsCategory.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/adsCategories/"+ adsCategory.id +"/edit\">\n"+
-                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_adsCategory_"+ adsCategory.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
-                    "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"
             });
@@ -155,14 +147,6 @@ $(".filter_data_table").on('change', function () {
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/adsCategories/"+ adsCategory.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/adsCategories/"+ adsCategory.id +"/edit\">\n"+
-                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_adsCategory_"+ adsCategory.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"

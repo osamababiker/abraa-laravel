@@ -135,7 +135,15 @@
 <script>
     $(".datepicker").daterangepicker({
         singleDatePicker: true,
-        showDropdowns: true
+        showDropdowns: true,
+    });
+
+    $(".ymd_datepicker").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        locale: {
+            format: "Y-M-D"
+        }
     });
 </script>
 
@@ -183,3 +191,7 @@
 <script src="{{ asset('js/form_steps.js') }}"></script>
 
 <script src="{{ asset('js/add_store.js') }}"></script>
+
+<script src="{{ asset('js/add_slider.js') }}"></script>
+
+<script src="{{ asset('js/add_ads.js') }}"></script>

@@ -473,8 +473,6 @@ class SuppliersController extends Controller
         if($shipping_country){
             $buying_request_obj->whereIn('buying_requests.country_code', $shipping_country);
         }
-
-    
             
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj->limit($rows_numbers)
@@ -492,7 +490,6 @@ class SuppliersController extends Controller
     /**********************************************/
     // to get supplier verifications
     public function suppliersVerifications($supplier_id){
-
         $supplier = Supplier::find($supplier_id);
         return view('admin.suppliers.verifications.index', compact(['supplier']));
     }
@@ -515,7 +512,6 @@ class SuppliersController extends Controller
     } 
 
     public function filterSuppliersVerifications(Request $request, $supplier_id){
-        
         $rows_numbers = $request->rows_numbers; 
 
         $verifications_obj = SupplierVerification::where('user_id', $supplier_id)
@@ -540,7 +536,6 @@ class SuppliersController extends Controller
     // **********************************************/
     // supplier create items 
     public function createSupplierItems($supplier_id){
-
         $supplier = Supplier::find($supplier_id);
         return view('admin.suppliers.items.create', compact(['supplier']));
     }
@@ -548,7 +543,6 @@ class SuppliersController extends Controller
     // **********************************************/
     // supplier create stores 
     public function createSupplierStores($supplier_id){
-
         $supplier = Supplier::find($supplier_id);
         return view('admin.suppliers.stores.create', compact(['supplier']));
     }
@@ -556,13 +550,11 @@ class SuppliersController extends Controller
     // **********************************************/
     // supplier create buying Requests 
     public function createSupplierbuyingRequests($supplier_id){
-
         $supplier = Supplier::find($supplier_id);
         return view('admin.suppliers.buyingRequests.create', compact(['supplier']));
     }
     
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $this->validate($request, [
             'business_name' => 'required',
             'country' => 'required',

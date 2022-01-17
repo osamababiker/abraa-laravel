@@ -34,7 +34,7 @@ $(document).ready(function () {
                 }
 
                 if(slider.user){
-                    added_by = slider.user.full_name;
+                    added_by = slider.user.name;
                 }
 
 
@@ -56,7 +56,7 @@ $(document).ready(function () {
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_slider("+ slider.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
-                    "</div>\n"+
+                    "</div>\n"+ 
                     "</div>\n"+
                 "</div>\n"+
 
@@ -70,10 +70,6 @@ $(document).ready(function () {
                 "<td>"+ added_by +"</td>\n"+
                 "<td>"+ slider_status +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/homeSliders/"+ slider.id +"\">\n"+
-                        "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
                     "<a target=\"_blank\" href=\"/homeSliders/"+ slider.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
@@ -133,7 +129,7 @@ $(".filter_data_table").on('change', function () {
                 }
 
                 if(slider.user){
-                    added_by = slider.user.full_name;
+                    added_by = slider.user.name;
                 }
 
 
@@ -169,10 +165,6 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ added_by +"</td>\n"+
                 "<td>"+ slider_status +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/homeSliders/"+ slider.id +"\">\n"+
-                        "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
                     "<a target=\"_blank\" href=\"/homeSliders/"+ slider.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+

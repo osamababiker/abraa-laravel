@@ -469,7 +469,7 @@ class StoresController extends Controller
                 $banner_name = time().'.'.$banner->extension();
                 $temp_dir = $banner->getPathName();
                 $banner3_url = $this->upload_image($banner_name, $temp_dir, 'files');
-            }
+            } 
 
             if($request->show_home_page){
                 $show_home_page = 1;

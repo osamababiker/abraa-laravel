@@ -11,7 +11,7 @@ $(document).ready(function () {
     var rows_numbers = $('#rows_numbers').val();
 
     $.ajax({
-        url: "/ads/json",  
+        url: "/ads/json",   
         type: "get", 
         data: {
             "rows_numbers": rows_numbers,

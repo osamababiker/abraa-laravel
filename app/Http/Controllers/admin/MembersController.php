@@ -12,14 +12,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class MembersController extends Controller
 {
-    public function index() 
-    {
+    public function index() {
         $countries = Country::all();
         return view('admin.members.index', compact(['countries'])); 
     } 
     
     public function getMembersAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
         $member_obj = new UserActivity();
 
@@ -35,7 +33,6 @@ class MembersController extends Controller
     } 
 
     public function filterMembers(Request $request){
-
         $member_name = $request->member_name;
         $countries = $request->countries;
         $rows_numbers = $request->rows_numbers; 

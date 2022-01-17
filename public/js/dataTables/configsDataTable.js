@@ -80,12 +80,14 @@ $(".filter_data_table").on('change', function () {
     
     // filter data
     var rows_numbers = $('#rows_numbers').val();
+    var config_name = $('#config_name').val();
 
     $.ajax({
         url: "/configs/filter",
         type: "post",
         data: {
             "rows_numbers": rows_numbers,
+            "config_name": config_name,
             "_token": csrf_token
         },
         success: function(response){

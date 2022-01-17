@@ -16,7 +16,7 @@ class Ads extends Model
 
     public function category(){
         return $this->belongsTo(AdsCategory::class,'sub_of');
-    }
+    } 
 
     public function language(){
         return $this->belongsTo(Language::class,'lang', 'code');

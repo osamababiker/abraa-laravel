@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; 
 use App\Models\AdsCategory;
 use App\Models\Category;
-use App\Exports\AdsCategoryExport;
+use App\Exports\AdsCategoryExport; 
 use App\Imports\AdsCategoryImport;
 use Maatwebsite\Excel\Facades\Excel;
 

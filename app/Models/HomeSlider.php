@@ -18,6 +18,6 @@ class HomeSlider extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class,'added_by');
+        return $this->belongsTo(User::class,'added_by'); 
     }
 }

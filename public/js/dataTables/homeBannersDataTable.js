@@ -34,7 +34,7 @@ $(document).ready(function () {
                 }
 
                 if(banner.user){
-                    added_by = banner.user.full_name;
+                    added_by = banner.user.name;
                 }
 
 
@@ -63,23 +63,15 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"banner_id[]\" value=\""+ banner.id +"\" ></input> </td>\n" +
                 "<td> <img src=\" " + banner.slider + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
-                "<td> <a href=\""+ banner.link +"\" target=\"_blank\"> "+ banner.link +" </a> </td>\n"+
+                "<td> <a href=\""+ public_url + banner.link +"\" target=\"_blank\"> "+ banner.link +" </a> </td>\n"+
                 "<td>"+ banner.title +"</td>\n"+
-                "<td>"+ banner_language +"</td>\n"+
+                "<td>"+ banner_language +"</td>\n"+ 
                 "<td>"+ banner.date_added +"</td>\n"+
                 "<td>"+ added_by +"</td>\n"+
                 "<td>"+ banner_status +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/homebanners/"+ banner.id +"\">\n"+
-                        "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/homebanners/"+ banner.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/homeBanners/"+ banner.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_banner_"+ banner.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"
@@ -133,7 +125,7 @@ $(".filter_data_table").on('change', function () {
                 }
 
                 if(banner.user){
-                    added_by = banner.user.full_name;
+                    added_by = banner.user.name;
                 }
 
 
@@ -162,23 +154,15 @@ $(".filter_data_table").on('change', function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"banner_id[]\" value=\""+ banner.id +"\" ></input> </td>\n" +
                 "<td> <img src=\" " + banner.slider + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
-                "<td> <a href=\""+ banner.link +"\" target=\"_blank\"> "+ banner.link +" </a> </td>\n"+
+                "<td> <a href=\""+ public_url + banner.link  +"\" target=\"_blank\"> "+ banner.link +" </a> </td>\n"+
                 "<td>"+ banner.title +"</td>\n"+
                 "<td>"+ banner_language +"</td>\n"+
                 "<td>"+ banner.date_added +"</td>\n"+
                 "<td>"+ added_by +"</td>\n"+
                 "<td>"+ banner_status +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/homebanners/"+ banner.id +"\">\n"+
-                        "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/homebanners/"+ banner.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/homeBanners/"+ banner.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_banner_"+ banner.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-trash\" data-feather=\"trash\"></i>\n"+
                     "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"

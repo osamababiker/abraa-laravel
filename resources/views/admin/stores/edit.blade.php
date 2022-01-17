@@ -15,7 +15,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"> <i class="fa fa-edit"></i> Edit Store </h1>
+					<h1 class="h3 mb-3 ml-4"> <i class="fa fa-edit"></i> Edit Store </h1>
 					<div class="col-12">
 						<div class="col-12 col-lg-12">
 							<div class="tab">
