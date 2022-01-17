@@ -764,9 +764,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('items/import/excel', [
         ItemsController::class, 'importExcel'
     ])->name('items.import.excel');
+    // to get import view
     Route::get('items/import/excel',  [
         ItemsController::class, 'importView'
     ])->name('items.import.excel'); 
+    // to get supplier and category 
+    // for import bulk items
+    Route::get('items/import/excel/getData',  [
+        ItemsController::class, 'getData'
+    ])->name('items.import.excel.getData'); 
     // custom delete route
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'

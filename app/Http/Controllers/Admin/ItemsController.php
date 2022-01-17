@@ -394,6 +394,40 @@ class ItemsController extends Controller
         return view('admin.items.import_csv');    
     }
 
+    // to get suppliers and categories for import the items
+    public function getData(Request $request){
+        if($request->is_category){
+            $results = Category::where('en_title', 'like', '%'. $request->term . '%')
+            ->orWhere('ar_title', 'like', '%'. $request->term . '%')
+            ->orWhere('ar_title', 'like', '%'. $request->term . '%')
+            ->orWhere('cn_title', 'like', '%'. $request->term . '%')
+            ->orWhere('ru_title', 'like', '%'. $request->term . '%')
+            ->orWhere('tr_title', 'like', '%'. $request->term . '%')
+            ->orWhere('pr_title', 'like', '%'. $request->term . '%')->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $categories[$i]['id'] = $r['id'];
+                $categories[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
+                $categories[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
+                $i++;
+            }
+            echo json_encode($categories);
+        }else 
+        if($request->is_supplier){
+            $results = Supplier::where('full_name', 'like', '%'. $request->term . '%')
+            ->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $suppliers[$i]['id'] = $r['id'];
+                $suppliers[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['full_name']));
+                $suppliers[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['full_name']));
+                $i++;
+            }
+            echo json_encode($suppliers);
+        }
+        
+    }
+
     public function importExcel(Request $request) {
         $csv_file = $request->csv_file;
         $supplier = Supplier::find($request->supplier_id);

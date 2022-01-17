@@ -18,7 +18,7 @@ $(".filter_data_table").on('change', function () {
         url: "/globalRfqs/suppliers/filter",
         type: "post",
         data: {
-            'product_search': product_search,
+            'product_search': product_search, 
             'countries': countries,
             'supplier_name': supplier_name,
             'keywords': keywords,
@@ -57,7 +57,7 @@ $(".filter_data_table").on('change', function () {
 });
 
 
-
+ 
 
 window.global_category = 0; 
 

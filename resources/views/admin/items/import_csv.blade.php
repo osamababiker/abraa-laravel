@@ -24,26 +24,23 @@
                                     <form action="{{ route('items.import.excel') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="supplier_id">Select Supplier</label>
-                                                <select name="supplier_id" id="supplier_id" class="form-control select2">
-                                                    <option value=""></option>
-                                                    
-                                                </select>
+                                            <div class="form-group col-md-6 autocomplete-supplier">
+                                                <label for="supplier_search">Select Supplier</label>
+                                                <input type="text" id="supplier_search" class="form-control autocomplete">
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="category_id">Select Category</label>
-                                                <select name="category_id" id="category_id" class="form-control select2">
-                                                    <option value=""></option>
-                                                   
-                                                </select>
+                                            <div class="form-group col-md-6 autocomplete-category">
+                                                <label for="category_search">Select Category</label>
+                                                <input type="text" id="category_search" class="form-control autocomplete">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="csv_file">Choose File</label>
                                                 <input type="file" name="csv_file" class="form-control" id="csv_file">
                                             </div>
                                         </div>
-
+                                        
+                                        <input type="hidden" name="supplier_id" id="supplier_id">
+                                        <input type="hidden" name="category_id" id="category_id">
+                                        
                                         <div class="form-row d-flex justify-content-center">
                                             <button type="submit" class="btn btn-primary">Import</button>
                                         </div>
@@ -60,5 +57,6 @@
                 @include('admin.items.components.feedback')
             @endif
             @include('admin.layouts.scripts') 
+            <script src="{{ asset('js/import_items.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')
