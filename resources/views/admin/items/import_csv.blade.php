@@ -54,7 +54,7 @@
             </main>
 
             @if(session()->has('feedback'))
-                @include('admin.items.components.feedback')
+                @include('admin.layouts.feedback')
             @endif
             @include('admin.layouts.scripts') 
             <script src="{{ asset('js/import_items.js') }}"></script>

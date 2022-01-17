@@ -63,8 +63,8 @@ $(document).ready(function () {
                 "<td> <input type=\"checkbox\" name=\"item_id[]\" value=\""+ item.id +"\" ></input> </td>\n" +
                 "<td>"+ item.id +"</td>\n"+
                 "<td>"+ item.title +"</td>\n"+
-                "<td>"+ item_category +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\"http://localhost/abraa/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ item_category +"</td>\n"+ 
+                "<td> <a target=\"_blank\" href=\""+ public_url +"item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
                 "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
@@ -169,7 +169,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ item.id +"</td>\n"+
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\"http://localhost/abraa/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ public_url +"/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
                 "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
