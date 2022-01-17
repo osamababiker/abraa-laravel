@@ -391,10 +391,7 @@ class ItemsController extends Controller
     }
     
     public function importView(){
-        $suppliers = Supplier::whereIn('member_type',[1,3])
-            ->where('user_type',0)->orderBy('id','desc')->get();
-        $categories = Category::all();
-        return view('admin.items.import_csv',compact(['suppliers','categories']));    
+        return view('admin.items.import_csv');    
     }
 
     public function importExcel(Request $request) {

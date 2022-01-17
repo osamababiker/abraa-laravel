@@ -28,18 +28,14 @@
                                                 <label for="supplier_id">Select Supplier</label>
                                                 <select name="supplier_id" id="supplier_id" class="form-control select2">
                                                     <option value=""></option>
-                                                    @foreach($suppliers as $supplier)
-                                                        <option value="{{ $supplier->id }}">{{ $supplier->full_name }}</option>
-                                                    @endforeach
+                                                    
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="category_id">Select Category</label>
                                                 <select name="category_id" id="category_id" class="form-control select2">
                                                     <option value=""></option>
-                                                    @foreach($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->en_title }}</option>
-                                                    @endforeach
+                                                   
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
