@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
+    // to load register view
     public function showRegister(){
-        return view('admin/auth/register');
+        return view('admin/auth/register');  
     }
     public function register(Request $request){
         $request->validate([
