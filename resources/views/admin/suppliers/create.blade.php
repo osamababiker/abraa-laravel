@@ -176,7 +176,7 @@
             </main>
 
             @if(session()->has('feedback'))
-                @include('admin.suppliers.components.feedback')
+                @include('admin.layouta.feedback')
             @endif
             @include('admin.layouts.scripts')
             <!-- footer is here -->
