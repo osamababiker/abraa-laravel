@@ -158,7 +158,7 @@ class StoresController extends Controller
         }
 
         if($store_country){
-            $store_obj->whereIn('users_store.country', $store_country)
+            $store_obj->where('users_store.country', $store_country[0])
                 ;
         }
         
