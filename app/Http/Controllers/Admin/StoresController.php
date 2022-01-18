@@ -155,7 +155,7 @@ class StoresController extends Controller
     
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%')
-                ->where('users.full_name', 'like',  '%'. $store_name .'%');
+                ->orWhere('users.full_name', 'like',  '%'. $store_name .'%');
         }
 
         if($store_country){
