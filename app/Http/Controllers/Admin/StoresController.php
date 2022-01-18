@@ -146,18 +146,13 @@ class StoresController extends Controller
             return $currentPage;
         });
 
-        $store_obj = Store::with('user')
-            ->select('users_store.*')
-            ->leftJoin('users', function($join) {
-            $join->on('users.id', '=', 'users_store.sub_of');
-        });
 
         $store_obj = Store::with('user')
             ->select('users_store.*')
             ->where('users_store.trash', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
-            });
+        });
         
         
         if($store_name){
@@ -165,7 +160,8 @@ class StoresController extends Controller
         }
 
         if($store_country){
-            $store_obj->whereIn('users_store.country', $store_country);
+            $store_obj->whereIn('users_store.country', $store_country)
+                ->orWhereIn('users.country', $store_country);
         }
         
         if($meta_keyword){
