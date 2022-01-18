@@ -23,6 +23,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\RandomStringTrait;
 use App\Http\Traits\FilesUploadTrait;
 use App\Http\Requests\StoresRequest;
+use Illuminate\Pagination\Paginator;
 
 class StoresController extends Controller
 {
@@ -41,11 +42,12 @@ class StoresController extends Controller
         $store_obj = new Store();
 
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->with('user')->orderBy('id','desc')->get();
+        $stores = $store_obj->with('user')->orderBy('id','desc')
+            ->paginate($rows_numbers);
         
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -55,8 +57,11 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
-        
         $store_obj = Store::with('user')
             ->select('users_store.*')
             ->leftJoin('users', function($join) {
@@ -87,19 +92,20 @@ class StoresController extends Controller
             $store_obj->whereIn('users_store.country', $store_country);
         }
         
-        if($meta_keyword){
+        if($meta_keyword){  
             foreach($meta_keyword as $word){
                 $store_obj->where('users_store.meta_keywords','like', '%' . $word . '%');
             }
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->orderBy('users_store.id','desc')->get();
+        $stores = $store_obj->orderBy('users_store.id','desc')
+            ->paginate($rows_numbers);
 
    
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
