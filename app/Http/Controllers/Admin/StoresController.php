@@ -57,6 +57,7 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
+
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
@@ -124,11 +125,12 @@ class StoresController extends Controller
         $store_obj = Store::where('users_store.trash', 0);
 
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->with('user')->orderBy('id','desc')->get();
+        $stores = $store_obj->with('user')->orderBy('id','desc')
+            ->paginate($rows_numbers);
         
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -139,7 +141,11 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
-        
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $store_obj = Store::with('user')
             ->select('users_store.*')
             ->leftJoin('users', function($join) {
@@ -169,12 +175,13 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->orderBy('users_store.id','desc')->get();
+        $stores = $store_obj->orderBy('users_store.id','desc')
+            ->paginate($rows_numbers);
 
    
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -194,11 +201,12 @@ class StoresController extends Controller
             ->where('rejected', 0);
 
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->with('user')->orderBy('id','desc')->get();
+        $stores = $store_obj->with('user')->orderBy('id','desc')
+            ->paginate($rows_numbers);
         
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -208,6 +216,11 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $store_obj = Store::with('user')
             ->select('users_store.*')
@@ -232,12 +245,13 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->orderBy('users_store.id','desc')->get();
+        $stores = $store_obj->orderBy('users_store.id','desc')
+            ->paginate($rows_numbers);
 
    
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -258,11 +272,12 @@ class StoresController extends Controller
             ->where('users_store.rejected', 1);
 
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->with('user')->orderBy('id','desc')->get();
+        $stores = $store_obj->with('user')->orderBy('id','desc')
+            ->paginate($rows_numbers);
         
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -274,6 +289,10 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $store_obj = Store::with('user')
             ->select('users_store.*')
@@ -298,12 +317,13 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->orderBy('users_store.id','desc')->get();
+        $stores = $store_obj->orderBy('users_store.id','desc')
+            ->paginate($rows_numbers);
 
    
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -329,11 +349,12 @@ class StoresController extends Controller
             ->whereIn('users.user_source', [29, 35]);
 
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)
-            ->orderBy('users_store.id','desc')->get();
+        $stores = $store_obj->orderBy('users_store.id','desc')
+            ->paginate($rows_numbers);
         
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
@@ -344,6 +365,11 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $store_obj = Store::with('user')
             ->select('users_store.*')
@@ -368,12 +394,13 @@ class StoresController extends Controller
         }
             
         $stores_count = $store_obj->count();
-        $stores = $store_obj->limit($rows_numbers)->with('user')
-            ->orderBy('users_store.id','desc')->get();
+        $stores = $store_obj->with('user')
+            ->orderBy('users_store.id','desc')->paginate($rows_numbers);
 
    
         return response()->json([
             'stores' => $stores,
+            'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);
     }
