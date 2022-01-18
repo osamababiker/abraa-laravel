@@ -146,17 +146,16 @@ class StoresController extends Controller
             return $currentPage;
         });
 
-
         $store_obj = Store::with('user')
             ->select('users_store.*')
             ->where('users_store.trash', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
         });
-        
-        
+    
         if($store_name){
-            $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
+            $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%')
+                ->where('users.full_name', 'like',  '%'. $store_name .'%');
         }
 
         if($store_country){
@@ -173,7 +172,6 @@ class StoresController extends Controller
         $stores_count = $store_obj->count();
         $stores = $store_obj->orderBy('users_store.id','desc')
             ->paginate($rows_numbers);
-
    
         return response()->json([
             'stores' => $stores,
@@ -224,14 +222,15 @@ class StoresController extends Controller
             ->where('users_store.rejected', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
-            });
+        });
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
         }
 
         if($store_country){
-            $store_obj->whereIn('users_store.country', $store_country);
+            $store_obj->whereIn('users_store.country', $store_country)
+                ->orWhereIn('users.country', $store_country);
         }
         
         if($meta_keyword){
@@ -244,7 +243,6 @@ class StoresController extends Controller
         $stores = $store_obj->orderBy('users_store.id','desc')
             ->paginate($rows_numbers);
 
-   
         return response()->json([
             'stores' => $stores,
             'pagination' => (string) $stores->links('pagination::bootstrap-4'),
@@ -296,14 +294,15 @@ class StoresController extends Controller
             ->where('users_store.rejected', 1)
             ->leftJoin('users', function($join){
                 $join->on('users.id', '=', 'users_store.sub_of');
-            });
+        });
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
         }
 
         if($store_country){
-            $store_obj->whereIn('users_store.country', $store_country);
+            $store_obj->whereIn('users_store.country', $store_country)
+                ->orWhereIn('users.country', $store_country);
         }
         
         if($meta_keyword){
@@ -341,8 +340,8 @@ class StoresController extends Controller
             ->where('users_store.trash', 1)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
-            })
-            ->whereIn('users.user_source', [29, 35]);
+             })
+        ->whereIn('users.user_source', [29, 35]);
 
         $stores_count = $store_obj->count();
         $stores = $store_obj->orderBy('users_store.id','desc')
@@ -373,14 +372,15 @@ class StoresController extends Controller
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
             })
-            ->whereIn('users.user_source', [29, 35]);
+        ->whereIn('users.user_source', [29, 35]);
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
         }
 
         if($store_country){
-            $store_obj->whereIn('users_store.country', $store_country);
+            $store_obj->whereIn('users_store.country', $store_country)
+                ->orWhereIn('users.country', $store_country);
         }
         
         if($meta_keyword){
