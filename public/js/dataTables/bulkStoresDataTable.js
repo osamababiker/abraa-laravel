@@ -113,6 +113,7 @@ $(".filter_data_table").on('change', function () {
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var stores_status = $('#stores_status').val();
+    var external = $('#external').val();
 
     $.ajax({
         url: "/bulkStores/filter",
@@ -122,9 +123,10 @@ $(".filter_data_table").on('change', function () {
             'store_country': store_country,
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
-            "stores_status": stores_status,
-            "current_page": window.current_page,
-            "_token": csrf_token
+            'stores_status': stores_status,
+            'external': external,
+            'current_page': window.current_page,
+            '_token': csrf_token
         },
         success: function(response){
 
@@ -219,7 +221,8 @@ $("#pagination").on('click', 'a', function(e) {
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var stores_status = $('#stores_status').val();
-    
+    var external = $('#external').val();
+
     $.ajax({
         url: "/bulkStores/filter",
         type: "post",
@@ -228,9 +231,10 @@ $("#pagination").on('click', 'a', function(e) {
             'store_country': store_country,
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
-            "stores_status": stores_status,
-            "current_page": window.current_page,
-            "_token": csrf_token
+            'stores_status': stores_status,
+            'external': external,
+            'current_page': window.current_page,
+            '_token': csrf_token
         },
         success: function(response){
 

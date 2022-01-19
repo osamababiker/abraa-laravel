@@ -81,6 +81,15 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-3 form-group">
+                                                <label for="external">Show External</label>
+                                                <select name="external" multiple="multiple" id="external"
+                                                    class="filter_data_table form-control select2">
+                                                    <option value="0"></option>
+                                                    <option value="1">show</option>
+                                                    <option value="0">hide</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 form-group">
                                                 <label for="rows_numbers">Numbers of rows</label>
                                                 <select name="rows_numbers" id="rows_numbers"
                                                     class="filter_data_table form-control select2">

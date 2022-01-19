@@ -216,6 +216,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+        $external = $request->external;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -228,7 +229,7 @@ class StoresController extends Controller
             ->where('users_store.rejected', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
-        })->where('users.external', 0);
+        })->where('users.external', $external);
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
@@ -368,6 +369,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+        $external = $request->external;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -381,7 +383,7 @@ class StoresController extends Controller
             })
         ->where('users_store.trash', 1)
         ->whereIn('users.user_source', [29, 35])
-        ->where('users.external', 0)
+        ->where('users.external', $external)
         ->where('users_store.rejected', 0);
         
         /*

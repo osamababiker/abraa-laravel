@@ -132,9 +132,9 @@ $(".filter_data_table").on('change', function () {
             'store_country': store_country,
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
-            "stores_status": stores_status,
-            "current_page": window.current_page,
-            "_token": csrf_token
+            'stores_status': stores_status,
+            'current_page': window.current_page,
+            '_token': csrf_token
         },
         success: function(response){
 
@@ -246,9 +246,9 @@ $("#pagination").on('click', 'a', function(e) {
             'store_country': store_country,
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
-            "stores_status": stores_status,
-            "current_page": window.current_page,
-            "_token": csrf_token
+            'stores_status': stores_status,
+            'current_page': window.current_page,
+            '_token': csrf_token
         },
         success: function(response){
 
