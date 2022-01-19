@@ -58,12 +58,12 @@
                                     <div class="card-body">
 
                                         <div class="row mb-2 m-1">
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="store_name">Store Name</label>
                                                 <input type="text" name="store_name" id="store_name"
                                                     class="filter_data_table form-control" aria-label="Search">
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="store_country"> Filter by Country</label>
                                                 <select name="store_country[]" multiple="multiple" id="store_country"
                                                     class="filter_data_table form-control select2">
@@ -73,14 +73,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="meta_keyword">Filter by Keywords</label>
                                                 <select name="meta_keyword[]" multiple="multiple" id="meta_keyword"
                                                     class="filter_data_table form-control select2">
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="external">Show External</label>
                                                 <select name="external" id="external"
                                                     class="filter_data_table form-control select2">
@@ -89,7 +89,7 @@
                                                     <option value="0">hide</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="rows_numbers">Numbers of rows</label>
                                                 <select name="rows_numbers" id="rows_numbers"
                                                     class="filter_data_table form-control select2">
