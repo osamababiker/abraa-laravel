@@ -124,6 +124,7 @@
                                                     <th>Contact Count</th>
                                                     <th>Date Added </th>
                                                     <th>Reminders Sent</th>
+                                                    <th>Products</th>
                                                     <th> Actions </th>
                                                 </tr>
                                             </thead>

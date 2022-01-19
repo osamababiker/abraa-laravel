@@ -548,6 +548,20 @@ Route::group(['middleware' => 'auth'], function (){
         StoresController::class, 'BulkStoresimportExportView'
     ]);
     
+    // ======================================//
+    // to get store items
+    Route::get('stores/{id}/items',  [
+        StoresController::class, 'storeItems'
+    ])->name('stores.items.index'); 
+    // to get stores items as json
+    Route::get('stores/{id}/items/json',  [
+        StoresController::class, 'getStoreItemsAsJson'
+    ]); 
+    // to filter stores items
+    Route::post('stores/{id}/items/filter',  [
+        StoresController::class, 'filterStoreItems'
+    ]); 
+
     // resource route
     Route::resource('stores', StoresController::class, ['except' => ['destroy','update']]);
 

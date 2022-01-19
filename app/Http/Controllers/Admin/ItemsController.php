@@ -38,7 +38,7 @@ class ItemsController extends Controller
         
         return response()->json([
             'items' => $items,
-            'items_count' => $items_count
+            'items_count' => $items_count 
         ]);
     }
 
@@ -88,8 +88,6 @@ class ItemsController extends Controller
             $item_obj = $item_obj->where('users_store.trash', 1);
         }
 
-       
-        
         if($product_name){
             $item_obj->where('items.title','like', '%' . $product_name . '%'); 
         }

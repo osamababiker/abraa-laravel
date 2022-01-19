@@ -5,7 +5,7 @@ use DB;
 use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Member;
+use App\Models\Item;
 use App\Models\Store;
 use App\Models\Country;
 use App\Models\State; 
@@ -407,14 +407,6 @@ class StoresController extends Controller
         ->whereIn('users.user_source', [29, 35])
         ->where('users.external', $external)
         ->where('users_store.rejected', 0);
-        
-        /*
-        
-        SELECT * FROM `users_store` store LEFT JOIN `users` supplier on supplier.id=store.sub_of WHERE store.rejected=0 AND store.trash=1 AND supplier.user_source IN (29, 35)
-
-        SELECT store.*, supplier.full_name, supplier.email, supplier.phone, supplier.prod_count, supplier.register_on AS supplier_register, supplier.id AS supplier_id FROM users_store AS store LEFT JOIN users AS supplier ON supplier.id=store.sub_of WHERE store.trash =1 AND supplier.user_source IN (29, 35) AND supplier.external=0 AND store.rejected=0
-
-        */
 
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
@@ -718,6 +710,98 @@ class StoresController extends Controller
         return redirect()->back();
     }
 
+    // to get store items 
+    public function storeItems($supplier_id){
+        $countries = Country::all();
+        $supplier = Supplier::findOrFail($supplier_id);
+        return view('admin.stores.items.index',compact(['countries','supplier']));   
+    }
+    // to get store items as json
+    public function getStoreItemsAsJson(Request $request, $supplier_id){
+        $rows_numbers = $request->rows_numbers;
+        $item_obj = Item::where('user_id', $supplier_id); 
+
+        $items_count = $item_obj->count();
+        $items = $item_obj->orderBy('id','DESC')->with('category')
+            ->with('supplier')->paginate($rows_numbers);
+        
+        return response()->json([
+            'items' => $items,
+            'items_count' => $items_count
+        ]);
+    }
+    // to filter store items
+    public function filterStoreItems(Request $request, $supplier_id){
+        $product_name = $request->product_name;
+        $manufacture_country = $request->manufacture_country;
+        $rows_numbers = $request->rows_numbers; 
+        $meta_keyword = $request->meta_keyword; 
+        $items_status = $request->items_status;
+        $store_status = $request->store_status;
+
+        $item_obj = Item::where('user_id', $supplier_id)
+            ->with('category')
+            ->select("items.*")
+            ->leftJoin('users', function($join) {
+                $join->on('users.id', '=', 'items.user_id');
+            })
+            ->leftJoin('users_store', function($join) {
+                $join->on('users_store.sub_of', '=', 'users.id');
+            });
+        
+        // filter by item status
+        if($items_status == 'active'){
+            $item_obj = $item_obj->where('items.status', 1)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 1);
+        } 
+        elseif($items_status == 'pending'){
+            $item_obj = $item_obj->where('items.status', 0)
+                ->where('items.rejected', 0)
+                ->where('items.approved', 0);
+        }
+        elseif($items_status == 'rejected'){
+            $item_obj = $item_obj->where('items.rejected',1);
+        }
+        elseif($items_status == 'home'){
+            $item_obj = $item_obj->where('items.show_homepage',1);
+        }
+        elseif($items_status == 'featured'){
+            $item_obj = $item_obj->where('items.featured',1);
+        }
+
+        // filter by store status
+        if($store_status == 'active_stores'){
+            $item_obj = $item_obj->where('users_store.trash', 0);
+        } 
+        elseif($store_status == 'pending_stores'){
+            $item_obj = $item_obj->where('users_store.trash', 1);
+        }
+
+        if($product_name){
+            $item_obj->where('items.title','like', '%' . $product_name . '%'); 
+        }
+
+        if($manufacture_country){
+            $item_obj->whereIn('items.manufacture_country', $manufacture_country);
+        }
+        
+        if($meta_keyword){
+            foreach($meta_keyword as $word){
+                $item_obj->where('items.meta_keyword','like', '%' . $word . '%');
+            }
+        }
+            
+        $items_count = $item_obj->count();
+        $items = $item_obj->orderBy('items.id','desc')
+        ->paginate($rows_numbers);
+
+        
+        return response()->json([
+            'items' => $items,
+            'items_count' => $items_count
+        ]);
+    }
 
     // to handel table actions 
     public function actions(Request $request){

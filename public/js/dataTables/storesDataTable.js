@@ -10,6 +10,7 @@ $(document).ready(function () {
     var store_verified = '';
     var is_reminder_sent = '';
     var store_url = '';
+    var store_products = 0;
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -31,6 +32,7 @@ $(document).ready(function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_products = "<a href=\"/stores/"+ store.user.id +"/items\" target=\"_blank\"> "+ store.user.prod_count +" </a></td>\n";
                     store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -70,12 +72,13 @@ $(document).ready(function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td>"+ store_url +"</td>\n"+
+                "<td>"+ store_url +"</td>\n"+ 
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
                 "<td>"+ is_reminder_sent +"</td>\n"+
+                "<td>"+ store_products +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
@@ -111,6 +114,7 @@ $(".filter_data_table").on('change', function () {
     var is_reminder_sent = '';
     var store_url = '';
     var user_email = '';
+    var store_products = 0;
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -142,6 +146,7 @@ $(".filter_data_table").on('change', function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_products = "<a href=\"/stores/"+ store.user.id +"/items\" target=\"_blank\"> "+ store.user.prod_count +" </a></td>\n";
                     store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -187,6 +192,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ store.contact_count +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
                 "<td>"+ is_reminder_sent +"</td>\n"+
+                "<td>"+ store_products +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
@@ -224,6 +230,7 @@ $("#pagination").on('click', 'a', function(e) {
     var store_verified = '';
     var is_reminder_sent = '';
     var store_url = '';
+    var store_products = 0;
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -255,6 +262,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_products = "<a href=\"/stores/"+ store.user.id +"/items\" target=\"_blank\"> "+ store.user.prod_count +" </a></td>\n";
                     store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -300,6 +308,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ store.contact_count +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
                 "<td>"+ is_reminder_sent +"</td>\n"+
+                "<td>"+ store_products +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
