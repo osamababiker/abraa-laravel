@@ -60,8 +60,6 @@ class StoresController extends Controller
         $stores_status = $request->stores_status;
         $subscription = (int) $request->subscription;
 
-        dd($request->subscription);
-
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
