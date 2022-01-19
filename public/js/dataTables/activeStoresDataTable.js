@@ -74,7 +74,7 @@ $(document).ready(function () {
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
@@ -189,7 +189,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
@@ -306,7 +306,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+

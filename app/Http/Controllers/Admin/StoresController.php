@@ -747,6 +747,20 @@ class StoresController extends Controller
             session()->flash('feedback', $message);
             return redirect()->back();
         }else 
+        // to reject selected stores
+        if($request->has('reject_selected_btn')){
+            foreach($request->store_id as $store_id){
+                $store = Store::find($store_id);
+                $store->trash = 1;
+                $store->rejected = 1;
+                $store->save();
+            }
+            $message = 'stores hass been approved successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }else
         // to approve single store
         if($request->has('approve_single_store_btn')){
             $store = Store::find($request->store_id);
@@ -758,71 +772,70 @@ class StoresController extends Controller
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
             return redirect()->back();
+        }else
+        // to reject single store
+        if($request->has('reject_single_store_btn')){
+            $store = Store::find($request->store_id);
+            $store->trash = 1;
+            $store->rejected = 1;
+            $store->save();
+            
+            $message = 'store hass been approved successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
         }
     }
 
+
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new StoresExport, 'stores.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new StoresImport,request()->file('file'));
-           
         return redirect()->back();
     }
 
     // import & export active stores to excel
-    public function activeStoresexportExcel() 
-    {
+    public function activeStoresexportExcel() {
         return Excel::download(new ActiveStoresExport, 'active_stores.xlsx'); 
     }
    
-    public function activeStoresimportExcel() 
-    {
+    public function activeStoresimportExcel() {
         Excel::import(new ActiveStoresImport,request()->file('file'));
-           
         return redirect()->back();
     }
 
     // import & export pending stores to excel
-    public function pendingStoresexportExcel() 
-    {
+    public function pendingStoresexportExcel() {
         return Excel::download(new PendingStoresExport, 'pending_stores.xlsx'); 
     }
    
-    public function pendingStoresimportExcel() 
-    {
+    public function pendingStoresimportExcel() {
         Excel::import(new PendingStoresImport,request()->file('file'));
-           
         return redirect()->back();
     }
 
     // import & export rejected stores to excel
-    public function rejectedStoresexportExcel() 
-    {
+    public function rejectedStoresexportExcel() {
         return Excel::download(new RejectedStoresExport, 'rejected_stores.xlsx'); 
     }
    
-    public function rejectedStoresimportExcel() 
-    {
+    public function rejectedStoresimportExcel() {
         Excel::import(new RejectedStoresImport,request()->file('file'));
-           
         return redirect()->back();
     }
 
     // import & export bulk stores to excel
-    public function bulkStoresexportExcel() 
-    {
+    public function bulkStoresexportExcel() {
         return Excel::download(new BulkStoresExport, 'bulk_stores.xlsx'); 
     }
    
-    public function bulkStoresimportExcel() 
-    {
+    public function bulkStoresimportExcel() {
         Excel::import(new BulkStoresImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }

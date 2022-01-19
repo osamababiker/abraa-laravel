@@ -58,11 +58,11 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
-                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
+                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
@@ -155,11 +155,11 @@ $(".filter_data_table").on('change', function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
-                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
+                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+
@@ -253,11 +253,11 @@ $("#pagination").on('click', 'a', function(e) {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
-                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
+                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/stores/"+ store.id +"\">\n"+

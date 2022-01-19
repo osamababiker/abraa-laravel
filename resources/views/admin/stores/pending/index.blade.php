@@ -38,6 +38,10 @@
                                                 class="btn btn-success"> <i class="fa fa-check"></i> Approve Selected
                                             </button>
                                             &nbsp; &nbsp;
+                                            <button type="button" data-toggle="modal" data-target="#reject_selected_confirm"
+                                                class="btn btn-warning"> <i class="fa fa-times"></i> Reject Selected
+                                            </button>
+                                            &nbsp; &nbsp;
                                             <button type="button" data-toggle="modal" data-target="#delete_selected_confirm"
                                                 class="btn btn-danger"> <i class="fa fa-trash"></i> Delete Selected
                                             </button>
@@ -108,7 +112,7 @@
                                                         <th> <input type="checkbox" name="all_colums"
                                                                 class="select_all_colums"> </th>
                                                         <th>Id</th>
-                                                        <th>Approve</th>
+                                                        <th>Approve/Reject</th>
                                                         <th>Registered Email</th>
                                                         <th>Store Name</th>
                                                         <th>Sub Domain</th>

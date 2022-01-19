@@ -38,7 +38,7 @@ $(document).ready(function () {
                 }else {
                     store_verified = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
                 }
-
+  
                 stores_html = stores_html +
                 
                 "<div class=\"modal fade\" id=\"delete_store_"+ store.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
@@ -64,11 +64,15 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
-                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
+                "<td>\n"+
+                    "<button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button>\n"+ 
+                    "&nbsp;&nbsp;\n"+
+                    "<button onclick=\"reject_store("+ store.id  +")\" name=\"reject_single_store_btn\" class=\"btn btn-danger\" type=\"button\"> <i class=\"fa fa-times\" style=\"color: #fff\"></i> </button>\n"+ 
+                "</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
@@ -171,11 +175,15 @@ $(".filter_data_table").on('change', function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
-                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
+                "<td>\n"+
+                    "<button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button>\n"+ 
+                    "&nbsp;&nbsp;\n"+
+                    "<button onclick=\"reject_store("+ store.id  +")\" name=\"reject_single_store_btn\" class=\"btn btn-danger\" type=\"button\"> <i class=\"fa fa-times\" style=\"color: #fff\"></i> </button>\n"+ 
+                "</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
@@ -279,11 +287,15 @@ $("#pagination").on('click', 'a', function(e) {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
-                "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
+                "<td>\n"+
+                    "<button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button>\n"+ 
+                    "&nbsp;&nbsp;\n"+
+                    "<button onclick=\"reject_store("+ store.id  +")\" name=\"reject_single_store_btn\" class=\"btn btn-danger\" type=\"button\"> <i class=\"fa fa-times\" style=\"color: #fff\"></i> </button>\n"+ 
+                "</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
                 "<td>"+ store_url +"</td>\n"+
-                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
+                "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\" alt=\""+ store.name +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.date_added +"</td>\n"+
@@ -323,6 +335,7 @@ function archive_store(store_id){
     });
 }
 
+// to approve single store
 function approve_store(store_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
@@ -332,6 +345,24 @@ function approve_store(store_id){
             "_token": csrf_token,
             'store_id': store_id, 
             'approve_single_store_btn': ''
+        },
+        success: function(response){
+            location.reload();
+        }
+    });
+}
+
+
+// to reject single store
+function reject_store(store_id){
+    $("#ajax_loader").css('display', 'block');
+    $.ajax({
+        url: "/stores/actions",
+        type: "post",
+        data: {
+            "_token": csrf_token,
+            'store_id': store_id, 
+            'reject_single_store_btn': ''
         },
         success: function(response){
             location.reload();
