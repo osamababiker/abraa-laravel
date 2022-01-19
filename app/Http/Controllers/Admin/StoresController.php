@@ -89,15 +89,15 @@ class StoresController extends Controller
             ->where('users.external', 0)
             ->where('users_store.rejected', 0);
         }
-
+        dd($subscription);
         if($subscription == 9){
             $store_obj->where('users.subscription_id', 2)
-                ->where('users.premium', '<', date("Y-m-d H:i:s"));
+            ->where('users.premium', '<', date("Y-m-d H:i:s"));
         }elseif($subscription == 0){
             $store_obj->where('users.subscription_id', $subscription);
         }else{
             $store_obj->where('users.subscription_id', $subscription)
-                ->where('users.premium', '>=', date("Y-m-d H:i:s"));
+            ->where('users.premium', '>=', date("Y-m-d H:i:s"));
         }
         
         if($store_name){
