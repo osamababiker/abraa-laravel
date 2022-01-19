@@ -191,8 +191,13 @@ class StoresController extends Controller
     public function getPendingStoresAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
 
-        $store_obj = Store::where('trash', 1)
-            ->where('rejected', 0);
+        $store_obj = Store::with('user')
+        ->select('users_store.*')
+        ->where('users_store.trash', 1)
+        ->where('users_store.rejected', 0)
+        ->leftJoin('users', function($join) {
+            $join->on('users.id', '=', 'users_store.sub_of');
+        })->where('users.external', 0);
 
         $stores_count = $store_obj->count();
         $stores = $store_obj->with('user')->orderBy('id','desc')
@@ -222,7 +227,7 @@ class StoresController extends Controller
             ->where('users_store.rejected', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
-        });
+        })->where('users.external', 0);
         
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
