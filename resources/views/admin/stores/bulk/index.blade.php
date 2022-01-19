@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-md-3 form-group">
                                                 <label for="external">Show External</label>
-                                                <select name="external" multiple="multiple" id="external"
+                                                <select name="external" id="external"
                                                     class="filter_data_table form-control select2">
                                                     <option value="0"></option>
                                                     <option value="1">show</option>
