@@ -377,7 +377,6 @@ class StoresController extends Controller
         
         /*
         SELECT * FROM `users_store` store LEFT JOIN `users` supplier on supplier.id=store.sub_of WHERE store.rejected=0 AND store.trash=1 AND supplier.user_source=29 OR supplier.user_source=35
-        
         */
 
         if($store_name){
@@ -385,8 +384,7 @@ class StoresController extends Controller
         }
 
         if($store_country){
-            $store_obj->whereIn('users_store.country', $store_country)
-                ->orWhereIn('users.country', $store_country);
+            $store_obj->whereIn('users_store.country', $store_country);
         }
         
         if($meta_keyword){
