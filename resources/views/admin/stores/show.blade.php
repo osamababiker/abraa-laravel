@@ -70,7 +70,7 @@
 													<td>@if($store->user){{ $store->user->full_name }}@endif</td>
 													<td>@if($store->user){{ $store->user->email }}@endif</td>
 													<td>@if($store->user){{ $store->user->phone }}@endif</td>
-													<td>@if($store->user){{ $store->user->interested_keyowrds }}@endif</td>
+													<td>@if($store->user){{ $store->user->interested_keywords }}@endif</td>
 													<td>
 														@if($store->user && $store->user->supplier_country)
 															{{ $store->user->supplier_country->en_name }}
