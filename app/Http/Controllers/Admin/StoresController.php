@@ -216,7 +216,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
-        $external = $request->external;
+        $external = (int) $request->external;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -369,8 +369,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
-        $external = $request->external;
-
+        $external = (int) $request->external;
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
