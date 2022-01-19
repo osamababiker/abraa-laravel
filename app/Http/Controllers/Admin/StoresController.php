@@ -58,7 +58,7 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
-        $subscription = $request->subscription;
+        $subscription = (int) $request->subscription;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -155,7 +155,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
-        $subscription = $request->subscription;
+        $subscription = (int) $request->subscription;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
