@@ -60,6 +60,8 @@ class StoresController extends Controller
         $stores_status = $request->stores_status;
         $subscription = (int) $request->subscription;
 
+        dd($request->subscription);
+
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
@@ -89,7 +91,7 @@ class StoresController extends Controller
             ->where('users.external', 0)
             ->where('users_store.rejected', 0);
         }
-        dd($subscription);
+
         if($subscription == 9){
             $store_obj->where('users.subscription_id', 2)
             ->where('users.premium', '<', date("Y-m-d H:i:s"));
