@@ -116,8 +116,8 @@ $(".filter_data_table").on('change', function () {
     var stores_status = $('#stores_status').val();
 
     $.ajax({
-        url: url,
-        type: "/stores/filter",
+        url: "/stores/filter",
+        type: "post",
         data: {
             'store_name': store_name,
             'store_country': store_country,

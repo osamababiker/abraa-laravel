@@ -340,7 +340,6 @@ class StoresController extends Controller
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
             })
-        ->where('users.external', 1)
         ->whereIn('users.user_source', [29, 35]);
 
         $stores_count = $store_obj->count();
@@ -377,6 +376,7 @@ class StoresController extends Controller
         
         /*
         SELECT * FROM `users_store` store LEFT JOIN `users` supplier on supplier.id=store.sub_of WHERE store.rejected=0 AND store.trash=1 AND supplier.user_source=29 OR supplier.user_source=35
+        
         */
 
         if($store_name){
