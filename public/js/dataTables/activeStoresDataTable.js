@@ -11,6 +11,7 @@ $(document).ready(function () {
     var store_verified = '';
     var products_count = 0;
     var is_reminder_sent = '';
+    var store_url = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -32,6 +33,7 @@ $(document).ready(function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     products_count = store.user.prod_count;
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -71,7 +73,7 @@ $(document).ready(function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
@@ -113,6 +115,7 @@ $(".filter_data_table").on('change', function () {
     var store_verified = '';
     var products_count = 0;
     var is_reminder_sent = '';
+    var store_url = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -142,6 +145,7 @@ $(".filter_data_table").on('change', function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     products_count = store.user.prod_count;
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -181,7 +185,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
@@ -225,6 +229,7 @@ $("#pagination").on('click', 'a', function(e) {
     var store_verified = '';
     var products_count = 0;
     var is_reminder_sent = '';
+    var store_url = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -254,6 +259,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     products_count = store.user.prod_count;
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -293,7 +299,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+

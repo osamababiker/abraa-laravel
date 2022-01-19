@@ -8,6 +8,7 @@ $(document).ready(function () {
     var stores_html = '';
     var user_email = '';
     var store_verified = '';
+    var store_url = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -29,6 +30,7 @@ $(document).ready(function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                 }
 
                 if(store.store_verified == 1){
@@ -65,7 +67,7 @@ $(document).ready(function () {
                 "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
@@ -103,6 +105,7 @@ $(".filter_data_table").on('change', function () {
     var stores_html = '';
     var user_email = '';
     var store_verified = '';
+    var store_url = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -132,6 +135,7 @@ $(".filter_data_table").on('change', function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                 }
 
                 if(store.store_verified == 1){
@@ -168,7 +172,7 @@ $(".filter_data_table").on('change', function () {
                 "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
@@ -207,6 +211,7 @@ $("#pagination").on('click', 'a', function(e) {
     var stores_html = '';
     var user_email = '';
     var store_verified = '';
+    var store_url = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -236,6 +241,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                 }
 
                 if(store.store_verified == 1){
@@ -272,7 +278,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: green\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td> <img style=\"width: 100px; height: 100px;\" src=\""+ store.logo_url +"\"/> </td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
