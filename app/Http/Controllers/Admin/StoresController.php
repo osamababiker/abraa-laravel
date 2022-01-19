@@ -336,12 +336,13 @@ class StoresController extends Controller
 
         $store_obj = Store::with('user')
             ->select('users_store.*')
-            ->where('users_store.trash', 1)
-            ->where('users_store.rejected', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
             })
-        ->whereIn('users.user_source', [29, 35]);
+        ->where('users_store.trash', 1)
+        ->whereIn('users.user_source', [29, 35])
+        ->where('users.external', 0)
+        ->where('users_store.rejected', 0);
 
         $stores_count = $store_obj->count();
         $stores = $store_obj->orderBy('users_store.id','desc')
