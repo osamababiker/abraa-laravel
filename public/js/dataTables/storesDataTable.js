@@ -9,6 +9,7 @@ $(document).ready(function () {
     var user_email = '';
     var store_verified = '';
     var is_reminder_sent = '';
+    var store_url = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -30,6 +31,7 @@ $(document).ready(function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                     }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
@@ -68,7 +70,7 @@ $(document).ready(function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
@@ -107,6 +109,7 @@ $(".filter_data_table").on('change', function () {
     var stores_html = '';
     var store_verified = '';
     var is_reminder_sent = '';
+    var store_url = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -136,6 +139,7 @@ $(".filter_data_table").on('change', function () {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                     }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
@@ -174,7 +178,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+
@@ -216,6 +220,7 @@ $("#pagination").on('click', 'a', function(e) {
     var user_email = '';
     var store_verified = '';
     var is_reminder_sent = '';
+    var store_url = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -245,6 +250,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(store.user){
                     user_email = store.user.email;
+                    store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                     }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
@@ -283,7 +289,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ store.id +"</td>\n"+
                 "<td>"+ user_email +"</td>\n"+
                 "<td>"+ store.name +"</td>\n"+
-                "<td> <a target=\"_blank\" href=\""+ public_url +"store/"+ store.id +"\"> "+ public_url +"store/"+ store.id +"</a> </td>\n"+
+                "<td>"+ store_url +"</td>\n"+
                 "<td>"+ store.noofvisits +"</td>\n"+
                 "<td>"+ store_verified +"</td>\n"+
                 "<td>"+ store.contact_count +"</td>\n"+

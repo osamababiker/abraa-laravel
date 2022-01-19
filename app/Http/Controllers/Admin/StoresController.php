@@ -377,6 +377,7 @@ class StoresController extends Controller
         
         /*
         SELECT * FROM `users_store` store LEFT JOIN `users` supplier on supplier.id=store.sub_of WHERE store.rejected=0 AND store.trash=1 AND supplier.user_source=29 OR supplier.user_source=35
+        
         */
 
         if($store_name){
