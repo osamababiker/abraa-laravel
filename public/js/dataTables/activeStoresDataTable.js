@@ -124,6 +124,7 @@ $(".filter_data_table").on('change', function () {
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var stores_status = $('#stores_status').val();
+    var subscription = $('#subscription').val();
 
     $.ajax({
         url: "/activeStores/filter",
@@ -134,6 +135,7 @@ $(".filter_data_table").on('change', function () {
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
             'stores_status': stores_status,
+            'subscription': subscription,
             'current_page': window.current_page,
             '_token': csrf_token
         },
@@ -239,6 +241,7 @@ $("#pagination").on('click', 'a', function(e) {
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var stores_status = $('#stores_status').val();
+    var subscription = $('#subscription').val();
 
     $.ajax({
         url: "/activeStores/filter",
@@ -249,6 +252,7 @@ $("#pagination").on('click', 'a', function(e) {
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
             'stores_status': stores_status,
+            'subscription': subscription,
             'current_page': window.current_page,
             '_token': csrf_token
         },

@@ -86,6 +86,18 @@
                                             </select>
                                         </div>
                                         <div class="col-md-2 form-group">
+                                            <label for="subscription">Filter by Subscription</label>
+                                            <select name="subscription" id="subscription"
+                                                class="filter_data_table form-control select2">
+                                                <option value="0"></option>
+                                                <option value="3">Platinum</option>
+                                                <option value="9">Old Gold</option>
+                                                <option value="2">Gold</option>
+                                                <option value="1">Silver</option>
+                                                <option value="0">Basic</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 form-group">
                                             <label for="rows_numbers">Numbers of rows</label>
                                             <select name="rows_numbers" id="rows_numbers"
                                                 class="filter_data_table form-control select2">

@@ -58,6 +58,7 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
+        $subscription = $request->subscription;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -87,6 +88,16 @@ class StoresController extends Controller
             ->whereIn('users.user_source', [29, 35])
             ->where('users.external', 0)
             ->where('users_store.rejected', 0);
+        }
+
+        if($subscription == 9){
+            $store_obj->where('users.subscription_id', 2)
+                ->where('users.premium', '<', date("Y-m-d H:i:s"));
+        }elseif($subscription == 0){
+            $store_obj->where('users.subscription_id', $subscription);
+        }else{
+            $store_obj->where('users.subscription_id', $subscription)
+                ->where('users.premium', '>=', date("Y-m-d H:i:s"));
         }
         
         if($store_name){
@@ -144,6 +155,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+        $subscription = $request->subscription;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -156,6 +168,16 @@ class StoresController extends Controller
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
         });
+
+        if($subscription == 9){
+            $store_obj->where('users.subscription_id', 2)
+                ->where('users.premium', '<', date("Y-m-d H:i:s"));
+        }elseif($subscription == 0){
+            $store_obj->where('users.subscription_id', $subscription);
+        }else{
+            $store_obj->where('users.subscription_id', $subscription)
+                ->where('users.premium', '>=', date("Y-m-d H:i:s"));
+        }
     
         if($store_name){
             $store_obj->where('users_store.name', 'like',  '%'. $store_name .'%');
