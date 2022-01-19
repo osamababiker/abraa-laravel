@@ -98,11 +98,11 @@
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">Website Url</label>
-                                            <input type="text" class="form-control required" name="website_url">
+                                            <input type="text" class="form-control required" name="weburl">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">About Store</label>
-                                            <textarea name="about_store" cols="4" rows="4"
+                                            <textarea name="aboutpage" cols="4" rows="4"
                                                 class="form-control required"></textarea>
                                         </div>
                                         <div class="form-group col-md-4">
@@ -118,19 +118,20 @@
                                             <input type="text" class="form-control required" name="instagram_url">
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label class="form-label">Meta Title</label>
-                                            <select name="meta_title[]" multiple="multiple" id="meta_title" class="form-control select2">
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="form-label">Meta Description</label>
-                                            <select name="meta_description[]" multiple="multiple" id="meta_description" class="form-control select2">
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-12">
                                             <label class="form-label">Meta Keywords</label>
                                             <select name="meta_keywords[]" multiple="multiple" id="meta_keywords" class="form-control select2">
                                             </select>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="meta_title">Meta Title</label>
+                                            <textarea name="meta_title" id="meta_title" cols="4" rows="4"
+                                                class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="meta_description">Meta Description</label>
+                                            <textarea name="meta_description" id="meta_description" cols="8"
+                                                rows="8"
+                                                class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>

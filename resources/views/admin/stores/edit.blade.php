@@ -66,7 +66,7 @@
 									@csrf
 									<input type="hidden" name="store_id" value="{{ $store->id }}">
 									<div class="tab-content">
-										<!-- update account info tab -->
+										<!-- update account info tab --> 
 										<div class="tab-pane active" id="account_info" role="tabpanel">
 											<h4 class="tab-title">Update Account Info</h4>
 											<div class="form-row">
@@ -78,7 +78,7 @@
 												</div>
 												<div class="form-group col-md-4">
 													<label for="email">Email</label>
-													<input type="email" class="form-control"
+													<input type="text" class="form-control"
 														value="{{ $store->user->email }}" name="email" id="email">
 												</div>
 												<div class="form-group col-md-4">
@@ -91,7 +91,7 @@
 												<div class="form-group col-md-12">
 													<label for="interested_keywords">interested
 														Keywords</label>
-													<select name="interested_keywords" id="interested_keywords"
+													<select multiple="multiple" name="interested_keywords[]" id="interested_keywords"
 														class="form-control select2">
 														<option selected
 															value="{{ $store->user->interested_keywords }}">
@@ -105,14 +105,14 @@
 													<select name="country" id="country" class="form-control select2">
 														@if($store->user->supplier_country)
 														<option selected
-															value="{{ $store->user->supplier_country->id }}">
+															value="{{ $store->user->supplier_country->co_code }}">
 															{{ $store->user->supplier_country->en_name }}
 														</option>
 														@else
 														<option value=""></option>
 														@endif
 														@foreach($countries as $country)
-														<option value="{{ $country->id }}">{{
+														<option value="{{ $country->co_code }}">{{
 															$country->en_name }}</option>
 														@endforeach
 													</select>
@@ -147,13 +147,13 @@
 											<h4 class="tab-title">Update Store Info</h4>
 											<div class="form-row">
 												<div class="form-group col-md-4">
-													<label for="name">Store Name</label>
+													<label for="store_name">Store Name</label>
 													<input type="text" class="form-control" value="{{ $store->name }}"
-														name="name" id="name">
+														name="store_name" id="store_name">
 												</div>
 												<div class="form-group col-md-4">
 													<label for="company_email">Company Email</label>
-													<input type="email" class="form-control"
+													<input type="text" class="form-control"
 														value="{{ $store->company_email }}" name="company_email"
 														id="company_email">
 												</div>
@@ -203,7 +203,7 @@
 											<div class="form-row">
 												<div class="form-group col-md-12">
 													<label for="weburl">Website Url</label>
-													<input type="url" name="weburl" value="{{ $store->weburl }}"
+													<input type="text" name="weburl" value="{{ $store->weburl }}"
 														class="form-control" id="weburl">
 												</div>
 											</div>
@@ -217,27 +217,37 @@
 											<div class="form-row">
 												<div class="form-group col-md-4">
 													<label for="facebook_url">Facebook Url</label>
-													<input type="url" class="form-control"
+													<input type="text" class="form-control"
 														value="{{ $store->facebook_url }}" name="facebook_url"
 														id="facebook_url">
 												</div>
 												<div class="form-group col-md-4">
 													<label for="twitter_url">Twitter Url</label>
-													<input type="url" class="form-control"
+													<input type="text" class="form-control"
 														value="{{ $store->twitter_url }}" name="twitter_url"
 														id="twitter_url">
 												</div>
 												<div class="form-group col-md-4">
 													<label for="instagram_url">Instagram Url</label>
-													<input type="url" class="form-control"
+													<input type="text" class="form-control"
 														value="{{ $store->instagram_url }}" name="instagram_url"
 														id="instagram_url">
 												</div>
 											</div>
 											<div class="form-row">
 												<div class="form-group col-md-12">
+													<label for="meta_keywords">Meta Keywords</label>
+													<select name="meta_keywords[]" id="meta_keywords" multiple="multiple"
+														class="form-control select2">
+														<option selected value="{{ $store->meta_keywords }}">{{
+															$store->meta_keywords }}</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-12">
 													<label for="meta_title">Meta Title</label>
-													<textarea name="meta_title" id="meta_title" cols="8" rows="8"
+													<textarea name="meta_title" id="meta_title" cols="4" rows="4"
 														class="form-control">{{ $store->meta_title }}</textarea>
 												</div>
 											</div>
@@ -247,16 +257,6 @@
 													<textarea name="meta_description" id="meta_description" cols="8"
 														rows="8"
 														class="form-control">{{ $store->meta_description }}</textarea>
-												</div>
-											</div>
-											<div class="form-row">
-												<div class="form-group col-md-12">
-													<label for="meta_keywords">Meta Keywords</label>
-													<select name="meta_keywords" id="meta_keywords" multiple="multiple"
-														class="form-control select">
-														<option value="{{ $store->meta_keywords }}">{{
-															$store->meta_keywords }}</option>
-													</select>
 												</div>
 											</div>
 											<div class="form-row d-flex justify-content-center">
@@ -339,7 +339,7 @@
 											<div class="form-row">
 												<div class="form-group col-md-12">
 													<label for="password">Password</label>
-													<input type="password" value="{{ $store->password }}"
+													<input type="password" 
 														class="form-control" name="password" id="password">
 												</div>
 												<div class="form-group col-md-12">
@@ -472,7 +472,7 @@
 		</main>
 
 		@if(session()->has('feedback'))
-		@include('admin.stores.components.feedback')
+		@include('admin.layouts.feedback')
 		@endif
 		@include('admin.layouts.scripts')
 		<!-- footer is here -->

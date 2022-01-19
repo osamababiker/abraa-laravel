@@ -53,23 +53,123 @@
 								<div class="tab-content">
 									<!-- account info tab -->
 									<div class="tab-pane active" id="account_info" role="tabpanel">
-										<h4 class="tab-title"> Account Info</h4>
+										<h4 class="tab-title"> Account Info</h4> 
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Full Name</th>
+													<th>Email</th>
+													<th>Phone Number</th>
+													<th>interested Keywords</th>
+													<th>Country</th>
+													<th>City</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>@if($store->user){{ $store->user->full_name }}@endif</td>
+													<td>@if($store->user){{ $store->user->email }}@endif</td>
+													<td>@if($store->user){{ $store->user->phone }}@endif</td>
+													<td>@if($store->user){{ $store->user->interested_keyowrds }}@endif</td>
+													<td>
+														@if($store->user && $store->user->supplier_country)
+															{{ $store->user->supplier_country->en_name }}
+														@endif
+													</td>
+													<td>
+														@if($store->user && $store->user->supplier_city)
+															{{ $store->user->supplier_city->en_name }}
+														@endif
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 									<!-- store info tab -->
 									<div class="tab-pane" id="store_info" role="tabpanel">
 										<h4 class="tab-title"> Store Info</h4>
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Store Name</th>
+													<th>Company Email</th>
+													<th>Company Mobile</th>
+													<th>Company Whatsapp</th>
+													<th>Sub Domain</th>
+													<th>Contact Address</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{ $store->name }}</td>
+													<td>{{ $store->company_email }}</td>
+													<td>{{ $store->company_mobile }}</td>
+													<td>{{ $store->company_whatsapp }}</td>
+													<td>
+														<a target="_blank" href="{{ config('global.public_url') }}store/{{ $store->user->id }}">
+															{{ config('global.public_url') }}store/{{ $store->user->id }}
+														</a>
+													</td>
+													<td>{{ $store->contact_address }}</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 									<!-- store logo -->
 									<div class="tab-pane" id="change_logo" role="tabpanel">
 										<h4 class="tab-title">Store Logo</h4>
+										<img style="width: 250px; height: 250px" src="{{ $store->logo_url }}" alt="{{ $store->name }}">
 									</div>
 									<!-- store banners -->
 									<div class="tab-pane" id="change_banners" role="tabpanel">
-										<h4 class="tab-title"> Store Banners</h4>
+										<h4 class="tab-title"> Store Banners 1</h4>
+										<img style="width: 250px; height: 250px" src="{{ $store->banner_url }}" alt="{{ $store->name }}">
+										<hr>
+
+										<h4 class="tab-title"> Store Banners 2</h4>
+										<img style="width: 250px; height: 250px" src="{{ $store->banner_url1 }}" alt="{{ $store->name }}">
+										<hr>
+
+										<h4 class="tab-title"> Store Banners 3</h4>
+										<img style="width: 250px; height: 250px" src="{{ $store->banner_url2 }}" alt="{{ $store->name }}">
 									</div>
 									<!-- store settings -->
 									<div class="tab-pane" id="store_settings" role="tabpanel">
 										<h4 class="tab-title"> Store Settings</h4>
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Store Disabled</th>
+													<th>Store Verified</th>
+													<th>Show on Home Page</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														@if($store->trash == 1)
+															<i class="fa fa-check" style="color: green"></i>
+														@else 
+															<i class="fa fa-times" style="color: red"></i>
+														@endif
+													</td>
+													<td>
+														@if($store->store_verified == 1)
+															<i class="fa fa-check" style="color: green"></i>
+														@else 
+															<i class="fa fa-times" style="color: red"></i>
+														@endif
+													</td>
+													<td>
+														@if($store->show_homepage == 1)
+															<i class="fa fa-check" style="color: green"></i>
+														@else 
+															<i class="fa fa-times" style="color: red"></i>
+														@endif
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>

@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Store;
 use App\Models\Country;
 use App\Models\State; 
+use App\Models\Supplier;
 use App\Exports\StoresExport;
 use App\Imports\StoresImport;
 use App\Exports\ActiveStoresExport;
@@ -431,7 +432,7 @@ class StoresController extends Controller
         DB::beginTransaction();
         try {
 
-            $user = new Member();
+            $supplier = new Supplier();
             $store = new Store();
 
             $salt = $this->getRandomString(3);
@@ -448,35 +449,27 @@ class StoresController extends Controller
             $register_level = 3;
             $is_login = 0;
 
-            // to save user info
-            $user->full_name = $request->full_name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->password = $password;
-            $user->salt = $salt;
-            $user->register_on = $register_on;
-            $user->verified = $verified;
-            $user->verification_token = $verification_token;
-            $user->country = $request->country;
-            $user->city = $request->city;
-            $user->user_type = $user_type;
-            $user->member_type = $member_type;
-            $user->is_organic = $is_organic;
-            $user->register_level = $register_level;
-            $user->added_by = $added_by;
-            $user->user_source = $user_source;
-            $user->is_login = $is_login;
-            $user->save();
+            // to save supplier info
+            $supplier->full_name = $request->full_name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->password = $password;
+            $supplier->salt = $salt;
+            $supplier->register_on = $register_on;
+            $supplier->verified = $verified;
+            $supplier->verification_token = $verification_token;
+            $supplier->country = $request->country;
+            $supplier->city = $request->city;
+            $supplier->user_type = $user_type;
+            $supplier->member_type = $member_type;
+            $supplier->is_organic = $is_organic;
+            $supplier->register_level = $register_level;
+            $supplier->added_by = $added_by;
+            $supplier->user_source = $user_source;
+            $supplier->is_login = $is_login;
+            $supplier->save();
 
             // to save store info
-            $meta_title = '';
-            foreach($request->meta_title as $title){
-                $meta_title .= $title . ',';
-            }
-            $meta_description = '';
-            foreach($request->meta_description as $description){
-                $meta_description .= $description . ',';
-            }
             $meta_keywords = '';
             foreach($request->meta_keywords as $keywords){
                 $meta_keywords .= $keywords . ',';
@@ -522,21 +515,20 @@ class StoresController extends Controller
                 $show_home_page = 1;
             }else $show_home_page = 0;
 
-
-            $store->sub_of = $user->id;
+            $store->sub_of = $supplier->id;
             $store->name = $request->store_name;
             $store->sub_domain = $request->sub_domain;
             $store->contact_address = $request->contact_address;
-            $store->weburl = $request->website_url;
-            $store->aboutpage = $request->about_store;
+            $store->weburl = $request->weburl;
+            $store->aboutpage = $request->aboutpage;
             $store->facebook_url = $request->facebook_url;
             $store->twitter_url = $request->twitter_url;
             $store->instagram_url = $request->instagram_url;
             $store->store_verified = $request->store_verified;
             $store->trash = $request->trash;
             $store->show_homepage = $show_home_page;
-            $store->meta_title = $meta_title;
-            $store->meta_description = $meta_description;
+            $store->meta_title = $request->meta_title;
+            $store->meta_description = $request->meta_description;
             $store->meta_keywords = $meta_keywords;
             $store->logo_url = $logo_url;
             $store->banner_url = $banner1_url;
@@ -546,9 +538,19 @@ class StoresController extends Controller
 
             DB::commit();
 
+            $message = 'Store hass been Added successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+
         }catch (\Exception $e) {
             DB::rollback();
-            echo $e;
+            $message = 'Problem Updating Store Info';
+            session()->flash('error', 'true');
+            session()->flash('feedback_title', 'Opps , Somesting Went Wrong');
+            session()->flash('feedback', $message);
+            return redirect()->back();
         }
         
     }
@@ -570,12 +572,131 @@ class StoresController extends Controller
     }
 
  
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request){
+        $store = Store::findOrFail($request->store_id);
+        $supplier = Supplier::findOrFail($store->sub_of);
+
+        DB::beginTransaction();
+        try {
+            
+            if($request->password){
+                $salt = $this->getRandomString(3);
+                $password = md5($request->password . $salt);
+            }else $password = $supplier->password;
+            
+            $interested_keywords = '';
+            foreach($request->interested_keywords as $keywords){
+                $interested_keywords .= $keywords . ',';
+            }
+
+            $updated_by = Auth::user()->id;
+            
+            // to save supplier info
+            $supplier->full_name = $request->full_name;
+            $supplier->email = $request->email;
+            $supplier->phone = $request->phone;
+            $supplier->password = $password;
+            $supplier->country = $request->country;
+            $supplier->interested_keywords = $interested_keywords;
+            $supplier->city = $request->city;
+            $supplier->save();
+
+            // to save store info
+            $meta_keywords = '';
+            foreach($request->meta_keywords as $keywords){
+                $meta_keywords .= $keywords . ',';
+            }
+
+            // to logo file
+            if($request->has('logo')){
+                $image = $request->file('logo');
+                $image_name = time().'.'.$image->extension();
+                $temp_dir = $image->getPathName();
+                $logo_url = $this->upload_image($image_name, $temp_dir, 'files'); 
+            }else $logo_url = $store->logo_url;
+
+            // to upload banner 1 files
+            if($request->has('banner1')){
+                $banner = $request->file('banner1');
+                $banner_name = time().'.'.$banner->extension();
+                $temp_dir = $banner->getPathName();
+                $banner1_url = $this->upload_image($banner_name, $temp_dir, 'files');
+            }else $banner1_url = $store->banner_url;
+
+            // to upload banner 2 files
+            if($request->has('banner2')){
+                $banner = $request->file('banner2');
+                $banner_name = time().'.'.$banner->extension();
+                $temp_dir = $banner->getPathName();
+                $banner2_url = $this->upload_image($banner_name, $temp_dir, 'files');
+            }else $banner2_url = $store->banner_url1;
+
+            // to upload banner 3 files
+            if($request->has('banner3')){
+                $banner = $request->file('banner3');
+                $banner_name = time().'.'.$banner->extension();
+                $temp_dir = $banner->getPathName();
+                $banner3_url = $this->upload_image($banner_name, $temp_dir, 'files');
+            }else $banner3_url = $store->banner_url2; 
+
+            if($request->show_home_page){
+                $show_home_page = 1;
+            }else $show_home_page = 0;
+
+            $store->name = $request->store_name;
+            $store->company_email = $request->company_email;
+            $store->company_mobile = $request->company_mobile;
+            $store->company_whatsapp = $request->company_whatsapp;
+            $store->is_whatsapp_contact = $request->is_whatsapp_contact;
+            $store->sub_domain = $request->sub_domain;
+            $store->contact_address = $request->contact_address;
+            $store->weburl = $request->weburl;
+            $store->aboutpage = $request->aboutpage;
+            $store->facebook_url = $request->facebook_url;
+            $store->twitter_url = $request->twitter_url;
+            $store->instagram_url = $request->instagram_url;
+            $store->store_verified = $request->store_verified;
+            $store->trash = $request->trash;
+            $store->show_homepage = $show_home_page;
+            $store->meta_title = $request->meta_title;
+            $store->meta_description = $request->meta_description;
+            $store->meta_keywords = $meta_keywords;
+            $store->logo_url = $logo_url;
+            $store->banner_url = $banner1_url;
+            $store->banner_url1 = $banner2_url;
+            $store->banner_url2 = $banner3_url;
+            $store->updated_by = $updated_by;
+            $store->save();
+
+            DB::commit();
+
+            $message = 'Store hass been Updated successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            $message = 'Problem Updating Store Info';
+            session()->flash('error', 'true');
+            session()->flash('feedback_title', 'Opps , Somesting Went Wrong');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
     }
 
-    
+
+    public function destroy($id){
+        Store::where('id',$id)->delete();
+        $message = 'Store hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
+    }
+
+
     // to handel table actions 
     public function actions(Request $request){
 
@@ -606,26 +727,16 @@ class StoresController extends Controller
         }else 
         // to approve single store
         if($request->has('approve_single_store_btn')){
-           $store = Store::find($request->store_id);
-           $store->trash = 0;
-           $store->save();
-           
-           $message = 'store hass been approved successfully';
-           session()->flash('success', 'true');
-           session()->flash('feedback_title', 'Success');
-           session()->flash('feedback', $message);
-           return redirect()->back();
+            $store = Store::find($request->store_id);
+            $store->trash = 0;
+            $store->save();
+            
+            $message = 'store hass been approved successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
         }
-    }
-
-
-    public function destroy($id){
-        Store::where('id',$id)->delete();
-        $message = 'Store hass been Archived successfully';
-        session()->flash('success', 'true');
-        session()->flash('feedback_title', 'Success');
-        session()->flash('feedback', $message);
-        return redirect()->back();
     }
 
     // import & export to excel
