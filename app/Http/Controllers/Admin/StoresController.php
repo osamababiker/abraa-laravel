@@ -368,16 +368,20 @@ class StoresController extends Controller
 
         $store_obj = Store::with('user')
             ->select('users_store.*')
-            ->where('users_store.trash', 1)
-            ->where('users_store.rejected', 0)
             ->leftJoin('users', function($join) {
                 $join->on('users.id', '=', 'users_store.sub_of');
             })
-        ->whereIn('users.user_source', [29, 35]);
+        ->where('users_store.trash', 1)
+        ->whereIn('users.user_source', [29, 35])
+        ->where('users.external', 0)
+        ->where('users_store.rejected', 0);
         
         /*
-        SELECT * FROM `users_store` store LEFT JOIN `users` supplier on supplier.id=store.sub_of WHERE store.rejected=0 AND store.trash=1 AND supplier.user_source=29 OR supplier.user_source=35
         
+        SELECT * FROM `users_store` store LEFT JOIN `users` supplier on supplier.id=store.sub_of WHERE store.rejected=0 AND store.trash=1 AND supplier.user_source IN (29, 35)
+
+        SELECT store.*, supplier.full_name, supplier.email, supplier.phone, supplier.prod_count, supplier.register_on AS supplier_register, supplier.id AS supplier_id FROM users_store AS store LEFT JOIN users AS supplier ON supplier.id=store.sub_of WHERE store.trash =1 AND supplier.user_source IN (29, 35) AND supplier.external=0 AND store.rejected=0
+
         */
 
         if($store_name){
