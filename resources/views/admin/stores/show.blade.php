@@ -106,9 +106,11 @@
 													<td>{{ $store->company_mobile }}</td>
 													<td>{{ $store->company_whatsapp }}</td>
 													<td>
-														<a target="_blank" href="{{ config('global.public_url') }}store/{{ $store->user->id }}">
-															{{ config('global.public_url') }}store/{{ $store->user->id }}
-														</a>
+														@if($store->user)
+															<a target="_blank" href="{{ config('global.public_url') }}store/{{ $store->user->id }}">
+																{{ config('global.public_url') }}store/{{ $store->user->id }}
+															</a>
+														@endif
 													</td>
 													<td>{{ $store->contact_address }}</td>
 												</tr>
