@@ -74,7 +74,8 @@ class StoresController extends Controller
         }
         elseif($stores_status == 'pending'){
             $store_obj->where('users_store.trash', 1)
-                ->where('users_store.rejected', 0); 
+                ->where('users_store.rejected', 0)
+                ->where('users.external', 0);
         }
         elseif($stores_status == 'rejected'){
             $store_obj->where('users_store.trash', 1)
