@@ -110,6 +110,7 @@ $(".filter_data_table").on('change', function () {
     var store_verified = '';
     var is_reminder_sent = '';
     var store_url = '';
+    var user_email = '';
 
     // filter data
     var store_name = $('#store_name').val(); 

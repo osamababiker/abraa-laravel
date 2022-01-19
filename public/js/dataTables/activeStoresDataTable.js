@@ -116,6 +116,7 @@ $(".filter_data_table").on('change', function () {
     var products_count = 0;
     var is_reminder_sent = '';
     var store_url = '';
+    var user_email  = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
@@ -230,6 +231,7 @@ $("#pagination").on('click', 'a', function(e) {
     var products_count = 0;
     var is_reminder_sent = '';
     var store_url = '';
+    var user_email  = '';
 
     // filter data
     var store_name = $('#store_name').val(); 
