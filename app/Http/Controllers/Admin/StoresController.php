@@ -82,8 +82,9 @@ class StoresController extends Controller
         }
         elseif($stores_status == 'bulk'){
             $store_obj->where('users_store.trash', 1)
-                ->where('users_store.rejected', 0)
-                ->whereIn('users.user_source', [29, 35]); 
+            ->whereIn('users.user_source', [29, 35])
+            ->where('users.external', 0)
+            ->where('users_store.rejected', 0);
         }
         
         if($store_name){
