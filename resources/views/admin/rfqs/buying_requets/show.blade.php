@@ -84,13 +84,13 @@
 														@if($rfq->buyer)
 															@if($rfq->buyer->subscription_id == 0)
 																<p>Basic</p>
-															@elseif($rfq->buyer->subscription_id == 1)
+															@else @if($rfq->buyer->subscription_id == 1)
 																<p>Silver</p>
-															@elseif($rfq->buyer->subscription_id == 2)
+															@else @if($rfq->buyer->subscription_id == 2)
 																<p>Gold</p>
-															@elseif($rfq->buyer->subscription_id == 3)
+															@else @if($rfq->buyer->subscription_id == 3)
 																<p>Platinum</p>
-															@elseif($rfq->buyer->subscription_id == 9)
+															@else @if($rfq->buyer->subscription_id == 9)
 																<p>Old Gold</p>
 															@endif
 														@endif
@@ -148,13 +148,13 @@
 													<td>
 														@if($rfq->status == 1)
 															<p>Pending</p>
-														@elseif($rfq->status == 2)
+														@else @if($rfq->status == 2)
 															<p>Approved</p>
-														@elseif($rfq->status == 3)
+														@else @if($rfq->status == 3)
 															<p>Completed</p>
-														@elseif($rfq->status == 4)
+														@else @if($rfq->status == 4)
 															<p>Lost</p>
-														@elseif($rfq->status == 5)
+														@else @if($rfq->status == 5)
 															<p>Canceled</p>
 														@endif
 													</td>
