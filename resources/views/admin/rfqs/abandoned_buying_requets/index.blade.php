@@ -28,14 +28,6 @@
                                     <div class="row">
                                         <a href="{{ route('abandonedRfqs.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                         &nbsp; &nbsp;
-                                        <button type="button" data-toggle="modal"
-                                            data-target="#approve_selected_confirm" class="btn btn-success">
-                                            Approve Selected </button>
-                                        &nbsp; &nbsp;
-                                        <button type="button" data-toggle="modal" data-target="#delete_selected_confirm"
-                                            class="btn btn-danger"> <i class="fa fa-trash"></i> Delete Selected
-                                        </button>
-                                        &nbsp; &nbsp;
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"

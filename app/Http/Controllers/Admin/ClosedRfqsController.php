@@ -38,7 +38,6 @@ class ClosedRfqsController extends Controller
 
     // to filter closed rfqs 
     public function filterClosedRfqs(Request $request){
-
         $product_name = $request->product_name;
         $buyer_name = $request->buyer_name;
         $countries = $request->countries;
@@ -50,10 +49,10 @@ class ClosedRfqsController extends Controller
         });
 
         $buying_request_obj =  Rfq::where('status', '>', 2)
-            ->select('buying_requests.*')
-            ->leftJoin('users', function($join){
-                $join->on('users.id', '=', 'buying_requests.buyer_id');
-            });
+        ->select('buying_requests.*')
+        ->leftJoin('users', function($join){
+            $join->on('users.id', '=', 'buying_requests.buyer_id');
+        });
 
         if($product_name){
             $buying_request_obj->where('buying_requests.product_name','like', '%' . $product_name . '%');
