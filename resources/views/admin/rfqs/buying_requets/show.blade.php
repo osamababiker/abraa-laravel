@@ -60,7 +60,7 @@
 													<td>@if($rfq->buyer){{ $rfq->buyer->email }}@endif</td>
 													<th>
 														@if($rfq->buyer)
-															@if(rfq->buyer->verified == 1)
+															@if($rfq->buyer->verified == 1)
 																<i class="fa fa-check" style="color: green"></i>
 															@else 
 																<i class="fa fa-times" style="color: red"></i>
@@ -71,8 +71,10 @@
 													<td>@if($rfq->buyer){{ $rfq->buyer->register_on }}@endif</td>
 													<td>@if($rfq->buyer){{ $rfq->buyer->last_login }}@endif</td>
 													<td>
-														@if($rfq->buyer && $rfq->buyer->country)
-															{{ $rfq->buyer->country->en_name }}
+														@if($rfq->buyer)
+															@if($rfq->buyer->buyer_country)
+																{{ $rfq->buyer->buyer_country->en_name }}
+															@endif
 														@endif
 													</td>
 													<td>
@@ -100,7 +102,7 @@
 													</td>
 													<th>
 														@if($rfq->buyer)
-															@if(rfq->buyer->active == 1)
+															@if($rfq->buyer->active == 1)
 																<i class="fa fa-check" style="color: green"></i>
 															@else 
 																<i class="fa fa-times" style="color: red"></i>
@@ -179,7 +181,7 @@
 		</main>
 
 		@if(session()->has('feedback'))
-		@include('admin.layouts.feedback')
+			@include('admin.layouts.feedback')
 		@endif
 		@include('admin.layouts.scripts')
 		<!-- footer is here -->
