@@ -17,7 +17,8 @@ use App\Models\BuyingRequestStatus;
 use App\Exports\RfqsExport;
 use App\Imports\RfqsImport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Traits\MailerTrait;
+use App\Http\Traits\MailerTrait; 
+use Illuminate\Pagination\Paginator;
 
 class ProductRfqsController extends Controller
 {   
@@ -39,14 +40,15 @@ class ProductRfqsController extends Controller
         $buying_request_obj = Rfq::where('item_id','<>', 0)->where('status','>', 1);
 
         $buying_requests_count = $buying_request_obj->count();
-        $buying_requests = $buying_request_obj->limit($rows_numbers)
-            ->with('category')->with('country')->with('buyer')->with('unit')->orderBy('id','desc')->get();    
+        $buying_requests = $buying_request_obj->with('category')->with('country')->with('buyer')->with('unit')
+        ->orderBy('id','desc')->paginate($rows_numbers);
         
         $site_url = config('global.public_url');
         
         return response()->json([
             'buying_requests' => $buying_requests,
             'buying_requests_count' => $buying_requests_count,
+            'pagination' => (string) $buying_requests->links('pagination::bootstrap-4'),
             'site_url' => $site_url
         ]); 
     }
@@ -61,6 +63,11 @@ class ProductRfqsController extends Controller
         $request_type = $request->request_type;
         $buying_request_status = $request->buying_request_status;
         
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $buying_request_obj =  Rfq::where('item_id','<>', 0)->where('status','>', 1);        
         
         if($product_name){
@@ -72,14 +79,15 @@ class ProductRfqsController extends Controller
         }
 
         $buying_requests_count = $buying_request_obj->count();
-        $buying_requests = $buying_request_obj->limit($rows_numbers)
+        $buying_requests = $buying_request_obj
             ->with('category')->with('country')->with('buyer')
-            ->with('unit')->orderBy('id','desc')->get();
+            ->with('unit')->orderBy('id','desc')->paginate($rows_numbers);
 
         $site_url = config('global.public_url');
    
         return response()->json([
             'buying_requests' => $buying_requests,
+            'pagination' => (string) $buying_requests->links('pagination::bootstrap-4'),
             'buying_requests_count' => $buying_requests_count,
             'site_url' => $site_url
         ]);

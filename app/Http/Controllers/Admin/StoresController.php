@@ -47,7 +47,7 @@ class StoresController extends Controller
             ->paginate($rows_numbers);
         
         return response()->json([
-            'stores' => $stores,
+            'stores' => $stores, 
             'pagination' => (string) $stores->links('pagination::bootstrap-4'),
             'stores_count' => $stores_count
         ]);

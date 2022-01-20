@@ -8,18 +8,17 @@ use App\Models\Country;
 use App\Exports\RfqsInvoiceExport;
 use App\Imports\RfqsInvoiceImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 class RfqInvoicesController extends Controller
 {
 
-    public function index() 
-    {
+    public function index() {
         $countries = Country::all();
         return view('admin.rfqs.invoices.index', compact(['countries'])); 
     }
 
     public function getRfqInvoicesAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
         $buying_request_status = $request->buying_request_status;
 
@@ -39,14 +38,14 @@ class RfqInvoicesController extends Controller
             $buying_request_obj = $buying_request_obj->where('status',1);
         }
       
-
         $buying_requests_count = $buying_request_obj->count();
-        $buying_requests = $buying_request_obj->limit($rows_numbers)
-            ->with('buying_request')->with('supplier')->with('unit')->orderBy('id','desc')->get();
+        $buying_requests = $buying_request_obj->with('buying_request')->with('supplier')->with('unit')
+        ->orderBy('id','desc')->paginate($rows_numbers);
 
         
         return response()->json([
             'buying_requests' => $buying_requests,
+            'pagination' => (string) $buying_requests->links('pagination::bootstrap-4'),
             'buying_requests_count' => $buying_requests_count
         ]); 
     }
@@ -60,6 +59,11 @@ class RfqInvoicesController extends Controller
         $request_type = $request->request_type;
         $buying_request_status = $request->buying_request_status;
         
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $buying_request_obj =  RfqInvoice::leftJoin('buying_requests', 'buying_requests.id', 'buying_request_invoices.buying_request_id');
 
         if($buying_request_status == 'approvel'){    
@@ -91,45 +95,36 @@ class RfqInvoicesController extends Controller
     
             
         $buying_requests_count = $buying_request_obj->count();
-        $buying_requests = $buying_request_obj->limit($rows_numbers)
+        $buying_requests = $buying_request_obj
             ->with('buying_request')->with('supplier')
-            ->with('unit')->orderBy('buying_request_invoices.id','desc')->get();
+            ->with('unit')->orderBy('buying_request_invoices.id','desc')->paginate($rows_numbers);
 
    
         return response()->json([
             'buying_requests' => $buying_requests,
+            'pagination' => (string) $buying_requests->links('pagination::bootstrap-4'),
             'buying_requests_count' => $buying_requests_count
         ]);
     }
 
 
 
-    public function create()
-    {
-        //
-    }
-
-  
-    public function buying_request(Request $request)
-    {
+    public function create(){
         //
     }
 
 
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
  
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -143,15 +138,12 @@ class RfqInvoicesController extends Controller
 
     
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new RfqsInvoiceExport, 'stores.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new RfqsInvoiceImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }
