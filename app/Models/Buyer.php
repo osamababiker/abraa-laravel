@@ -11,7 +11,7 @@ class Buyer extends Model
     use HasFactory; 
     use SoftDeletes;
     protected $table = "users";
-    protected $guarded = [];
+    protected $guarded = []; 
 
     public function buyer_country() {
         return $this->belongsTo(Country::class,'country','co_code');

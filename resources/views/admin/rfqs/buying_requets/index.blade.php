@@ -43,7 +43,7 @@
                                                 Tools
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{{ route('rfq.export.excel') }}"
+                                                <a class="dropdown-item" href="{{ route('rfqs.export.excel') }}"
                                                     target="_blank">Export to excel</a>
                                             </div>
                                         </div>

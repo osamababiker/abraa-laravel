@@ -87,38 +87,28 @@ class RfqsController extends Controller
 
 
 
-    public function create()
-    {
+    public function create(){
         //
     }
 
-  
-    public function buying_request(Request $request)
-    {
-        //
-    }
-
-
-    public function show($id)
-    {
-        //
+    public function show($id){
+        $rfq = Rfq::findOrFail($id);
+        return view('admin.rfqs.buying_requets.show', compact(['rfq']));
     }
 
  
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
 
     public function destroy($id){
-        BuyingRequestInvoice::where('id',$id)->delete();
+        Rfq::where('id',$id)->delete();
         $message = 'Request hass been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');

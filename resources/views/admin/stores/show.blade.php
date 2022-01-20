@@ -183,7 +183,7 @@
 		</main>
 
 		@if(session()->has('feedback'))
-		@include('admin.stores.components.feedback')
+		@include('admin.layouts.feedback')
 		@endif
 		@include('admin.layouts.scripts')
 		<!-- footer is here -->

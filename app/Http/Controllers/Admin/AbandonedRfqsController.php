@@ -22,13 +22,7 @@ class AbandonedRfqsController extends Controller
     public function getAbandonedRfqsAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
 
-        $buying_request_obj = AbandonedRfq::select('abandoned_rfq.*', 'countries.en_name')
-        ->leftJoin('users', function($join){
-            $join->on('users.id', '=', 'buyer_id');
-        })->leftJoin('countries', function($join){
-            $join->on('users.country', '=', 'countries.co_code');
-        });
-
+        $buying_request_obj = new AbandonedRfq();
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj->with('buyer')->with('item')->with('unit')
         ->orderBy('id','desc')->paginate($rows_numbers);
@@ -54,14 +48,14 @@ class AbandonedRfqsController extends Controller
             return $currentPage;
         });
 
-        $buying_request_obj =  AbandonedRfq::leftJoin('users', 'users.id', 'abandoned_rfq.buyer_id');
+        $buying_request_obj =  AbandonedRfq::leftJoin('abandoned_registerations', 'abandoned_registerations.id', 'abandoned_rfq.buyer_id');
 
         if($product_name){
             $buying_request_obj->where('abandoned_rfq.product_name','like', '%' . $product_name . '%');
         }
 
         if($countries){
-            $buying_request_obj->whereIn('users.country', $countries);
+            $buying_request_obj->whereIn('abandoned_registerations.country', $countries);
         }
 
         $buying_requests_count = $buying_request_obj->count();
@@ -86,7 +80,8 @@ class AbandonedRfqsController extends Controller
     }
 
     public function show($id){
-        //
+        $rfq = AbandonedRfq::findOrFail($id);
+        return view('admin.rfqs.abandoned_buying_requets.show', compact(['rfq']));
     }
 
     public function edit($id){

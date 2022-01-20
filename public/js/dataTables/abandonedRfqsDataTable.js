@@ -9,6 +9,7 @@ $(document).ready(function () {
     var item_link = '';
     var buyer_name = '';
     var buyer_phone = '';
+    var buyer_country = '';
     var unit = '';
 
     // filter data
@@ -33,7 +34,8 @@ $(document).ready(function () {
                 if(request.buyer){
                     buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
-                    buyer_phone = request.buyer.phone;
+                    buyer_phone = request.buyer.mobile;
+                    buyer_country = request.buyer.country;
                 }
 
                 if(request.item_id > 0){
@@ -89,7 +91,7 @@ $(document).ready(function () {
                 "<td>"+ request.id +"</td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
-                "<td>"+ request.en_name +"</td>\n"+
+                "<td>"+ buyer_country +"</td>\n"+
                 "<td>"+ item_link +"</td>\n"+
                 "<td>"+ request.product_name +"</td>\n"+
                 "<td>\n"+
@@ -103,11 +105,11 @@ $(document).ready(function () {
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td>"+ request.last_updated +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/abandonedRfqs/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/abandonedRfqs/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
@@ -140,12 +142,13 @@ $(".filter_data_table").on('change', function () {
     var item_link = '';
     var buyer_name = '';
     var buyer_phone = '';
+    var buyer_country = '';
     var unit = '';
 
 
     // filter data
     var product_name = $('#product_name').val(); 
-    var shipping_country = $('#shipping_country').val(); 
+    var countries = $('#countries').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -153,7 +156,7 @@ $(".filter_data_table").on('change', function () {
         type: "post",
         data: {
             'product_name': product_name,
-            'shipping_country': shipping_country,
+            'countries': countries,
             'rows_numbers': rows_numbers,
             'current_page': window.current_page,
             '_token': csrf_token
@@ -172,7 +175,8 @@ $(".filter_data_table").on('change', function () {
                 if(request.buyer){
                     buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
-                    buyer_phone = request.buyer.phone;
+                    buyer_phone = request.buyer.mobile;
+                    buyer_country = request.buyer.country;
                 }
 
                 if(request.item_id > 0){
@@ -228,7 +232,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ request.id +"</td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
-                "<td>"+ request.en_name +"</td>\n"+
+                "<td>"+ buyer_country +"</td>\n"+
                 "<td>"+ item_link +"</td>\n"+
                 "<td>"+ request.product_name +"</td>\n"+
                 "<td>\n"+
@@ -242,11 +246,11 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td>"+ request.last_updated +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/abandonedRfqs/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/abandonedRfqs/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
@@ -281,12 +285,13 @@ $("#pagination").on('click', 'a', function(e) {
     var item_link = '';
     var buyer_name = '';
     var buyer_phone = '';
+    var buyer_country = '';
     var unit = '';
 
 
     // filter data
     var product_name = $('#product_name').val(); 
-    var shipping_country = $('#shipping_country').val(); 
+    var countries = $('#countries').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -294,7 +299,7 @@ $("#pagination").on('click', 'a', function(e) {
         type: "post",
         data: {
             'product_name': product_name,
-            'shipping_country': shipping_country,
+            'countries': countries,
             'current_page': window.current_page,
             'rows_numbers': rows_numbers,
             '_token': csrf_token
@@ -313,7 +318,8 @@ $("#pagination").on('click', 'a', function(e) {
                 if(request.buyer){
                     buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
-                    buyer_phone = request.buyer.phone;
+                    buyer_phone = request.buyer.mobile;
+                    buyer_country = request.buyer.country;
                 }
 
                 if(request.item_id > 0){
@@ -368,7 +374,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ request.id +"</td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
-                "<td>"+ request.en_name +"</td>\n"+
+                "<td>"+ buyer_country +"</td>\n"+
                 "<td>"+ item_link +"</td>\n"+
                 "<td>"+ request.product_name +"</td>\n"+
                 "<td>\n"+
@@ -382,11 +388,11 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td>"+ request.last_updated +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/abandonedRfqs/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/abandonedRfqs/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+

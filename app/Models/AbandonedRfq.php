@@ -13,12 +13,12 @@ class AbandonedRfq extends Model
     protected $table = "abandoned_rfq"; 
     protected $guarded = []; 
 
-    public function item(){
+    public function item(){ 
         return $this->belongsTo(Item::class,'item_id');
     }
 
     public function buyer(){
-        return $this->belongsTo(Buyer::class,'buyer_id');
+        return $this->belongsTo(AbandonedRegisteration::class,'buyer_id');
     }
 
     public function unit(){

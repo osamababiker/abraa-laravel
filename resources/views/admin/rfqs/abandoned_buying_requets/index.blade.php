@@ -63,7 +63,7 @@
                                                 class="filter_data_table form-control select2">
                                                 <option value=""> choose country </option>
                                                 @foreach($countries as $country)
-                                                <option value="{{ $country->co_code }}">{{ $country->en_name }}</option>
+                                                <option value="{{ $country->en_name }}">{{ $country->en_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
