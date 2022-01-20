@@ -13,7 +13,7 @@ class RfqInvoice extends Model
     protected $table = "buying_request_invoices";
     protected $guarded = []; 
 
-
+ 
     public function supplier(){
         return $this->belongsTo(Supplier::class,'supplier_id');
     }

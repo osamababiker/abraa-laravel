@@ -190,14 +190,10 @@ class GlobalRfqsController extends Controller
         //
     }
 
-  
-    public function buying_request(Request $request){
-        //
-    }
-
 
     public function show($id){
-        //
+        $rfq = Rfq::findOrFail($id);
+        return view('admin.rfqs.global_buying_requets.show', compact(['rfq']));
     }
 
  

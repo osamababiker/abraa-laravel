@@ -15,7 +15,7 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3 ml-4"> <i class="fa fa-eye"></i> View Buying Request </h1>
+					<h1 class="h3 mb-3 ml-4"> <i class="fa fa-eye"></i> View Buying Request Invoice </h1>
 					<div class="col-12">
 						<div class="col-12 col-lg-12">
 							<div class="tab">
@@ -53,47 +53,47 @@
 													<th>Status</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody> 
 												<tr> 
-                                                    <td>@if($rfq->buyer){{ $rfq->buyer->id }}@endif</td>
-													<td>@if($rfq->buyer){{ $rfq->buyer->full_name }}@endif</td>
-													<td>@if($rfq->buyer){{ $rfq->buyer->email }}@endif</td>
+                                                    <td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->id }}@endif</td>
+													<td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->full_name }}@endif</td>
+													<td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->email }}@endif</td>
 													<th>
-														@if($rfq->buyer)
-															@if($rfq->buyer->verified == 1)
+														@if($rfq->buying_request->buyer)
+															@if($rfq->buying_request->buyer->verified == 1)
 																<i class="fa fa-check" style="color: green"></i>
 															@else 
 																<i class="fa fa-times" style="color: red"></i>
 															@endif
 														@endif
 													</th>
-													<td>@if($rfq->buyer){{ $rfq->buyer->phone }}@endif</td>
-													<td>@if($rfq->buyer){{ $rfq->buyer->register_on }}@endif</td>
-													<td>@if($rfq->buyer){{ $rfq->buyer->last_login }}@endif</td>
+													<td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->phone }}@endif</td>
+													<td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->register_on }}@endif</td>
+													<td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->last_login }}@endif</td>
 													<td>
-														@if($rfq->buyer)
-															@if($rfq->buyer->buyer_country)
-																{{ $rfq->buyer->buyer_country->en_name }}
+														@if($rfq->buying_request->buyer)
+															@if($rfq->buying_request->buyer->buyer_country)
+																{{ $rfq->buying_request->buyer->buyer_country->en_name }}
 															@endif
 														@endif
 													</td>
 													<td>
-														@if($rfq->buyer && $rfq->buyer->city)
-															{{ $rfq->buyer->city->en_name }}
+														@if($rfq->buying_request->buyer && $rfq->buying_request->buyer->city)
+															{{ $rfq->buying_request->buyer->city->en_name }}
 														@endif
 													</td>
-													<td>@if($rfq->buyer){{ $rfq->buyer->company }}@endif</td>
+													<td>@if($rfq->buying_request->buyer){{ $rfq->buying_request->buyer->company }}@endif</td>
 													<td>
-														@if($rfq->buyer)
-															@if($rfq->buyer->subscription_id == 0)
+														@if($rfq->buying_request->buyer)
+															@if($rfq->buying_request->buyer->subscription_id == 0)
 																<p>Basic</p>
-															@elseif($rfq->buyer->subscription_id == 1)
+															@elseif($rfq->buying_request->buyer->subscription_id == 1)
 																<p>Silver</p>
-															@elseif($rfq->buyer->subscription_id == 2)
+															@elseif($rfq->buying_request->buyer->subscription_id == 2)
 																<p>Gold</p>
-															@elseif($rfq->buyer->subscription_id == 3)
+															@elseif($rfq->buying_request->buyer->subscription_id == 3)
 																<p>Platinum</p>
-															@elseif($rfq->buyer->subscription_id == 9)
+															@elseif($rfq->buying_request->buyer->subscription_id == 9)
 																<p>Old Gold</p>
 															@else 
 																<p></p>
@@ -101,8 +101,8 @@
 														@endif
 													</td>
 													<th>
-														@if($rfq->buyer)
-															@if($rfq->buyer->active == 1)
+														@if($rfq->buying_request->buyer)
+															@if($rfq->buying_request->buyer->active == 1)
 																<i class="fa fa-check" style="color: green"></i>
 															@else 
 																<i class="fa fa-times" style="color: red"></i>
@@ -115,22 +115,23 @@
 									</div>
 									<!-- RFQ Information tab -->
 									<div class="tab-pane" id="rfq_info" role="tabpanel">
-										<h4 class="tab-title"> RFQ Information </h4>
+										<h4 class="tab-title"> Buying Request Invoice </h4>
 										<table class="table table-striped">
 											<thead>
 												<tr>
                                                     <th>Id</th>
-													<th>Category</th>
-													<th>Product Name</th>
-													<th>Product Details</th>
+													<th>Buying Request</th>
+													<th>Supplier Name</th>
+													<th>Supplier Phone</th>
 													<th>Quantity</th>
 													<th>Unit</th>
-													<th>Buying Frequency</th>
-													<th>Target Price</th>
-													<th>Validity</th>
-													<th>Shipping Request</th>
-													<th>Source</th>
-													<th>Status</th>
+													<th>Price</th>
+													<th>Total Price</th>
+													<th>Currency</th>
+													<th>Message</th>
+													<th>Type</th>
+													<th>Is Confirmed</th>
+													<th>Vat</th>
                                                     <th>Date Added</th>
 												</tr>
 											</thead>
@@ -138,39 +139,53 @@
 												<tr>
 													<td>{{ $rfq->id }}</td>
 													<td>
-														@if($rfq->category)
-															{{ $rfq->category->en_title }}
+														@if($rfq->buying_request)
+															{{ $rfq->buying_request->product_name }}
 														@endif
 													</td>
-													<td>{{ $rfq->product_name }}</td>
-													<td>{{ $rfq->product_details }}</td>
+													<td>
+														@if($rfq->supplier)
+															{{ $rfq->supplier->full_name }}
+														@endif
+													</td>
+													<td>
+														@if($rfq->supplier)
+															{{ $rfq->supplier->phone }}
+														@endif
+													</td>
 													<td>{{ $rfq->quantity }}</td>
                                                     <td>
                                                         @if($rfq->unit)
                                                             {{ $rfq->unit->unit_en }}
                                                         @endif
                                                     </td>
-                                                    <td>{{ $rfq->buying_frequency_id }}</td>
-													<td>{{ $rfq->target_price }}</td>
-													<td>@if($rfq->validity > 0) {{ $rfq->validity }} @endif</td>
-													<td>{{ $rfq->shipping_request }}</td>
-													<td>{{ $rfq->source_url }}</td>
+                                                    <td>{{ $rfq->price }}</td>
+													<td>{{ $rfq->total_price }}</td>
 													<td>
-														@if($rfq->status == 1)
-															<p>Pending</p>
-														@elseif($rfq->status == 2)
-															<p>Approved</p>
-														@elseif($rfq->status == 3)
-															<p>Completed</p>
-														@elseif($rfq->status == 4)
-															<p>Lost</p>
-														@elseif($rfq->status == 5)
-															<p>Canceled</p>
+                                                        @if($rfq->currency)
+                                                            {{ $rfq->currency->name_en }}
+                                                        @endif
+                                                    </td>
+													<td>
+														@if($rfq->type == 1)
+															<p>Quote</p>
+														@elseif($rfq->type == 2)
+															<p>Offer</p>
+														@elseif($rfq->type == 3)
+															<p>Invoice</p>
 														@else 
 															<p></p>
 														@endif
 													</td>
-                                                    <td>{{ $rfq->date_added }}</td>
+													<td>
+														@if($rfq->confirmed == 1)
+															<i class="fa fa-check" style="color: green"></i>
+														@else
+															<i class="fa fa-times" style="color: red"></i>
+														@endif
+													</td>
+                                                    <td>{{ $rfq->vat }}</td>
+													<td>{{ $rfq->datetime }}</td>
 												</tr>
 											</tbody>
 										</table>

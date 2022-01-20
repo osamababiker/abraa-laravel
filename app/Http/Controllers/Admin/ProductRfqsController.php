@@ -204,7 +204,8 @@ class ProductRfqsController extends Controller
 
 
     public function show($id){
-        //
+        $rfq = Rfq::findOrFail($id);
+        return view('admin.rfqs.product_buying_requets.show', compact(['rfq']));
     }
 
  

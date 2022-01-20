@@ -72,8 +72,6 @@ class RfqInvoicesController extends Controller
         if($shipping_country){
             $buying_request_obj->whereIn('buying_requests.country_code', $shipping_country);
         }
-
-    
             
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj
@@ -96,7 +94,8 @@ class RfqInvoicesController extends Controller
 
 
     public function show($id){
-        //
+        $rfq = RfqInvoice::findOrFail($id);
+        return view('admin.rfqs.invoices.show', compact(['rfq']));
     }
 
  
