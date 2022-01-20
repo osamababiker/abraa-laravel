@@ -40,8 +40,6 @@ class AbandonedRfqsController extends Controller
         $product_name = $request->product_name;
         $countries = $request->countries;
         $rows_numbers = $request->rows_numbers; 
-        $request_type = $request->request_type;
-        $buying_request_status = $request->buying_request_status;
         
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {

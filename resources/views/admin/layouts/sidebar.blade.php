@@ -141,7 +141,7 @@
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('rfqs.index') }}">Pending Buying Requests</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('globalRfqs.index') }}">Global Buying Requests</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('productRfqs.index') }}">Product Buying Requests</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-pricing.html">Closed Buying Quotation</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('closedRfqs.index') }}">Closed Buying Quotation</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('abandonedRfqs.index') }}">Abandoned  Buying Quotation</a></li>
                 </ul>
             </li>

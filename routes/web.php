@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\RfqInvoicesController;
 use App\Http\Controllers\Admin\RfqsController;
 use App\Http\Controllers\Admin\AbandonedRfqsController;
+use App\Http\Controllers\Admin\ClosedRfqsController;
 use App\Http\Controllers\Admin\GlobalRfqsController;
 use App\Http\Controllers\Admin\ProductRfqsController;
 use App\Http\Controllers\Admin\HomeSlidersController;
@@ -788,6 +789,37 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('abandonedRfqs', AbandonedRfqsController::class);
+
+
+    // ======================= Closed rfqs Routes ====================== //
+    // table actions route
+    Route::post('closedRfqs/actions', 
+        [ClosedRfqsController::class , 'actions']
+    )->name('closedRfqs.actions');  
+     // get closed Rfqs as json route 
+     Route::get('closedRfqs/json', [
+        ClosedRfqsController::class, 'getClosedRfqsAsJson'
+    ])->name('closedRfqs.json');
+        // filter closed Rfqs  route 
+    Route::post('closedRfqs/filter', [
+        ClosedRfqsController::class, 'filterClosedRfqs'
+    ])->name('closedRfqs.filter');
+    // to import & export excel 
+    Route::get('closedRfqs/export/excel', [
+        ClosedRfqsController::class, 'exportExcel'
+    ])->name('closedRfqs.export.excel');
+    Route::post('closedRfqs/import/excel', [
+        ClosedRfqsController::class, 'importExcel'
+    ])->name('closedRfqs.import.excel');
+    Route::get('closedRfqs/importExportView',  [
+        ClosedRfqsController::class, 'importExportView'
+    ]);    
+    // custom delete route
+    Route::get('closedRfqs/{id}/destroy', [
+        ClosedRfqsController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('closedRfqs', ClosedRfqsController::class);
 
 
     // ======================= Items Routes ====================== //

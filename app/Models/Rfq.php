@@ -20,13 +20,17 @@ class Rfq extends Model
     public function country(){
         return $this->belongsTo(Country::class,'country_code','co_code');
     }
-
+ 
     public function city(){
         return $this->belongsTo(State::class,'city');
     }
 
     public function buyer(){ 
         return $this->belongsTo(Buyer::class,'buyer_id');
+    }
+
+    public function item(){ 
+        return $this->belongsTo(Item::class,'item_id');
     }
 
     public function approved_by_admin(){
