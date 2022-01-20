@@ -60,10 +60,11 @@
 													<td>@if($rfq->buyer){{ $rfq->buyer->email }}@endif</td>
 													<th>
 														@if($rfq->buyer)
-														@if(rfq->buyer->verified == 1)
-															<i class="fa fa-check" style="color: green"></i>
-														@else 
-															<i class="fa fa-times" style="color: red"></i>
+															@if(rfq->buyer->verified == 1)
+																<i class="fa fa-check" style="color: green"></i>
+															@else 
+																<i class="fa fa-times" style="color: red"></i>
+															@endif
 														@endif
 													</th>
 													<td>@if($rfq->buyer){{ $rfq->buyer->phone }}@endif</td>
