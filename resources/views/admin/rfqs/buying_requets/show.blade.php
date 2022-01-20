@@ -95,6 +95,7 @@
 															@else 
 																<p></p>
 															@endif
+															@endif
 														@endif
 													</td>
 													<th>
@@ -147,7 +148,7 @@
 													<td>@if($rfq->validity > 0) {{ $rfq->validity }} @endif</td>
 													<td>{{ $rfq->shipping_request }}</td>
 													<td>{{ $rfq->source_url }}</td>
-													
+												
                                                     <td>{{ $rfq->date_added }}</td>
 												</tr>
 											</tbody>
