@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rfq extends Model 
 {
-    use HasFactory; 
+    use HasFactory;  
     use SoftDeletes;
     protected $table = "buying_requests"; 
     protected $guarded = []; 

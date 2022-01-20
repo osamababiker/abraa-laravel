@@ -20,29 +20,12 @@ class RfqInvoicesController extends Controller
 
     public function getRfqInvoicesAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
-        $buying_request_status = $request->buying_request_status;
-
         $buying_request_obj = new RfqInvoice();
-
-     
-        if($buying_request_status == 'approvel'){    
-            $buying_request_obj = $buying_request_obj->where('status',2);
-        }
-        elseif($buying_request_status == 'completed'){
-            $buying_request_obj = $buying_request_obj->where('status',3);
-        }
-        elseif($buying_request_status == 'canceled'){
-            $buying_request_obj = $buying_request_obj->where('status',5);
-        }
-        elseif($buying_request_status == 'pending'){
-            $buying_request_obj = $buying_request_obj->where('status',1);
-        }
       
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj->with('buying_request')->with('supplier')->with('unit')
         ->orderBy('id','desc')->paginate($rows_numbers);
 
-        
         return response()->json([
             'buying_requests' => $buying_requests,
             'pagination' => (string) $buying_requests->links('pagination::bootstrap-4'),
@@ -51,8 +34,6 @@ class RfqInvoicesController extends Controller
     }
 
     public function filterRfqInvoices(Request $request){
-
-        
         $product_name = $request->product_name;
         $shipping_country = $request->shipping_country;
         $rows_numbers = $request->rows_numbers; 
@@ -131,7 +112,9 @@ class RfqInvoicesController extends Controller
 
     public function destroy($id){
         BuyingRequestInvoice::where('id',$id)->delete();
-        $message = 'Request hass been Archived successfully';
+        $message = 'Buying request hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -145,5 +128,20 @@ class RfqInvoicesController extends Controller
     public function importExcel() {
         Excel::import(new RfqsInvoiceImport,request()->file('file'));
         return redirect()->back();
+    }
+
+     // Rfq Invoices actions
+     public function actions(Request $request){
+        if($request->has('delete_selected_btn')){
+            foreach($request->rfqs_id as $request_id){
+                $rfq = BuyingRequestInvoice::find($request_id);
+                $rfq->delete();
+                $message = 'buying requests hass been deleted successfully';
+                session()->flash('success', 'true');
+                session()->flash('feedback_title', 'Success');
+                session()->flash('feedback', $message);
+                return redirect()->back();
+            }
+        }
     }
 }

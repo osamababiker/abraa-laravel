@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
 use App\Http\Controllers\Admin\RfqInvoicesController;
 use App\Http\Controllers\Admin\RfqsController;
+use App\Http\Controllers\Admin\AbandonedRfqsController;
 use App\Http\Controllers\Admin\GlobalRfqsController;
 use App\Http\Controllers\Admin\ProductRfqsController;
 use App\Http\Controllers\Admin\HomeSlidersController;
@@ -756,6 +757,37 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('rfqInvoices', RfqInvoicesController::class);
+
+
+    // ======================= Abandoned rfqs Routes ====================== //
+    // table actions route
+    Route::post('abandonedRfqs/actions', 
+        [AbandonedRfqsController::class , 'actions']
+    )->name('abandonedRfqs.actions');  
+     // get abandoned Rfqs as json route 
+     Route::get('abandonedRfqs/json', [
+        AbandonedRfqsController::class, 'getAbandonedRfqsAsJson'
+    ])->name('abandonedRfqs.json');
+        // filter abandoned Rfqs  route 
+    Route::post('abandonedRfqs/filter', [
+        AbandonedRfqsController::class, 'filterAbandonedRfqs'
+    ])->name('abandonedRfqs.filter');
+    // to import & export excel 
+    Route::get('abandonedRfqs/export/excel', [
+        AbandonedRfqsController::class, 'exportExcel'
+    ])->name('abandonedRfqs.export.excel');
+    Route::post('abandonedRfqs/import/excel', [
+        AbandonedRfqsController::class, 'importExcel'
+    ])->name('abandonedRfqs.import.excel');
+    Route::get('abandonedRfqs/importExportView',  [
+        AbandonedRfqsController::class, 'importExportView'
+    ]);    
+    // custom delete route
+    Route::get('abandonedRfqs/{id}/destroy', [
+        AbandonedRfqsController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('abandonedRfqs', AbandonedRfqsController::class);
 
 
     // ======================= Items Routes ====================== //

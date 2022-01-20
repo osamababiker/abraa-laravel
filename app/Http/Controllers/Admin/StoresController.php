@@ -166,7 +166,7 @@ class StoresController extends Controller
             ->select('users_store.*')
             ->where('users_store.trash', 0)
             ->leftJoin('users', function($join) {
-                $join->on('users.id', '=', 'users_store.sub_of');
+                $join->on('users.id', '=', 'users_store.sub_of'); 
         });
 
         if($subscription == 9){

@@ -160,8 +160,10 @@ class GlobalRfqsController extends Controller
             $this->sendEmail($email_templete, $supplier->email, $subject);
         }
  
-        $message = 'Message has been send successfuly';
-        session()->flash('feedback',$message);
+        $message = 'Message hass been send successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
         return redirect()->back();
         
     }
@@ -169,7 +171,6 @@ class GlobalRfqsController extends Controller
 
     // to get suppliers details to approve
     public function getSuppliersDetails(Request $request){
-        
         if($request->has('is_product')){
             $results = Item::where('title', 'like', '%'. $request->term . '%')
                 ->orWhere('meta_keyword', 'like', '%'. $request->term . '%')->get();
@@ -185,32 +186,27 @@ class GlobalRfqsController extends Controller
         
     }
 
-    public function create()
-    {
+    public function create(){
         //
     }
 
   
-    public function buying_request(Request $request)
-    {
+    public function buying_request(Request $request){
         //
     }
 
 
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
  
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -226,22 +222,17 @@ class GlobalRfqsController extends Controller
 
     
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new RfqsExport, 'buying_requests.xlsx'); 
     }
    
-    public function importExcel() 
-    {
-        Excel::import(new RfqsImport,request()->file('file'));
-           
+    public function importExcel() {
+        Excel::import(new RfqsImport,request()->file('file')); 
         return redirect()->back();
     }
 
-    // Rfq actions ('delete(Archive) selected , approve selected')
-    public function actions(Request $request)
-    {
-        // to delete (archived) selected
+    // Global Rfq actions
+    public function actions(Request $request){
         if($request->has('delete_selected_btn')){
             foreach($request->rfqs_id as $request_id){
                 $rfq = Rfq::find($request_id);
