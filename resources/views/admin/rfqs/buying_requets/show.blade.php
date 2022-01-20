@@ -147,21 +147,7 @@
 													<td>@if($rfq->validity > 0) {{ $rfq->validity }} @endif</td>
 													<td>{{ $rfq->shipping_request }}</td>
 													<td>{{ $rfq->source_url }}</td>
-													<td>
-														@if($rfq->status == 1)
-															<p>Pending</p>
-														@elseif($rfq->status == 2)
-															<p>Approved</p>
-														@elseif($rfq->status == 3)
-															<p>Completed</p>
-														@elseif($rfq->status == 4)
-															<p>Lost</p>
-														@elseif($rfq->status == 5)
-															<p>Canceled</p>
-														@else 
-															<p></p>
-														@endif
-													</td>
+													
                                                     <td>{{ $rfq->date_added }}</td>
 												</tr>
 											</tbody>
