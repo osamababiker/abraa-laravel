@@ -146,11 +146,11 @@ $(document).ready(function () {
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/rfqs/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/rfqs/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
@@ -327,11 +327,11 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/rfqs/"+ request.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyingRequestInvoice/"+ request.id +"/edit\">\n"+
+                    "<a target=\"_blank\" href=\"/rfqs/"+ request.id +"/edit\">\n"+
                         "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
