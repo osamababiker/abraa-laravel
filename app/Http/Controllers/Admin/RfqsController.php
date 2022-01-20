@@ -30,7 +30,7 @@ class RfqsController extends Controller
     public function getRfqsAsJson(Request $request){
 
         $rows_numbers = $request->rows_numbers;
-        $buying_request_status = $request->buying_request_status;
+        $buying_request_status = $request->buying_request_status; 
 
         $buying_request_obj = Rfq::where('item_id', '<>', 0)->where('status', 1);
 

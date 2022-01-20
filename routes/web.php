@@ -609,7 +609,7 @@ Route::group(['middleware' => 'auth'], function (){
     ])->name('rfqs.json');
     // filter rfqs  route 
     Route::post('rfqs/filter', [
-        RfqsController::class, 'filterRfqs'
+        RfqsController::class, 'filterRfqs' 
     ])->name('rfqs.filter');
     // to import & export excel 
     Route::get('rfqs/export/excel', [
