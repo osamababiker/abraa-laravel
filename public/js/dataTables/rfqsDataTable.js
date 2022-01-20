@@ -51,7 +51,7 @@ $(document).ready(function () {
                 }
 
                 if(request.item_id > 0){
-                    item_link = "<a href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
+                    item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
                 }else item_link =  request.product_name;
 
 
@@ -236,7 +236,7 @@ $(".filter_data_table").on('change', function () {
                 }
 
                 if(request.item_id > 0){
-                    item_link = "<a href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
+                    item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
                 }else item_link =  request.product_name;
 
                 buying_request_html = buying_request_html +
@@ -423,7 +423,7 @@ $("#pagination").on('click', 'a', function(e) {
                 }
 
                 if(request.item_id > 0){
-                    item_link = "<a href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
+                    item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
                 }else item_link =  request.product_name;
 
 
