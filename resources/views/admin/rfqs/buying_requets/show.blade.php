@@ -137,7 +137,11 @@
 											<tbody>
 												<tr>
 													<td>{{ $rfq->id }}</td>
-													<td>{{ $rfq->category->en_title }}</td>
+													<td>
+														@if($rfq->category)
+															{{ $rfq->category->en_title }}
+														@endif
+													</td>
 													<td>{{ $rfq->product_name }}</td>
 													<td>{{ $rfq->product_details }}</td>
 													<td>{{ $rfq->quantity }}</td>
