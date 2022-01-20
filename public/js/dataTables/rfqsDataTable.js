@@ -11,6 +11,7 @@ $(document).ready(function () {
     var buyer_name = '';
     var buyer_email = '';
     var buyer_phone = '';
+    var item_link = '';
     var unit = '';
 
     // filter data
@@ -48,6 +49,10 @@ $(document).ready(function () {
                 if(request.country){
                     country = request.country.en_name;
                 }
+
+                if(request.item_id > 0){
+                    item_link = "<a href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
+                }else item_link =  request.product_name;
 
 
                 buying_request_html = buying_request_html +
@@ -141,7 +146,7 @@ $(document).ready(function () {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td>"+ request.product_name +"</td>\n"+
+                "<td>"+ item_link +"</td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+
@@ -185,6 +190,7 @@ $(".filter_data_table").on('change', function () {
     var buyer_name = '';
     var buyer_email = '';
     var buyer_phone = '';
+    var item_link = '';
     var unit = '';
 
 
@@ -229,6 +235,9 @@ $(".filter_data_table").on('change', function () {
                     country = request.country.en_name;
                 }
 
+                if(request.item_id > 0){
+                    item_link = "<a href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
+                }else item_link =  request.product_name;
 
                 buying_request_html = buying_request_html +
 
@@ -322,7 +331,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td>"+ request.product_name +"</td>\n"+
+                "<td>"+ item_link +"</td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+
@@ -368,6 +377,7 @@ $("#pagination").on('click', 'a', function(e) {
     var buyer_name = '';
     var buyer_email = '';
     var buyer_phone = '';
+    var item_link = '';
     var unit = '';
 
 
@@ -411,6 +421,10 @@ $("#pagination").on('click', 'a', function(e) {
                 if(request.country){
                     country = request.country.en_name;
                 }
+
+                if(request.item_id > 0){
+                    item_link = "<a href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
+                }else item_link =  request.product_name;
 
 
                 buying_request_html = buying_request_html +
@@ -505,7 +519,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td>"+ request.product_name +"</td>\n"+
+                "<td>"+ item_link +"</td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ request.date_added +"</td>\n"+

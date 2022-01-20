@@ -125,7 +125,8 @@
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
-            <script src="{{ asset('js/dataTables/rfqsDataTable.js') }}"></script>
+            <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
+            <script src="{{ asset('js/dataTables/rfqsDataTable.js') }}"></script> 
             <!-- footer is here -->
             @include('admin.layouts.footer')
 
