@@ -78,11 +78,10 @@ $(document).ready(function () {
                 "<td> <input type=\"checkbox\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
-                    "<a href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
+                    "<a class=\"btn btn-success\" color=\"color: #fff\" href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
                         "<i class=\"align-middle fa fa-link\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
-                "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
                 "<td>"+ country +"</td>\n"+
@@ -202,11 +201,10 @@ $(".filter_data_table").on('change', function () {
                 "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
-                    "<a href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
+                    "<a class=\"btn btn-success\" color=\"color: #fff\" href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
                         "<i class=\"align-middle fa fa-link\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
-                "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
                 "<td>"+ country +"</td>\n"+
@@ -326,11 +324,10 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
-                    "<a href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
+                    "<a class=\"btn btn-success\" color=\"color: #fff\" href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
                         "<i class=\"align-middle fa fa-link\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
-                "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
                 "<td>"+ country +"</td>\n"+

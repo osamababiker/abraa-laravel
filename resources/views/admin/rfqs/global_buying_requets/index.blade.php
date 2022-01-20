@@ -84,7 +84,6 @@
                                                         <th> <input type="checkbox" class="select_all_colums"> </th>
                                                         <th>Id</th>
                                                         <th>Send To Suppliers</th>
-                                                        <th>Type</th>
                                                         <th>Buyer Name</th>
                                                         <th>Phone</th>
                                                         <th>Country</th>
