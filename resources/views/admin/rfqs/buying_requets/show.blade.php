@@ -71,12 +71,12 @@
 													<td>@if($rfq->buyer){{ $rfq->buyer->last_login }}@endif</td>
 													<td>
 														@if($rfq->buyer && $rfq->buyer->country)
-														{{ $rfq->buyer->country->en_name }}
+															{{ $rfq->buyer->country->en_name }}
 														@endif
 													</td>
 													<td>
 														@if($rfq->buyer && $rfq->buyer->city)
-														{{ $rfq->buyer->city->en_name }}
+															{{ $rfq->buyer->city->en_name }}
 														@endif
 													</td>
 													<td>@if($rfq->buyer){{ $rfq->buyer->company }}@endif</td>
@@ -84,27 +84,26 @@
 														@if($rfq->buyer)
 															@if($rfq->buyer->subscription_id == 0)
 																<p>Basic</p>
-															@endif
-															@if($rfq->buyer->subscription_id == 1)
+															@elseif($rfq->buyer->subscription_id == 1)
 																<p>Silver</p>
-															@endif
-															@if($rfq->buyer->subscription_id == 2)
+															@elseif($rfq->buyer->subscription_id == 2)
 																<p>Gold</p>
-															@endif
-															@if($rfq->buyer->subscription_id == 3)
+															@elseif($rfq->buyer->subscription_id == 3)
 																<p>Platinum</p>
-															@endif
-															@if($rfq->buyer->subscription_id == 9)
+															@elseif($rfq->buyer->subscription_id == 9)
 																<p>Old Gold</p>
+															@else 
+																<p></p>
 															@endif
 														@endif
 													</td>
 													<th>
 														@if($rfq->buyer)
-														@if(rfq->buyer->active == 1)
-															<i class="fa fa-check" style="color: green"></i>
-														@else 
-															<i class="fa fa-times" style="color: red"></i>
+															@if(rfq->buyer->active == 1)
+																<i class="fa fa-check" style="color: green"></i>
+															@else 
+																<i class="fa fa-times" style="color: red"></i>
+															@endif
 														@endif
 													</th>
 												</tr>
@@ -152,18 +151,16 @@
 													<td>
 														@if($rfq->status == 1)
 															<p>Pending</p>
-														@endif
-														@if($rfq->status == 2)
+														@elseif($rfq->status == 2)
 															<p>Approved</p>
-														@endif
-														@if($rfq->status == 3)
+														@elseif($rfq->status == 3)
 															<p>Completed</p>
-														@endif
-														@if($rfq->status == 4)
+														@elseif($rfq->status == 4)
 															<p>Lost</p>
-														@endif
-														@if($rfq->status == 5)
+														@elseif($rfq->status == 5)
 															<p>Canceled</p>
+														@else 
+															<p></p>
 														@endif
 													</td>
                                                     <td>{{ $rfq->date_added }}</td>

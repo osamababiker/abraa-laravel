@@ -131,7 +131,7 @@ $(document).ready(function () {
                 "<td> <input type=\"checkbox\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                    "<a href=\"#\" type=\"button\" class=\"btn btn-success\" style=\"color: #fff\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-check\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
@@ -312,7 +312,7 @@ $(".filter_data_table").on('change', function () {
                 "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                    "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-check\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
@@ -495,7 +495,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
-                    "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                    "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
                         "<i  class=\"align-middle fa fa-check\" ></i>\n"+
                     "</a>\n"+ 
                 "</td>\n"+
