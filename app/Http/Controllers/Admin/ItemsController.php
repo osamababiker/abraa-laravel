@@ -50,32 +50,25 @@ class ItemsController extends Controller
         $items_status = $request->items_status;
         $store_status = $request->store_status;
 
-        $item_obj = Item::with('category')
-            ->select("items.*")
-            ->leftJoin('users', function($join) {
-                $join->on('users.id', '=', 'items.user_id');
-            })
-            ->leftJoin('users_store', function($join) {
-                $join->on('users_store.sub_of', '=', 'users.id');
-            });
+        $item_obj = Item::with('category');
         
         // filter by item status
         if($items_status == 'active'){
-            $item_obj = $item_obj->where('items.status', 1); 
+            $item_obj = $item_obj->where('status', 1); 
         } 
         elseif($items_status == 'pending'){
-            $item_obj = $item_obj->where('items.status', 0)
-                ->where('items.rejected', 0);
+            $item_obj = $item_obj->where('status', 0)
+                ->where('rejected', 0);
         }
         elseif($items_status == 'rejected'){
-            $item_obj = $item_obj->where('items.status', 0)
-                ->where('items.rejected',1);
+            $item_obj = $item_obj->where('status', 0)
+                ->where('rejected',1);
         }
         elseif($items_status == 'home'){
-            $item_obj = $item_obj->where('items.show_homepage',1);
+            $item_obj = $item_obj->where('show_homepage',1);
         }
         elseif($items_status == 'featured'){
-            $item_obj = $item_obj->where('items.featured',1);
+            $item_obj = $item_obj->where('featured',1);
         }
 
         // filter by store status
@@ -87,22 +80,22 @@ class ItemsController extends Controller
         }
 
         if($product_name){
-            $item_obj->where('items.title','like', '%' . $product_name . '%'); 
+            $item_obj->where('title','like', '%' . $product_name . '%'); 
         }
 
         if($manufacture_country){
-            $item_obj->whereIn('items.manufacture_country', $manufacture_country);
+            $item_obj->whereIn('manufacture_country', $manufacture_country);
         }
         
         if($meta_keyword){
             foreach($meta_keyword as $word){
-                $item_obj->where('items.meta_keyword','like', '%' . $word . '%');
+                $item_obj->where('meta_keyword','like', '%' . $word . '%');
             }
         }
             
         $items_count = $item_obj->count();
         $items = $item_obj->limit($rows_numbers)
-            ->orderBy('items.id','desc')->get();
+            ->orderBy('id','desc')->get();
 
         
         return response()->json([
