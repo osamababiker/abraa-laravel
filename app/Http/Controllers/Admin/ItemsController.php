@@ -61,14 +61,11 @@ class ItemsController extends Controller
         
         // filter by item status
         if($items_status == 'active'){
-            $item_obj = $item_obj->where('items.status', 1)
-                ->where('items.rejected', 0)
-                ->where('items.approved', 1);
+            $item_obj = $item_obj->where('items.status', 1); 
         } 
         elseif($items_status == 'pending'){
             $item_obj = $item_obj->where('items.status', 0)
-                ->where('items.rejected', 0)
-                ->where('items.approved', 0);
+                ->where('items.rejected', 0);
         }
         elseif($items_status == 'rejected'){
             $item_obj = $item_obj->where('items.rejected',1);
@@ -199,13 +196,11 @@ class ItemsController extends Controller
 
     }
 
-   
     public function show($id){
         $item = Item::findOrFail($id);
         return view('admin.items.show', compact(['item']));
     }
 
- 
     public function edit($id){
         $item = Item::find($id);
         $categories = Category::all();
@@ -221,7 +216,6 @@ class ItemsController extends Controller
         ));
     }
 
-   
     public function update(ItemsRequest $request){
         $meta_keyword = '';
         foreach($request->meta_keyword as $keyword){
