@@ -25,7 +25,7 @@ class Item extends Model
         return $this->belongsTo(Currency::class,'currency');
     }
 
-    public function manufacture_country(){
+    public function country(){
         return $this->belongsTo(Country::class,'manufacture_country','co_code');
     }
 

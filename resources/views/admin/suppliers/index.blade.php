@@ -133,6 +133,8 @@
 
                                                 </tbody>
                                             </table>
+                                            <div id="pagination" class="d-flex justify-content-center">
+                                            </div>
                                         </div>
                                         @include('admin.suppliers.components.email_editors')
                                         @include('admin.suppliers.components.delete_selected')

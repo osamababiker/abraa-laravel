@@ -77,6 +77,8 @@
 
                                                 </tbody>
                                             </table>
+                                            <div id="pagination" class="d-flex justify-content-center">
+                                            </div>
                                         </div>
                                         @include('admin.suppliers.files.components.delete_selected')
                                     </div>

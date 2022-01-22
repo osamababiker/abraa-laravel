@@ -123,8 +123,8 @@
 										<tr class="table-success">
 											<th>Manufacture Country</th>
 											<td>
-												@if($item->manufacture_country)
-													{{ $item->manufacture_country->en_name }}
+												@if($item->country)
+													{{ $item->country->en_name }} 
 												@endif
 											</td>
 										</tr>
