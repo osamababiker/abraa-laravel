@@ -68,7 +68,8 @@ class ItemsController extends Controller
                 ->where('items.rejected', 0);
         }
         elseif($items_status == 'rejected'){
-            $item_obj = $item_obj->where('items.rejected',1);
+            $item_obj = $item_obj->where('items.status', 0)
+                ->where('items.rejected',1);
         }
         elseif($items_status == 'home'){
             $item_obj = $item_obj->where('items.show_homepage',1);
