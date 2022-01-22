@@ -82,6 +82,7 @@
                                                     <option value="rejected"> Rejected Items </option>
                                                     <option value="home"> Home Items </option>
                                                     <option value="featured"> Featured Items </option>
+                                                    <option value="no_image">Items With No Image</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2 form-group">

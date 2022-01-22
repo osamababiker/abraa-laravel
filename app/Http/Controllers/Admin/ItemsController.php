@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
@@ -76,6 +77,13 @@ class ItemsController extends Controller
         }
         elseif($items_status == 'featured'){
             $item_obj = $item_obj->where('items.featured',1);
+        }
+        elseif($items_status == 'no_image'){
+            $item_obj = $item_obj->whereNotExists(function($query) {
+                $query->select(DB::raw(1))
+                ->from('items_files')
+                ->whereRaw('items.id = items_files.sub_of');
+            });
         }
 
         // filter by store status
