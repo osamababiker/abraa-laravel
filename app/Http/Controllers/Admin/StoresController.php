@@ -93,8 +93,9 @@ class StoresController extends Controller
             $store_obj->where('users.subscription_id', 2)
             ->where('users.premium', '<', date("Y-m-d H:i:s"));
         }elseif($request->subscription && (int) $request->subscription == 0){
+  
             $store_obj->where('users.subscription_id', (int) $request->subscription);
-        }else{
+        }elseif($request->subscription){
             $store_obj->where('users.subscription_id', (int) $request->subscription)
             ->where('users.premium', '>=', date("Y-m-d H:i:s"));
         }
@@ -171,7 +172,7 @@ class StoresController extends Controller
             ->where('users.premium', '<', date("Y-m-d H:i:s"));
         }elseif($request->subscription && (int) $request->subscription == 0){
             $store_obj->where('users.subscription_id', (int) $request->subscription);
-        }else{
+        }elseif($request->subscription){
             $store_obj->where('users.subscription_id', (int) $request->subscription)
             ->where('users.premium', '>=', date("Y-m-d H:i:s"));
         }
