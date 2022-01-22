@@ -28,12 +28,12 @@
                                 <hr>
                                 <div class="card-body">
                                     <div class="row mb-2 m-1">
-                                        <div class="col-md-3 form-group">
+                                        <div class="col-md-2 form-group">
                                             <label for="keywords">By KeyWords</label>
                                             <select name="keywords" multiple="multiple" id="keywords" class="form-control filter_data_table select2">
                                             </select>
                                         </div>
-                                        <div class="col-md-3 form-group">
+                                        <div class="col-md-2 form-group">
                                             <label for="countries"> By Country</label>
                                             <select name="countries[]" multiple="multiple" id="countries"
                                                 class="form-control filter_data_table select2">
@@ -43,13 +43,23 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3 form-group autocomplete-product">
+                                        <div class="col-md-2 form-group autocomplete-product">
                                             <label for="product_search">By Product</label>
                                             <input type="text" name="product_search" id="product_search" class="form-control autocomplete filter_data_table">
                                         </div>
-                                        <div class="col-md-3 form-group">
+                                        <div class="col-md-2 form-group">
                                             <label for="supplier_name">By Supplier name</label>
                                             <input name="supplier_name" id="supplier_name" class="form-control filter_data_table">
+                                        </div>
+                                        <div class="col-md-2 form-group">
+                                            <label for="rows_numbers">Numbers of rows</label>
+                                            <select name="rows_numbers" id="rows_numbers"
+                                                class="filter_data_table form-control select2">
+                                                <option value="10"> 10 </option>
+                                                <option value="100"> 100 </option>
+                                                <option value="500"> 500 </option>
+                                                <option value="1000"> 1000 </option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -71,7 +81,7 @@
                                                             <th>Supplier Phone</th>
                                                             <th>Supplier Country</th>
                                                             <th>Category</th>
-                                                            <th>Subscription</th>
+                                                            <th>Subscription</th> 
                                                             <th>Sent Requests</th>
                                                         </tr>
                                                     </thead>
@@ -79,6 +89,8 @@
 
                                                     </tbody>
                                                 </table>
+                                                <div id="pagination" class="d-flex justify-content-center">
+                                                </div>
                                                 <div class="" style="justify-content: center;">
                                                     <button type="submit" class="btn btn-secondary" id="">Send Request</button>
                                                     <button class="btn btn-secondary" id="">Send For Suppliers Verification</button>
@@ -100,6 +112,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+            <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script src="{{ asset('js/dataTables/sendRfqToSuppliersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

@@ -54,7 +54,7 @@ $(document).ready(function () {
                     item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
                 }else item_link =  request.product_name;
 
-
+ 
                 buying_request_html = buying_request_html +
 
                 // archive confirmation modal
@@ -364,7 +364,7 @@ $(".filter_data_table").on('change', function () {
 
 
 
-// ==============================================================//
+// ==============================================================// 
 // to handel pagination  
 $("#pagination").on('click', 'a', function(e) {
     e.preventDefault();

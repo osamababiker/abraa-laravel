@@ -58,8 +58,7 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
-        $subscription = (int) $request->subscription;
-
+        
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
@@ -90,13 +89,13 @@ class StoresController extends Controller
             ->where('users_store.rejected', 0);
         }
 
-        if($subscription == 9){
+        if($request->subscription && (int) $request->subscription == 9){
             $store_obj->where('users.subscription_id', 2)
             ->where('users.premium', '<', date("Y-m-d H:i:s"));
-        }elseif($subscription == 0){
-            $store_obj->where('users.subscription_id', $subscription);
+        }elseif($request->subscription && (int) $request->subscription == 0){
+            $store_obj->where('users.subscription_id', (int) $request->subscription);
         }else{
-            $store_obj->where('users.subscription_id', $subscription)
+            $store_obj->where('users.subscription_id', (int) $request->subscription)
             ->where('users.premium', '>=', date("Y-m-d H:i:s"));
         }
         
@@ -116,9 +115,8 @@ class StoresController extends Controller
             
         $stores_count = $store_obj->count();
         $stores = $store_obj->orderBy('users_store.id','desc')
-            ->paginate($rows_numbers);
+            ->paginate($rows_numbers); 
 
-   
         return response()->json([
             'stores' => $stores,
             'pagination' => (string) $stores->links('pagination::bootstrap-4'),
@@ -155,7 +153,6 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
-        $subscription = (int) $request->subscription;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -169,14 +166,14 @@ class StoresController extends Controller
                 $join->on('users.id', '=', 'users_store.sub_of'); 
         });
 
-        if($subscription == 9){
+        if($request->subscription && (int) $request->subscription == 9){
             $store_obj->where('users.subscription_id', 2)
-                ->where('users.premium', '<', date("Y-m-d H:i:s"));
-        }elseif($subscription == 0){
-            $store_obj->where('users.subscription_id', $subscription);
+            ->where('users.premium', '<', date("Y-m-d H:i:s"));
+        }elseif($request->subscription && (int) $request->subscription == 0){
+            $store_obj->where('users.subscription_id', (int) $request->subscription);
         }else{
-            $store_obj->where('users.subscription_id', $subscription)
-                ->where('users.premium', '>=', date("Y-m-d H:i:s"));
+            $store_obj->where('users.subscription_id', (int) $request->subscription)
+            ->where('users.premium', '>=', date("Y-m-d H:i:s"));
         }
     
         if($store_name){

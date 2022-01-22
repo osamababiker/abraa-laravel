@@ -101,7 +101,14 @@ class GlobalRfqsController extends Controller
         $product_search = $request->product_search;
         $countries = $request->countries;
         $keywords = $request->keywords;
+        $rows_numbers = $request->rows_numbers;
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+        
+        
         $suppliers_obj = Supplier::whereIn('member_type',[1,3])
             ->where('user_type',0)->with('supplier_country')
             ->with('store'); 
@@ -129,10 +136,11 @@ class GlobalRfqsController extends Controller
                 ->orWhere('items.meta_keyword', 'like', '%'. $product_search .'%');
         }
 
-        $suppliers = $suppliers_obj->get();
+        $suppliers = $suppliers_obj->paginate($rows_numbers);
 
         return response()->json([
             'suppliers' => $suppliers,
+            'pagination' => (string) $suppliers->links('pagination::bootstrap-4'),
         ]);
 
     }
