@@ -717,14 +717,20 @@ class StoresController extends Controller
     // to get store items as json
     public function getStoreItemsAsJson(Request $request, $supplier_id){
         $rows_numbers = $request->rows_numbers;
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $item_obj = Item::where('user_id', $supplier_id); 
 
         $items_count = $item_obj->count();
         $items = $item_obj->orderBy('id','DESC')->with('category')
             ->with('supplier')->paginate($rows_numbers);
         
-        return response()->json([
+        return response()->json([ 
             'items' => $items,
+            'pagination' => (string) $items->links('pagination::bootstrap-4'),
             'items_count' => $items_count
         ]);
     }
@@ -736,6 +742,11 @@ class StoresController extends Controller
         $meta_keyword = $request->meta_keyword; 
         $items_status = $request->items_status;
         $store_status = $request->store_status;
+
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $item_obj = Item::where('user_id', $supplier_id)
             ->with('category')
@@ -797,6 +808,7 @@ class StoresController extends Controller
         
         return response()->json([
             'items' => $items,
+            'pagination' => (string) $items->links('pagination::bootstrap-4'),
             'items_count' => $items_count
         ]);
     }

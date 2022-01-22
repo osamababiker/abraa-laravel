@@ -293,7 +293,7 @@ $("#pagination").on('click', 'a', function(e) {
                     "</a>\n"+
                     "&nbsp;"+
                     "<a target=\"_blank\" href=\"/items/"+ item.id +"/edit\">\n"+
-                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
+                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+ 
                     "</a>\n"+
                     "&nbsp;"+
                     "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_item_"+ item.id +"\">\n"+

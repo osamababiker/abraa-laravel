@@ -13,7 +13,7 @@ class Item extends Model
     protected $table = "items";
     protected $guarded = [];
 
-    public function category(){
+    public function category(){ 
         return $this->belongsTo(Category::class,'sub_of');
     }
 
@@ -23,6 +23,10 @@ class Item extends Model
 
     public function item_currency(){
         return $this->belongsTo(Currency::class,'currency');
+    }
+
+    public function manufacture_country(){
+        return $this->belongsTo(Country::class,'manufacture_country','co_code');
     }
 
     public function supplier(){
