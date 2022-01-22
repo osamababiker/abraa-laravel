@@ -51,13 +51,10 @@ class ItemsController extends Controller
         $store_status = $request->store_status;
 
         $item_obj = Item::with('category')
-            ->leftJoin('users', function($join) {
-                $join->on('users.id', '=', 'items.user_id');
-            })
-            ->leftJoin('users_store', function($join) {
-                $join->on('users_store.sub_of', '=', 'users.id');
-            })
-        ->select("items.*");
+        ->select('items.*')
+        ->leftJoin('users', function($join) {
+            $join->on('users.id', '=', 'items.user_id');
+        });
         
         // filter by item status
         if($items_status == 'active'){
