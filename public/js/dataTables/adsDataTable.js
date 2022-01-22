@@ -72,7 +72,7 @@ $(document).ready(function () {
                 "<td>"+ ads.clicks +"</td>\n"+
                 "<td>"+ is_active +"</td>\n"+
                 "<td>"+ ads.alt_txt +"</td>\n"+
-                "<td>"+ language +"</td>\n"+
+                "<td>"+ language +"</td>\n"+ 
                 "<td>"+ ads.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
                     "<a target=\"_blank\" href=\"/ads/"+ ads.id +"\">\n"+

@@ -19,19 +19,22 @@
 
                     <h1 class="h3 mb-3">Home Sliders Table</h1>
 
-                    <div class="row">
-                        <form action="{{ route('homeSliders.actions') }}" id="sliders_actions_form" method="post">
+                    <form action="{{ route('homeSliders.actions') }}" id="sliders_actions_form" method="post">
+                        <div class="row">
                             @csrf
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header ml-3">
-                                        <h5 class="card-title"> You have <span id="home_sliders_counter"></span> slider in
+                                        <h5 class="card-title"> You have <span id="home_sliders_counter"></span> slider
+                                            in
                                             this table </h5>
                                         <div class="row">
-                                            <a href="{{ route('homeSliders.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
+                                            <a href="{{ route('homeSliders.create') }}" target="_blanck"
+                                                class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
-                                            <button type="button" data-toggle="modal" data-target="#delete_selected_confirm"
-                                                class="btn btn-danger"> <i class="fa fa-trash"></i> Archive Selected
+                                            <button type="button" data-toggle="modal"
+                                                data-target="#delete_selected_confirm" class="btn btn-danger"> <i
+                                                    class="fa fa-trash"></i> Archive Selected
                                             </button>
                                             &nbsp; &nbsp;
                                             <div class="dropdown">
@@ -41,7 +44,8 @@
                                                     Tools
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{ route('homeSliders.export.excel') }}"
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('homeSliders.export.excel') }}"
                                                         target="_blank">Export to excel</a>
                                                 </div>
                                             </div>
@@ -84,19 +88,18 @@
                                                 </thead>
                                                 <tbody id="home_sliders_table_body">
 
-                                                </tbody> 
+                                                </tbody>
                                             </table>
                                         </div>
                                         @if(session()->has('feedback'))
-                                            @include('admin.layouts.feedback')
+                                        @include('admin.layouts.feedback')
                                         @endif
                                         @include('admin.home.sliders.components.delete_selected')
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-
+                        </div>
+                    </form>
                 </div>
             </main>
 

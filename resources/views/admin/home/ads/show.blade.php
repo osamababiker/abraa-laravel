@@ -22,11 +22,11 @@
 								</div>
 								<table class="table show-details-table">
 									<tbody>
-										<tr class="table-info">
+										<tr class="table-success">
 											<th>Is Sub Of</th>
 											<td>{{ $ads->category->name }}</td>
 										</tr>
-                                        <tr class="table-warning">
+                                        <tr class="table-success">
 											<th>Name</th>
 											<td>{{ $ads->name }}</td>
 										</tr>
@@ -34,19 +34,19 @@
 											<th>Ads Picture</th>
 											<td> <img src="{{ $ads->pic_url }}" alt=""> </td>
 										</tr>
-                                        <tr class="table-danger">
+                                        <tr class="table-success">
 											<th>Ads Link</th>
 											<td> <a target="_blank" href="{{ config('global.public_url') . $ads->link }}"> {{ config('global.public_url') . $ads->link }} </a> </td>
 										</tr>
-                                        <tr class="table-primary">
+                                        <tr class="table-success">
 											<th>Ads Code</th>
 											<td>{{ $ads->ad_code }}</td>
 										</tr>
-                                        <tr class="table-info">
+                                        <tr class="table-success">
 											<th>Ads Start On</th>
 											<td>{{ $ads->start_on }}</td>
 										</tr>
-                                        <tr class="table-warning">
+                                        <tr class="table-success">
 											<th>Ads Expired On</th>
 											<td>{{ $ads->expired_on }}</td>
 										</tr>
@@ -54,19 +54,19 @@
 											<th>Ads Views</th>
 											<td>{{ $ads->views }}</td>
 										</tr>
-                                        <tr class="table-danger">
+                                        <tr class="table-success">
 											<th>Ads Clicks</th>
 											<td>{{ $ads->clicks }}</td>
 										</tr>
-                                        <tr class="table-primary">
+                                        <tr class="table-success">
 											<th>Ads Alt Text</th>
 											<td>{{ $ads->alt_txt }}</td>
 										</tr>
-                                        <tr class="table-info">
+                                        <tr class="table-success">
 											<th>Ads Language</th>
 											<td>{{ $ads->language->name }}</td>
 										</tr>
-                                        <tr class="table-warning">
+                                        <tr class="table-success">
 											<th>Ads Added Date</th>
 											<td>{{ $ads->date_added }}</td>
 										</tr>
@@ -74,7 +74,7 @@
 											<th>Ads Added By</th>
 											<td>{{ $ads->user->name }}</td>
 										</tr>
-                                        <tr class="table-danger">
+                                        <tr class="table-success">
 											<th>Ads Updated date</th>
 											<td>{{ $ads->date_updated }}</td>
 										</tr>

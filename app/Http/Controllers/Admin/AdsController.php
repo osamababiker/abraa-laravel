@@ -43,6 +43,7 @@ class AdsController extends Controller
         $rows_numbers = $request->rows_numbers; 
 
         $ads_obj = Ads::leftJoin('ads_cat', 'ads_cat.id', '=', 'ads.sub_of')
+            ->select('ads.*')
             ->where('ads.active',1);
         
         if($ads_name){
@@ -116,7 +117,7 @@ class AdsController extends Controller
 
  
     public function edit($id){
-        $ads = Ads::find($id);
+        $ads = Ads::findOrFail($id);
         $adsCategories = AdsCategory::all();
         $languages = Language::all();
         return view('admin.home.ads.edit', compact(['ads','adsCategories','languages']));

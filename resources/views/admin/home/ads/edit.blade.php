@@ -19,7 +19,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
+                            <div class="card"> 
                                 <div class="card-body">
                                 <form method="post" action="{{ route('ads.update') }}" enctype="multipart/form-data">
                                         @csrf 
