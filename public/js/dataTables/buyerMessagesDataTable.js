@@ -5,41 +5,52 @@ $(document).ready(function () {
 
     $("#ajax_loader").css('display', 'block');
 
-    var buyers_messages_html = '';
+    var messages_html = '';
     var supplier_name = '';
     var buyer_name = '';
+    var message_from = '';
+    var is_approved = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
 
     $.ajax({
-        url: "/suppliers/"+ supplier_id +"/buyersMessages/json",
+        url: "/buyerMessages/json",
         type: "get",
-        cache: false,
         data: {"rows_numbers": rows_numbers},
         success: function(response){
 
-            $("#buyers_messages_counter").text(response.buyers_messages_count);
-            $('#pagination').html(response.pagination);
+            $("#messages_counter").text(response.messages_count); 
+            $('#pagination').html(response.pagination); 
 
-            response.buyers_messages.data.forEach(function(message) {
-
-                if(message.supplier){
-                    supplier_name = message.supplier.full_name;
-                }
+            response.messages.data.forEach(function(message) {
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
                 }
 
-                buyers_messages_html = buyers_messages_html +
-                
-                // delete modal
+                if(message.supplier){
+                    supplier_name = message.supplier.full_name;
+                }
+
+                if(message.message_from == 1){
+                    message_from = "Buyer";
+                }else if(message.message_from == 2){
+                    message_from = "Supplier";
+                }
+
+                if(message.is_approved == 1){
+                    is_approved = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
+                }else{
+                    is_approved = "<i class=\"fa fa-times\" style=\"color: red;\"></i>";
+                }
+
+                messages_html = messages_html +
+
+                // Archive modal
                 "<div class=\"modal fade\" id=\"delete_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/buyers_messages/"+ message.id +"/destroy\"  method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive this message</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -49,16 +60,16 @@ $(document).ready(function () {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move this message to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_message("+ message.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_message("+ message.id  +")\"  class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
                 "</div>\n"+
 
-                // buyers message modal
-                "<div class=\"modal fade\" id=\"buying_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                // message body modal
+                "<div class=\"modal fade\" id=\"buyer_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                     "<div class=\"modal-dialog\" role=\"document\">\n"+
                         "<div class=\"modal-content\">\n"+
                             "<div class=\"modal-header\">\n"+
@@ -77,21 +88,19 @@ $(document).ready(function () {
                             "</div>\n"+
                         "</div>\n"+
                     "</div>\n"+
-                "</div>\n"+ 
+                "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" class=\"message_id\" name=\"message_id[]\" value=\""+ message.id +"\" ></input> </td>\n" +
-                "<td>"+ message.buyer_id +"</td>\n"+
+                "<td> <input type=\"checkbox\" name=\"message_id[]\" value=\""+ message.id +"\" ></input> </td>\n" +
+                "<td>"+ message.id +"</td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
-                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ message.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
+                "<td>"+ message_from +"</td>\n"+
+                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buyer_message_"+ message.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
+                "<td>"+ is_approved +"</td>"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyers_messages/"+ message.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/buyerMessages/"+ message.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyers_messages/"+ message.id +"/edit\">\n"+
-                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
                     "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_message_"+ message.id +"\">\n"+
@@ -101,7 +110,7 @@ $(document).ready(function () {
                 "</tr>\n"
             });
 
-            $("#buyersMessages_table_body").html(buyers_messages_html);
+            $("#buyer_messages_table_body").html(messages_html);
 
             $("#ajax_loader").css('display', 'none');
         }
@@ -116,44 +125,60 @@ $(".filter_data_table").on('change', function () {
 
     $("#ajax_loader").css('display', 'block');
 
-    var buyers_messages_html = '';
+    var messages_html = '';
     var supplier_name = '';
     var buyer_name = '';
+    var message_from = '';
+    var is_approved = '';
 
     // filter data
+    var supplier_name = $('#supplier_name').val(); 
+    var buyer_name = $('#buyer_name').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
-        url: "/suppliers/"+ supplier_id +"/buyersMessages/filter",
+        url: "/buyerMessages/filter",
         type: "post",
         data: {
             'rows_numbers': rows_numbers,
+            'buyer_name': buyer_name,
+            'supplier_name': supplier_name,
             'current_page': window.current_page,
             '_token': csrf_token
         },
         success: function(response){
 
-            $("#buyers_messages_counter").text(response.buyers_messages_count);
+            $("#messages_counter").text(response.messages_count); 
             $('#pagination').html(response.pagination); 
 
-            response.buyers_messages.data.forEach(function(message) {
-                
-                if(message.supplier){
-                    supplier_name = message.supplier.full_name;
-                }
+            response.messages.data.forEach(function(message) {
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
                 }
 
-                buyers_messages_html = buyers_messages_html +
-                
-                // delete modal
+                if(message.supplier){
+                    supplier_name = message.supplier.full_name;
+                }
+
+                if(message.message_from == 1){
+                    message_from = "Buyer";
+                }else if(message.message_from == 2){
+                    message_from = "Supplier";
+                }
+
+                if(message.is_approved == 1){
+                    is_approved = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
+                }else{
+                    is_approved = "<i class=\"fa fa-times\" style=\"color: red;\"></i>";
+                }
+
+                messages_html = messages_html +
+
+                // Archive modal
                 "<div class=\"modal fade\" id=\"delete_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/buyers_messages/"+ message.id +"/destroy\"  method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive this message</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -163,16 +188,16 @@ $(".filter_data_table").on('change', function () {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move this message to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_message("+ message.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_message("+ message.id  +")\"  class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
                 "</div>\n"+
 
-                // buyers message modal
-                "<div class=\"modal fade\" id=\"buying_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                // message body modal
+                "<div class=\"modal fade\" id=\"buyer_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                     "<div class=\"modal-dialog\" role=\"document\">\n"+
                         "<div class=\"modal-content\">\n"+
                             "<div class=\"modal-header\">\n"+
@@ -194,18 +219,16 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" class=\"message_id\" name=\"message_id[]\" value=\""+ message.id +"\" ></input> </td>\n" +
-                "<td>"+ message.buyer_id +"</td>\n"+
+                "<td> <input type=\"checkbox\" name=\"message_id[]\" value=\""+ message.id +"\" ></input> </td>\n" +
+                "<td>"+ message.id +"</td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
-                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ message.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
+                "<td>"+ message_from +"</td>\n"+
+                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buyer_message_"+ message.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
+                "<td>"+ is_approved +"</td>"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyers_messages/"+ message.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/buyerMessages/"+ message.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyers_messages/"+ message.id +"/edit\">\n"+
-                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
                     "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_message_"+ message.id +"\">\n"+
@@ -215,7 +238,7 @@ $(".filter_data_table").on('change', function () {
                 "</tr>\n"
             });
 
-            $("#buyersMessages_table_body").html(buyers_messages_html);
+            $("#buyer_messages_table_body").html(messages_html);
 
             $("#ajax_loader").css('display', 'none');
         }
@@ -224,51 +247,67 @@ $(".filter_data_table").on('change', function () {
 
 
 
-// ==============================================================// 
-// to handel pagination  
+// ==============================================================//
+// to handel pagination 
 $("#pagination").on('click', 'a', function(e) {
     e.preventDefault();
     window.current_page = this.href.split('=')[1];
     $("#ajax_loader").css('display', 'block');
 
-    var buyers_messages_html = '';
+    var messages_html = '';
     var supplier_name = '';
     var buyer_name = '';
+    var message_from = '';
+    var is_approved = '';
 
     // filter data
-    var rows_numbers = $('#rows_numbers').val(); 
+    var supplier_name = $('#supplier_name').val(); 
+    var buyer_name = $('#buyer_name').val(); 
+    var rows_numbers = $('#rows_numbers').val();  
 
     $.ajax({
-        url: "/suppliers/"+ supplier_id +"/buyersMessages/filter",
+        url: "/buyerMessages/filter",
         type: "post",
         data: {
             'rows_numbers': rows_numbers,
+            'buyer_name': buyer_name,
+            'supplier_name': supplier_name,
             'current_page': window.current_page,
             '_token': csrf_token
         },
         success: function(response){
 
-            $("#buyers_messages_counter").text(response.buyers_messages_count);
+            $("#messages_counter").text(response.messages_count); 
             $('#pagination').html(response.pagination); 
 
-            response.buyers_messages.data.forEach(function(message) {
-                
-                if(message.supplier){
-                    supplier_name = message.supplier.full_name;
-                }
+            response.messages.data.forEach(function(message) {
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
                 }
 
-                buyers_messages_html = buyers_messages_html +
-                
-                // delete modal
+                if(message.supplier){
+                    supplier_name = message.supplier.full_name;
+                }
+
+                if(message.message_from == 1){
+                    message_from = "Buyer";
+                }else if(message.message_from == 2){
+                    message_from = "Supplier";
+                }
+
+                if(message.is_approved == 1){
+                    is_approved = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
+                }else{
+                    is_approved = "<i class=\"fa fa-times\" style=\"color: red;\"></i>";
+                }
+
+                messages_html = messages_html +
+
+                // Archive modal
                 "<div class=\"modal fade\" id=\"delete_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                 "<div class=\"modal-dialog\" role=\"document\">\n"+
                     "<div class=\"modal-content\">\n"+
-                        "<form action=\"/buyers_messages/"+ message.id +"/destroy\"  method=\"DELETE\">\n"+
-                        "</form>\n"+
                         "<div class=\"modal-header\">\n"+
                             "<h5 class=\"modal-title\">Archive this message</h5>\n"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"+
@@ -278,16 +317,16 @@ $("#pagination").on('click', 'a', function(e) {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move this message to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
-                            "<button type=\"button\" onclick=\"archive_message("+ message.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
+                            "<button type=\"button\" onclick=\"archive_message("+ message.id  +")\"  class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
                     "</div>\n"+
                 "</div>\n"+
 
-                // buyers message modal
-                "<div class=\"modal fade\" id=\"buying_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
+                // message body modal
+                "<div class=\"modal fade\" id=\"buyer_message_"+ message.id +"\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n"+
                     "<div class=\"modal-dialog\" role=\"document\">\n"+
                         "<div class=\"modal-content\">\n"+
                             "<div class=\"modal-header\">\n"+
@@ -309,18 +348,16 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" class=\"message_id\" name=\"message_id[]\" value=\""+ message.id +"\" ></input> </td>\n" +
-                "<td>"+ message.buyer_id +"</td>\n"+
+                "<td> <input type=\"checkbox\" name=\"message_id[]\" value=\""+ message.id +"\" ></input> </td>\n" +
+                "<td>"+ message.id +"</td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
-                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buying_message_"+ message.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
+                "<td>"+ message_from +"</td>\n"+
+                "<td> <a type=\"button\" data-toggle=\"modal\" data-target=\"#buyer_message_"+ message.id +"\"><i class=\"align-middle\" href=\"javascript:;\"> <i class=\"fa fa-ellipsis-h\"></i> </a> </td>\n"+
+                "<td>"+ is_approved +"</td>"+
                 "<td class=\"table-action\">\n"+
-                    "<a target=\"_blank\" href=\"/buyers_messages/"+ message.id +"\">\n"+
+                    "<a target=\"_blank\" href=\"/buyerMessages/"+ message.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
-                    "</a>\n"+
-                    "&nbsp;"+
-                    "<a target=\"_blank\" href=\"/buyers_messages/"+ message.id +"/edit\">\n"+
-                        "<i class=\"align-middle fa fa-edit\" data-feather=\"edit-2\"></i>\n"+
                     "</a>\n"+
                     "&nbsp;"+
                     "<a href=\"#\" type=\"button\"  data-toggle=\"modal\" data-target=\"#delete_message_"+ message.id +"\">\n"+
@@ -330,25 +367,22 @@ $("#pagination").on('click', 'a', function(e) {
                 "</tr>\n"
             });
 
-            $("#buyersMessages_table_body").html(buyers_messages_html);
+            $("#buyer_messages_table_body").html(messages_html);
 
             $("#ajax_loader").css('display', 'none');
         }
     });
 });
-
 
 
 // to delete (archive) message
 function archive_message(message_id){
     $("#ajax_loader").css('display', 'block');
     $.ajax({
-        url: "/suppliers/buyers_messages/" + message_id + "/destroy",
+        url: "/buyerMessages/" + message_id + "/destroy",
         type: "get",
         success: function(response){
             location.reload();
         }
     });
 }
-
-

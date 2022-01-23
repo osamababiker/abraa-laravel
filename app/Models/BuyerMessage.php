@@ -13,9 +13,13 @@ class BuyerMessage extends Model
 
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'supplier_id');
-    }
+    } 
 
     public function buyer(){
         return $this->belongsTo(Buyer::class, 'buyer_id');
+    }
+
+    public function item(){
+        return $this->belongsTo(Item::class, 'item_id');
     }
 }

@@ -20,7 +20,7 @@ class BuyersController extends Controller
     public function index(){ 
         $countries = Country::all();
         return view('admin.buyers.index',compact(['countries']));
-    }
+    } 
 
     public function getBuyersAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
@@ -125,25 +125,6 @@ class BuyersController extends Controller
         return redirect()->back();
     }
 
-    // to handel table actions
-    public function actions(Request $request){
-        if($request->has('delete_selected_btn')){
-            $supplier_id = $request->supplier_id;
-            if($request->all_colums){
-                Supplier::delete();
-            }
-            elseif($supplier_id){
-                foreach($supplier_id as $id){
-                    Supplier::where('id',$id)->delete();
-                }
-            }
-            $message = 'suppliers has been archived successfully';
-            session()->flash('feedback', $message);
-            return redirect()->back();
-        }
-    }
-
-
     public function show(Buyer $buyer){
         //
     }
@@ -160,18 +141,40 @@ class BuyersController extends Controller
     public function destroy($id){
         Buyer::where('id',$id)->delete();
         $message = 'Buyer hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
 
+
+    // to handel table actions
+    public function actions(Request $request){
+        if($request->has('delete_selected_btn')){
+            $buyer_id = $request->buyer_id;
+            if($request->all_colums){
+                Buyer::delete();
+            }
+            elseif($buyer_id){
+                foreach($buyer_id as $id){
+                    Buyer::where('id',$id)->delete();
+                }
+            }
+            $message = 'Buyers has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
     // import & export to excel
     public function exportExcel() {
-        return Excel::download(new BuyersExport, 'stores.xlsx'); 
+        return Excel::download(new BuyersExport, 'buyers.xlsx'); 
     }
    
     public function importExcel() {
         Excel::import(new BuyersImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }

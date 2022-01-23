@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ShippersController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
+use App\Http\Controllers\Admin\BuyerMessagesController;
 use App\Http\Controllers\Admin\RfqInvoicesController;
 use App\Http\Controllers\Admin\RfqsController;
 use App\Http\Controllers\Admin\AbandonedRfqsController;
@@ -602,6 +603,36 @@ Route::group(['middleware' => 'auth'], function (){
     // resource route
     Route::resource('buyers', BuyersController::class);
 
+
+    // ======================= Buyers Messages Routes ====================== //
+    // table actions route
+    Route::post('buyerMessages/actions', 
+        [BuyerMessagesController::class , 'actions']
+    )->name('buyerMessages.actions');
+    // get buyerMessages as json route 
+      Route::get('buyerMessages/json', [
+        BuyerMessagesController::class, 'getBuyerMessagesAsJson'
+    ])->name('buyerMessages.json');
+       // filter buyerMessages  route 
+    Route::post('buyerMessages/filter', [
+        BuyerMessagesController::class, 'filterBuyerMessages'
+    ])->name('buyerMessages.filter');  
+    // to import & export excel 
+    Route::get('buyerMessages/export/excel', [
+        BuyerMessagesController::class, 'exportExcel'
+    ])->name('buyerMessages.export.excel');
+    Route::post('buyerMessages/import/excel', [
+        BuyerMessagesController::class, 'importExcel'
+    ])->name('buyerMessages.import.excel');
+    Route::get('buyerMessages/importExportView',  [
+        BuyerMessagesController::class, 'importExportView'
+    ]); 
+    // custom delete route 
+    Route::get('buyerMessages/{id}/destroy', [
+        BuyerMessagesController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('buyerMessages', BuyerMessagesController::class);
 
 
     // ======================= rfqs Routes ====================== //

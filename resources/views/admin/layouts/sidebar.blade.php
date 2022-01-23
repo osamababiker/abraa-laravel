@@ -61,6 +61,7 @@
                 </a>
                 <ul id="buyers" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('buyers.index') }}">All buyers</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('buyerMessages.index') }}"> buyers Messages </a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

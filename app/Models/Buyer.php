@@ -15,6 +15,10 @@ class Buyer extends Model
 
     public function buyer_country() {
         return $this->belongsTo(Country::class,'country','co_code');
+    } 
+
+    public function buyer_city() {
+        return $this->belongsTo(State::class,'city');
     }
  
     public function getUserSource($source){
