@@ -21,7 +21,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                <form method="post" action="{{ route('configs.store') }}">
+                                    <form method="post" action="{{ route('configs.store') }}">
                                         @csrf 
                                         <div class="form-row mt-4">
                                             <div class="col-md-12 form-group">

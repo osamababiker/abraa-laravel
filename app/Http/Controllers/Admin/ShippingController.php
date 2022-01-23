@@ -6,9 +6,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shipping;
+use App\Models\Shipper;
 use App\Models\Country;
 use App\Exports\ShippingExport;
 use App\Imports\ShippingImport;
+use App\Http\Requests\ShippingRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Pagination\Paginator;
 
@@ -84,14 +86,32 @@ class ShippingController extends Controller
         ]);
     }
 
- 
     public function create(){
-        //
+        $shippers = Shipper::where('member_type',4)
+        ->where('user_type',0)->get();
+        $countries = Country::all();
+        return view('admin.shipping.create', compact(['shippers','countries']));
     }
 
- 
-    public function store(Request $request){
-        //
+    public function store(ShippingRequest $request){
+        $shipping_obj = new Shipping();
+        $shipping_obj->sub_of = $request->sub_of;
+        $shipping_obj->email = $request->email;
+        $shipping_obj->phone_number = $request->phone_number;
+        $shipping_obj->company_name = $request->company_name;
+        $shipping_obj->shipping_from = $request->shipping_from;
+        $shipping_obj->shipping_to = $request->shipping_to;
+        $shipping_obj->shipping_methods = $request->shipping_methods;
+        $shipping_obj->clearance = $request->clearance;
+        $shipping_obj->doortodoor = $request->doortodoor;
+        $shipping_obj->status = $request->status;
+        $shipping_obj->save();
+
+        $message = 'Shipping Company hass been Added successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
    
