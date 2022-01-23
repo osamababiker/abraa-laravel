@@ -70,6 +70,7 @@
                 </a>
                 <ul id="shippers" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('shippers.index') }}">All shippers</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('shipping.index') }}">Shipping Companies</a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

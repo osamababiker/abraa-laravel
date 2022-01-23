@@ -32,7 +32,7 @@ use App\Exports\SupplierVerificationsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
 use App\Http\Traits\RandomStringTrait; 
-use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\Paginator; 
 
 
 class SuppliersController extends Controller

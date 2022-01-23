@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ItemsController;
 use App\Http\Controllers\Admin\SuppliersController;
 use App\Http\Controllers\Admin\ShippersController;
+use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\BuyersController;
@@ -417,6 +418,37 @@ Route::group(['middleware' => 'auth'], function (){
     ]);
     // resource route
     Route::resource('shippers', ShippersController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Shipping Routes ====================== //
+    // table actions route
+    Route::post('shipping/actions', 
+        [ShippingController::class , 'actions']
+    )->name('shipping.actions');    
+    // get suppliers as json route 
+    Route::get('shipping/json', [
+        ShippingController::class, 'getShippingAsJson'
+    ])->name('shipping.json');
+       // filter shipping  route 
+    Route::post('shipping/filter', [
+        ShippingController::class, 'filterShipping'
+    ])->name('shipping.filter');
+     // to import & export excel 
+     Route::get('shipping/export/excel', [
+        ShippingController::class, 'exportExcel'
+    ])->name('shipping.export.excel');
+    Route::post('shipping/import/excel', [
+        ShippingController::class, 'importExcel'
+    ])->name('shipping.import.excel');
+    Route::get('shipping/importExportView',  [
+        ShippingController::class, 'importExportView'
+    ]);
+     // custom delete route 
+     Route::get('shipping/{id}/destroy', [ 
+        ShippingController::class, 'destroy'
+    ]);
+    // resource route
+    Route::resource('shipping', ShippingController::class, ['except' => ['destroy']]);
 
 
     // ======================= Stores Routes ====================== //

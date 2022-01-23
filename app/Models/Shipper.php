@@ -18,7 +18,6 @@ class Shipper extends Model
         return $this->belongsTo(Country::class,'country','co_code');
     }
 
-
     public function getUserSource($source){
         $result = 'Unknown';
         switch ($source) {

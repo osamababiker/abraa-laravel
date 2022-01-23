@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buyer extends Model 
 {
-    use HasFactory; 
+    use HasFactory;  
     use SoftDeletes;
     protected $table = "users";
     protected $guarded = []; 
