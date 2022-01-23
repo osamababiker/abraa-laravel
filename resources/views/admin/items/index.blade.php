@@ -134,7 +134,6 @@
                                                         <th>Title</th>
                                                         <th>Category</th>
                                                         <th>Link</th>
-                                                        <th>Store</th>
                                                         <th>Status</th>
                                                         <th>Created at</th>
                                                         <th>Actions</th>
