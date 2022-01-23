@@ -25,7 +25,7 @@ class Supplier extends Model
         return $this->hasMany(Item::class, 'user_id');
     } 
 
-    public function store(){
+    public function store(){ 
         return $this->hasOne(Store::class, 'sub_of');
     }
 

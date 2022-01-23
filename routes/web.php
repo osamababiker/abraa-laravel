@@ -33,7 +33,7 @@ use App\Http\Controllers\Admin\PaymentOptionsController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\ModeratorsController;
 use App\Http\Controllers\Admin\ServicesController;
-
+use App\Http\Controllers\Admin\CacheController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -1482,7 +1482,10 @@ Route::group(['middleware' => 'auth'], function (){
 
 
     // ======================= General Classes Routes ====================== //
-
+    Route::get('cache/flush', [
+        CacheController::class, 'flushcache'
+    ])->name('cache.flush');
+    
 });
 
 

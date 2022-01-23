@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory; 
-    use SoftDeletes;
+    use SoftDeletes; 
     protected $table = "items";
     protected $guarded = [];
 

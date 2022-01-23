@@ -158,7 +158,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="#">
+                <a class="sidebar-link" href="{{ route('cache.flush') }}">
                     <i class="align-middle" data-feather="trash"></i> <span class="align-middle">Clear Cache</span>
                 </a>
             </li>

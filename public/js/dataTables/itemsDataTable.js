@@ -8,6 +8,7 @@ $(document).ready(function () {
     var items_html = '';
     var item_category = '';
     var item_status = '';
+    var store_link = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -27,6 +28,10 @@ $(document).ready(function () {
                 
                 if(item.category){
                     item_category = item.category.en_title;
+                }
+
+                if(item.supplier){
+                    store_link = "<a href=\""+ public_url +"store\\"+ item.supplier.id +"\">"+ item.supplier.store.name +"</a>";
                 }
 
                 if(item.status == 1){
@@ -69,6 +74,7 @@ $(document).ready(function () {
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+ 
                 "<td> <a target=\"_blank\" href=\""+ public_url +"item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ store_link +"</td>\n"+
                 "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
@@ -105,6 +111,7 @@ $(".filter_data_table").on('change', function () {
     var items_html = '';
     var item_category = '';
     var item_status = '';
+    var store_link = '';
 
     // filter data
     var product_name = $('#product_name').val(); 
@@ -136,6 +143,10 @@ $(".filter_data_table").on('change', function () {
                 
                 if(item.category){
                     item_category = item.category.en_title;
+                }
+
+                if(item.supplier){
+                    store_link = "<a href=\""+ public_url +"store\\"+ item.supplier.id +"\">"+ item.supplier.store.name +"</a>";
                 }
 
                 if(item.status == 1){
@@ -178,6 +189,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
                 "<td> <a target=\"_blank\" href=\""+ public_url +"/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ store_link +"</td>\n"+
                 "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
@@ -214,6 +226,7 @@ $("#pagination").on('click', 'a', function(e) {
     var items_html = '';
     var item_category = '';
     var item_status = '';
+    var store_link = '';
 
     // filter data
     var product_name = $('#product_name').val(); 
@@ -245,6 +258,10 @@ $("#pagination").on('click', 'a', function(e) {
                 
                 if(item.category){
                     item_category = item.category.en_title;
+                }
+
+                if(item.supplier){
+                    store_link = "<a href=\""+ public_url +"store\\"+ item.supplier.id +"\">"+ item.supplier.store.name +"</a>";
                 }
 
                 if(item.status == 1){
@@ -287,6 +304,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ item.title +"</td>\n"+
                 "<td>"+ item_category +"</td>\n"+
                 "<td> <a target=\"_blank\" href=\""+ public_url +"/item/"+ item.slug +"\">"+ item.slug +"</a> </td>\n"+
+                "<td>"+ store_link +"</td>\n"+
                 "<td>"+ item_status +"</td>\n"+
                 "<td>"+ item.date_added +"</td>\n"+
                 "<td class=\"table-action\">\n"+
