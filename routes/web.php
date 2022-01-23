@@ -595,6 +595,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('buyers/{id}/destroy', [
         BuyersController::class, 'destroy'
     ]);
+    // to get city by country 
+    Route::get('buyers/create/getCities/{country_id}', [
+        BuyersController::class, 'getCites'
+    ]);
     // resource route
     Route::resource('buyers', BuyersController::class);
 

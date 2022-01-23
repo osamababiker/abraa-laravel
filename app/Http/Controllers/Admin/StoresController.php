@@ -360,9 +360,7 @@ class StoresController extends Controller
     }
     // get bulk stores as json
     public function getBulkStoresAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
-
         $store_obj = Store::with('user')
             ->select('users_store.*')
             ->leftJoin('users', function($join) {

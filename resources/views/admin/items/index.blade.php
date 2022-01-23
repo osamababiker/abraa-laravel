@@ -143,6 +143,8 @@
 
                                                 </tbody>
                                             </table>
+                                            <div id="pagination" class="d-flex justify-content-center">
+                                            </div>
                                         </div>
                                         @include('admin.items.components.delete_selected')
                                         @include('admin.items.components.approve_selected')

@@ -17,7 +17,7 @@ use App\Imports\ItemsImport;
 use App\Http\Requests\ItemsRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\FilesUploadTrait;
-
+use Illuminate\Pagination\Paginator;
 
 class ItemsController extends Controller 
 {
@@ -33,12 +33,12 @@ class ItemsController extends Controller
         $item_obj = new Item(); 
 
         $items_count = $item_obj->count();
-        $items = $item_obj->limit($rows_numbers)
-            ->orderBy('id','DESC')->with('category')
-            ->with('supplier')->get();
+        $items = $item_obj->orderBy('id','DESC')->with('category')
+            ->with('supplier')->paginate($rows_numbers);
         
         return response()->json([
             'items' => $items,
+            'pagination' => (string) $items->links('pagination::bootstrap-4'),
             'items_count' => $items_count 
         ]);
     }
@@ -50,6 +50,11 @@ class ItemsController extends Controller
         $meta_keyword = $request->meta_keyword; 
         $items_status = $request->items_status;
         $store_status = $request->store_status;
+
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $item_obj = Item::with('category')
         ->leftJoin('users', function($join) {
@@ -110,12 +115,13 @@ class ItemsController extends Controller
         }
             
         $items_count = $item_obj->count();
-        $items = $item_obj->limit($rows_numbers)
-            ->orderBy('items.id','desc')->get();
+        $items = $item_obj->orderBy('items.id','desc')
+            ->paginate($rows_numbers);
 
         
         return response()->json([
             'items' => $items,
+            'pagination' => (string) $items->links('pagination::bootstrap-4'),
             'items_count' => $items_count
         ]);
     }

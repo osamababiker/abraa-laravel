@@ -62,7 +62,6 @@ class SuppliersController extends Controller
     }
 
     public function filterSuppliers(Request $request){
-
         $countries = $request->countries;
         $keywords = $request->keywords;
         $rows_numbers = $request->rows_numbers; 
