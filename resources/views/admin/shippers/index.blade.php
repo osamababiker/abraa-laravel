@@ -36,13 +36,6 @@
                                                 data-target="#delete_selected_confirm" class="btn btn-danger"> <i
                                                     class="fa fa-trash"></i> Archive Selected </button>
                                             &nbsp; &nbsp;
-                                            <button type="button" data-toggle="modal"
-                                                data-target="#send_emails_to_selected" class="btn btn-info"> <i
-                                                    class="fa fa-envelope"></i> Send Email </button>
-                                            &nbsp; &nbsp;
-                                            <button type="button" name="send_sms_multiple" class="btn btn-success"> <i
-                                                    class="fa fa-phone"></i> Send SMS </button>
-                                            &nbsp; &nbsp;
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"

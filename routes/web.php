@@ -412,12 +412,20 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('shippers/importExportView',  [
         ShippersController::class, 'importExportView'
     ]);
-     // custom delete route 
-     Route::get('shippers/{id}/destroy', [ 
+    // custom update route 
+    Route::post('shippers/update', [ 
+        ShippersController::class, 'update'
+    ])->name('shippers.update');
+    // custom delete route 
+    Route::get('shippers/{id}/destroy', [ 
         ShippersController::class, 'destroy'
     ]);
+    // to get city by country 
+    Route::get('shippers/create/getCities/{country_code}', [
+        ShippersController::class, 'getCites'
+    ]);
     // resource route
-    Route::resource('shippers', ShippersController::class, ['except' => ['destroy']]);
+    Route::resource('shippers', ShippersController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Shipping Routes ====================== //
@@ -443,12 +451,16 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('shipping/importExportView',  [
         ShippingController::class, 'importExportView'
     ]);
-     // custom delete route 
-     Route::get('shipping/{id}/destroy', [ 
+    // custom update route 
+    Route::post('shipping/update', [ 
+        ShippingController::class, 'update'
+    ])->name('shipping.update');
+    // custom delete route 
+    Route::get('shipping/{id}/destroy', [ 
         ShippingController::class, 'destroy'
     ]);
     // resource route
-    Route::resource('shipping', ShippingController::class, ['except' => ['destroy']]);
+    Route::resource('shipping', ShippingController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Stores Routes ====================== //

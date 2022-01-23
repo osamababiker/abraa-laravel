@@ -6,7 +6,7 @@
 
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
-
+ 
         <div class="main">
 
             <!-- main nav here -->
@@ -15,123 +15,116 @@
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3 mb-3">Manage Suppliers Table</h1>
-
                     <div class="row">
                     <div class="col-12 col-xl-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Users: #58741 </h5>
+									<h5 class="card-title"> <i class="fa fa-eye"></i> Shipper: #{{ $shipper->id }} </h5>
 								</div>
 								<table class="table show-details-table">
 									<tbody>
 										<tr class="table-primary">
 											<td>id</td>
-											<td>2458</td>
+											<td>{{ $shipper->id }}</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Full Name</td>
-											<td>Omer Alhamra</td>
+											<td>{{ $shipper->full_name }}</td>
 										</tr>
                                         <tr class="table-success">
 											<td>Email</td>
-											<td>omer@abraa.com</td>
-										</tr>
-                                        <tr class="table-default">
-											<td>Profile Picture</td>
-											<td> <img src="img/avatars/avatar-5.jpg"
-                                                class="avatar img-fluid rounded-circle" alt="Ashley Briggs">
-                                            </td>
+											<td>{{ $shipper->email }}</td>
 										</tr>
                                         <tr class="table-info">
 											<td>Phone</td>
-											<td>0542178966</td>
+											<td>{{ $shipper->phone }}</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Date Registered</td>
-											<td>2021-12-05 09:01:04 </td>
+											<td>{{ $shipper->register_on }}</td>
 										</tr>
                                         <tr class="table-primary">
-											<td>Verified</td>
-											<td> Yes </td>
+											<td>Is Verified</td>
+											<td>
+												@if($shipper->verified == 1)
+													<i class="fa fa-check" style="color: green"></i> Yes
+												@else 
+													<i class="fa fa-times" style="color: red"></i> No
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Search Log</td>
-											<td>  </td>
+											<td> {{ $shipper->search_log }} </td>
 										</tr>
                                         <tr class="table-secondary">
 											<td>Country</td>
-											<td> UAE </td>
+											<td>
+												@if($shipper->shipper_country)
+													$shipper->shipper_country->en_name
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
 											<td>City</td>
-											<td> Dubai  </td>
+											<td>
+												@if($shipper->shipper_city)
+													$shipper->shipper_city->en_name
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-danger">
 											<td>Company</td>
-											<td> Proverde Cleaning Equipment Trading LLC  </td>
+											<td> {{ $shipper->company_name }}  </td>
 										</tr>
                                         <tr class="table-default">
 											<td>Is Organic</td>
-											<td> Yes </td>
+											<td>
+												@if($shipper->is_organic == 1)
+													<i class="fa fa-check" style="color: green"></i> Yes
+												@else 
+													<i class="fa fa-times" style="color: red"></i> No
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-primary">
 											<td>Source</td>
-											<td>  </td>
+											<td> {{ $shipper->getUserSource($shipper->user_source) }} </td>
 										</tr>
                                         <tr class="table-default">
 											<td>Interested Keywords</td>
-											<td> Proverde,SINTAN  </td>
+											<td> {{ $shipper->interested_keywords }}  </td>
 										</tr>
                                         <tr class="table-success">
-											<td>Disabled</td>
-											<td> No </td>
-										</tr>
-                                        <tr class="table-default">
-											<td>Prod Count</td>
-											<td> 0 </td>
-										</tr>
-                                        <tr class="table-secondary">
-											<td>External</td>
-											<td> No </td>
-										</tr>
-                                        <tr class="table-default">
-											<td>Reference Url</td>
-											<td>  </td>
-										</tr>
-                                        <tr class="table-info">
-											<td>External Categories</td>
-											<td>  </td>
-										</tr>
-                                        <tr class="table-default">
-											<td>Lead Assigned</td>
-											<td>  0 </td>
-										</tr>
-                                        <tr class="table-danger">
-											<td>External Buyer</td>
-											<td>  0 </td>
+											<td>Is Active</td>
+											<td>
+												@if($shipper->active == 1)
+													<i class="fa fa-check" style="color: green"></i> Is Active
+												@else 
+													<i class="fa fa-times" style="color: red"></i> Not Active
+												@endif
+											</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Date Added</td>
-											<td>   	2021-12-05 09:01:04  </td>
+											<td>  {{ $shipper->date_added }}  </td>
 										</tr>
                                         <tr class="table-success">
 											<td>Added By</td>
-											<td>   </td>
+											<td> 
+												@if($shipper->added_by) 
+													{{ $shipper->added_by->name }}
+												@endif 
+											</td>
 										</tr>
                                         <tr class="table-default">
 											<td>Date Updated</td>
-											<td>  2021-12-05 10:34:18  </td>
-										</tr>
-                                        <tr class="table-info">
-											<td>Updated By</td>
-											<td>  </td>
+											<td> {{ $shipper->date_updated }} </td>
 										</tr>
 									</tbody>
 								</table>
                                 <div class="m-4">
-                                    This user doesn't sent a buy request till now
-                                    <button class="btn btn-secondary"> Back </button>
+                                    <a href="{{ route('shippers.index') }}" class="btn btn-secondary"> Back </a>
                                 </div>
 							</div>
 						</div>
@@ -140,5 +133,6 @@
                 </div>
             </main>
 
+			@include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')

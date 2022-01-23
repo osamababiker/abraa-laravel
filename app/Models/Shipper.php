@@ -13,9 +13,16 @@ class Shipper extends Model
     protected $table = "users";
     protected $guarded = [];
 
-
-    public function shipper_country() {
+    public function shipper_country() { 
         return $this->belongsTo(Country::class,'country','co_code');
+    }
+
+    public function shipper_city() { 
+        return $this->belongsTo(State::class,'city');
+    }
+
+    public function added_by(){
+        return $this->belongsTo(User::class, 'added_by');
     }
 
     public function getUserSource($source){

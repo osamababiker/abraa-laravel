@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shipper;
 use App\Models\Country;
+use App\Models\State;
 use App\Exports\ShippersExport;
 use App\Imports\ShippersImport;
+use App\Http\Requests\ShippersRequest;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Traits\RandomStringTrait; 
 use Illuminate\Pagination\Paginator;
-
 
 class ShippersController extends Controller
 {
-    
+    use RandomStringTrait;
+
     public function index(){
         $countries = Country::all();
         return view('admin.shippers.index', compact(['countries']));
@@ -70,14 +74,53 @@ class ShippersController extends Controller
         ]);
     }
 
+    // to get cites by country for create page 
+    public function getCites($country_code){
+        $states_html = '';
+        $country = Country::where('co_code',$country_code)->first();
+        $states = State::where('sub_of', $country->id)->get();
+        $phone_code = $country->ph_code;
+        foreach($states as $state) {
+            $states_html .= "<option value='$state->id'>$state->en_name</option>";
+        }
+        return response()->json([
+            'state_html' => $states_html,
+            'phone_code' => $phone_code
+        ]);
+    }
 
     public function create(){
-        //
+        $countries = Country::all();
+        return view('admin.shippers.create', compact(['countries']));
     }
 
  
-    public function store(Request $request){
-        //
+    public function store(ShippersRequest $request){
+        $shipper = new Shipper();
+
+        $salt = $this->getRandomString(3);
+        $password = md5($request->password . $salt);
+        $member_type = 4;
+        $user_type = 0;
+
+        $shipper->full_name = $request->full_name;
+        $shipper->email = $request->email;
+        $shipper->phone = $request->phone;
+        $shipper->country = $request->country;
+        $shipper->city = $request->city;
+        $shipper->verified = $request->verified;
+        $shipper->password = $password;
+        $shipper->member_type = $member_type;
+        $shipper->user_type = $user_type;
+        $shipper->is_login = 0;
+        $shipper->added_by = Auth::user()->id;
+        $shipper->save();
+
+        $message = 'Shipping Company hass Added successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
   
@@ -87,12 +130,33 @@ class ShippersController extends Controller
     }
 
     public function edit($id){
-        //
+        $shipper = Shipper::findOrFail($id);
+        $countries = Country::all();
+        return view('admin.shippers.edit', compact(['shipper','countries']));
     }
 
   
-    public function update(Request $request, $id){
-        //
+    public function update(Request $request){
+        $shipper = Shipper::find($request->shipper_id);
+        if($request->password){
+            $salt = $this->getRandomString(3);
+            $password = md5($request->password . $salt);
+        }else $password = $shipper->password;
+
+        $shipper->full_name = $request->full_name;
+        $shipper->email = $request->email;
+        $shipper->phone = $request->phone;
+        $shipper->country = $request->country;
+        $shipper->city = $request->city;
+        $shipper->verified = $request->verified;
+        $shipper->password = $password;
+        $shipper->save();
+
+        $message = 'Shipping Company hass Updated successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
  

@@ -116,17 +116,38 @@ class ShippingController extends Controller
 
    
     public function show($id){
-        $shipper = Shipping::findOrFail($id);
-        return view('admin.shipping.show', compact(['shipper']));
+        $shipping = Shipping::findOrFail($id); 
+        return view('admin.shipping.show', compact(['shipping']));
     }
 
     
     public function edit($id){
-        //
+        $shipper = Shipping::findOrFail($id);
+        $shippers = Shipper::where('member_type',4)
+        ->where('user_type',0)->get();
+        $countries = Country::all();
+        return view('admin.shipping.edit', compact(['shipper','shippers','countries']));
     }
 
-    public function update(Request $request){
-        //
+    public function update(ShippingRequest $request){
+        $shipping_obj = Shipping::find($request->shipping_id);
+        $shipping_obj->sub_of = $request->sub_of;
+        $shipping_obj->email = $request->email;
+        $shipping_obj->phone_number = $request->phone_number;
+        $shipping_obj->company_name = $request->company_name;
+        $shipping_obj->shipping_from = $request->shipping_from;
+        $shipping_obj->shipping_to = $request->shipping_to;
+        $shipping_obj->shipping_methods = $request->shipping_methods;
+        $shipping_obj->clearance = $request->clearance;
+        $shipping_obj->doortodoor = $request->doortodoor;
+        $shipping_obj->status = $request->status;
+        $shipping_obj->save();
+
+        $message = 'Shipping Company hass been Updated successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
     public function destroy($id){
