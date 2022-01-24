@@ -719,6 +719,8 @@ class SuppliersController extends Controller
                 }
             }
             $message = 'items has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Item Successfully archived');
             session()->flash('feedback', $message);
             return redirect()->back();
         }
@@ -740,9 +742,12 @@ class SuppliersController extends Controller
             }
             $message = 'stores has been archived successfully';
             session()->flash('feedback', $message);
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Store Successfully archived');
+            session()->flash('feedback', $message);
             return redirect()->back();
         }
-    }
+    } 
 
     // **********************************************/
     // supplier buers messages action
@@ -759,6 +764,8 @@ class SuppliersController extends Controller
                 }
             }
             $message = 'messages  has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Message Successfully archived');
             session()->flash('feedback', $message);
             return redirect()->back();
         }
@@ -779,6 +786,8 @@ class SuppliersController extends Controller
                 }
             }
             $message = 'request has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Request Successfully archived');
             session()->flash('feedback', $message);
             return redirect()->back();
         }
@@ -799,6 +808,8 @@ class SuppliersController extends Controller
                 }
             }
             $message = 'file has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'File Successfully archived');
             session()->flash('feedback', $message);
             return redirect()->back();
         }
@@ -819,6 +830,8 @@ class SuppliersController extends Controller
                 }
             }
             $message = 'invoices has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Invoice Successfully archived');
             session()->flash('feedback', $message);
             return redirect()->back();
         }
@@ -839,6 +852,8 @@ class SuppliersController extends Controller
                 }
             }
             $message = 'verifications has been archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Successfully archived');
             session()->flash('feedback', $message);
             return redirect()->back();
         }
@@ -897,6 +912,8 @@ class SuppliersController extends Controller
     public function destroy($id){
         Supplier::where('id',$id)->delete();
         $message = 'Supplier hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Supplier Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -907,6 +924,8 @@ class SuppliersController extends Controller
     public function destroySupplierItems($id){
         Item::where('id',$id)->delete();
         $message = 'Item hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -916,6 +935,8 @@ class SuppliersController extends Controller
     public function destroySupplierStores($id){
         Store::where('id',$id)->delete();
         $message = 'store hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -925,6 +946,8 @@ class SuppliersController extends Controller
     public function destroySupplierBuyersMessages($id){
         BuyerMessage::where('id',$id)->delete();
         $message = 'message hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -934,6 +957,8 @@ class SuppliersController extends Controller
     public function destroySupplierBuyingRequests($id){
         SupplierBuyingRequest::where('id',$id)->delete();
         $message = 'request hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -943,6 +968,8 @@ class SuppliersController extends Controller
     public function destroySupplierFiles($id){
         SupplierFile::where('id',$id)->delete();
         $message = 'file hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -952,6 +979,8 @@ class SuppliersController extends Controller
     public function destroySupplierInvoices($id){
         RfqInvoice::where('id',$id)->delete();
         $message = 'invoice hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -961,6 +990,8 @@ class SuppliersController extends Controller
     public function destroySupplierVerifications($id){
         SupplierVerification::where('id',$id)->delete();
         $message = 'verification hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully archived');
         session()->flash('feedback', $message);
         return redirect()->back();
     }

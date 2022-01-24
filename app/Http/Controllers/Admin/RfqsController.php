@@ -12,8 +12,11 @@ use App\Models\AdminEmail;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\BuyingRequestStatus;
+use App\Models\BuyingFrequency;
+use App\Models\Unit;
 use App\Exports\RfqsExport;
 use App\Imports\RfqsImport;
+use App\Http\Requests\BuyingRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
 use Illuminate\Pagination\Paginator;
@@ -85,10 +88,68 @@ class RfqsController extends Controller
         ]);
     }
 
-
+    // to get products & buyers for create page
+    public function getBuyerProductDetails(Request $request){
+        if($request->is_buyer){
+            $results = Buyer::whereIn('member_type',[2,3])
+            ->where('user_type',0)
+            ->where('full_name', 'like', '%'. $request->term . '%')->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $buyers[$i]['id'] = $r['id'];
+                $buyers[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['full_name']));
+                $buyers[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['full_name']));
+                $i++;
+            }
+            echo json_encode($buyers);
+        }else 
+        if($request->is_product){
+            $results = Item::where('title', 'like', '%'. $request->term . '%')
+            ->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $products[$i]['id'] = $r['id'];
+                $products[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['title']));
+                $products[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['title']));
+                $i++;
+            }
+            echo json_encode($products);
+        }
+    }
 
     public function create(){
-        //
+        $units = Unit::all();
+        $buying_frequencies = BuyingFrequency::all();
+        return view('admin.rfqs.buying_requets.create', compact(['units','buying_frequencies']));
+    }
+
+    public function store(BuyingRequest $request){
+        $rfq = new Rfq();
+        $hash = md5(time() . rand(10000, 99999));
+        $date_added = date('Y-m-d H:i:s');
+        $added_by = Auth::user()->id;
+
+        $rfq->buyer_id = $request->buyer_id;
+        $rfq->item_id = $request->item_id;
+        $rfq->product_name = $request->product_name;
+        $rfq->product_detail = $request->product_detail;
+        $rfq->quantity = $request->quantity;
+        $rfq->unit_id = $request->unit_id;
+        $rfq->buying_frequency_id = $request->buying_frequency_id;
+        $rfq->reference_url = $request->reference_url;
+        $rfq->target_price = $request->target_price;
+        $rfq->validity = $request->validity;
+        $rfq->hash = $hash;
+        $rfq->date_added = $date_added;
+        $rfq->added_by = $added_by;
+        $rfq->country_code = 0;
+        $rfq->save();
+
+        $message = "Buying Request Has Been Added Successfully";
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully Added');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
     public function show($id){
@@ -98,12 +159,37 @@ class RfqsController extends Controller
 
  
     public function edit($id){
-        //
+        $rfq = Rfq::findOrFail($id);
+        $units = Unit::all();
+        $buying_frequencies = BuyingFrequency::all();
+        return view('admin.rfqs.buying_requets.edit', compact(['rfq','units','buying_frequencies']));
     }
 
 
-    public function update(Request $request, $id){
-        //
+    public function update(BuyingRequest $request){
+        $rfq = Rfq::find($request->rfq_id);
+        $date_updated = date('Y-m-d H:i:s');
+        $updated_by = Auth::user()->id;
+
+        $rfq->buyer_id = $request->buyer_id;
+        $rfq->item_id = $request->item_id;
+        $rfq->product_name = $request->product_name;
+        $rfq->product_detail = $request->product_detail;
+        $rfq->quantity = $request->quantity;
+        $rfq->unit_id = $request->unit_id;
+        $rfq->buying_frequency_id = $request->buying_frequency_id;
+        $rfq->reference_url = $request->reference_url;
+        $rfq->target_price = $request->target_price;
+        $rfq->validity = $request->validity;
+        $rfq->date_updated = $date_updated;
+        $rfq->updated_by = $updated_by;
+        $rfq->save();
+
+        $message = "Buying Request Has Been Updated Successfully";
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Successfully Updated');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
 

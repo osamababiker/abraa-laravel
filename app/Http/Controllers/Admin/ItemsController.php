@@ -434,8 +434,7 @@ class ItemsController extends Controller
                 $i++;
             }
             echo json_encode($suppliers);
-        }
-        
+        } 
     }
 
     public function importExcel(Request $request) {

@@ -707,16 +707,24 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('rfqs/approve/getSuppliersDetails', [
         RfqsController::class, 'getSuppliersDetails'
     ])->name('rfqs.getSuppliersDetails');  
+    // to get Buyer and Product Details for create page  
+    Route::get('rfqs/create/getBuyerProductDetails', [
+        RfqsController::class, 'getBuyerProductDetails'
+    ])->name('rfqs.getSuppliersDetails');  
     // to approve single rfq 
     Route::get('rfqs/{id}/approve', [
         RfqsController::class, 'approve'
     ]);
+    // custom update route
+    Route::post('rfqs/update', [
+        RfqsController::class, 'update'
+    ])->name('rfqs.update');
     // custom delete route
     Route::get('rfqs/{id}/destroy', [
         RfqsController::class, 'destroy'
     ]);
     // resource route
-    Route::resource('rfqs', RfqsController::class);
+    Route::resource('rfqs', RfqsController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= global rfqs Routes ====================== //

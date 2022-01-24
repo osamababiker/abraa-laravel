@@ -24,7 +24,7 @@ class Rfq extends Model
     public function city(){
         return $this->belongsTo(State::class,'city');
     }
-
+ 
     public function buyer(){ 
         return $this->belongsTo(Buyer::class,'buyer_id');
     }
@@ -39,6 +39,10 @@ class Rfq extends Model
  
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
+    }
+
+    public function buying_frequency(){
+        return $this->belongsTo(BuyingFrequency::class,'buying_frequency_id');
     }
 
 }
