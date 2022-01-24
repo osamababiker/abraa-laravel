@@ -25,6 +25,14 @@ class Order extends Model
         return $this->belongsTo(Buyer::class, 'user_id');
     }
 
+    public function order_item(){
+        return $this->hasMany(OrderItem::class, 'sub_of');
+    }
+
+    public function buying_request(){
+        return $this->hasMany(BuyingRequestOrderItem::class, 'sub_of');
+    }
+
     public function getPaymentGeteway($code){
         $result = 'Unknown';
         switch ($code) {

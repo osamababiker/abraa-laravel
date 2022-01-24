@@ -29,7 +29,7 @@ class Item extends Model
         return $this->belongsTo(Country::class,'manufacture_country','co_code');
     }
 
-    public function supplier(){
+    public function supplier(){ 
         return $this->belongsTo(Supplier::class, 'user_id');
     }
 }

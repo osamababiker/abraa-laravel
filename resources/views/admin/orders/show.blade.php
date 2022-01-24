@@ -130,6 +130,55 @@
 									<!-- Product Details -->
 									<div class="tab-pane" id="product_details" role="tabpanel">
 										<h4 class="tab-title">Product Details</h4>
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Id</th>
+													<th>Product Name</th>
+													<th>Store</th>
+													<th>Quantity</th>
+													<th>Total Price</th>
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												@if($order->order_item)
+													@foreach($order->order_item as $order_item)
+													<tr>
+														<td>
+															@if($order_item->item)
+																{{ $order_item->item->id }}
+															@endif
+														</td>
+														<td>
+															@if($order_item->item)
+																{{ $order_item->item->title }}
+															@endif
+														</td>
+														<td>
+															@if($order_item->item)
+																@if($order_item->item->supplier)
+																	<a target="_blank" href="{{ config('global.public_url') }}store/{{ $order_item->item->supplier->id }}">{{ config('global.public_url') }}store/{{ $order_item->item->supplier->id }}</a>
+																@endif
+															@endif
+														</td>
+														<td>
+															{{ $order_item->quantity }}
+														</td>
+														<td>
+															{{ $order_item->final_price }}
+														</td>
+														<td>
+															@if($order_item->status == 1)
+																<!-- <i class="fa fa-check" style="color: green"></i> -->
+															@else 
+															@endif
+														</td>
+													</tr>
+													@endforeach
+												@endif
+											</tbody>
+										</table>
 									</div>
 									<!-- Shipping Details -->
 									<div class="tab-pane" id="shipping_details" role="tabpanel">

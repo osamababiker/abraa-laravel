@@ -67,7 +67,7 @@ class OrdersController extends Controller
 
         if($user_name){
             $order_obj->where('users.full_name','like', '%' . $user_name . '%'); 
-        }
+        } 
 
         if($countries){
             $order_obj->whereIn('users.country', $countries);
@@ -93,7 +93,7 @@ class OrdersController extends Controller
     }
 
     public function show($id){
-        $order = Order::findOrFail($id);
+        $order = Order::findOrFail($id); 
         return view('admin.orders.show', compact(['order']));
     }
 
