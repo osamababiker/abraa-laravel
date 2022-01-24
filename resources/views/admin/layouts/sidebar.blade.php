@@ -96,6 +96,14 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#orders" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Orders</span>
+                </a>
+                <ul id="orders" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('orders.index') }}">All Orders</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#categories" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="list"></i> <span class="align-middle">Categories</span>
                 </a>

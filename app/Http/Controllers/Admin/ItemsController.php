@@ -26,7 +26,7 @@ class ItemsController extends Controller
     public function index(){
         $countries = Country::all();
         return view('admin.items.index', compact(['countries']));
-    }
+    } 
 
     public function getItemsAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
@@ -294,6 +294,8 @@ class ItemsController extends Controller
     public function destroy($id){
         Item::where('id',$id)->delete();
         $message = 'Item hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -395,7 +397,7 @@ class ItemsController extends Controller
     
     // import & export to excel 
     public function exportExcel() {
-        return Excel::download(new ItemsExport, 'stores.xlsx'); 
+        return Excel::download(new ItemsExport, 'items.xlsx'); 
     }
     
     public function importView(){

@@ -164,7 +164,6 @@ class HomeSlidersController extends Controller
    
     public function importExcel() {
         Excel::import(new HomeSliderImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }

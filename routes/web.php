@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\PaymentOptionsController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\ModeratorsController;
 use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\CacheController;
 
 /* 
@@ -910,7 +911,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('items/json', [
         ItemsController::class, 'getItemsAsJson'
     ])->name('items.json');
-        // filter items  route 
+    // filter items  route 
     Route::post('items/filter', [
         ItemsController::class, 'filterItems'
     ])->name('items.filter');
@@ -941,6 +942,42 @@ Route::group(['middleware' => 'auth'], function (){
     // resource route
     Route::resource('items', ItemsController::class, ['except' => ['destroy','update']]);
     
+
+    // ======================= orders Routes ====================== //
+    // table actions route
+    Route::post('orders/actions', 
+        [OrdersController::class , 'actions']
+    )->name('orders.actions');
+    // get orders as json route 
+    Route::get('orders/json', [
+        OrdersController::class, 'getOrdersAsJson'
+    ])->name('orders.json');
+        // filter orders  route 
+    Route::post('orders/filter', [
+        OrdersController::class, 'filterOrders'
+    ])->name('orders.filter');
+    // to import & export excel 
+    Route::get('orders/export/excel', [
+        OrdersController::class, 'exportExcel'
+    ])->name('orders.export.excel');
+    Route::post('orders/import/excel', [
+        OrdersController::class, 'importExcel'
+    ])->name('orders.import.excel');
+    // to get import view
+    Route::get('orders/import/excel',  [
+        OrdersController::class, 'importView'
+    ])->name('orders.import.excel'); 
+    // custom delete route
+    Route::get('orders/{id}/destroy', [
+        OrdersController::class, 'destroy'
+    ]);
+    // custom update route 
+    Route::post('orders/update', [ 
+        OrdersController::class, 'update'
+    ])->name('orders.update');
+    // resource route
+    Route::resource('orders', OrdersController::class, ['except' => ['destroy','update']]);
+
 
     // ======================= Categories Routes ====================== //
     // table actions route

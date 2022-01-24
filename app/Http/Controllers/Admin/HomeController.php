@@ -13,7 +13,7 @@ use App\Models\Rfq;
 class HomeController extends Controller
 {
     public function index() {
-
+ 
         // get stores count
         $approved_stores_count = DB::table('users_store')
             ->leftJoin('users', 'users.id', '=', 'users_store.sub_of')
