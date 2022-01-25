@@ -8,40 +8,40 @@ use App\Models\Country;
 use App\Exports\CategoriesExport;
 use App\Imports\CategoriesImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 
 class CategoriesController extends Controller
 {
-    
-    public function index()
-    {
+    public function index(){
         $countries = Country::all();
         return view('admin.categories.index',compact(['countries']));
     } 
 
     public function getCategoriesAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
-
         $category_obj = new Category();
 
         $categories_count = $category_obj->count();
-        $categories = $category_obj->limit($rows_numbers)
-            ->with('parent')->orderBy('id','desc')->get();
+        $categories = $category_obj->with('parent')->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'categories' => $categories,
+            'pagination' => (string) $categories->links('pagination::bootstrap-4'),
             'categories_count' => $categories_count
         ]); 
     }
 
     public function filterCategories(Request $request){
-
-        
         $category_title = $request->category_title;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $category_obj = Category::where('deleted_at',null);
 
@@ -61,43 +61,37 @@ class CategoriesController extends Controller
         }
             
         $categories_count = $category_obj->count();
-        $categories = $category_obj->limit($rows_numbers)
-            ->with('parent')->orderBy('id','desc')->get();
-
+        $categories = $category_obj->with('parent')->orderBy('id','desc')
+        ->paginate($rows_numbers);
    
         return response()->json([
             'categories' => $categories,
+            'pagination' => (string) $categories->links('pagination::bootstrap-4'),
             'categories_count' => $categories_count
         ]);
     }
 
 
-
-    public function create()
-    {
+    public function create(){
         //
     }
 
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
+    public function show($id){
         //
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function edit($id){
+        //
+    }
+
+
+    public function update(Request $request, $id){
         //
     }
 
@@ -105,20 +99,19 @@ class CategoriesController extends Controller
     public function destroy($id){
         Category::where('id',$id)->delete();
         $message = 'Category hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Archived Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
 
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new CategoriesExport, 'categories.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new CategoriesImport,request()->file('file'));
-           
         return redirect()->back();
     }
 

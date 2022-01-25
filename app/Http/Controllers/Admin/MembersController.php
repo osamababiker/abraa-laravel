@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Exports\MemberExport;
 use App\Imports\MemberImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 class MembersController extends Controller
 {
@@ -22,12 +23,12 @@ class MembersController extends Controller
         $member_obj = new UserActivity();
 
         $members_count = $member_obj->count();
-        $members = $member_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->with('user_country')
-            ->with('user')->get();
+        $members = $member_obj->orderBy('id','desc')->with('user_country')
+            ->with('user')->paginate($rows_numbers);
         
         return response()->json([
             'members' => $members,
+            'pagination' => (string) $members->links('pagination::bootstrap-4'),
             'members_count' => $members_count
         ]); 
     } 
@@ -37,8 +38,13 @@ class MembersController extends Controller
         $countries = $request->countries;
         $rows_numbers = $request->rows_numbers; 
 
-        $member_obj =  UserActivity::leftJoin('users', 'users.id', 'user_activity.user_id');
-       
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
+        $member_obj =  UserActivity::leftJoin('users', 'users.id', 'user_activity.user_id')
+        ->select('user_activity.*');
         if($member_name){
             $member_obj->where('users.full_name','like', '%' . $member_name . '%');
         }
@@ -48,66 +54,71 @@ class MembersController extends Controller
         }
 
         $members_count = $member_obj->count();
-        $members = $member_obj->limit($rows_numbers)
-            ->orderBy('user_activity.id','desc')->with('user_country')
-            ->with('user')->get();
+        $members = $member_obj->orderBy('user_activity.id','desc')
+        ->with('user_country')->with('user')->paginate($rows_numbers);
 
    
         return response()->json([
             'members' => $members,
+            'pagination' => (string) $members->links('pagination::bootstrap-4'),
             'members_count' => $members_count
         ]);
     }
 
     
-    public function create()
-    {
+    public function create(){
         //
     }
 
     
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
  
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
- 
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
-
     
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
-
  
     public function destroy($id){
         Member::where('id',$id)->delete();
         $message = 'Member hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Archived Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
 
+    // to handel members table actions
+    public function actions(Request $request){
+        if($request->has('delete_selected_btn')){
+            foreach($request->member_id as $id){
+                Member::where('id',$id)->delete();
+            }
+            $message = 'members hass been Archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
+
     
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new MemberExport, 'members.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new MemberImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }

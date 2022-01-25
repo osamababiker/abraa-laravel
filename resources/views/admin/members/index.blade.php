@@ -99,6 +99,8 @@
 
                                             </tbody>
                                         </table>
+                                        <div id="pagination" class="d-flex justify-content-center">
+                                        </div>
                                     </div>
                                     @if(session()->has('feedback'))
                                         @include('admin.layouts.feedback')
@@ -115,6 +117,7 @@
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
+            <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
             <script src="{{ asset('js/dataTables/membersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

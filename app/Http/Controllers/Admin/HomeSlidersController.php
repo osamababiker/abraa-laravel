@@ -12,6 +12,7 @@ use App\Http\Traits\FilesUploadTrait;
 use App\Exports\HomeSliderExport;
 use App\Imports\HomeSliderImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 class HomeSlidersController extends Controller
 {
@@ -26,11 +27,12 @@ class HomeSlidersController extends Controller
         $sliders_obj = new HomeSlider();
 
         $sliders_count = $sliders_obj->count();
-        $sliders = $sliders_obj->limit($rows_numbers)
-            ->with('language')->with('user')->orderBy('id','desc')->get();
+        $sliders = $sliders_obj->with('language')->with('user')
+        ->orderBy('id','desc')->paginate($rows_numbers);
         
         return response()->json([
             'sliders' => $sliders,
+            'pagination' => (string) $sliders->links('pagination::bootstrap-4'),
             'sliders_count' => $sliders_count
         ]);
     } 
@@ -39,6 +41,11 @@ class HomeSlidersController extends Controller
         $slider_title = $request->slider_title;
         $rows_numbers = $request->rows_numbers; 
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $sliders_obj = HomeSlider::with('language')->with('user');
         
         if($slider_title){
@@ -46,12 +53,12 @@ class HomeSlidersController extends Controller
         }
             
         $sliders_count = $sliders_obj->count();
-        $sliders = $sliders_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
-
+        $sliders = $sliders_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'sliders' => $sliders,
+            'pagination' => (string) $sliders->links('pagination::bootstrap-4'),
             'sliders_count' => $sliders_count
         ]);
     }
@@ -63,7 +70,6 @@ class HomeSlidersController extends Controller
 
     public function store(SlidersRequest $request){
         $slider = new HomeSlider();
-
         // to upload slider image
         $slider_url = '';
         if($request->has('slider')){
@@ -96,17 +102,14 @@ class HomeSlidersController extends Controller
         //
     }
 
-
     public function edit($id){
         $languages = Language::all();
         $slider = HomeSlider::find($id);
         return view('admin.home.sliders.edit', compact(['slider','languages']));
     }
 
-
     public function update(Request $request){
         $slider = HomeSlider::find($request->slider_id);
-
         // to upload slider image
         $slider_url = '';
         if($request->has('slider')){

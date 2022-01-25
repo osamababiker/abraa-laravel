@@ -11,7 +11,6 @@ use App\Imports\OrdersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Pagination\Paginator;
 
-
 class OrdersController extends Controller
 {
 

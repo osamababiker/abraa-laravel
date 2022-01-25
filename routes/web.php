@@ -34,6 +34,8 @@ use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\ModeratorsController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\EmailArchivesController;
+use App\Http\Controllers\Admin\SuppliersVerificationController;
 use App\Http\Controllers\Admin\CacheController;
 
 /* 
@@ -1524,6 +1526,78 @@ Route::group(['middleware' => 'auth'], function (){
         AdminUsersController::class, 'destroy'
     ]);
     Route::resource('users', AdminUsersController::class, ['except' => ['destroy']]);
+
+
+    // ======================= Email Archived Routes ====================== //
+    // table actions route
+    Route::post('emailsArchives/actions', 
+        [EmailArchivesController::class , 'actions']
+    )->name('emailsArchives.actions');
+    // get emails Archives as json route 
+    Route::get('emailsArchives/json', [
+        EmailArchivesController::class, 'getEmailsAsJson'
+    ])->name('emailsArchives.json');
+    // filter emails Archives  route 
+    Route::post('emailsArchives/filter', [
+        EmailArchivesController::class, 'filterEmails'
+    ])->name('emailsArchives.filter');
+    // to import & export excel 
+    Route::get('emailsArchives/export/excel', [
+        EmailArchivesController::class, 'exportExcel'
+    ])->name('emailsArchives.export.excel');
+    Route::post('emailsArchives/import/excel', [
+        EmailArchivesController::class, 'importExcel'
+    ])->name('emailsArchives.import.excel');
+    Route::get('emailsArchives/importExportView',  [
+        EmailArchivesController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('emailsArchives/update', [
+        EmailArchivesController::class, 'update'
+    ])->name('emailsArchives.update');
+    // custom delete route
+    Route::get('emailsArchives/{id}/destroy', [
+        EmailArchivesController::class, 'destroy'
+    ]);
+    Route::resource('emailsArchives', EmailArchivesController::class, ['except' => ['destroy','update']]);
+
+
+    // ======================= Email Archived Routes ====================== //
+    // table actions route
+    Route::post('suppliersVerification/actions', 
+        [SuppliersVerificationController::class , 'actions']
+    )->name('suppliersVerification.actions');
+    // get suppliers verification as json route 
+    Route::get('suppliersVerification/json', [
+        SuppliersVerificationController::class, 'getVerificationsAsJson'
+    ])->name('suppliersVerification.json');
+    // filter suppliers verification route 
+    Route::post('suppliersVerification/filter', [
+        SuppliersVerificationController::class, 'filterVerifications'
+    ])->name('suppliersVerification.filter');
+    // to import & export excel 
+    Route::get('suppliersVerification/export/excel', [
+        SuppliersVerificationController::class, 'exportExcel'
+    ])->name('suppliersVerification.export.excel');
+    Route::post('suppliersVerification/import/excel', [
+        SuppliersVerificationController::class, 'importExcel'
+    ])->name('suppliersVerification.import.excel');
+    Route::get('suppliersVerification/importExportView',  [
+        SuppliersVerificationController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('suppliersVerification/update', [
+        SuppliersVerificationController::class, 'update'
+    ])->name('suppliersVerification.update');
+    // custom delete route
+    Route::get('suppliersVerification/{id}/destroy', [
+        SuppliersVerificationController::class, 'destroy'
+    ]);
+    // get supplier for create & edit page 
+    Route::get('suppliersVerification/getsupplierDetails', [
+        SuppliersVerificationController::class, 'getsupplierDetails'
+    ])->name('suppliersVerification.getsupplierDetails');
+    Route::resource('suppliersVerification', SuppliersVerificationController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= General Classes Routes ====================== //

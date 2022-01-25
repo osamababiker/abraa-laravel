@@ -10,7 +10,7 @@ class SupplierVerification extends Model
     use HasFactory;
     protected $table = "supplier_verification";
     protected $guarded = [];
-
+ 
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'user_id');
     }

@@ -8,6 +8,8 @@ use App\Models\Country;
 use App\Exports\CountryExport;
 use App\Imports\CountryImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
+
 
 class CountriesController extends Controller
 {
@@ -20,13 +22,13 @@ class CountriesController extends Controller
         $rows_numbers = $request->rows_numbers;
 
         $country_obj = new Country();
-
         $countries_count = $country_obj->count();
-        $countries = $country_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
+        $countries = $country_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'countries' => $countries,
+            'pagination' => (string) $countries->links('pagination::bootstrap-4'),
             'countries_count' => $countries_count
         ]); 
     }
@@ -35,18 +37,24 @@ class CountriesController extends Controller
     public function filterCountries(Request $request){
         $rows_numbers = $request->rows_numbers; 
         $country_name = $request->country_name;
+
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $country_obj = Country::where('deleted_at',null);
-        
         if($country_name){
             $country_obj->where('en_name', 'like', '%'. $country_name .'%')
                 ->orWhere('ar_name', 'like', '%'. $country_name .'%');
         }
         $countries_count = $country_obj->count();
-        $countries = $country_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
+        $countries = $country_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
    
         return response()->json([
             'countries' => $countries,
+            'pagination' => (string) $countries->links('pagination::bootstrap-4'),
             'countries_count' => $countries_count
         ]);
     }
@@ -75,20 +83,17 @@ class CountriesController extends Controller
         session()->flash('feedback', $message);
         return redirect()->back();
     }
-
   
     public function show($id){
         $country = Country::find($id);
         return view('admin.countries.show', compact(['country']));
     }
 
-    
     public function edit($id){
         $country = Country::find($id);
         return view('admin.countries.edit', compact(['country']));
     }
 
-    
     public function update(Request $request){
         $country = Country::find($request->country_id);
         $country->co_code = $request->co_code;
@@ -107,7 +112,6 @@ class CountriesController extends Controller
         return redirect()->back();
     }
 
-  
     public function destroy($id){
         Country::where('id',$id)->delete();
         $message = 'Country hass been Archived successfully';
@@ -132,15 +136,12 @@ class CountriesController extends Controller
     }
 
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new CountryExport, 'countries.xlsx'); 
     }
    
-    public function importExcel() 
-    {
+    public function importExcel() {
         Excel::import(new CountryImport,request()->file('file'));
-           
         return redirect()->back();
     }
 }

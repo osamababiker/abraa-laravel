@@ -11,6 +11,7 @@ use App\Exports\HomeBannerExport;
 use App\Imports\HomeBannerImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\FilesUploadTrait;
+use Illuminate\Pagination\Paginator;
 
 class HomeBannersController extends Controller
 {
@@ -25,11 +26,12 @@ class HomeBannersController extends Controller
         $banners_obj = HomeBanner::with('language')->with('user');
 
         $banners_count = $banners_obj->count();
-        $banners = $banners_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
+        $banners = $banners_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'banners' => $banners,
+            'pagination' => (string) $banners->links('pagination::bootstrap-4'),
             'banners_count' => $banners_count
         ]);
     } 
@@ -38,19 +40,23 @@ class HomeBannersController extends Controller
         $banner_title = $request->banner_title;
         $rows_numbers = $request->rows_numbers; 
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $banners_obj = HomeBanner::with('language')->with('user');
-        
         if($banner_title){
             $banners_obj->where('title','like', '%' . $banner_title . '%'); 
         }
             
         $banners_count = $banners_obj->count();
-        $banners = $banners_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
-
+        $banners = $banners_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'banners' => $banners,
+            'pagination' => (string) $banners->links('pagination::bootstrap-4'),
             'banners_count' => $banners_count
         ]);
     }
@@ -60,27 +66,22 @@ class HomeBannersController extends Controller
         //
     }
 
-  
     public function store(Request $request){
         //
     }
-
   
     public function show($id){
         //
     }
-
 
     public function edit($id){
         $banner = HomeBanner::find($id);
         $languages = Language::all();
         return view('admin.home.banners.edit', compact(['banner','languages']));
     }
-
    
     public function update(Request $request){
         $banner = HomeBanner::find($request->banner_id);
-
         // to upload slider image
         $banner_url = '';
         if($request->has('slider')){
@@ -103,7 +104,7 @@ class HomeBannersController extends Controller
 
         $message = 'banner hass been Updated successfully';
         session()->flash('success', 'true');
-        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback_title', 'Updated Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
@@ -112,10 +113,25 @@ class HomeBannersController extends Controller
     public function destroy($id){
         HomeBanner::where('id',$id)->delete();
         $message = 'Banner hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Archived Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }
 
+    // to handel banners table actions
+    public function actions(Request $request){
+        if($request->has('delete_selected_btn')){
+            foreach($request->banner_id as $id){
+                HomeBanner::where('id',$id)->delete();
+            }
+            $message = 'banners hass been Archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Success');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+    }
     
     // import & export to excel
     public function exportExcel() {

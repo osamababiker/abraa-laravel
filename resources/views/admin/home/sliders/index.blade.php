@@ -90,6 +90,8 @@
 
                                                 </tbody>
                                             </table>
+                                            <div id="pagination" class="d-flex justify-content-center">
+                                            </div>
                                         </div>
                                         @if(session()->has('feedback'))
                                         @include('admin.layouts.feedback')

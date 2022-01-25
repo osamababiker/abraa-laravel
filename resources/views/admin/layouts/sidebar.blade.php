@@ -156,6 +156,15 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#general" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="info"></i> <span class="align-middle">General</span>
+                </a>
+                <ul id="general" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('emailsArchives.index') }}">Email Activites</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('suppliersVerification.index') }}">Suppliers Verifications</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#charts" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="pie-chart"></i> <span class="align-middle">Reports</span>
                 </a>

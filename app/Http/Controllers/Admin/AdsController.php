@@ -13,6 +13,7 @@ use App\Exports\AdsExport;
 use App\Imports\AdsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\FilesUploadTrait;
+use Illuminate\Pagination\Paginator;
 
 class AdsController extends Controller
 {
@@ -28,11 +29,12 @@ class AdsController extends Controller
         $ads_obj = Ads::where('active',1);
 
         $ads_count = $ads_obj->count();
-        $ads = $ads_obj->limit($rows_numbers)
-            ->with('category')->with('language')->orderBy('id','desc')->get();
+        $ads = $ads_obj->with('category')->with('language')
+        ->orderBy('id','desc')->paginate($rows_numbers);
         
         return response()->json([
             'ads' => $ads,
+            'pagination' => (string) $ads->links('pagination::bootstrap-4'),
             'ads_count' => $ads_count
         ]);
     } 
@@ -41,6 +43,11 @@ class AdsController extends Controller
         $ads_name = $request->ads_name;
         $filter_by_category = $request->filter_by_category;
         $rows_numbers = $request->rows_numbers; 
+
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
 
         $ads_obj = Ads::leftJoin('ads_cat', 'ads_cat.id', '=', 'ads.sub_of')
             ->select('ads.*')
@@ -57,11 +64,12 @@ class AdsController extends Controller
         }
             
         $ads_count = $ads_obj->count();
-        $ads = $ads_obj->limit($rows_numbers)
-            ->with('category')->with('language')->orderBy('ads.id','desc')->get();
+        $ads = $ads_obj->with('category')->with('language')
+        ->orderBy('ads.id','desc')->paginate($rows_numbers);
         
         return response()->json([
             'ads' => $ads,
+            'pagination' => (string) $ads->links('pagination::bootstrap-4'),
             'ads_count' => $ads_count
         ]);
     }
@@ -111,7 +119,7 @@ class AdsController extends Controller
 
 
     public function show($id){
-        $ads = Ads::find($id);
+        $ads = Ads::findOrFail($id);
         return view('admin.home.ads.show', compact(['ads']));
     }
 

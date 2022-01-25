@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Exports\StateExport;
 use App\Imports\StateImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 class StatesController extends Controller
 {
@@ -20,15 +21,15 @@ class StatesController extends Controller
 
     public function getstatesAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
-
         $state_obj = new State();
 
         $states_count = $state_obj->count();
-        $states = $state_obj->limit($rows_numbers)
-            ->with('country')->orderBy('id','desc')->get();
+        $states = $state_obj->with('country')->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'states' => $states,
+            'pagination' => (string) $states->links('pagination::bootstrap-4'),
             'states_count' => $states_count
         ]); 
     }
@@ -38,11 +39,15 @@ class StatesController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $state_name = $request->state_name;
         $state_countries = $request->state_countries;
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $state_obj = State::where('deleted_at',null);
-        
         if($state_name){
             $state_obj->where('en_name', 'like', '%'. $state_name .'%')
-                ->orWhere('ar_name', 'like', '%'. $state_name .'%');
+            ->orWhere('ar_name', 'like', '%'. $state_name .'%');
         }
 
         if($state_countries){
@@ -50,11 +55,12 @@ class StatesController extends Controller
         }
 
         $states_count = $state_obj->count();
-        $states = $state_obj->limit($rows_numbers)
-            ->with('country')->orderBy('id','desc')->get();
+        $states = $state_obj->with('country')->orderBy('id','desc')
+        ->paginate($rows_numbers);
    
         return response()->json([
             'states' => $states,
+            'pagination' => (string) $states->links('pagination::bootstrap-4'),
             'states_count' => $states_count
         ]);
     }

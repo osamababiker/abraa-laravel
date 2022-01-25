@@ -8,29 +8,29 @@ use App\Models\Country;
 use App\Exports\ModeratorsExport;
 use App\Imports\ModeratorsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 class ModeratorsController extends Controller
 {
     
-    public function index()
-    {
+    public function index(){
         $moderators = Member::all();
         $countries = Country::all();
         return view('admin.moderators.index',compact(['moderators','countries']));
     }
 
     public function getModeratorsAsJson(Request $request){
-
         $rows_numbers = $request->rows_numbers;
         $moderator_obj = Member::where('user_type', 1)
-                            ->with('member_country');
+        ->with('member_country');
 
         $moderators_count = $moderator_obj->count();
-        $moderators = $moderator_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
+        $moderators = $moderator_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'moderators' => $moderators,
+            'pagination' => (string) $moderators->links('pagination::bootstrap-4'),
             'moderators_count' => $moderators_count
         ]); 
     }
@@ -41,12 +41,17 @@ class ModeratorsController extends Controller
         $countries = $request->countries;
         $rows_numbers = $request->rows_numbers; 
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+
         $moderator_obj = Member::where('user_type', 1)
-                            ->with('member_country');
+        ->with('member_country');
 
         if($moderator_name){
             $moderator_obj->where('full_name','like', '%' . $moderator_name . '%')
-                ->orWhere('username', 'like', '%'. $moderator_name . '%');
+            ->orWhere('username', 'like', '%'. $moderator_name . '%');
         }
 
         if($countries){
@@ -54,43 +59,38 @@ class ModeratorsController extends Controller
         }
  
         $moderators_count = $moderator_obj->count();
-        $moderators = $moderator_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
-
+        $moderators = $moderator_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
    
         return response()->json([
             'moderators' => $moderators,
+            'pagination' => (string) $moderators->links('pagination::bootstrap-4'),
             'moderators_count' => $moderators_count
         ]);
     }
 
     
-    public function create()
-    {
+    public function create(){
         //
     }
 
    
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
     
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
     
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
     
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -98,6 +98,8 @@ class ModeratorsController extends Controller
     public function destroy($id){
         Member::where('id',$id)->delete();
         $message = 'moderator hass been Archived successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Archived Success');
         session()->flash('feedback', $message);
         return redirect()->back();
     }

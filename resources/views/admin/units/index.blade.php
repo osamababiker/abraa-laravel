@@ -23,7 +23,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header ml-3">
-                                    <h5 class="card-title"> You have <span id="units_counter"></span> config in this
+                                    <h5 class="card-title"> You have <span id="units_counter"></span> Units in this
                                         table </h5>
                                     <div class="row">
                                         <a href="{{ route('units.create') }}" target="_blanck"  class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
@@ -85,6 +85,8 @@
 
                                             </tbody>
                                         </table>
+                                        <div id="pagination" class="d-flex justify-content-center">
+                                        </div>
                                     </div>
                                     @if(session()->has('feedback'))
                                         @include('admin.layouts.feedback')

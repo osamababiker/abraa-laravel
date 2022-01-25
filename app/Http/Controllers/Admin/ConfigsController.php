@@ -8,6 +8,7 @@ use App\Http\Requests\ConfigsRequest;
 use App\Exports\ConfigExport;
 use App\Imports\ConfigImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
 
 
 class ConfigsController extends Controller
@@ -19,15 +20,15 @@ class ConfigsController extends Controller
 
     public function getConfigsAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
-
         $config_obj = new Config();
 
         $configs_count = $config_obj->count();
-        $configs = $config_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
+        $configs = $config_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
         
         return response()->json([
             'configs' => $configs,
+            'pagination' => (string) $configs->links('pagination::bootstrap-4'),
             'configs_count' => $configs_count
         ]); 
     }
@@ -37,16 +38,22 @@ class ConfigsController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $config_name = $request->config_name;
 
+        $currentPage = $request->current_page;
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+        
         if($config_name){
             $config_obj = Config::where('config_name', 'like', '%'. $config_name . '%');
         }else $config_obj = new Config();
 
         $configs_count = $config_obj->count();
-        $configs = $config_obj->limit($rows_numbers)
-            ->orderBy('id','desc')->get();
+        $configs = $config_obj->orderBy('id','desc')
+        ->paginate($rows_numbers);
    
         return response()->json([
             'configs' => $configs,
+            'pagination' => (string) $configs->links('pagination::bootstrap-4'),
             'configs_count' => $configs_count
         ]);
     }
@@ -117,15 +124,12 @@ class ConfigsController extends Controller
     }
 
     // import & export to excel
-    public function exportExcel() 
-    {
+    public function exportExcel() {
         return Excel::download(new ConfigExport, 'site_configs.xlsx'); 
     }
    
-    public function importExcel() 
-    {
-        Excel::import(new ConfigImport,request()->file('file'));
-           
+    public function importExcel() {
+        Excel::import(new ConfigImport,request()->file('file'));      
         return redirect()->back();
     }
 }
