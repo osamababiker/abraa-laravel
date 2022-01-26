@@ -165,7 +165,7 @@
         if (!window.Quill) {
             return $("#quill-editor,#quill-toolbar,#quill-bubble-editor,#quill-bubble-toolbar").remove();
         }
-        var editor = new Quill("#quill-editor", {
+        var editor = new Quill(".quill-editor", { 
             modules: {
                 toolbar: "#quill-toolbar"
             },

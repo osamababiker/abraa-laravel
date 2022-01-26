@@ -58,7 +58,7 @@
                             <button class="ql-clean"></button>
                         </span>
                     </div>
-                    <div id="quill-editor"></div>
+                    <div class="quill-editor"></div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">

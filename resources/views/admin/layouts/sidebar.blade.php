@@ -56,6 +56,14 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#pages" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="link"></i> <span class="align-middle"> Static Pages </span>
+                </a>
+                <ul id="pages" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pages.index') }}">  Pages List </a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#buyers" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Buyers</span>
                 </a>
@@ -173,6 +181,14 @@
                 <a class="sidebar-link" href="#">
                     <i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
                 </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#guidelines" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="info"></i> <span class="align-middle">GuideLines</span>
+                </a>
+                <ul id="guidelines" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('guidelines.index') }}">Guidelines List</a></li>
+                </ul>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('cache.flush') }}">

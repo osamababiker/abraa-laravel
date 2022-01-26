@@ -36,6 +36,8 @@ use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\EmailArchivesController;
 use App\Http\Controllers\Admin\SuppliersVerificationController;
+use App\Http\Controllers\Admin\GuidelinesController;
+use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\CacheController;
 
 /* 
@@ -1560,6 +1562,74 @@ Route::group(['middleware' => 'auth'], function (){
         EmailArchivesController::class, 'destroy'
     ]);
     Route::resource('emailsArchives', EmailArchivesController::class, ['except' => ['destroy','update']]);
+
+
+    // ======================= Pages Routes ====================== //
+    // table actions route
+    Route::post('pages/actions', 
+        [PagesController::class , 'actions']
+    )->name('pages.actions');
+    // get pages as json route 
+    Route::get('pages/json', [
+        PagesController::class, 'getPagesAsJson'
+    ])->name('pages.json');
+    // filter pages  route 
+    Route::post('pages/filter', [
+        PagesController::class, 'filterPages'
+    ])->name('pages.filter');
+    // to import & export excel 
+    Route::get('pages/export/excel', [
+        PagesController::class, 'exportExcel'
+    ])->name('pages.export.excel'); 
+    Route::post('pages/import/excel', [
+        PagesController::class, 'importExcel'
+    ])->name('pages.import.excel');
+    Route::get('pages/importExportView',  [
+        PagesController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('pages/update', [
+        PagesController::class, 'update'
+    ])->name('pages.update');
+    // custom delete route
+    Route::get('pages/{id}/destroy', [
+        PagesController::class, 'destroy'
+    ]);
+    Route::resource('pages', PagesController::class, ['except' => ['destroy','update']]);
+
+
+    // ======================= Guide lines Routes ====================== //
+    // table actions route
+    Route::post('guidelines/actions', 
+        [GuidelinesController::class , 'actions']
+    )->name('guidelines.actions');
+    // get guide lines as json route 
+    Route::get('guidelines/json', [
+        GuidelinesController::class, 'getGuidelinesAsJson'
+    ])->name('guidelines.json');
+    // filter guide lines  route 
+    Route::post('guidelines/filter', [
+        GuidelinesController::class, 'filterGuidelines'
+    ])->name('guidelines.filter');
+    // to import & export excel 
+    Route::get('guidelines/export/excel', [
+        GuidelinesController::class, 'exportExcel'
+    ])->name('guidelines.export.excel');
+    Route::post('guidelines/import/excel', [
+        GuidelinesController::class, 'importExcel'
+    ])->name('guidelines.import.excel');
+    Route::get('guidelines/importExportView',  [
+        GuidelinesController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('guidelines/update', [
+        GuidelinesController::class, 'update'
+    ])->name('guidelines.update');
+    // custom delete route
+    Route::get('guidelines/{id}/destroy', [
+        GuidelinesController::class, 'destroy'
+    ]);
+    Route::resource('guidelines', GuidelinesController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Email Archived Routes ====================== //

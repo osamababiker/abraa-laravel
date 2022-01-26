@@ -68,7 +68,7 @@ class StoresController extends Controller
             ->select('users_store.*')
             ->leftJoin('users', function($join) {
             $join->on('users.id', '=', 'users_store.sub_of');
-        });
+        }); 
 
         if($stores_status == 'active'){
             $store_obj->where('users_store.trash', 0); 

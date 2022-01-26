@@ -72,7 +72,7 @@
                                 <button class="ql-clean"></button>
                               </span>
                             </div>
-                            <div id="quill-editor"></div>
+                            <div class="quill-editor"></div>
                             <div class="mt-4">
                               <button type="submit" class="btn btn-primary">Send Message</button>
                             </div>

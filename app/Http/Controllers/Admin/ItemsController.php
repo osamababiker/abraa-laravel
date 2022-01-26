@@ -64,7 +64,7 @@ class ItemsController extends Controller
         
         // filter by item status
         if($items_status == 'active'){
-            $item_obj = $item_obj->where('items.status', 1); 
+            $item_obj = $item_obj->where('items.status', 1);  
         } 
         elseif($items_status == 'pending'){
             $item_obj = $item_obj->where('items.status', 0)
