@@ -48,6 +48,7 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
                 "<td>"+ page.id +"</td>\n"+
+                "<td>"+ page.sub_of +"</td>\n"+
                 "<td>"+ page.ar_title +"</td>\n"+
                 "<td>"+ page.ar_visits +"</td>\n"+
                 "<td>"+ page.en_title +"</td>\n"+
@@ -130,6 +131,7 @@ $(".filter_data_table").on('change', function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
                 "<td>"+ page.id +"</td>\n"+
+                "<td>"+ page.sub_of +"</td>\n"+
                 "<td>"+ page.ar_title +"</td>\n"+
                 "<td>"+ page.ar_visits +"</td>\n"+
                 "<td>"+ page.en_title +"</td>\n"+
@@ -213,6 +215,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
                 "<td>"+ page.id +"</td>\n"+
+                "<td>"+ page.sub_of +"</td>\n"+
                 "<td>"+ page.ar_title +"</td>\n"+
                 "<td>"+ page.ar_visits +"</td>\n"+
                 "<td>"+ page.en_title +"</td>\n"+

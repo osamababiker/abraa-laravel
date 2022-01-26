@@ -1595,6 +1595,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('pages/{id}/destroy', [
         PagesController::class, 'destroy'
     ]);
+    // to get editor value for edit page 
+    Route::get('pages/edit/getEditorData', [
+        PagesController::class, 'getEditorData'
+    ])->name('pages.getEditorData');
     Route::resource('pages', PagesController::class, ['except' => ['destroy','update']]);
 
 

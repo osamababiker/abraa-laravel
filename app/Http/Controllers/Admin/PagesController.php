@@ -101,6 +101,19 @@ class PagesController extends Controller
         return view('admin.pages.show', compact(['page']));
     }
 
+    // to get editor values 
+    public function getEditorData(Request $request){
+        $page = Page::findOrFail($request->page_id);
+        return response()->json([
+            'ar_content' => $page->ar_content,
+            'en_content' => $page->en_content,
+            'cn_content' => $page->cn_content,
+            'ru_content' => $page->ru_content,
+            'tr_content' => $page->tr_content,
+            'pr_content' => $page->pr_content,
+        ]);
+    }
+
     public function edit($id){
         $page = Page::findOrFail($id);
         return view('admin.pages.edit', compact(['page']));
@@ -136,9 +149,11 @@ class PagesController extends Controller
 
         $message = 'Article hass been Updated successfully';
         session()->flash('success', 'true');
-        session()->flash('feedback_title', 'Update Success');
+        session()->flash('feedback_title', 'Updated successfull');
         session()->flash('feedback', $message);
-        return redirect()->back();
+        return response()->json([
+            'data' => $page
+        ], 200);
     }
 
     public function destroy($id){
