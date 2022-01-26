@@ -1633,6 +1633,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('guidelines/{id}/destroy', [
         GuidelinesController::class, 'destroy'
     ]);
+    // to get editor value for edit page 
+    Route::get('guidelines/edit/getEditorData', [
+        GuidelinesController::class, 'getEditorData'
+    ])->name('guidelines.getEditorData');
     Route::resource('guidelines', GuidelinesController::class, ['except' => ['destroy','update']]);
 
 

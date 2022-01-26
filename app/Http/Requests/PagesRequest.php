@@ -24,7 +24,17 @@ class PagesRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'sub_of' => 'required',
+            'sort_id' => 'required',
+            'ar_title' => 'required',
+            'en_title' => 'required',
+            'ar_content' => 'required',
+            'en_content' => 'required',
+            'ar_visits' => 'required',
+            'en_visits' => 'required',
+            'meta_title' => 'required',
+            'meta_description' => 'required',
+            'meta_keyword' => 'required'
         ];
     }
 }

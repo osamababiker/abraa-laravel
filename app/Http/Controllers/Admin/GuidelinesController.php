@@ -60,7 +60,7 @@ class GuidelinesController extends Controller
         return view('admin.guidelines.create', compact(['guideline_types']));
     }
 
-    public function store(GuidelineRequest $request){
+    public function store(GuidelinesRequest $request){
         $guideline_obj = new Guideline();
         $guideline_obj->guideline_type = $request->guideline_type;
         $guideline_obj->en_title = $request->en_title;
@@ -80,11 +80,13 @@ class GuidelinesController extends Controller
         $guideline_obj->date_added = date('Y-m-d H:i:s');
         $guideline_obj->save();
 
-        $message = 'Guideline hass been Saved successfully';
+        $message = 'Guide line hass been Added successfully';
         session()->flash('success', 'true');
-        session()->flash('feedback_title', 'Saved Success');
+        session()->flash('feedback_title', 'Added successfull');
         session()->flash('feedback', $message);
-        return redirect()->back();
+        return response()->json([
+            'data' => $guideline_obj
+        ], 200);
 
     }
     
@@ -93,12 +95,26 @@ class GuidelinesController extends Controller
         return view('admin.guidelines.show', compact(['guideline']));
     }
     
+    // to get editor values 
+    public function getEditorData(Request $request){
+        $guideline = Guideline::findOrFail($request->guideline_id);
+        return response()->json([
+            'ar_content' => $guideline->ar_content,
+            'en_content' => $guideline->en_content,
+            'cn_content' => $guideline->cn_content,
+            'ru_content' => $guideline->ru_content,
+            'tr_content' => $guideline->tr_content,
+            'pr_content' => $guideline->pr_content,
+        ]);
+    }
+
     public function edit($id){
         $guideline = Guideline::findOrFail($id);
-        return view('admin.guidelines.edit', compact(['guideline']));
+        $guideline_types = GuidelineType::all();
+        return view('admin.guidelines.edit', compact(['guideline','guideline_types']));
     }
    
-    public function update(Request $request){
+    public function update(GuidelinesRequest $request){
         $guideline_obj = Guideline::findOrFail($request->guideline_id);
         $guideline_obj->guideline_type = $request->guideline_type;
         $guideline_obj->en_title = $request->en_title;
@@ -118,11 +134,13 @@ class GuidelinesController extends Controller
         $guideline_obj->date_updated = date('Y-m-d H:i:s');
         $guideline_obj->save();
 
-        $message = 'Guideline hass been Updated successfully';
+        $message = 'Guide line hass been Updated successfully';
         session()->flash('success', 'true');
-        session()->flash('feedback_title', 'Updated Success');
+        session()->flash('feedback_title', 'Updated successfull');
         session()->flash('feedback', $message);
-        return redirect()->back();
+        return response()->json([
+            'data' => $guideline_obj
+        ], 200);
     }
     
     public function destroy($id){

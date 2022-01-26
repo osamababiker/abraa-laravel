@@ -37,7 +37,7 @@ $(document).ready(function () {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move this config to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_config("+ config.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
@@ -130,7 +130,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ config.id +"</td>\n"+
                 "<td>"+ config.config_name +"</td>\n"+
                 "<td>"+ config.config_value +"</td>\n"+
-                "<td class=\"table-action\">\n"+
+                "<td class=\"table-action\" style=\"justify-content: center;\">\n"+
                     "<a target=\"_blank\" href=\"/configs/"+ config.id +"\">\n"+
                         "<i class=\"align-middle fa fa-eye\" data-feather=\"eye\"></i>\n"+
                     "</a>\n"+
@@ -198,7 +198,7 @@ $("#pagination").on('click', 'a', function(e) {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move this config to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_config("+ config.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
