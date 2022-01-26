@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\EmailArchivesController;
 use App\Http\Controllers\Admin\SuppliersVerificationController;
 use App\Http\Controllers\Admin\GuidelinesController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\AbraaMessagesController;
 use App\Http\Controllers\Admin\CacheController;
 
 /* 
@@ -1676,6 +1677,56 @@ Route::group(['middleware' => 'auth'], function (){
         SuppliersVerificationController::class, 'getsupplierDetails'
     ])->name('suppliersVerification.getsupplierDetails');
     Route::resource('suppliersVerification', SuppliersVerificationController::class, ['except' => ['destroy','update']]);
+
+
+    // ======================= abraa messages Routes ====================== //
+    // table actions route
+    Route::post('abraaMessages/actions', 
+        [AbraaMessagesController::class , 'actions']
+    )->name('abraaMessages.actions');
+    // get abraa messages as json route 
+    Route::get('abraaMessages/json', [
+        AbraaMessagesController::class, 'getAbraaMessagesAsJson'
+    ])->name('abraaMessages.json');
+    // filter abraa messages  route 
+    Route::post('abraaMessages/filter', [
+        AbraaMessagesController::class, 'filterAbraaMessages'
+    ])->name('abraaMessages.filter');
+    // get users for send messages 
+    Route::post('abraaMessages/users/filter', [
+        AbraaMessagesController::class, 'filterUsersAsJson'
+    ])->name('abraaMessages.users.filter');
+    // to import & export excel 
+    Route::get('abraaMessages/export/excel', [
+        AbraaMessagesController::class, 'exportExcel'
+    ])->name('abraaMessages.export.excel'); 
+    Route::post('abraaMessages/import/excel', [
+        AbraaMessagesController::class, 'importExcel'
+    ])->name('abraaMessages.import.excel');
+    Route::get('abraaMessages/importExportView',  [
+        AbraaMessagesController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('abraaMessages/update', [
+        AbraaMessagesController::class, 'update'
+    ])->name('abraaMessages.update');
+    // custom delete route
+    Route::get('abraaMessages/{id}/destroy', [
+        AbraaMessagesController::class, 'destroy'
+    ]);
+    // to get editor message routes
+    Route::get('abraaMessages/send', [
+        AbraaMessagesController::class, 'getEditor'
+    ])->name('abraaMessages.send');
+    // to send message routes
+    Route::post('abraaMessages/send', [
+        AbraaMessagesController::class, 'sendMessage'
+    ])->name('abraaMessages.send');
+    // to search user for create page
+    Route::get('abraaMessages/searchUsers', [
+        AbraaMessagesController::class, 'searchUsers'
+    ])->name('abraaMessages.searchUsers');
+    Route::resource('abraaMessages', AbraaMessagesController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= General Classes Routes ====================== //

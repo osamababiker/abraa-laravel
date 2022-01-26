@@ -140,6 +140,15 @@
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a href="#messages" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="align-middle" data-feather="message-circle"></i> <span class="align-middle"> Abraa Messages </span>
+                </a>
+                <ul id="messages" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('abraaMessages.index') }}">  All Messages </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('abraaMessages.send') }}">  Send Message </a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a href="#memberships" data-toggle="collapse" class="sidebar-link collapsed">
                     <i class="align-middle" data-feather="users"></i> <span class="align-middle">Memberships</span>
                 </a>

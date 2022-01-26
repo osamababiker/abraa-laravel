@@ -65,16 +65,26 @@ trait MailerTrait {
             // $mail->AltBody = plain text version of email body;
 
             if( !$mail->send() ) {
-                return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
+                //return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
+                $message = 'Oops , Problem Sending Messages';
+                session()->flash('error', 'true');
+                session()->flash('feedback_title', 'Error Sending');
+                session()->flash('feedback', $message);
             }
             
             else {
-                return back()->with("success", "Email has been sent.");
+                //return back()->with("success", "Email has been sent.");
+                $message = 'Message Has been Send successfully';
+                session()->flash('success', 'true');
+                session()->flash('feedback_title', 'Send Success');
+                session()->flash('feedback', $message);
             }
 
         } catch (Exception $e) {
-            print($e); dd();
-             return back()->with('error','Message could not be sent.');
+            $message = 'Oops , Problem Sending Messages';
+            session()->flash('error', 'true');
+            session()->flash('feedback_title', 'Error Sending');
+            session()->flash('feedback', $message);
         }
     }
 
