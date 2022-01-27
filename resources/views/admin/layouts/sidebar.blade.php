@@ -53,6 +53,7 @@
                 </a>
                 <ul id="home_items" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('services.index') }}"> Services</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('homePageBuyers.index') }}"> Home Page Buyers</a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

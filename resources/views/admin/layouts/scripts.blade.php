@@ -194,4 +194,6 @@
 
 <script src="{{ asset('js/add_slider.js') }}"></script>
 
+<script src="{{ asset('js/add_home_buyer.js') }}"></script>
+
 <script src="{{ asset('js/add_ads.js') }}"></script>

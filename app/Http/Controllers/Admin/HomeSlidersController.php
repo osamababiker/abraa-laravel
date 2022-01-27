@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\HomeSlider;
 use App\Models\Language;
 use App\Http\Requests\SlidersRequest;
-use App\Http\Traits\FilesUploadTrait;
+use App\Http\Traits\FilesUploadTrait; 
 use App\Exports\HomeSliderExport;
 use App\Imports\HomeSliderImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -99,12 +99,13 @@ class HomeSlidersController extends Controller
 
 
     public function show($id){
-        //
+        $slider = HomeSlider::findOrFail($id);
+        return view('admin.home.sliders.show', compact(['slider']));
     }
 
     public function edit($id){
         $languages = Language::all();
-        $slider = HomeSlider::find($id);
+        $slider = HomeSlider::findOrFail($id);
         return view('admin.home.sliders.edit', compact(['slider','languages']));
     }
 

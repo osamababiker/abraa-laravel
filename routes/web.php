@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\GlobalRfqsController;
 use App\Http\Controllers\Admin\ProductRfqsController;
 use App\Http\Controllers\Admin\HomeSlidersController;
 use App\Http\Controllers\Admin\HomeBannersController;
+use App\Http\Controllers\Admin\HomePageBuyersController;
 use App\Http\Controllers\Admin\AdsCategoriesController;
 use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\MembershipsPlansController;
@@ -1089,6 +1090,40 @@ Route::group(['middleware' => 'auth'], function (){
         HomeBannersController::class, 'destroy'
     ]);
     Route::resource('homeBanners', HomeBannersController::class, ['except' => ['destroy','update']]);
+
+
+    // ======================= Home banners Routes ====================== //
+    // table actions route
+    Route::post('homePageBuyers/actions', 
+        [HomePageBuyersController::class , 'actions']
+    )->name('homePageBuyers.actions');
+    // get Buyers as json route 
+    Route::get('homePageBuyers/json', [
+        HomePageBuyersController::class, 'getHomeBuersAsJson'
+    ])->name('homePageBuyers.json');
+        // filter Buyers  route 
+    Route::post('homePageBuyers/filter', [
+        HomePageBuyersController::class, 'filterHomeBuyers'
+    ])->name('homePageBuyers.filter');
+    // to import & export excel 
+    Route::get('homePageBuyers/export/excel', [
+        HomePageBuyersController::class, 'exportExcel'
+    ])->name('homePageBuyers.export.excel');
+    Route::post('homePageBuyers/import/excel', [
+        HomePageBuyersController::class, 'importExcel'
+    ])->name('homePageBuyers.import.excel');
+    Route::get('homePageBuyers/importExportView',  [
+        HomePageBuyersController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('homePageBuyers/update', [
+        HomePageBuyersController::class, 'update'
+    ])->name('homePageBuyers.update');
+     // custom delete route
+     Route::get('homePageBuyers/{id}/destroy', [
+        HomePageBuyersController::class, 'destroy'
+    ]);
+    Route::resource('homePageBuyers', HomePageBuyersController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Ads Categories Routes ====================== //
