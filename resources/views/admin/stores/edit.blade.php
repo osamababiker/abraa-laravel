@@ -475,5 +475,6 @@
 		@include('admin.layouts.feedback')
 		@endif
 		@include('admin.layouts.scripts')
+		<script src="{{ asset('js/add_store.js') }}"></script>
 		<!-- footer is here -->
 		@include('admin.layouts.footer')

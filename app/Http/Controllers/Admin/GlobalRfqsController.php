@@ -168,9 +168,9 @@ class GlobalRfqsController extends Controller
             $this->sendEmail($email_templete, $supplier->email, $subject);
         }
  
-        $message = 'Message hass been send successfully';
+        $message = 'Message has been send successfully';
         session()->flash('success', 'true');
-        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback_title', 'send successfully');
         session()->flash('feedback', $message);
         return redirect()->back();
         
@@ -191,7 +191,6 @@ class GlobalRfqsController extends Controller
             }
             echo json_encode($items);
         }
-        
     }
 
     public function create(){
@@ -241,7 +240,7 @@ class GlobalRfqsController extends Controller
             foreach($request->rfqs_id as $request_id){
                 $rfq = Rfq::find($request_id);
                 $rfq->delete();
-                $message = 'buying requests hass been deleted successfully';
+                $message = 'buying requests has been deleted successfully';
                 session()->flash('success', 'true');
                 session()->flash('feedback_title', 'Success');
                 session()->flash('feedback', $message);

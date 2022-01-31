@@ -37,7 +37,7 @@ $(document).ready(function () {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move "+ plan.name +" to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_plan("+ plan.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
@@ -124,7 +124,7 @@ $(".filter_data_table").on('change', function () {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move "+ plan.name +" to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_plan("+ plan.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
@@ -212,7 +212,7 @@ $("#pagination").on('click', 'a', function(e) {
                         "<div class=\"modal-body m-3\">\n"+
                             "<p class=\"mb-0\">Are you Sure you want to move "+ plan.name +" to archive ??</p>\n"+
                         "</div>\n"+
-                        "<div class=\"modal-footer\">\n"+
+                        "<div class=\"modal-footer\" style=\"justify-content: center;\">\n"+
                             "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"+
                             "<button type=\"button\" onclick=\"archive_plan("+ plan.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+

@@ -87,7 +87,7 @@ $(document).ready(function () {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td> <a href=\""+ response.site_url +"item/"+ request.id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
+                "<td> <a href=\""+ response.site_url +"item/"+ request.item_id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ approved_by +"</td>\n"+
@@ -211,7 +211,7 @@ $(".filter_data_table").on('change', function () {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td> <a href=\""+ response.site_url +"item/"+ request.id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
+                "<td> <a href=\""+ response.site_url +"item/"+ request.item_id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ approved_by +"</td>\n"+
@@ -336,7 +336,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td>"+ country +"</td>\n"+
                 "<td>"+ buyer_email +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
-                "<td> <a href=\""+ response.site_url +"item/"+ request.id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
+                "<td> <a href=\""+ response.site_url +"item/"+ request.item_id +"\" target=\"_blank\"> "+ request.product_name +" </a> </td>\n"+
                 "<td>"+ request.quantity +"</td>\n"+ 
                 "<td>"+ unit +"</td>\n"+
                 "<td>"+ approved_by +"</td>\n"+

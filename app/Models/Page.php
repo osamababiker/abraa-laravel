@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+    protected $table = "pages";
+    protected $guarded = [];  
 }

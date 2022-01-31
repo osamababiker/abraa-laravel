@@ -27,7 +27,7 @@
                                 <div class="card">
                                     <div class="card-header ml-3">
                                         <h5 class="card-title"> You have <span
-                                                id="memberships_transactions_counter"></span> memberships Plan in this
+                                                id="memberships_transactions_counter"></span> memberships Transaction in this
                                             table </h5>
 
                                         <div class="row ml-1">

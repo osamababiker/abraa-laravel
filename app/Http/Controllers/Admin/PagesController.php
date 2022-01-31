@@ -8,7 +8,7 @@ use App\Http\Requests\PagesRequest;
 use Illuminate\Pagination\Paginator;
 
 class PagesController extends Controller
-{
+{ 
    
     public function index(){
         return view('admin.pages.index');

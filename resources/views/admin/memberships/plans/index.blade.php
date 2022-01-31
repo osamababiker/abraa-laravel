@@ -19,7 +19,7 @@
 
                     <h1 class="h3 mb-3">Manage memberships plans Table</h1>
 
-                    <form id="membershipsPlans_actions_form" action="{{ route('membershipsPlans.actions') }}"
+                    <form id="memberships_plans_actions_form" action="{{ route('membershipsPlans.actions') }}"
                         method="post">
                         @csrf
                         <div class="row">

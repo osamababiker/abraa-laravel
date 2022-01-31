@@ -14,6 +14,6 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" name="delete_selected_btn" form="memberships_plans_actions_form" class="btn btn-danger">Yes Sure</button>
             </div>
-        </div>
+        </div>  
     </div>
 </div>

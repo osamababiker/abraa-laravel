@@ -1016,12 +1016,16 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('categories/importExportView',  [
         CategoriesController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('categories/update', [
+        CategoriesController::class, 'update'
+    ])->name('categories.update');
     // custom delete route
     Route::get('categories/{id}/destroy', [
         CategoriesController::class, 'destroy'
     ]);
     // resource route
-    Route::resource('categories', CategoriesController::class);
+    Route::resource('categories', CategoriesController::class,  ['except' => ['destroy','update']]);
 
 
     // ======================= Home Sliders Routes ====================== //
@@ -1243,11 +1247,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('membershipsPlans/importExportView',  [
         MembershipsPlansController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('membershipsPlans/update', [
+        MembershipsPlansController::class, 'update'
+    ])->name('membershipsPlans.update');
     // custom delete route
     Route::get('membershipsPlans/{id}/destroy', [
         MembershipsPlansController::class, 'destroy'
     ]);
-    Route::resource('membershipsPlans', MembershipsPlansController::class, ['except' => ['destroy']]);
+    Route::resource('membershipsPlans', MembershipsPlansController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Memberships Transactions Routes ====================== //
@@ -1273,11 +1281,19 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('membershipsTransactions/importExportView',  [
         MembershipsTransactionsController::class, 'importExportView'
     ]);
-    // custom delete route
-    Route::get('membershipsTransactions/{id}/destroy', [
+    // custom update route
+    Route::post('membershipsTransactions/update', [
+        MembershipsTransactionsController::class, 'update'
+    ])->name('membershipsTransactions.update');
+     // custom delete route
+     Route::get('membershipsTransactions/{id}/destroy', [
         MembershipsTransactionsController::class, 'destroy'
     ]);
-    Route::resource('membershipsTransactions', MembershipsTransactionsController::class, ['except' => ['destroy']]);
+     // custom delete route
+     Route::get('membershipsTransactions/searchUsers', [
+        MembershipsTransactionsController::class, 'searchUsers'
+    ])->name('membershipsTransactions.searchUsers');
+    Route::resource('membershipsTransactions', MembershipsTransactionsController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Members Routes ====================== //
