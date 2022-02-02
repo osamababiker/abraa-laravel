@@ -11,11 +11,12 @@ use App\Exports\HomeBannerExport;
 use App\Imports\HomeBannerImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\FilesUploadTrait;
+use App\Http\Traits\ClearCacheTrait; 
 use Illuminate\Pagination\Paginator;
 
 class HomeBannersController extends Controller
 {
-    use FilesUploadTrait ;
+    use FilesUploadTrait , ClearCacheTrait;
     
     public function index(){
         return view('admin.home.banners.index'); 
@@ -102,6 +103,9 @@ class HomeBannersController extends Controller
         $banner->date_updated = date('Y-m-d H:i:s');  
         $banner->save();
 
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("home_banners");
+
         $message = 'banner hass been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Updated Success');
@@ -112,6 +116,10 @@ class HomeBannersController extends Controller
    
     public function destroy($id){
         HomeBanner::where('id',$id)->delete();
+
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("home_banners");
+
         $message = 'Banner hass been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Archived Success');
@@ -125,6 +133,9 @@ class HomeBannersController extends Controller
             foreach($request->banner_id as $id){
                 HomeBanner::where('id',$id)->delete();
             }
+            // to clear the cache on abraa.com
+            $this->clearAbraaCache("home_banners");
+
             $message = 'banners hass been Archived successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');

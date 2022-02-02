@@ -17,11 +17,12 @@ use App\Imports\ItemsImport;
 use App\Http\Requests\ItemsRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\FilesUploadTrait;
+use App\Http\Traits\ClearCacheTrait; 
 use Illuminate\Pagination\Paginator;
 
 class ItemsController extends Controller 
 {
-    use FilesUploadTrait;
+    use FilesUploadTrait, ClearCacheTrait;
 
     public function index(){
         $countries = Country::all();
@@ -286,6 +287,9 @@ class ItemsController extends Controller
         $item->is_customized = $request->is_customized;
         $item->is_shipping = $request->is_shipping;
         $item->save();
+        
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("items");
 
         $message = 'Item hass been Updated successfully';
         session()->flash('success', 'true');

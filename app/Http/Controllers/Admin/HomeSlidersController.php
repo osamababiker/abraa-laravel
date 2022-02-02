@@ -9,6 +9,7 @@ use App\Models\HomeSlider;
 use App\Models\Language;
 use App\Http\Requests\SlidersRequest;
 use App\Http\Traits\FilesUploadTrait; 
+use App\Http\Traits\ClearCacheTrait; 
 use App\Exports\HomeSliderExport;
 use App\Imports\HomeSliderImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,7 +17,7 @@ use Illuminate\Pagination\Paginator;
 
 class HomeSlidersController extends Controller
 {
-    use FilesUploadTrait ;
+    use FilesUploadTrait, ClearCacheTrait;
 
     public function index(){
         return view('admin.home.sliders.index'); 
@@ -89,6 +90,9 @@ class HomeSlidersController extends Controller
         $slider->date_updated = date('Y-m-d H:i:s');  
         $slider->added_by = Auth::user()->id;
         $slider->save();
+        
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("home_sliders");
 
         $message = 'Slider hass been Added successfully';
         session()->flash('success', 'true');
@@ -130,6 +134,9 @@ class HomeSlidersController extends Controller
         $slider->region = $request->region;
         $slider->save();
 
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("home_sliders");
+
         $message = 'Slider hass been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
@@ -139,6 +146,10 @@ class HomeSlidersController extends Controller
 
     public function destroy($id){
         HomeSlider::where('id',$id)->delete();
+
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("home_sliders");
+
         $message = 'Slider hass been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
@@ -152,6 +163,9 @@ class HomeSlidersController extends Controller
             foreach($request->slider_id as $id){
                 HomeSlider::where('id',$id)->delete();
             }
+            // to clear the cache on abraa.com
+            $this->clearAbraaCache("home_sliders");
+
             $message = 'Sliders hass been Archived successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
