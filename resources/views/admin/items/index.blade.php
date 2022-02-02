@@ -32,7 +32,7 @@
                                             </a>
                                             &nbsp; &nbsp;
                                             <button type="button"
-                                                data-target="#delete_selected_confirm" class="btn btn-danger"> <i
+                                                data-target="#delete_selected_confirm" class="btn btn-danger action_btn"> <i
                                                     class="fa fa-trash"></i> Delete Selected </button>
                                             &nbsp; &nbsp;
                                             <button type="button" data-target="#approve_selected_confirm"
