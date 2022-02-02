@@ -25,6 +25,17 @@ class ItemsRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
+            'user_id' => 'required',
+            'sub_of' => 'required',
+            'phone' => 'required',
+            'deliver_per' => 'required',
+            'active' => 'required',
+            'status' => 'required',
+            'featured' => 'required',
+            'accept_min_offer' => 'required',
+            'sort_order' => 'required',
+            'meta_keyword' => 'required',
+            'meta_description' => 'required'
         ];
     }
 }

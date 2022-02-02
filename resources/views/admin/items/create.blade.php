@@ -24,18 +24,18 @@
                                     <form method="post" action="{{ route('items.store') }}" enctype='multipart/form-data'>
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="title">Item Name</label>
                                                 <input type="text" name="title" class="form-control" id="title">
                                             </div>
-                                            <div class="form-group col-md-6 autocomplete-supplier">
+                                            <div class="form-group col-md-6 required autocomplete-supplier">
                                                 <label for="user_id">Search For User</label>
                                                 <input type="hidden" name="user_id" id="user_id">
                                                 <input type="text" name="search_supplier" class="form-control" id="search_supplier">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="sub_of">Category</label>
                                                 <select name="sub_of" id="sub_of" class="form-control select2">
                                                     <option value=""></option>
@@ -75,7 +75,7 @@
                                                 <label for="youtube_video">Youtube Video</label>
                                                 <input type="string" name="youtube_video" class="form-control" id="youtube_video">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="deliver_per">Deliver Per ?</label>
                                                 <input type="number" name="deliver_per" placeholder="1 = week, 2 = month, 3 = year, 4 = one time" class="form-control" id="deliver_per">
                                             </div>
@@ -110,14 +110,14 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="active">Is Active</label>
                                                 <select name="active" id="active" class="form-control select2">
                                                     <option value="1">Active Item</option>
                                                     <option value="0">Un Active Item</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="status">Item Status</label>
                                                 <select name="status" id="status" class="form-control select2">
                                                     <option value="1">Is Available</option>
@@ -142,7 +142,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="featured">Is Reatured</label>
                                                 <select name="featured" id="featured" class="form-control select2">
                                                     <option value="1">Reatured Item</option>
@@ -158,28 +158,28 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="accept_min_offer">Accept Min Offer</label>
                                                 <input type="number" name="accept_min_offer" class="form-control" id="accept_min_offer">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="sort_order">Sort Order</label>
                                                 <input type="number" name="sort_order" class="form-control" id="sort_order">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="meta_keyword">Meta Keywords</label>
                                                 <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="form-control select2">
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="meta_description">Meta Description</label>
                                                 <textarea name="meta_description" class="form-control" id="meta_description" cols="30" rows="10"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group required col-md-4">
                                                 <label for="phone_count">Phone Count</label>
                                                 <input type="number" name="phone_count" class="form-control" id="phone_count">
                                             </div>

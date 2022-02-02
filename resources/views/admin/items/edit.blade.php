@@ -25,11 +25,11 @@
                                         @csrf 
                                         <input type="hidden" name="item_id" value="{{ $item->id }}">
                                         <div class="form-row mt-4">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6"> 
                                                 <label for="title">Item Name</label>
                                                 <input type="text" value="{{ $item->title }}" name="title" class="form-control" id="title">
                                             </div>
-                                            <div class="form-group col-md-6 autocomplete-supplier">
+                                            <div class="form-group required col-md-6 autocomplete-supplier">
                                                 <label for="user_id">Search For User</label>
                                                 @if($item->supplier)
                                                     <input type="hidden" value="{{ $item->supplier->id }}" name="user_id" id="user_id">
@@ -41,7 +41,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="sub_of">Category</label>
                                                 <select name="sub_of" id="sub_of" class="form-control select2">
                                                     @if($item->category)
@@ -89,7 +89,7 @@
                                                 <label for="youtube_video">Youtube Video</label>
                                                 <input type="string" name="youtube_video" value="{{ $item->youtube_video }}" class="form-control" id="youtube_video">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="deliver_per">Deliver Per ?</label>
                                                 <input type="number" name="deliver_per" value="{{ $item->deliver_per }}" placeholder="1 = week, 2 = month, 3 = year, 4 = one time" class="form-control" id="deliver_per">
                                             </div>
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="active">Is Active</label>
                                                 <select name="active" id="active" class="form-control select2">
                                                     @if($item->active == 1)
@@ -140,7 +140,7 @@
                                                     @endif
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required required col-md-6">
                                                 <label for="status">Item Status</label>
                                                 <select name="status" id="status" class="form-control select2">
                                                     @if($item->status == 1)
@@ -180,7 +180,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="featured">Is Reatured</label>
                                                 <select name="featured" id="featured" class="form-control select2">
                                                     @if($item->featured == 1)
@@ -206,29 +206,29 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="accept_min_offer">Accept Min Offer</label>
                                                 <input type="number" value="{{ $item->accept_min_offer }}" name="accept_min_offer" class="form-control" id="accept_min_offer">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="sort_order">Sort Order</label>
                                                 <input type="number" value="{{ $item->sort_order }}" name="sort_order" class="form-control" id="sort_order">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="meta_keyword">Meta Keywords</label>
                                                 <select name="meta_keyword[]" multiple="multiple" id="meta_keyword" class="form-control select2">
                                                     <option selected value="{{ $item->meta_keyword }}">{{ $item->meta_keyword }}</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="meta_description">Meta Description</label>
                                                 <textarea name="meta_description" class="form-control" id="meta_description" cols="30" rows="10">{{ $item->meta_description }}</textarea>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group required col-md-4">
                                                 <label for="phone_count">Phone Count</label>
                                                 <input type="number" name="phone_count" value="{{ $item->phone_count }}" class="form-control" id="phone_count">
                                             </div>

@@ -288,7 +288,7 @@ class ItemsController extends Controller
         $item->rating = $request->rating;
         $item->currency = $request->currency;
         $item->approved = $request->approved;
-        $item->is_bulk = $request->is_bulk;
+        $item->is_bulk = $request->is_bulk; 
         $item->is_global = $request->is_global;
         $item->is_customized = $request->is_customized;
         $item->is_shipping = $request->is_shipping;
