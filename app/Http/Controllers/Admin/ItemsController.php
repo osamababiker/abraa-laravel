@@ -293,9 +293,6 @@ class ItemsController extends Controller
         $item->is_customized = $request->is_customized;
         $item->is_shipping = $request->is_shipping;
         $item->save();
-        
-        // to clear the cache on abraa.com
-        $this->clearAbraaCache("items");
 
         $message = 'Item hass been Updated successfully';
         session()->flash('success', 'true');
