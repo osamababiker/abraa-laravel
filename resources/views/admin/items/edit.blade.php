@@ -259,7 +259,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="default_image">Item Default Image</label>
-                                                <input type="file" value="{{ $item->default_image }}" name="default_image" class="form-control" id="default_image">
+                                                <input type="file"  name="default_image" class="form-control" id="default_image">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="rating">Item Rating</label>
