@@ -167,7 +167,7 @@ class ItemsController extends Controller
         // to upload default image file
         $default_image = '';
         if($request->has('default_image')){
-            $image = $request->file('logo');
+            $image = $request->file('default_image');
             $image_name = time().'.'.$image->extension();
             $temp_dir = $image->getPathName();
             $default_image = $this->upload_image($image_name, $temp_dir, 'files');
@@ -250,7 +250,7 @@ class ItemsController extends Controller
         // to upload default image
         $default_image = '';
         if($request->has('default_image')){
-            $image = $request->file('logo');
+            $image = $request->file('default_image');
             $image_name = time().'.'.$image->extension();
             $temp_dir = $image->getPathName();
             $default_image = $this->upload_image($image_name, $temp_dir, 'files');
@@ -294,6 +294,8 @@ class ItemsController extends Controller
         $item->is_shipping = $request->is_shipping;
         $item->save();
         
+        // to clear the cache on abraa.com
+        $this->clearAbraaCache("items");
 
         $message = 'Item hass been Updated successfully';
         session()->flash('success', 'true');
