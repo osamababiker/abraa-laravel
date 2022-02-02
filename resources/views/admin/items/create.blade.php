@@ -175,8 +175,7 @@
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="meta_description">Meta Description</label>
-                                                <select name="meta_description"  multiple="multiple"  id="meta_description" class="form-control select2">
-                                                </select>
+                                                <textarea name="meta_description" class="form-control" id="meta_description" cols="30" rows="10"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row">
