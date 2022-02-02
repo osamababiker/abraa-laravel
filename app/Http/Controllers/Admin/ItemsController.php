@@ -165,12 +165,12 @@ class ItemsController extends Controller
 
         // to be changed latter 
         // to upload default image file
-        $default_image_url = '';
+        $default_image = '';
         if($request->has('default_image')){
             $image = $request->file('logo');
             $image_name = time().'.'.$image->extension();
             $temp_dir = $image->getPathName();
-            $default_image_url = $this->upload_image($image_name, $temp_dir, 'files');
+            $default_image = $this->upload_image($image_name, $temp_dir, 'files');
         }
         //uploads/product/682526/pout-case-foundation_58262.jpeg 
 
@@ -248,13 +248,13 @@ class ItemsController extends Controller
             $meta_keyword .= $keyword . ',';
         }
         // to upload default image
-        $default_image_url = '';
+        $default_image = '';
         if($request->has('default_image')){
             $image = $request->file('logo');
             $image_name = time().'.'.$image->extension();
             $temp_dir = $image->getPathName();
-            $default_image_url = $this->upload_image($image_name, $temp_dir, 'files');
-        }else $default_image_url = $item->default_image;
+            $default_image = $this->upload_image($image_name, $temp_dir, 'files');
+        }else $default_image = $item->default_image;
 
         $item->title = $request->title;
         $item->user_id = $request->user_id;
