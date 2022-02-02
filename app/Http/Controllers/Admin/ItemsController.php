@@ -213,6 +213,7 @@ class ItemsController extends Controller
         $item->is_bulk = $request->is_bulk;
         $item->is_global = $request->is_global;
         $item->is_customized = $request->is_customized;
+        $item->is_shipping = $request->is_shipping;
         $item->default_image = $default_image;
         $item->save();
 
@@ -292,6 +293,7 @@ class ItemsController extends Controller
         $item->is_bulk = $request->is_bulk;
         $item->is_global = $request->is_global;
         $item->is_customized = $request->is_customized;
+        $item->is_shipping = $request->is_shipping;
         $item->save();
 
         $message = 'Item hass been Updated successfully';

@@ -235,25 +235,32 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
                                                 <label for="is_bulk">Is Bulk</label>
                                                 <select name="is_bulk" id="is_bulk" class="form-control select2">
                                                     <option value="1">Bulk Item</option>
                                                     <option value="0">Not Bulk Item</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
                                                 <label for="is_global">Is Global</label>
                                                 <select name="is_global" id="is_global" class="form-control select2">
                                                     <option value="1">Global Item</option>
                                                     <option value="0">Not Global Item</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
                                                 <label for="is_customized">Is Customized</label>
                                                 <select name="is_customized" id="is_customized" class="form-control select2">
                                                     <option value="1">Customized Item</option>
                                                     <option value="0">Not Customized Item</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="is_shipping">Is Shipping</label>
+                                                <select name="is_shipping" id="is_shipping" class="form-control select2">
+                                                    <option value="1">Shipping Item</option>
+                                                    <option value="0">Not Shipping Item</option>
                                                 </select>
                                             </div>
                                         </div>
