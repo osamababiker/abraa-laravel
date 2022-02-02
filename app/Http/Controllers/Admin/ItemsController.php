@@ -159,11 +159,6 @@ class ItemsController extends Controller
             $meta_keyword .= $keyword . ',';
         }
 
-        $meta_description = '';
-        foreach($request->meta_description as $description){
-            $meta_description .= $description . ',';
-        }
-
         $lastId = Item::orderBy('id','DESC')->first()->id;
         $slug = substr($request->title,0, 6) . '-' . $lastId + 1;
 
@@ -200,7 +195,7 @@ class ItemsController extends Controller
         $item->accept_min_offer = $request->accept_min_offer;
         $item->sort_order = $request->sort_order;
         $item->part_number = $request->part_number;
-        $item->meta_description = $meta_description;
+        $item->meta_description = $request->meta_description;
         $item->meta_keyword = $meta_keyword;
         $item->phone_count = $request->phone_count;
         $item->email_count = $request->email_count;
@@ -249,10 +244,6 @@ class ItemsController extends Controller
         foreach($request->meta_keyword as $keyword){
             $meta_keyword .= $keyword . ',';
         }
-        $meta_description = '';
-        foreach($request->meta_description as $description){
-            $meta_description .= $description . ',';
-        }
         // to upload default image
         if($request->has('default_image')){
             // to be added later
@@ -280,7 +271,7 @@ class ItemsController extends Controller
         $item->accept_min_offer = $request->accept_min_offer;
         $item->sort_order = $request->sort_order;
         $item->meta_keyword = $meta_keyword;
-        $item->meta_description = $meta_description;
+        $item->meta_description = $request->meta_description;
         $item->phone_count = $request->phone_count;
         $item->email_count = $request->email_count;
         $item->chat_count = $request->chat_count;
