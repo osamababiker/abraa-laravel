@@ -21,6 +21,9 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
+                                    @if($errors->any())
+                                        {!! implode('', $errors->all('<div class="alert alert-danger p-2">:message</div>')) !!}
+                                    @endif
                                     <form method="post" action="{{ route('items.update') }}" enctype='multipart/form-data'>
                                         @csrf 
                                         <input type="hidden" name="item_id" value="{{ $item->id }}">

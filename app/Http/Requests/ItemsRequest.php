@@ -27,7 +27,6 @@ class ItemsRequest extends FormRequest
             'title' => 'required|string',
             'user_id' => 'required',
             'sub_of' => 'required',
-            'phone' => 'required',
             'deliver_per' => 'required',
             'active' => 'required',
             'status' => 'required',
