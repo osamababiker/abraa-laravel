@@ -46,7 +46,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"country_id[]\" value=\""+ country.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"country_id[]\" value=\""+ country.id +"\" ></input> </td>\n" +
                 "<td>"+ country.id +"</td>\n"+
                 "<td>"+ country.co_code +"</td>\n"+
                 "<td>"+ country.ar_name +"</td>\n"+
@@ -128,7 +128,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"country_id[]\" value=\""+ country.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"country_id[]\" value=\""+ country.id +"\" ></input> </td>\n" +
                 "<td>"+ country.id +"</td>\n"+
                 "<td>"+ country.co_code +"</td>\n"+
                 "<td>"+ country.ar_name +"</td>\n"+
@@ -211,7 +211,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"country_id[]\" value=\""+ country.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"country_id[]\" value=\""+ country.id +"\" ></input> </td>\n" +
                 "<td>"+ country.id +"</td>\n"+
                 "<td>"+ country.co_code +"</td>\n"+
                 "<td>"+ country.ar_name +"</td>\n"+

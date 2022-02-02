@@ -59,7 +59,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"adsCategory_id[]\" value=\""+ adsCategory.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"adsCategory_id[]\" value=\""+ adsCategory.id +"\" ></input> </td>\n" +
                 "<td>"+ adsCategory.name +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
                 "<td> <a href=\"\" target=\"_blank\"> ads list <i class=\"fa fa-list\"></i> </a> </td>\n"+
@@ -146,7 +146,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"adsCategory_id[]\" value=\""+ adsCategory.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"adsCategory_id[]\" value=\""+ adsCategory.id +"\" ></input> </td>\n" +
                 "<td>"+ adsCategory.name +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
                 "<td> <a href=\"\" target=\"_blank\"> ads list <i class=\"fa fa-list\"></i> </a> </td>\n"+
@@ -235,7 +235,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"adsCategory_id[]\" value=\""+ adsCategory.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"adsCategory_id[]\" value=\""+ adsCategory.id +"\" ></input> </td>\n" +
                 "<td>"+ adsCategory.name +"</td>\n"+
                 "<td>"+ category +"</td>\n"+
                 "<td> <a href=\"\" target=\"_blank\"> ads list <i class=\"fa fa-list\"></i> </a> </td>\n"+

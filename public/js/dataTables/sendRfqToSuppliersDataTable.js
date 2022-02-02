@@ -43,7 +43,7 @@ $(".filter_data_table").on('change', function () {
 
                 supplier_html = supplier_html +
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"supplier_email[]\" value=\""+ supplier.email +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"supplier_email[]\" value=\""+ supplier.email +"\" ></input> </td>\n" +
                 "<td>\n"+ supplier_store +"</td>\n"+
                 "<td>\n"+ supplier.full_name +"</td>\n"+
                 "<td>"+ supplier.email +"</td>\n"+
@@ -107,7 +107,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 supplier_html = supplier_html +
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"supplier_email[]\" value=\""+ supplier.email +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"supplier_email[]\" value=\""+ supplier.email +"\" ></input> </td>\n" +
                 "<td>\n"+ supplier_store +"</td>\n"+
                 "<td>\n"+ supplier.full_name +"</td>\n"+
                 "<td>"+ supplier.email +"</td>\n"+

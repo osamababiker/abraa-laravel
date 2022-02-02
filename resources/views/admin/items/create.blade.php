@@ -28,14 +28,10 @@
                                                 <label for="title">Item Name</label>
                                                 <input type="text" name="title" class="form-control" id="title">
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="user_id">Select User</label>
-                                                <select name="user_id" id="user_id" class="form-control select2">
-                                                    <option value=""></option>
-                                                    @foreach($suppliers as $supplier) 
-                                                        <option value="{{ $supplier->id }}">{{ $supplier->full_name }}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="form-group col-md-6 autocomplete-supplier">
+                                                <label for="user_id">Search For User</label>
+                                                <input type="hidden" name="user_id" id="user_id">
+                                                <input type="text" name="search_supplier" class="form-control" id="search_supplier">
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -279,5 +275,6 @@
                 @include('admin.layouts.feedback')
             @endif
             @include('admin.layouts.scripts')
+            <script src="{{ asset('js/add_item.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

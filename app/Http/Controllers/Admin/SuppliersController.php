@@ -673,15 +673,12 @@ class SuppliersController extends Controller
     {
         if($request->has('delete_selected_btn')){
             $supplier_id = $request->supplier_id;
-            if($request->all_colums){
-                Supplier::delete();
+            foreach($supplier_id as $id){
+                Supplier::where('id',$id)->delete();
             }
-            elseif($supplier_id){
-                foreach($supplier_id as $id){
-                    Supplier::where('id',$id)->delete();
-                }
-            }
-            $message = 'suppliers has been archived successfully';
+            $message = 'suppliers has been Archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Archived successfully');
             session()->flash('feedback', $message);
             return redirect()->back();
         }

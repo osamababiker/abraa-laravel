@@ -53,7 +53,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"currency_id[]\" value=\""+ currency.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"currency_id[]\" value=\""+ currency.id +"\" ></input> </td>\n" +
                 "<td>"+ currency.id +"</td>\n"+
                 "<td>"+ currency.code +"</td>\n"+
                 "<td>"+ currency.name_ar +"</td>\n"+
@@ -141,7 +141,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"currency_id[]\" value=\""+ currency.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"currency_id[]\" value=\""+ currency.id +"\" ></input> </td>\n" +
                 "<td>"+ currency.id +"</td>\n"+
                 "<td>"+ currency.code +"</td>\n"+
                 "<td>"+ currency.name_ar +"</td>\n"+
@@ -230,7 +230,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"currency_id[]\" value=\""+ currency.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"currency_id[]\" value=\""+ currency.id +"\" ></input> </td>\n" +
                 "<td>"+ currency.id +"</td>\n"+
                 "<td>"+ currency.code +"</td>\n"+
                 "<td>"+ currency.name_ar +"</td>\n"+

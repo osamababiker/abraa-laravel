@@ -944,7 +944,7 @@ Route::group(['middleware' => 'auth'], function (){
     // for import bulk items
     Route::get('items/import/excel/getData',  [
         ItemsController::class, 'getData'
-    ])->name('items.import.excel.getData'); 
+    ])->name('items.import.excel.getData');  
     // custom delete route
     Route::get('items/{id}/destroy', [
         ItemsController::class, 'destroy'
@@ -953,6 +953,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('items/update', [ 
         ItemsController::class, 'update'
     ])->name('items.update');
+    // to get suppliers data for create page
+    Route::get('items/create/getSuppliersData',  [
+        ItemsController::class, 'getSuppliersData'
+    ])->name('items.create.getSuppliersData');  
     // resource route
     Route::resource('items', ItemsController::class, ['except' => ['destroy','update']]);
     

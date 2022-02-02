@@ -51,7 +51,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"file_id[]\" value=\""+ file.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"file_id[]\" value=\""+ file.id +"\" ></input> </td>\n" +
                 "<td>"+ file.id +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
                 "<td> <img src=\""+ file.file_url +"\" style=\"width: 100px; height=100px\"> </td>\n"+
@@ -135,7 +135,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"file_id[]\" value=\""+ file.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"file_id[]\" value=\""+ file.id +"\" ></input> </td>\n" +
                 "<td>"+ file.id +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
                 "<td> <img src=\""+ file.file_url +"\" style=\"width: 100px; height=100px\"> </td>\n"+
@@ -219,7 +219,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"file_id[]\" value=\""+ file.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"file_id[]\" value=\""+ file.id +"\" ></input> </td>\n" +
                 "<td>"+ file.id +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
                 "<td> <img src=\""+ file.file_url +"\" style=\"width: 100px; height=100px\"> </td>\n"+

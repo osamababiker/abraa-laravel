@@ -66,7 +66,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"shipper_id[]\" value=\""+ shipper.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"shipper_id[]\" value=\""+ shipper.id +"\" ></input> </td>\n" +
                 "<td>"+ shipper.id +"</td>\n"+
                 "<td>"+ shipper.full_name +"</td>\n"+
                 "<td>"+ shipper.email +"</td>\n"+
@@ -176,7 +176,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"shipper_id[]\" value=\""+ shipper.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"shipper_id[]\" value=\""+ shipper.id +"\" ></input> </td>\n" +
                 "<td>"+ shipper.id +"</td>\n"+
                 "<td>"+ shipper.full_name +"</td>\n"+
                 "<td>"+ shipper.email +"</td>\n"+
@@ -288,7 +288,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"shipper_id[]\" value=\""+ shipper.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"shipper_id[]\" value=\""+ shipper.id +"\" ></input> </td>\n" +
                 "<td>"+ shipper.id +"</td>\n"+
                 "<td>"+ shipper.full_name +"</td>\n"+
                 "<td>"+ shipper.email +"</td>\n"+

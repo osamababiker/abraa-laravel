@@ -93,10 +93,25 @@
                 </div>
             </main>
 
+            @include('admin.layouts.select_feedback')
+
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
+            <script>
+                $('.action_btn').on('click', function(e){
+                    var target_modal = $(this).attr('data-target');
+                    e.preventDefault();
+                    var checkbox = $('.selected_items');
+                    if(!checkbox.is(":checked")){
+                        $('#not_checked_modal_title').text("Plase Select the Banners First");
+                        $('#not_checked_modal').modal('show');
+                    }else {
+                        $(target_modal).modal('show');
+                    }
+                });
+            </script>
             <script src="{{ asset('js/dataTables/homeBannersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

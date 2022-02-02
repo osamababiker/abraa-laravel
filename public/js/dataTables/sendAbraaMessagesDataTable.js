@@ -41,7 +41,7 @@ $(".filter_data_table").on('change', function () {
 
                 users_html = users_html +
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"user_email[]\" value=\""+ user.email +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"user_email[]\" value=\""+ user.email +"\" ></input> </td>\n" +
                 "<td>\n"+ user_store +"</td>\n"+
                 "<td>\n"+ user.full_name +"</td>\n"+
                 "<td>"+ user.email +"</td>\n"+
@@ -101,7 +101,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 users_html = users_html +
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"user_email[]\" value=\""+ user.email +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"user_email[]\" value=\""+ user.email +"\" ></input> </td>\n" +
                 "<td>\n"+ user_store +"</td>\n"+
                 "<td>\n"+ user.full_name +"</td>\n"+
                 "<td>"+ user.email +"</td>\n"+

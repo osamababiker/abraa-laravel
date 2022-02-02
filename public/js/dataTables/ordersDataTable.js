@@ -81,7 +81,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"order_id[]\" value=\""+ order.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"order_id[]\" value=\""+ order.id +"\" ></input> </td>\n" +
                 "<td>"+ order.id +"</td>\n"+ 
                 "<td>\n"+
                     "<button type=\"button\" onclick=\"approve_order("+ order.id +")\" class=\"btn btn-success\" name=\"approve_single_order_btn\"> <i style=\"color: #fff\"><i class=\"fa fa-check\"></i> </button>\n"+
@@ -218,7 +218,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"order_id[]\" value=\""+ order.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"order_id[]\" value=\""+ order.id +"\" ></input> </td>\n" +
                 "<td>"+ order.id +"</td>\n"+ 
                 "<td>\n"+
                     "<button type=\"button\" onclick=\"approve_order("+ order.id +")\" class=\"btn btn-success\" name=\"approve_single_order_btn\"> <i style=\"color: #fff\"><i class=\"fa fa-check\"></i> </button>\n"+
@@ -355,7 +355,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"order_id[]\" value=\""+ order.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"order_id[]\" value=\""+ order.id +"\" ></input> </td>\n" +
                 "<td>"+ order.id +"</td>\n"+ 
                 "<td>\n"+
                     "<button type=\"button\" onclick=\"approve_order("+ order.id +")\" class=\"btn btn-success\" name=\"approve_single_order_btn\"> <i style=\"color: #fff\"><i class=\"fa fa-check\"></i> </button>\n"+

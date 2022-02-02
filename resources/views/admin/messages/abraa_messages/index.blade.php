@@ -30,8 +30,8 @@
                                         <div class="row">
                                             <a href="{{ route('abraaMessages.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
-                                            <button type="button" data-toggle="modal"
-                                                data-target="#delete_selected_confirm" class="btn btn-danger"> <i
+                                            <button type="button"
+                                                data-target="#delete_selected_confirm" class="btn btn-danger action_btn"> <i
                                                     class="fa fa-trash"></i> Delete Selected </button>
                                             &nbsp; &nbsp;
                                             <div class="dropdown">
@@ -107,9 +107,24 @@
                 </div>
             </main>
 
+            @include('admin.layouts.select_feedback')
+
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
+            <script>
+                $('.action_btn').on('click', function(e){
+                    var target_modal = $(this).attr('data-target');
+                    e.preventDefault();
+                    var checkbox = $('.selected_items');
+                    if(!checkbox.is(":checked")){
+                        $('#not_checked_modal_title').text("Plase Select the Messages First");
+                        $('#not_checked_modal').modal('show');
+                    }else {
+                        $(target_modal).modal('show');
+                    }
+                });
+            </script>
             <script src="{{ asset('js/dataTables/abraaMessagesDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

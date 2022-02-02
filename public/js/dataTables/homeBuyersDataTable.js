@@ -59,7 +59,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buyer_id[]\" value=\""+ buyer.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"buyer_id[]\" value=\""+ buyer.id +"\" ></input> </td>\n" +
                 "<td>"+ buyer.id +"</td>\n"+
                 "<td>"+ buyer.buyername +"</td>\n"+
                 "<td> <img src=\" " + buyer.buyer_logo + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
@@ -155,7 +155,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buyer_id[]\" value=\""+ buyer.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"buyer_id[]\" value=\""+ buyer.id +"\" ></input> </td>\n" +
                 "<td>"+ buyer.id +"</td>\n"+
                 "<td>"+ buyer.buyername +"</td>\n"+
                 "<td> <img src=\" " + buyer.buyer_logo + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
@@ -253,7 +253,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buyer_id[]\" value=\""+ buyer.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"buyer_id[]\" value=\""+ buyer.id +"\" ></input> </td>\n" +
                 "<td>"+ buyer.id +"</td>\n"+
                 "<td>"+ buyer.buyername +"</td>\n"+
                 "<td> <img src=\" " + buyer.buyer_logo + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+

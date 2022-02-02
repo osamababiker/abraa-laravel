@@ -53,7 +53,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"option_id[]\" value=\""+ paymentOption.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"option_id[]\" value=\""+ paymentOption.id +"\" ></input> </td>\n" +
                 "<td>"+ paymentOption.id +"</td>\n"+
                 "<td>"+ paymentOption.type +"</td>\n"+
                 "<td>"+ paymentOption.method +"</td>\n"+
@@ -140,7 +140,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"option_id[]\" value=\""+ paymentOption.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"option_id[]\" value=\""+ paymentOption.id +"\" ></input> </td>\n" +
                 "<td>"+ paymentOption.id +"</td>\n"+
                 "<td>"+ paymentOption.type +"</td>\n"+
                 "<td>"+ paymentOption.method +"</td>\n"+
@@ -227,7 +227,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"option_id[]\" value=\""+ paymentOption.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"option_id[]\" value=\""+ paymentOption.id +"\" ></input> </td>\n" +
                 "<td>"+ paymentOption.id +"</td>\n"+
                 "<td>"+ paymentOption.type +"</td>\n"+
                 "<td>"+ paymentOption.method +"</td>\n"+

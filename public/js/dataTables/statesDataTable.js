@@ -58,7 +58,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"state_id[]\" value=\""+ state.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"state_id[]\" value=\""+ state.id +"\" ></input> </td>\n" +
                 "<td>"+ state.id +"</td>\n"+
                 "<td>"+ state_country +"</td>\n"+
                 "<td>"+ state.ar_name +"</td>\n"+
@@ -154,7 +154,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"state_id[]\" value=\""+ state.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"state_id[]\" value=\""+ state.id +"\" ></input> </td>\n" +
                 "<td>"+ state.id +"</td>\n"+
                 "<td>"+ state_country +"</td>\n"+
                 "<td>"+ state.ar_name +"</td>\n"+
@@ -251,7 +251,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"state_id[]\" value=\""+ state.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"state_id[]\" value=\""+ state.id +"\" ></input> </td>\n" +
                 "<td>"+ state.id +"</td>\n"+
                 "<td>"+ state_country +"</td>\n"+
                 "<td>"+ state.ar_name +"</td>\n"+

@@ -65,7 +65,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"slider_id[]\" value=\""+ slider.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"slider_id[]\" value=\""+ slider.id +"\" ></input> </td>\n" +
                 "<td> <img src=\" " + slider.slider + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
                 "<td> <a href=\""+ slider.link +"\" target=\"_blank\"> "+ slider.link +" </a> </td>\n"+
                 "<td>"+ slider.title +"</td>\n"+
@@ -163,7 +163,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"slider_id[]\" value=\""+ slider.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"slider_id[]\" value=\""+ slider.id +"\" ></input> </td>\n" +
                 "<td> <img src=\" " + slider.slider + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
                 "<td> <a href=\""+ slider.link +"\" target=\"_blank\"> "+ slider.link +" </a> </td>\n"+
                 "<td>"+ slider.title +"</td>\n"+
@@ -263,7 +263,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"slider_id[]\" value=\""+ slider.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"slider_id[]\" value=\""+ slider.id +"\" ></input> </td>\n" +
                 "<td> <img src=\" " + slider.slider + " \" style=\"width: 100px; height: 100px\" /> </td>\n"+
                 "<td> <a href=\""+ slider.link +"\" target=\"_blank\"> "+ slider.link +" </a> </td>\n"+
                 "<td>"+ slider.title +"</td>\n"+

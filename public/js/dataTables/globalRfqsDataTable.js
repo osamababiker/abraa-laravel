@@ -75,7 +75,7 @@ $(document).ready(function () {
 
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\"  name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
                     "<a class=\"btn btn-success\" color=\"color: #fff\" href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
@@ -198,7 +198,7 @@ $(".filter_data_table").on('change', function () {
 
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\"  class=\"selected_items\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
                     "<a class=\"btn btn-success\" color=\"color: #fff\" href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+
@@ -321,7 +321,7 @@ $("#pagination").on('click', 'a', function(e) {
 
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
                 "<td>\n"+ 
                     "<a class=\"btn btn-success\" color=\"color: #fff\" href=\"/globalRfqs/"+ request.id +"/send\" target=\"_blank\">\n"+

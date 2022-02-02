@@ -56,7 +56,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
                 "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
@@ -153,7 +153,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
                 "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn-success\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+
@@ -251,7 +251,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"store_id[]\" value=\""+ store.id +"\" ></input> </td>\n" +
                 "<td>"+ store.id +"</td>\n"+
                 "<td> <button onclick=\"approve_store("+ store.id  +")\" name=\"approve_single_store_btn\" class=\"btn btn\" type=\"button\"> <i class=\"fa fa-check\" style=\"color: #fff\"></i> </button> </td>\n"+
                 "<td>"+ user_email +"</td>\n"+

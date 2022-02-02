@@ -46,7 +46,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
                 "<td>"+ page.id +"</td>\n"+
                 "<td>"+ page.sub_of +"</td>\n"+
                 "<td>"+ page.ar_title +"</td>\n"+
@@ -129,7 +129,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
                 "<td>"+ page.id +"</td>\n"+
                 "<td>"+ page.sub_of +"</td>\n"+
                 "<td>"+ page.ar_title +"</td>\n"+
@@ -213,7 +213,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"page_id[]\" value=\""+ page.id +"\" ></input> </td>\n" +
                 "<td>"+ page.id +"</td>\n"+
                 "<td>"+ page.sub_of +"</td>\n"+
                 "<td>"+ page.ar_title +"</td>\n"+

@@ -46,7 +46,7 @@ $(document).ready(function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"config_id[]\" value=\""+ config.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"config_id[]\" value=\""+ config.id +"\" ></input> </td>\n" +
                 "<td>"+ config.id +"</td>\n"+
                 "<td>"+ config.config_name +"</td>\n"+
                 "<td>"+ config.config_value +"</td>\n"+
@@ -126,7 +126,7 @@ $(".filter_data_table").on('change', function () {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"config_id[]\" value=\""+ config.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"config_id[]\" value=\""+ config.id +"\" ></input> </td>\n" +
                 "<td>"+ config.id +"</td>\n"+
                 "<td>"+ config.config_name +"</td>\n"+
                 "<td>"+ config.config_value +"</td>\n"+
@@ -207,7 +207,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "</div>\n"+
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"config_id[]\" value=\""+ config.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"config_id[]\" value=\""+ config.id +"\" ></input> </td>\n" +
                 "<td>"+ config.id +"</td>\n"+
                 "<td>"+ config.config_name +"</td>\n"+
                 "<td>"+ config.config_value +"</td>\n"+

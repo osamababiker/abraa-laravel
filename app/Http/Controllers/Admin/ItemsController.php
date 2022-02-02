@@ -41,7 +41,7 @@ class ItemsController extends Controller
             'pagination' => (string) $items->links('pagination::bootstrap-4'),
             'items_count' => $items_count 
         ]);
-    }
+    } 
 
     public function filterItems(Request $request){
         $product_name = $request->product_name;
@@ -126,17 +126,29 @@ class ItemsController extends Controller
         ]);
     }
 
-    
+    // to get suppliers for create items
+    public function getSuppliersData(Request $request){
+        $results = Supplier::where('full_name', 'like', '%'. $request->term . '%')
+        ->get();
+        $i = 0;
+        foreach ($results as $r) {
+            $suppliers[$i]['id'] = $r['id'];
+            $suppliers[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['full_name']));
+            $suppliers[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['full_name']));
+            $i++;
+        }
+        echo json_encode($suppliers);
+    }
+
     public function create(){
         $categories = Category::all();
-        $countries = Country::all();
-        $suppliers = Supplier::all();
+        $countries = Country::all(); 
         $units = Unit::all();
         $states = State::all();
         $paymentOptions = PaymentOption::all();
         $currencies = Currency::all();
         return view('admin.items.create', compact(
-            ['categories','suppliers','units','states','countries','paymentOptions','currencies']
+            ['categories','units','states','countries','paymentOptions','currencies']
         ));
     }
 
@@ -221,14 +233,13 @@ class ItemsController extends Controller
         $item = Item::find($id);
         $categories = Category::all();
         $countries = Country::all();
-        $suppliers = Supplier::all();
         $units = Unit::all();
         $states = State::all();
         $paymentOptions = PaymentOption::all();
         $currencies = Currency::all();
         return view('admin.items.edit', compact(
             ['item', 'categories', 'countries', 
-            'suppliers', 'units', 'states', 'paymentOptions', 'currencies']
+            'units', 'states', 'paymentOptions', 'currencies']
         ));
     }
 

@@ -231,7 +231,7 @@ class RfqsController extends Controller
                 $product_link = config('global.public_url') . 'new-dashboard-buyer/buying-requests/' . $rfq->id;
                 $subject = AdminEmail::find(25)->subject;
                 $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
-                $email_templete = $this->getEmailTemplete($email_content);
+                $email_templete = $this->getEmailTemplete($email_content); 
                 $this->sendEmail($email_templete, $buyer_email, $subject);
                 
 

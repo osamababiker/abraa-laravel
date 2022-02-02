@@ -79,7 +79,7 @@ $(document).ready(function () {
              "</div>\n"+ 
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"verification_id[]\" value=\""+ verification.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"verification_id[]\" value=\""+ verification.id +"\" ></input> </td>\n" +
                 "<td>"+ verification.id +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
                 "<td>"+ verification.document_uploaded +"</td>\n"+
@@ -101,7 +101,7 @@ $(document).ready(function () {
                     "</a>\n"+
                 "</td>\n"+
                 "</tr>\n"
-            });
+            }); 
 
             $("#verifications_table_body").html(verifications_html);
 
@@ -196,7 +196,7 @@ $(".filter_data_table").on('change', function () {
              "</div>\n"+ 
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"verification_id[]\" value=\""+ verification.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"verification_id[]\" value=\""+ verification.id +"\" ></input> </td>\n" +
                 "<td>"+ verification.id +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
                 "<td>"+ verification.document_uploaded +"</td>\n"+
@@ -314,7 +314,7 @@ $("#pagination").on('click', 'a', function(e) {
              "</div>\n"+ 
 
                 "<tr>\n"+
-                "<td> <input type=\"checkbox\" name=\"verification_id[]\" value=\""+ verification.id +"\" ></input> </td>\n" +
+                "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"verification_id[]\" value=\""+ verification.id +"\" ></input> </td>\n" +
                 "<td>"+ verification.id +"</td>\n"+
                 "<td>"+ supplier_name +"</td>\n"+
                 "<td>"+ verification.document_uploaded +"</td>\n"+
