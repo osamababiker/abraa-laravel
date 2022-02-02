@@ -31,7 +31,7 @@
                                             <a href="{{ route('items.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New
                                             </a>
                                             &nbsp; &nbsp;
-                                            <button type="button" data-toggle="modal"
+                                            <button type="button"
                                                 data-target="#delete_selected_confirm" class="btn btn-danger"> <i
                                                     class="fa fa-trash"></i> Delete Selected </button>
                                             &nbsp; &nbsp;

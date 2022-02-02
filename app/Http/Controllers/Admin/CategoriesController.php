@@ -15,7 +15,7 @@ use App\Http\Traits\FilesUploadTrait;
 
 class CategoriesController extends Controller
 {
-    use FilesUploadTrait ;
+    use FilesUploadTrait ; 
 
     public function index(){
         $countries = Country::all();
