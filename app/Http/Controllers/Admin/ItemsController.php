@@ -241,15 +241,21 @@ class ItemsController extends Controller
     }
 
     public function update(ItemsRequest $request){
+        $item = Item::findOrFail($request->item_id);
+
         $meta_keyword = '';
         foreach($request->meta_keyword as $keyword){
             $meta_keyword .= $keyword . ',';
         }
         // to upload default image
+        $default_image_url = '';
         if($request->has('default_image')){
-            // to be added later
-        }
-        $item = Item::find($request->item_id);
+            $image = $request->file('logo');
+            $image_name = time().'.'.$image->extension();
+            $temp_dir = $image->getPathName();
+            $default_image_url = $this->upload_image($image_name, $temp_dir, 'files');
+        }else $default_image_url = $item->default_image;
+
         $item->title = $request->title;
         $item->user_id = $request->user_id;
         $item->sub_of = $request->sub_of;
