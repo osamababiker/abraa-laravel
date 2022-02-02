@@ -21,7 +21,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form method="post" action="{{ route('items.update') }}">
+                                    <form method="post" action="{{ route('items.update') }}" enctype='multipart/form-data'>
                                         @csrf 
                                         <input type="hidden" name="item_id" value="{{ $item->id }}">
                                         <div class="form-row mt-4">
