@@ -25,11 +25,13 @@
                                         @csrf 
                                         <input type="hidden" name="banner_id" id="banner_id" value="{{ $banner->id }}">
                                         <div class="form-row mt-4">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="file-drop-area"> 
                                                     <span class="choose-file-button">Choose banner Image</span> 
                                                     <input type="file"  name="slider" id="banner-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div id="banner_preview"></div>
                                             </div>
                                         </div>

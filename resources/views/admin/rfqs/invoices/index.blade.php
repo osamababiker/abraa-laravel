@@ -143,6 +143,7 @@
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')
+
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script>
                 $('.action_btn').on('click', function(e){
