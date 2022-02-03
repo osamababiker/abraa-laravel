@@ -295,6 +295,9 @@ class ItemsController extends Controller
         $item->elasticsearch_sync = null;
         $item->save();
 
+        // to clear the cache on abraa
+        $this->ClearCacheTrait("items");
+
         $message = 'Item hass been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
