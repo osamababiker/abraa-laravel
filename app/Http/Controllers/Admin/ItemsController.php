@@ -296,7 +296,7 @@ class ItemsController extends Controller
         $item->save();
 
         // to clear the cache on abraa
-        $this->ClearCacheTrait("items");
+        $this->clearAbraaCache("items");
 
         $message = 'Item hass been Updated successfully';
         session()->flash('success', 'true');
