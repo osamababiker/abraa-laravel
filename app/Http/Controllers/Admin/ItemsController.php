@@ -213,6 +213,9 @@ class ItemsController extends Controller
         $item->default_image = $default_image;
         $item->save();
 
+        // to clear the cache on abraa
+        $this->clearAbraaCache("items");
+
         $message = 'Item hass been Saved successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');

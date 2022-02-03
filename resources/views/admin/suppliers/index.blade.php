@@ -34,7 +34,7 @@
                                             &nbsp; &nbsp;
                                             <button type="button" data-target="#delete_selected_confirm" class="btn btn-danger action_btn"> <i
                                                     class="fa fa-trash"></i> Archive Selected </button>
-                                            &nbsp; &nbsp;
+                                            &nbsp; &nbsp; 
                                             <button type="button" data-target="#send_emails_to_selected" class="btn btn-info action_btn"> <i
                                                     class="fa fa-envelope"></i> Send Email </button>
                                             &nbsp; &nbsp;
@@ -156,7 +156,7 @@
 
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
-            <script>
+            <script type="text/javascript">
                 $('.action_btn').on('click', function(e){
                     var target_modal = $(this).attr('data-target');
                     e.preventDefault();
@@ -169,6 +169,7 @@
                     }
                 });
             </script>
+            <script type="text/javascript" src="{{ asset('js/send_message_to_suppliers.js') }}"></script>
             <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

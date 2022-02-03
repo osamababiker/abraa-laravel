@@ -12,10 +12,10 @@ use App\Models\BuyerMessage;
 use App\Models\SupplierBuyingRequest;
 use App\Models\SupplierFile;
 use App\Models\RfqInvoice;
-use App\Models\SupplierVerification;
+use App\Models\SupplierVerification; 
 use App\Exports\SuppliersExport;
 use App\Imports\SuppliersImport;
-use App\Exports\SupplierItemsExport;
+use App\Exports\SupplierItemsExport; 
 use App\Imports\SupplierItemsImport;
 use App\Exports\SupplierStoresExport;
 use App\Imports\SupplierStoresImport;
@@ -683,17 +683,20 @@ class SuppliersController extends Controller
             return redirect()->back();
         }
 
-        if($request->has('send_message_btn')){
-            $suppliers_ids = $request->suppliers_ids;
+        if($request->has('send_message_to_suppliers')){
+            $suppliers_id = $request->suppliers_id;
             $subject = $request->subject;
-            $message = $request->message;
-            foreach($suppliers_ids as $supplier_id){
-                $supplier = Supplier::find($supplier_id);
+            $message = $request->email_content;
+            foreach($suppliers_id as $supplier_id){
+                $supplier = Supplier::findOrFail($supplier_id);
                 $email_content = $this->send_custom_email_to_suppliers($supplier, $message);
                 $email_templete = $this->getEmailTemplete($email_content);
                 $this->sendEmail($email_templete, $supplier->email, $subject);
             }
-
+            $message = 'Emails has been Send To Suppliers successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Emails Send successfully');
+            session()->flash('feedback', $message);
             return response()->json([
                 'message' => 'Email has been send successfuly'
             ],200);

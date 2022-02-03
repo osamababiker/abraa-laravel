@@ -9,12 +9,12 @@
             </div> 
             <div class="modal-body m-3">
                 <div class="form-group">
-                    <label for="subject"> Email Subject </label>
+                    <label for="subject"> Email Subject </label> 
                     <input type="text" name="subject" class="form-control" id="subject">
                 </div>
                 <div class="form-group clearfix">
                     <label for="subject"> Email Content </label>
-                    <div id="quill-toolbar">
+                    <div id="email-toolbar">
                         <span class="ql-formats">
                             <select class="ql-font"></select>
                             <select class="ql-size"></select>
@@ -58,12 +58,12 @@
                             <button class="ql-clean"></button>
                         </span>
                     </div>
-                    <div class="quill-editor"></div>
+                    <div id="email-editor"></div>
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="send_message_btn" name="send_message_btn" form="suppliers_actions_form"
+                <button type="button" id="send_email_btn" name="send_email_btn" 
                     class="btn btn-success">Send Email</button>
             </div>
         </div>

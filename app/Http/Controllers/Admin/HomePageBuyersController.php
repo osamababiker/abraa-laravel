@@ -11,7 +11,9 @@ use App\Http\Traits\FilesUploadTrait;
 use App\Exports\HomePageBuyerExport;
 use App\Imports\HomePageBuyerImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Traits\ClearCacheTrait; 
 use Illuminate\Pagination\Paginator;
+
 
 class HomePageBuyersController extends Controller
 {
@@ -86,6 +88,9 @@ class HomePageBuyersController extends Controller
         $buyer->added_by = Auth::user()->id;
         $buyer->save();
 
+        // to clear the cache on abraa
+        $this->clearAbraaCache("homepage_buyers");
+
         $message = 'buyer hass been Added successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Added successfully');
@@ -124,6 +129,9 @@ class HomePageBuyersController extends Controller
         $buyer->added_by = Auth::user()->id;
         $buyer->save();
 
+        // to clear the cache on abraa
+        $this->clearAbraaCache("homepage_buyers");
+
         $message = 'buyer hass been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
@@ -133,6 +141,9 @@ class HomePageBuyersController extends Controller
 
     public function destroy($id){
         HomePageBuyer::where('id',$id)->delete();
+        // to clear the cache on abraa
+        $this->clearAbraaCache("homepage_buyers");
+        
         $message = 'buyer hass been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');

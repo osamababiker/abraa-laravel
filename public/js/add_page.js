@@ -1,9 +1,10 @@
+var ar_editor , en_editor, cn_editor, ru_editor, tr_editor, pr_editor; 
 
 document.addEventListener("DOMContentLoaded", function() {
     if (!window.Quill) {
         return $("#ar-editor,#ar-toolbar,#en-editor,#en-toolbar,#cn-editor,#cn-toolbar,#ru-editor,#ru-toolbar,#tr-editor,#tr-toolbar,#pr-editor,#pr-toolbar").remove();
     }
-    var ar_editor = new Quill("#ar-editor", { 
+    ar_editor = new Quill("#ar-editor", { 
         modules: {
             toolbar: "#ar-toolbar"
         },
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: "snow"
     });
 
-    var en_editor = new Quill("#en-editor", { 
+    en_editor = new Quill("#en-editor", { 
         modules: {
             toolbar: "#en-toolbar"
         },
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: "snow"
     });
 
-    var cn_editor = new Quill("#cn-editor", { 
+    cn_editor = new Quill("#cn-editor", { 
         modules: {
             toolbar: "#cn-toolbar"
         },
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: "snow"
     });
 
-    var ru_editor = new Quill("#ru-editor", { 
+    ru_editor = new Quill("#ru-editor", { 
         modules: {
             toolbar: "#ru-toolbar"
         },
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: "snow"
     });
 
-    var tr_editor = new Quill("#tr-editor", { 
+    tr_editor = new Quill("#tr-editor", { 
         modules: {
             toolbar: "#tr-toolbar"
         },
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         theme: "snow"
     });
 
-    var pr_editor = new Quill("#pr-editor", { 
+    pr_editor = new Quill("#pr-editor", { 
         modules: {
             toolbar: "#pr-toolbar"
         },
@@ -73,12 +74,12 @@ $("#add_page_btn").on('click', function() {
     var sort_id = $("#sort_id").val();
     var meta_description = $("#meta_description").val();
     var meta_keyword = $("#meta_keyword").val();
-    var ar_content = $("#ar-editor").html();
-    var en_content = $("#en-editor").html();
-    var cn_content = $("#cn-editor").html();
-    var ru_content = $("#ru-editor").html();
-    var tr_content = $("#tr-editor").html();
-    var pr_content = $("#pr-editor").html();
+    var ar_content = ar_editor.root.innerHTML;
+    var en_content = en_editor.root.innerHTML;
+    var cn_content = cn_editor.root.innerHTML;
+    var ru_content = ru_editor.root.innerHTML;
+    var tr_content = tr_editor.root.innerHTML;
+    var pr_content = pr_editor.root.innerHTML;
     
     var url = $("#add_page_form").attr('action');
 

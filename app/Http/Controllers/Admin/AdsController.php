@@ -13,11 +13,12 @@ use App\Exports\AdsExport;
 use App\Imports\AdsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\FilesUploadTrait;
-use Illuminate\Pagination\Paginator;
+use App\Http\Traits\ClearCacheTrait; 
+use Illuminate\Pagination\Paginator; 
 
 class AdsController extends Controller
 {
-    use FilesUploadTrait ;
+    use FilesUploadTrait , ClearCacheTrait;
 
     public function index(){
         $adsCategories = AdsCategory::all();
@@ -110,6 +111,9 @@ class AdsController extends Controller
         $ads->clicks = 0;
         $ads->save();
 
+        // to clear the cache on abraa
+        $this->clearAbraaCache("ads");
+
         $message = 'Ads hass been Added successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
@@ -160,6 +164,9 @@ class AdsController extends Controller
         $ads->updated_by = Auth::user()->id;
         $ads->save();
 
+        // to clear the cache on abraa
+        $this->clearAbraaCache("ads");
+        
         $message = 'Ads hass been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
