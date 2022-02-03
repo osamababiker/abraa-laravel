@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ItemsController;
+use App\Http\Controllers\Admin\ItemsFilesController;
 use App\Http\Controllers\Admin\SuppliersController;
 use App\Http\Controllers\Admin\ShippersController;
 use App\Http\Controllers\Admin\ShippingController;
@@ -959,6 +960,46 @@ Route::group(['middleware' => 'auth'], function (){
     ])->name('items.create.getSuppliersData');  
     // resource route
     Route::resource('items', ItemsController::class, ['except' => ['destroy','update']]);
+    
+
+    // ======================= Items Files Routes ====================== //
+    // table actions route
+    Route::post('itemsFiles/actions', 
+        [ItemsFilesController::class , 'actions']
+    )->name('itemsFiles.actions');
+    // get itemsFiles as json route 
+    Route::get('itemsFiles/json', [
+        ItemsFilesController::class, 'getItemsFilesAsJson'
+    ])->name('itemsFiles.json');
+    // filter items  route 
+    Route::post('itemsFiles/filter', [
+        ItemsFilesController::class, 'filterItemsFiles'
+    ])->name('itemsFiles.filter');
+    // to import & export excel 
+    Route::get('itemsFiles/export/excel', [
+        ItemsFilesController::class, 'exportExcel'
+    ])->name('itemsFiles.export.excel');
+    Route::post('itemsFiles/import/excel', [
+        ItemsFilesController::class, 'importExcel'
+    ])->name('itemsFiles.import.excel');
+    // to get import view
+    Route::get('itemsFiles/import/excel',  [
+        ItemsFilesController::class, 'importView'
+    ])->name('itemsFiles.import.excel'); 
+    // custom delete route
+    Route::get('itemsFiles/{id}/destroy', [
+        ItemsFilesController::class, 'destroy'
+    ]);
+    // custom update route 
+    Route::post('itemsFiles/update', [ 
+        ItemsFilesController::class, 'update'
+    ])->name('itemsFiles.update');
+    // to get suppliers data for create page
+    Route::get('itemsFiles/getItemsData',  [
+        ItemsFilesController::class, 'getItemsData'
+    ])->name('itemsFiles.getItemsData');  
+    // resource route
+    Route::resource('itemsFiles', ItemsFilesController::class, ['except' => ['destroy','update']]);
     
 
     // ======================= orders Routes ====================== //

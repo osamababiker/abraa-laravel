@@ -11,7 +11,7 @@ use App\Http\Requests\SlidersRequest;
 use App\Http\Traits\FilesUploadTrait; 
 use App\Http\Traits\ClearCacheTrait; 
 use App\Exports\HomeSliderExport;
-use App\Imports\HomeSliderImport;
+use App\Imports\HomeSliderImport; 
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Pagination\Paginator;
 
@@ -94,7 +94,7 @@ class HomeSlidersController extends Controller
         // to clear the cache on abraa.com
         $this->clearAbraaCache("home_sliders");
 
-        $message = 'Slider hass been Added successfully';
+        $message = 'Slider has been Added successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
@@ -137,7 +137,7 @@ class HomeSlidersController extends Controller
         // to clear the cache on abraa.com
         $this->clearAbraaCache("home_sliders");
 
-        $message = 'Slider hass been Updated successfully';
+        $message = 'Slider has been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
@@ -150,7 +150,7 @@ class HomeSlidersController extends Controller
         // to clear the cache on abraa.com
         $this->clearAbraaCache("home_sliders");
 
-        $message = 'Slider hass been Archived successfully';
+        $message = 'Slider has been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Success');
         session()->flash('feedback', $message);
@@ -166,7 +166,7 @@ class HomeSlidersController extends Controller
             // to clear the cache on abraa.com
             $this->clearAbraaCache("home_sliders");
 
-            $message = 'Sliders hass been Archived successfully';
+            $message = 'Sliders has been Archived successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);

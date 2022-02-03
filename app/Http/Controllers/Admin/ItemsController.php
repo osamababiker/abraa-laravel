@@ -172,7 +172,7 @@ class ItemsController extends Controller
             $temp_dir = $image->getPathName();
             $default_image = $this->upload_image($image_name, $temp_dir, 'files');
         }
-        //uploads/product/682526/pout-case-foundation_58262.jpeg 
+        //uploads/product/682526/pout-case-foundation_58262.jpeg    
 
         $item = new Item();
         $item->title = $request->title;
@@ -223,6 +223,7 @@ class ItemsController extends Controller
         return redirect()->back();
 
     }
+
 
     public function show($id){
         $item = Item::findOrFail($id);

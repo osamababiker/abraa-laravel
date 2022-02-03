@@ -101,6 +101,7 @@
                 </a>
                 <ul id="products" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.index') }}">All Items</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('itemsFiles.index') }}">Items Files</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('items.import.excel') }}">Import Items</a></li>
                 </ul>
             </li>
