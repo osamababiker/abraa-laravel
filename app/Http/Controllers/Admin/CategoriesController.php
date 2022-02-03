@@ -12,11 +12,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Pagination\Paginator;
 use App\Http\Traits\FilesUploadTrait;
 
-
+ 
 class CategoriesController extends Controller
 {
     use FilesUploadTrait ; 
-
+ 
     public function index(){
         $countries = Country::all();
         return view('admin.categories.index',compact(['countries']));

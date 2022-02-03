@@ -292,6 +292,7 @@ class ItemsController extends Controller
         $item->is_global = $request->is_global;
         $item->is_customized = $request->is_customized;
         $item->is_shipping = $request->is_shipping;
+        $item->elasticsearch_sync = null;
         $item->save();
 
         $message = 'Item hass been Updated successfully';
