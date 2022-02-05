@@ -234,14 +234,16 @@ class RfqsController extends Controller
                 $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
                 $email_templete = $this->getEmailTemplete($email_content); 
                 $this->sendEmail($email_templete, $buyer_email, $subject);
-                
-
-                $message = 'buying requests hass been approved successfully';
-                session()->flash('success', 'true');
-                session()->flash('feedback_title', 'Success'); 
-                session()->flash('feedback', $message);
-                return redirect()->back();
             }
+
+             // to clear the cache on abraa
+             $this->clearAbraaCache("buying_requests");
+
+             $message = 'buying requests hass been approved successfully';
+             session()->flash('success', 'true');
+             session()->flash('feedback_title', 'Success'); 
+             session()->flash('feedback', $message);
+             return redirect()->back();
         }
 
         // to delete (archived) selected
