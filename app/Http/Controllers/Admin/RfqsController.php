@@ -237,7 +237,7 @@ class RfqsController extends Controller
 
                 $message = 'buying requests hass been approved successfully';
                 session()->flash('success', 'true');
-                session()->flash('feedback_title', 'Success');
+                session()->flash('feedback_title', 'Success'); 
                 session()->flash('feedback', $message);
                 return redirect()->back();
             }
@@ -259,32 +259,46 @@ class RfqsController extends Controller
 
     // to get suppliers details to approve
     public function getSuppliersDetails(Request $request){
-        $results = Category::where('en_title', 'like', '%'. $request->term . '%')
-            ->orWhere('ar_title', 'like', '%'. $request->term . '%')
-            ->orWhere('ar_title', 'like', '%'. $request->term . '%')
-            ->orWhere('cn_title', 'like', '%'. $request->term . '%')
-            ->orWhere('ru_title', 'like', '%'. $request->term . '%')
-            ->orWhere('tr_title', 'like', '%'. $request->term . '%')
-            ->orWhere('pr_title', 'like', '%'. $request->term . '%')->get();
-        $i = 0;
-        foreach ($results as $r) {
-            $categories[$i]['id'] = $r['id'];
-            $categories[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
-            $categories[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
-            $i++;
+        if($request->is_category){
+            $results = Category::where('en_title', 'like', '%'. $request->term . '%')
+                ->orWhere('ar_title', 'like', '%'. $request->term . '%')
+                ->orWhere('ar_title', 'like', '%'. $request->term . '%')
+                ->orWhere('cn_title', 'like', '%'. $request->term . '%')
+                ->orWhere('ru_title', 'like', '%'. $request->term . '%')
+                ->orWhere('tr_title', 'like', '%'. $request->term . '%')
+                ->orWhere('pr_title', 'like', '%'. $request->term . '%')->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $categories[$i]['id'] = $r['id'];
+                $categories[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
+                $categories[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['en_title']));
+                $i++;
+            }
+            echo json_encode($categories);
         }
-        echo json_encode($categories);
+        if($request->is_product){
+            $results = Item::where('title', 'like', '%'. $request->term . '%')
+            ->get();
+            $i = 0;
+            foreach ($results as $r) {
+                $products[$i]['id'] = $r['id'];
+                $products[$i]['value'] = str_replace("&#39;s", " ", html_entity_decode($r['title']));
+                $products[$i]['label'] = str_replace("&#39;s", " ", html_entity_decode($r['title']));
+                $i++;
+            }
+            echo json_encode($products);
+        }
     } 
 
     // to approve single rfq
     public function approve(Request $request){
-
         // to update rfq info
         $rfq = Rfq::find($request->rfq_id);
         $rfq->status = 2;
         $rfq->product_name = $request->rfq_name;
         $rfq->product_detail = $request->rfq_details;
         $rfq->category_id = $request->category_id;
+        $rfq->item_id = $request->product_id;
         $rfq->save();
 
         // to update buyer info

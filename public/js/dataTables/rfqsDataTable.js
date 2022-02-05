@@ -94,7 +94,7 @@ $(document).ready(function () {
                                     "<label for=\"category_search\">Suppliers by Category</label>\n"+
                                     "<input type=\"text\" name=\"category_search\" class=\"form-control category_search\" id=\"category_search_"+ request.id +"\">\n"+
                                 "</div>\n"+
-                                "<div class=\"form-group col-md-12\">\n"+
+                                "<div class=\"form-group col-md-12 autocomplete-product\">\n"+
                                     "<label for=\"product_search\">Suppliers by Products</label>\n"+
                                     "<input type=\"text\" name=\"product_search\" class=\"form-control product_search\" id=\"product_search_"+ request.id +"\">\n"+
                                 "</div>\n"+
@@ -278,7 +278,7 @@ $(".filter_data_table").on('change input', function () {
                                     "<label for=\"category_search\">Suppliers by Category</label>\n"+
                                     "<input type=\"text\" name=\"category_search\" class=\"form-control category_search\" id=\"category_search_"+ request.id +"\">\n"+
                                 "</div>\n"+
-                                "<div class=\"form-group col-md-12\">\n"+
+                                "<div class=\"form-group col-md-12 autocomplete-product\">\n"+
                                     "<label for=\"product_search\">Suppliers by Products</label>\n"+
                                     "<input type=\"text\" name=\"product_search\" class=\"form-control product_search\" id=\"product_search_"+ request.id +"\">\n"+
                                 "</div>\n"+
@@ -466,7 +466,7 @@ $("#pagination").on('click', 'a', function(e) {
                                     "<label for=\"category_search\">Suppliers by Category</label>\n"+
                                     "<input type=\"text\" name=\"category_search\" class=\"form-control category_search\" id=\"category_search_"+ request.id +"\">\n"+
                                 "</div>\n"+
-                                "<div class=\"form-group col-md-12\">\n"+
+                                "<div class=\"form-group col-md-12 autocomplete-product\">\n"+
                                     "<label for=\"product_search\">Suppliers by Products</label>\n"+
                                     "<input type=\"text\" name=\"product_search\" class=\"form-control product_search\" id=\"product_search_"+ request.id +"\">\n"+
                                 "</div>\n"+
@@ -553,6 +553,7 @@ $("#pagination").on('click', 'a', function(e) {
 
 
 window.global_category = 0;
+window.global_product = 0;
 
 // to get suppliers details to approve rfq
 $(function(){ 
@@ -560,10 +561,11 @@ $(function(){
         $(".category_search").autocomplete({
             minLength: 1,
             source: function (request, response) {
+                is_category = true;
                 $.ajax({
                     url: "/rfqs/approve/getSuppliersDetails",
                     dataType: "json",
-                    data: {term: request.term},
+                    data: {term: request.term, is_category: is_category},
                     success: function (data) {
                         response($.map(data, function (item) {
                             return {
@@ -577,22 +579,21 @@ $(function(){
             },
             select: function (event, ui) {
                 global_category = ui.item.id;
-                $('.product_search').attr('disabled', true);
-
             }
         });
 
         $(".category_search").autocomplete("option", "appendTo", ".autocomplete-category");
+    });
 
+    $("#buying_requests_table_body").on('click', '.product_search', function() {
         $(".product_search").autocomplete({
             minLength: 1,
             source: function (request, response) {
-                var is_description = $('#is_description').is(':checked');
-
+                var is_product = true;
                 $.ajax({
-                    url: "<?php {{ route('rfqs.getSuppliersDetails') }} ?>",
+                    url: "/rfqs/approve/getSuppliersDetails",
                     dataType: "json",
-                    data: {term: request.term, is_description: is_description},
+                    data: {term: request.term, is_product: is_product},
                     success: function (data) {
                         response($.map(data, function (item) {
                             return {
@@ -605,22 +606,7 @@ $(function(){
                 });
             },
             select: function (event, ui) {
-                $.ajax({
-                    url: "<?php {{ route('rfqs.getSuppliersDetails') }} ?>",
-                    data: {product_id: ui.item.id},
-                    success: function (data) {
-                        if (data != 0) {
-                            global_category = data;
-                            $('.category_search').attr('disabled', true);
-                        } else {
-                            swal("No category associated with the product.");
-                        }
-                    },
-                    error: function (xhr, textStatus, error) {
-                        swal("Something went wrong. If problem persist, contact administrator.");
-                        //swal(xhr.statusText);
-                    }
-                });
+                global_product = ui.item.id;
             }
         });
         $(".product_search").autocomplete("option", "appendTo", ".autocomplete-product");
@@ -652,6 +638,7 @@ $(function(){
                 "buyer_email": buyer_email,
                 "buyer_keywords": buyer_keywords,
                 "category_id": global_category,
+                "product_id": global_product,
                 "rfq_name": rfq_name,
                 "rfq_details": rfq_details,
                 "rfq_id": rfq_id
