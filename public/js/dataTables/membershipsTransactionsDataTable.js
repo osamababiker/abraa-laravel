@@ -92,7 +92,7 @@ $(document).ready(function () {
 
 // ==============================================================//
 // to handel filteration 
-$(".filter_data_table").on('change', function () {
+$(".filter_data_table").on('change input', function () {
 
     $("#ajax_loader").css('display', 'block');
 

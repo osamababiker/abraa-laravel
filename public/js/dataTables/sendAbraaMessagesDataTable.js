@@ -1,7 +1,7 @@
 window.current_page = 1; 
 // ==============================================================//
 // when the page is load 
-$(".filter_data_table").on('change', function () {
+$(".filter_data_table").on('change input', function () {
 
     $("#ajax_loader").css('display', 'block');
 
