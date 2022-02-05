@@ -168,6 +168,14 @@
                         $(target_modal).modal('show');
                     }
                 });
+                $("form").submit(function(e){
+                    var checkbox = $('.selected_items');
+                    if(!checkbox.is(":checked")){
+                        e.preventDefault();
+                        $('#not_checked_modal_title').text("Plase Select the Suppliers First");
+                        $('#not_checked_modal').modal('show');
+                    }
+                });
             </script>
             <script type="text/javascript" src="{{ asset('js/send_message_to_suppliers.js') }}"></script>
             <script src="{{ asset('js/dataTables/suppliersDataTable.js') }}"></script>

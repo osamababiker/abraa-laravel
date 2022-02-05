@@ -118,6 +118,29 @@
             @include('admin.layouts.scripts')
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
             <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
+              
+            @include('admin.layouts.select_feedback')
+            <script>
+                $('.action_btn').on('click', function(e){
+                    var target_modal = $(this).attr('data-target');
+                    e.preventDefault();
+                    var checkbox = $('.selected_items');
+                    if(!checkbox.is(":checked")){
+                        $('#not_checked_modal_title').text("Plase Select the Payment Option First");
+                        $('#not_checked_modal').modal('show');
+                    }else {
+                        $(target_modal).modal('show');
+                    }
+                });
+                $("form").submit(function(e){
+                    var checkbox = $('.selected_items');
+                    if(!checkbox.is(":checked")){
+                        e.preventDefault();
+                        $('#not_checked_modal_title').text("Plase Select Buying Request First");
+                        $('#not_checked_modal').modal('show');
+                    }
+                });
+            </script>
             <script src="{{ asset('js/dataTables/abandonedRfqsDataTable.js') }}"></script>
             <!-- footer is here -->
             @include('admin.layouts.footer')

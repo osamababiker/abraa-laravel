@@ -150,7 +150,6 @@ class BuyersController extends Controller
 
     // to handel table actions
     public function actions(Request $request){
-        dd($request->all());
         if($request->has('delete_selected_btn')){ 
             $buyer_id = $request->buyer_id;
             if($request->all_colums){

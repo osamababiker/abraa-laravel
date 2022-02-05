@@ -115,6 +115,14 @@
                         $(target_modal).modal('show');
                     }
                 });
+                $("form").submit(function(e){
+                    var checkbox = $('.selected_items');
+                    if(!checkbox.is(":checked")){
+                        e.preventDefault();
+                        $('#not_checked_modal_title').text("Plase Select the Emails First");
+                        $('#not_checked_modal').modal('show');
+                    }
+                });
             </script>
             <script src="{{ asset('js/dataTables/emailsArchivesDataTable.js') }}"></script>
             <!-- footer is here -->
