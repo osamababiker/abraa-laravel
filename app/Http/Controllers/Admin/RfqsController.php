@@ -218,7 +218,8 @@ class RfqsController extends Controller
     public function actions(Request $request){
         // to approve selected
         if($request->has('approve_selected_btn')){
-            foreach($request->rfqs_id as $request_id){
+            foreach($request->rfqs_id as $request_id){ 
+                dd($request->rfqs_id);
                 $rfq = Rfq::find($request_id);
                 $rfq->status = 2;
                 $rfq->approved_by = Auth::user()->id;
