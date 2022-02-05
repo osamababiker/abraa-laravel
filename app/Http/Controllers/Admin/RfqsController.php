@@ -19,11 +19,12 @@ use App\Imports\RfqsImport;
 use App\Http\Requests\BuyingRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Traits\MailerTrait;
+use App\Http\Traits\ClearCacheTrait; 
 use Illuminate\Pagination\Paginator;
 
 class RfqsController extends Controller
 {   
-    use MailerTrait; 
+    use MailerTrait, ClearCacheTrait; 
 
     public function index() {
         $countries = Country::all();
@@ -219,7 +220,6 @@ class RfqsController extends Controller
         // to approve selected
         if($request->has('approve_selected_btn')){
             foreach($request->rfqs_id as $request_id){ 
-                dd($request->rfqs_id);
                 $rfq = Rfq::find($request_id);
                 $rfq->status = 2;
                 $rfq->approved_by = Auth::user()->id;
@@ -322,6 +322,9 @@ class RfqsController extends Controller
         $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
         $email_templete = $this->getEmailTemplete($email_content);
         $this->sendEmail($email_templete, $buyer_email, $subject);
+
+        // to clear the cache on abraa
+        $this->clearAbraaCache("buying_requests");
 
         $message = 'buying requests hass been approved successfully';
         session()->flash('success', 'true');
