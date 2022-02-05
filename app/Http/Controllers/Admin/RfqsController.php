@@ -237,7 +237,7 @@ class RfqsController extends Controller
             }
 
              // to clear the cache on abraa
-             //$this->clearAbraaCache("buying_requests");
+             $this->clearAbraaCache("buying_requests");
 
              $message = 'buying requests hass been approved successfully';
              session()->flash('success', 'true');
