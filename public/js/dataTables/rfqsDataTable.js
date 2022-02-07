@@ -12,6 +12,7 @@ $(document).ready(function () {
     var buyer_email = '';
     var buyer_phone = '';
     var item_link = '';
+    var approve_btn = '';
     var unit = '';
 
     // filter data
@@ -52,7 +53,14 @@ $(document).ready(function () {
 
                 if(request.item_id > 0){
                     item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
-                }else item_link =  request.product_name;
+                    approve_btn = "<a href=\"#\" type=\"button\" data-id=\""+ request.id +"\" class=\"btn btn-success approve_product_rfq_btn\" style=\"color: #fff\">\n"+
+                    "<i  class=\"align-middle fa fa-check\" ></i>\n"+"</a>\n" ;
+                }else{
+                    item_link =  request.product_name;
+                    approve_btn = "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                    "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                    "</a>\n";
+                }
 
  
                 buying_request_html = buying_request_html +
@@ -135,11 +143,7 @@ $(document).ready(function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"rfqs_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
-                "<td>\n"+ 
-                    "<a href=\"#\" type=\"button\" class=\"btn btn-success\" style=\"color: #fff\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-check\" ></i>\n"+
-                    "</a>\n"+ 
-                "</td>\n"+
+                "<td>\n"+ approve_btn +"</td>\n"+
                 "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
@@ -191,6 +195,7 @@ $(".filter_data_table").on('change input', function () {
     var buyer_email = '';
     var buyer_phone = '';
     var item_link = '';
+    var approve_btn = '';
     var unit = '';
 
 
@@ -237,7 +242,14 @@ $(".filter_data_table").on('change input', function () {
 
                 if(request.item_id > 0){
                     item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
-                }else item_link =  request.product_name;
+                    approve_btn = "<a href=\"#\" type=\"button\" data-id=\""+ request.id +"\" class=\"btn btn-success approve_product_rfq_btn\" style=\"color: #fff\">\n"+
+                    "<i  class=\"align-middle fa fa-check\" ></i>\n"+"</a>\n" ;
+                }else{
+                    item_link =  request.product_name;
+                    approve_btn = "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                    "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                    "</a>\n";
+                }
 
                 buying_request_html = buying_request_html +
 
@@ -320,11 +332,7 @@ $(".filter_data_table").on('change input', function () {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
-                "<td>\n"+ 
-                    "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-check\" ></i>\n"+
-                    "</a>\n"+ 
-                "</td>\n"+
+                "<td>\n"+ approve_btn +"</td>\n"+
                 "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
@@ -378,6 +386,7 @@ $("#pagination").on('click', 'a', function(e) {
     var buyer_email = '';
     var buyer_phone = '';
     var item_link = '';
+    var approve_btn = '';
     var unit = '';
 
 
@@ -424,7 +433,14 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(request.item_id > 0){
                     item_link = "<a target=\"_blank\" href=\""+ public_url +"item\\"+ request.item_id +"\">"+ request.product_name +"</a>";
-                }else item_link =  request.product_name;
+                    approve_btn = "<a href=\"#\" type=\"button\" data-id=\""+ request.id +"\" class=\"btn btn-success approve_product_rfq_btn\" style=\"color: #fff\">\n"+
+                    "<i  class=\"align-middle fa fa-check\" ></i>\n"+"</a>\n" ;
+                }else{
+                    item_link =  request.product_name;
+                    approve_btn = "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
+                    "<i  class=\"align-middle fa fa-check\" ></i>\n"+
+                    "</a>\n";
+                }
 
 
                 buying_request_html = buying_request_html +
@@ -508,11 +524,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<tr>\n"+
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"buyingRequestInvoice_id[]\" value=\""+ request.id +"\" ></input> </td>\n" +
                 "<td>"+ request.id +"</td>\n"+
-                "<td>\n"+ 
-                    "<a href=\"#\" class=\"btn btn-success\" style=\"color: #fff\" type=\"button\"  data-toggle=\"modal\" data-target=\"#approve_buying_request_"+ request.id +"\">\n"+
-                        "<i  class=\"align-middle fa fa-check\" ></i>\n"+
-                    "</a>\n"+ 
-                "</td>\n"+
+                "<td>\n"+ approve_btn +"</td>\n"+
                 "<td>  </td>\n"+
                 "<td>"+ buyer_name +"</td>\n"+
                 "<td>"+ buyer_phone +"</td>\n"+
@@ -614,7 +626,7 @@ $(function(){
 });
 
 
-// to approve rfq
+// to approve global rfq
 $(function(){ 
     $("#buying_requests_table_body").on('click', '#approve_btn', function() {
 
@@ -649,6 +661,28 @@ $(function(){
         });
     });
 });
+
+
+// to approve product rfq
+$(function(){ 
+    $("#buying_requests_table_body").on('click', '.approve_product_rfq_btn', function() {
+
+        var rfq_id = $(this).attr('data-id');
+
+        $("#ajax_loader").css('display', 'block');
+        $.ajax({
+            url: "/rfqs/" + rfq_id + "/product/approve",
+            type: "get",
+            data: {
+                "rfq_id": rfq_id
+            },
+            success: function(response){
+                location.reload();
+            }
+        });
+    });
+});
+
 
 
 // to delete (archive) buying Request Invoice

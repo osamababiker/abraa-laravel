@@ -722,6 +722,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('rfqs/{id}/approve', [
         RfqsController::class, 'approve'
     ]);
+     // to approve single product rfq 
+     Route::get('rfqs/{id}/product/approve', [
+        RfqsController::class, 'approve_product'
+    ]);
     // custom update route
     Route::post('rfqs/update', [
         RfqsController::class, 'update'

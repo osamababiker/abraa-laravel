@@ -335,4 +335,33 @@ class RfqsController extends Controller
         return redirect()->back();
         
     }
+
+
+    // to approve product rfq
+    public function approve_product(Request $request){
+        $rfq = Rfq::find($request->rfq_id);
+        $rfq->status = 2;
+        $rfq->save();
+
+        // to send email to buyer 
+        $buyer_name = $rfq->buyer->full_name;
+        $buyer_email = $rfq->buyer->email;
+        $product_name = $rfq->product_name;
+        $product_link = config('global.public_url') . 'new-dashboard-buyer/buying-requests/' . $rfq->id;
+        $subject = AdminEmail::find(25)->subject;
+        $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
+        $email_templete = $this->getEmailTemplete($email_content);
+        $this->sendEmail($email_templete, $buyer_email, $subject);
+
+        // to clear the cache on abraa
+        $this->clearAbraaCache("buying_requests");
+
+        $message = 'buying requests hass been approved successfully';
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'Success');
+        session()->flash('feedback', $message);
+        return response()->json([
+            'message' => $message
+        ], 200);
+    }
 }
