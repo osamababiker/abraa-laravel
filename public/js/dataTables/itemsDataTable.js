@@ -32,7 +32,7 @@ $(document).ready(function () {
                 if(item.status == 1){
                     item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
                 }else if(item.status == 0){
-                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending - </i> </button>";
+                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn btn-success\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending  </i> </button>";
                 } 
                 if(item.status == 0 && item.rejected == 1){
                     item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\"> <i style=\"color: red\">rejected - <i class=\"fa fa-times\"></i> </button>";
@@ -141,7 +141,7 @@ $(".filter_data_table").on('change input', function () {
                 if(item.status == 1){
                     item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
                 }else if(item.status == 0){
-                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending - </i> </button>";
+                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn btn-success\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending  </i> </button>";
                 } 
                 if(item.status == 0 && item.rejected == 1){
                     item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\"> <i style=\"color: red\">rejected - <i class=\"fa fa-times\"></i> </button>";
@@ -250,7 +250,7 @@ $("#pagination").on('click', 'a', function(e) {
                 if(item.status == 1){
                     item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
                 }else if(item.status == 0){
-                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending - </i> </button>";
+                    item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn btn-success\" name=\"approve_single_item_btn\">  <i class=\"fa fa-check\"> pending  </i> </button>";
                 } 
                 if(item.status == 0 && item.rejected == 1){
                     item_status = "<button type=\"button\" onclick=\"approve_item("+ item.id +")\" class=\"btn\" name=\"approve_single_item_btn\"> <i style=\"color: red\">rejected - <i class=\"fa fa-times\"></i> </button>";
