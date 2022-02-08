@@ -460,7 +460,7 @@ class ItemsController extends Controller
         $csv_file = $request->csv_file;
         //$supplier = Supplier::find($request->supplier_id);
         $data['supplier_id'] = 0;
-        $data['supplier_phone'] = $supplier->phone;
+        $data['supplier_phone'] = 0;
         $data['category_id'] = $request->category_id;
         Excel::import(new ItemsImport($data),$csv_file);
  
