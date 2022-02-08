@@ -458,8 +458,8 @@ class ItemsController extends Controller
 
     public function importExcel(Request $request) {
         $csv_file = $request->csv_file;
-        $supplier = Supplier::find($request->supplier_id);
-        $data['supplier_id'] = $supplier->id;
+        //$supplier = Supplier::find($request->supplier_id);
+        $data['supplier_id'] = 0;
         $data['supplier_phone'] = $supplier->phone;
         $data['category_id'] = $request->category_id;
         Excel::import(new ItemsImport($data),$csv_file);
