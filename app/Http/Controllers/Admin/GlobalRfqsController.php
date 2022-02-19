@@ -59,6 +59,7 @@ class GlobalRfqsController extends Controller
         $shipping_country = $request->shipping_country;
         $rows_numbers = $request->rows_numbers;  
         $request_type = $request->request_type;
+        $date_range = $request->date_range;
         $buying_request_status = $request->buying_request_status;
         
         $currentPage = $request->current_page;
@@ -76,6 +77,11 @@ class GlobalRfqsController extends Controller
             $buying_request_obj->whereIn('country_code', $shipping_country);
         }
 
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $buying_request_obj->whereBetween('date_added', $date_range);
+        }
+          
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj->with('category')->with('country')
             ->with('buyer')->with('unit')->orderBy('id','desc')->paginate($rows_numbers);

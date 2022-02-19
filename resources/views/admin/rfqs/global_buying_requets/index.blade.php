@@ -48,12 +48,16 @@
                                 <div class="card-body">
 
                                     <div class="row mb-2 m-1">
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label for="product_name">Product Name</label>
                                             <input type="text" name="product_name" id="product_name"
                                                 class="filter_data_table form-control" aria-label="Search">
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-3 form-group">
+                                            <label for="date_range">Filter By Date</label>
+											<input class="filter_data_table form-control ymd_datepicker_range" id="date_range" type="text" name="date_range[]"/>
+                                        </div>
+                                        <div class="col-md-3 form-group">
                                             <label for="shipping_country"> Shipping Country</label>
                                             <select name="shipping_country[]" multiple="multiple" id="shipping_country"
                                                 class="filter_data_table form-control select2">
@@ -63,7 +67,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-3 form-group">
                                             <label for="rows_numbers">Numbers of rows</label>
                                             <select name="rows_numbers" id="rows_numbers"
                                                 class="filter_data_table form-control select2">

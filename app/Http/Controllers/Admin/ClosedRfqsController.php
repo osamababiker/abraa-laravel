@@ -41,6 +41,7 @@ class ClosedRfqsController extends Controller
         $product_name = $request->product_name;
         $buyer_name = $request->buyer_name;
         $countries = $request->countries;
+        $date_range = $request->date_range;
         $rows_numbers = $request->rows_numbers; 
         
         $currentPage = $request->current_page;
@@ -56,6 +57,11 @@ class ClosedRfqsController extends Controller
 
         if($product_name){
             $buying_request_obj->where('buying_requests.product_name','like', '%' . $product_name . '%');
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $buying_request_obj->whereBetween('buying_requests.date_added', $date_range);
         }
 
         if($buyer_name){

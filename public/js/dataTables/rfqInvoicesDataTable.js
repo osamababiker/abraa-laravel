@@ -12,7 +12,7 @@ $(document).ready(function () {
     var is_confirmed = '';
     var type = '';
 
-    // filter data
+    // filter data 
     var rows_numbers = $('#rows_numbers').val();
     var buying_request_status = $('#buying_request_status').val();
     var request_unit = ''; 
@@ -157,6 +157,7 @@ $(".filter_data_table").on('change input', function () {
     var shipping_country = $('#shipping_country').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var request_type = $("#request_type").val();
+    var date_range = $('#date_range').val();
     var buying_request_status = $('#buying_request_status').val();
 
     $.ajax({
@@ -166,6 +167,7 @@ $(".filter_data_table").on('change input', function () {
             'product_name': product_name,
             'shipping_country': shipping_country,
             'request_type': request_type,
+            'date_range': date_range,
             'buying_request_status': buying_request_status,
             'current_page': window.current_page,
             'rows_numbers': rows_numbers,
@@ -307,6 +309,7 @@ $("#pagination").on('click', 'a', function(e) {
     var shipping_country = $('#shipping_country').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var request_type = $("#request_type").val();
+    var date_range = $('#date_range').val();
     var buying_request_status = $('#buying_request_status').val();
 
     $.ajax({
@@ -316,6 +319,7 @@ $("#pagination").on('click', 'a', function(e) {
             'product_name': product_name,
             'shipping_country': shipping_country,
             'request_type': request_type,
+            'date_range': date_range,
             'buying_request_status': buying_request_status,
             'current_page': window.current_page,
             'rows_numbers': rows_numbers,

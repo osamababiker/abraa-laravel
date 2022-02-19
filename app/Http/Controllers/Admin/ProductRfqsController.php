@@ -59,6 +59,7 @@ class ProductRfqsController extends Controller
 
         $product_name = $request->product_name;
         $shipping_country = $request->shipping_country;
+        $date_range = $request->date_range;
         $rows_numbers = $request->rows_numbers; 
         $request_type = $request->request_type;
         $buying_request_status = $request->buying_request_status;
@@ -76,6 +77,11 @@ class ProductRfqsController extends Controller
 
         if($shipping_country){
             $buying_request_obj->whereIn('country_code', $shipping_country);
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $buying_request_obj->whereBetween('date_added', $date_range);
         }
 
         $buying_requests_count = $buying_request_obj->count();

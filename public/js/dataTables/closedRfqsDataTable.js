@@ -12,7 +12,7 @@ $(document).ready(function () {
     var buyer_phone = '';
     var buyer_email = '';
     var buyer_country = '';
-    var unit = '';
+    var unit = ''; 
     var status = '';
     var approved_by = '';
 
@@ -184,6 +184,7 @@ $(".filter_data_table").on('change input', function () {
     var product_name = $('#product_name').val(); 
     var buyer_name = $('#buyer_name').val();
     var countries = $('#countries').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -194,6 +195,7 @@ $(".filter_data_table").on('change input', function () {
             'buyer_name': buyer_name,
             'countries': countries,
             'rows_numbers': rows_numbers,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },
@@ -359,6 +361,7 @@ $("#pagination").on('click', 'a', function(e) {
     var product_name = $('#product_name').val(); 
     var countries = $('#countries').val(); 
     var buyer_name = $('#buyer_name').val();
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -368,6 +371,7 @@ $("#pagination").on('click', 'a', function(e) {
             'product_name': product_name,
             'buyer_name': buyer_name,
             'countries': countries,
+            'date_range': date_range,
             'current_page': window.current_page,
             'rows_numbers': rows_numbers,
             '_token': csrf_token

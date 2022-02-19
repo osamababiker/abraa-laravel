@@ -56,6 +56,7 @@ class AbandonedRfqsController extends Controller
             $buying_request_obj->whereIn('abandoned_registerations.country', $countries);
         }
 
+
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj
             ->with('buyer')->with('item')

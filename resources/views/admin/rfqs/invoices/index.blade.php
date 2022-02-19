@@ -58,6 +58,10 @@
                                                 class="filter_data_table form-control" aria-label="Search">
                                         </div>
                                         <div class="col-md-2 form-group">
+                                            <label for="date_ragne">Filter By Date</label>
+											<input class="filter_data_table form-control ymd_datepicker_range" id="date_ragne" type="text" name="date_range[]"/>
+                                        </div>
+                                        <div class="col-md-2 form-group">
                                             <label for="buying_request_status">Filter by Status</label>
                                             <select name="buying_request_status" id="buying_request_status"
                                                 class="filter_data_table form-control select2">

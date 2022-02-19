@@ -138,8 +138,20 @@
         showDropdowns: true,
     });
 
+    $(".daterangepicker").daterangepicker({
+        
+    });
+            
     $(".ymd_datepicker").daterangepicker({
         singleDatePicker: true,
+        showDropdowns: true,
+        locale: {
+            format: "Y-M-D"
+        }
+    });
+
+    $(".ymd_datepicker_range").daterangepicker({
+        singleDatePicker: false,
         showDropdowns: true,
         locale: {
             format: "Y-M-D"

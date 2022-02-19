@@ -83,7 +83,7 @@ $(document).ready(function () {
                             "<button type=\"button\" onclick=\"archive_buyingRequest("+ request.id  +")\" class=\"btn btn-danger\">Yes Sure</button>\n"+
                         "</div>\n"+
                     "</div>\n"+
-                    "</div>\n"+
+                    "</div>\n"+ 
                 "</div>\n"+
 
                 // approve single request modal
@@ -202,6 +202,7 @@ $(".filter_data_table").on('change input', function () {
     // filter data
     var product_name = $('#product_name').val(); 
     var shipping_country = $('#shipping_country').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -210,6 +211,7 @@ $(".filter_data_table").on('change input', function () {
         data: {
             'product_name': product_name,
             'shipping_country': shipping_country,
+            'date_range': date_range,
             'rows_numbers': rows_numbers,
             'current_page': window.current_page,
             "_token": csrf_token
@@ -393,6 +395,7 @@ $("#pagination").on('click', 'a', function(e) {
     // filter data
     var product_name = $('#product_name').val(); 
     var shipping_country = $('#shipping_country').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -401,6 +404,7 @@ $("#pagination").on('click', 'a', function(e) {
         data: {
             'product_name': product_name,
             'shipping_country': shipping_country,
+            'date_range': date_range,
             'current_page': window.current_page,
             'rows_numbers': rows_numbers,
             "_token": csrf_token

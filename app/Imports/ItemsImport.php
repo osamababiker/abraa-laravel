@@ -71,7 +71,7 @@ class ItemsImport implements ToModel
             'lon' => ' ',
             'capacity' => '0',
             'capcity_frequency' => '0',
-            'is_bulk' => 1
+            'is_bulk' => 0
 
         ]); 
     }
