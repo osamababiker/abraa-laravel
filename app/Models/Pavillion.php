@@ -13,5 +13,5 @@ class Pavillion extends Model
 
     public function suppliers(){
         return $this->hasMany(Supplier::class, 'pavillion_id');
-    }
+    } 
 }

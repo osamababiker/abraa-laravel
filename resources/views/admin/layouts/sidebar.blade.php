@@ -62,6 +62,7 @@
                 </a>
                 <ul id="pages" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pages.index') }}">  Pages List </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{{ route('pavillions.index') }}">  Site Pavillions </a></li>
                 </ul>
             </li>
             <li class="sidebar-item">

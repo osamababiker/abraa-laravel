@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\SuppliersVerificationController;
 use App\Http\Controllers\Admin\GuidelinesController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\AbraaMessagesController;
+use App\Http\Controllers\Admin\PavillionsController;
 use App\Http\Controllers\Admin\CacheController;
 
 /* 
@@ -1701,6 +1702,41 @@ Route::group(['middleware' => 'auth'], function (){
         PagesController::class, 'getEditorData'
     ])->name('pages.getEditorData');
     Route::resource('pages', PagesController::class, ['except' => ['destroy','update']]);
+
+
+    
+    // ======================= Pavillions Routes ====================== //
+    // table actions route
+    Route::post('pavillions/actions', 
+        [PavillionsController::class , 'actions']
+    )->name('pavillions.actions');
+    // get pavillions as json route 
+    Route::get('pavillions/json', [
+        PavillionsController::class, 'getPavillionsAsJson'
+    ])->name('pavillions.json');
+    // filter pavillions  route 
+    Route::post('pavillions/filter', [
+        PavillionsController::class, 'filterPavillions'
+    ])->name('pavillions.filter');
+    // to import & export excel 
+    Route::get('pavillions/export/excel', [
+        PavillionsController::class, 'exportExcel'
+    ])->name('pavillions.export.excel'); 
+    Route::post('pavillions/import/excel', [
+        PavillionsController::class, 'importExcel'
+    ])->name('pavillions.import.excel');
+    Route::get('pavillions/importExportView',  [
+        PavillionsController::class, 'importExportView'
+    ]);
+    // custom update route
+    Route::post('pavillions/update', [
+        PavillionsController::class, 'update'
+    ])->name('pavillions.update');
+    // custom delete route
+    Route::get('pavillions/{id}/destroy', [
+        PavillionsController::class, 'destroy'
+    ]);
+    Route::resource('pavillions', PavillionsController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Guide lines Routes ====================== //

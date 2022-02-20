@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
@@ -87,7 +87,7 @@ class PagesController extends Controller
         $page->meta_keyword = $request->meta_keyword;
         $page->save();
 
-        $message = 'Article hass been Added successfully';
+        $message = 'Article has been Added successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Added successfull');
         session()->flash('feedback', $message);
