@@ -41,6 +41,9 @@
                                             <button type="button" name="send_sms_multiple" class="btn btn-success action_btn"> <i
                                                     class="fa fa-phone"></i> Send SMS </button>
                                             &nbsp; &nbsp;
+                                            <button type="button"  data-target="#add_to_pavillion_modal"  class="btn btn-warning action_btn"> <i
+                                                    class="fa fa-flag"></i> Add to Pavillion </button>
+                                            &nbsp; &nbsp;
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -140,6 +143,7 @@
                                         </div>
                                         @include('admin.suppliers.components.email_editors')
                                         @include('admin.suppliers.components.delete_selected')
+                                        @include('admin.suppliers.components.select_pavillion')
                                     </div>
                                 </div>
                             </div>

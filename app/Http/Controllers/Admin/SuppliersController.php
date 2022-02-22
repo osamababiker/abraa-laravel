@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Supplier;
+use App\Models\Pavillion;
 use App\Models\Item;
 use App\Models\Country;
 use App\Models\Store;
@@ -42,7 +43,8 @@ class SuppliersController extends Controller
  
     public function index(){
         $countries = Country::all();
-        return view('admin.suppliers.index', compact(['countries']));
+        $pavillions = Pavillion::all();
+        return view('admin.suppliers.index', compact(['countries','pavillions']));
     } 
 
     public function getSuppliersAsJson(Request $request){
@@ -690,7 +692,7 @@ class SuppliersController extends Controller
         }
 
         if($request->has('send_message_to_suppliers')){
-            $suppliers_id = $request->suppliers_id;
+            $suppliers_id = $request->supplier_id;
             $subject = $request->subject;
             $message = $request->email_content;
             foreach($suppliers_id as $supplier_id){
@@ -706,6 +708,20 @@ class SuppliersController extends Controller
             return response()->json([
                 'message' => 'Email has been send successfuly'
             ],200);
+        }
+
+        if($request->has('add_suppliers_to_pavillion')){
+            $suppliers_id = $request->supplier_id;
+            foreach($suppliers_id as $supplier_id){
+                $supplier = Supplier::findOrFail($supplier_id);
+                $supplier->pavillion_id = $request->pavillion_id;
+                $supplier->save();
+            }
+            $message = 'Suppliers has been added to pavillion successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Added Successfully');
+            session()->flash('feedback', $message);
+            return redirect()->back();
         }
         
     }
