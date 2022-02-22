@@ -37,6 +37,7 @@ class MembersController extends Controller
         $member_name = $request->member_name;
         $countries = $request->countries;
         $rows_numbers = $request->rows_numbers; 
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -51,6 +52,11 @@ class MembersController extends Controller
              
         if($countries){
             $member_obj->whereIn('users.country', $countries);
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $member_obj->whereBetween('datevsiited', $date_range);
         }
 
         $members_count = $member_obj->count();

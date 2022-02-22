@@ -50,12 +50,12 @@
                                     <div class="card-body">
 
                                         <div class="row mb-2 m-1">
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="buyer_name">Search Buyers by Name</label>
                                                 <input type="text" name="buyer_name" id="buyer_name"
                                                     class="filter_data_table form-control" aria-label="Search">
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="filter_by_country">Filter by Country</label>
                                                 <select name="country[]" multiple="multiple" id="filter_by_country"
                                                     class="filter_data_table form-control select2">
@@ -65,14 +65,18 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
                                                 <label for="filter_by_keywords">Filter by Keywords</label>
                                                 <select name="keywords[]" multiple="multiple" id="filter_by_keywords"
                                                     class="filter_data_table form-control select2">
                                                     <option value=""> enter keywords </option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-2 form-group">
+                                                <label for="date_range">Filter By Date</label>
+                                                <input class="filter_data_table form-control ymd_datepicker_range" id="date_range" type="text" name="date_range[]"/>
+                                            </div>
+                                            <div class="col-md-2 form-group">
                                                 <label for="rows_numbers">Numbers of rows</label>
                                                 <select name="rows_numbers" id="rows_numbers"
                                                     class="filter_data_table form-control select2">

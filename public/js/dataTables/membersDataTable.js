@@ -125,6 +125,7 @@ $(".filter_data_table").on('change input', function () {
     // filter data
     var countries = $('#filter_by_country').val(); 
     var member_name = $('#member_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -134,6 +135,7 @@ $(".filter_data_table").on('change input', function () {
             'countries': countries,
             'rows_numbers': rows_numbers,
             'current_page': window.current_page,
+            'date_range': date_range,
             'member_name': member_name,
             '_token': csrf_token
         },
@@ -246,6 +248,7 @@ $("#pagination").on('click', 'a', function(e) {
     // filter data
     var countries = $('#filter_by_country').val(); 
     var member_name = $('#member_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -254,6 +257,7 @@ $("#pagination").on('click', 'a', function(e) {
         data: {
             'countries': countries,
             'rows_numbers': rows_numbers,
+            'date_range': date_range,
             'current_page': window.current_page,
             'member_name': member_name,
             '_token': csrf_token

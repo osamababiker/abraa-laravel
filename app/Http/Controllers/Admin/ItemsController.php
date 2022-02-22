@@ -51,6 +51,7 @@ class ItemsController extends Controller
         $meta_keyword = $request->meta_keyword; 
         $items_status = $request->items_status;
         $store_status = $request->store_status;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -113,6 +114,11 @@ class ItemsController extends Controller
             foreach($meta_keyword as $word){
                 $item_obj->where('items.meta_keyword','like', '%' . $word . '%');
             }
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $item_obj->whereBetween('items.added', $date_range);
         }
             
         $items_count = $item_obj->count();

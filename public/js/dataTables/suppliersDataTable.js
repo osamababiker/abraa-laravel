@@ -137,7 +137,9 @@ $(".filter_data_table").on('change input', function () {
     var supplier_type = $('#supplier_type').val(); 
     var product_title = $('#filter_by_products_title').val(); 
     var supplier_name = $('#supplier_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
+
 
     $.ajax({
         url: "/suppliers/filter",
@@ -146,6 +148,7 @@ $(".filter_data_table").on('change input', function () {
             'countries': countries,
             'keywords': keywords,
             'rows_numbers': rows_numbers,
+            'date_range': date_range,
             'supplier_type': supplier_type,
             'product_title': product_title,
             'supplier_name': supplier_name,
@@ -294,6 +297,7 @@ $("#pagination").on('click', 'a', function(e) {
     var supplier_type = $('#supplier_type').val(); 
     var product_title = $('#filter_by_products_title').val(); 
     var supplier_name = $('#supplier_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -305,6 +309,7 @@ $("#pagination").on('click', 'a', function(e) {
             'rows_numbers': rows_numbers,
             'supplier_type': supplier_type,
             'product_title': product_title,
+            'date_range': date_range,
             'supplier_name': supplier_name,
             'current_page': window.current_page,
             '_token': csrf_token

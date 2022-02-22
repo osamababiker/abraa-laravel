@@ -112,6 +112,7 @@ $(".filter_data_table").on('change input', function () {
     var countries = $('#filter_by_country').val(); 
     var keywords = $('#filter_by_keywords').val(); 
     var buyer_name = $('#buyer_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -122,6 +123,7 @@ $(".filter_data_table").on('change input', function () {
             'keywords': keywords,
             'rows_numbers': rows_numbers,
             'buyer_name': buyer_name,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },
@@ -221,6 +223,7 @@ $("#pagination").on('click', 'a', function(e) {
     var countries = $('#filter_by_country').val(); 
     var keywords = $('#filter_by_keywords').val(); 
     var buyer_name = $('#buyer_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -231,6 +234,7 @@ $("#pagination").on('click', 'a', function(e) {
             'keywords': keywords,
             'rows_numbers': rows_numbers,
             'buyer_name': buyer_name,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },

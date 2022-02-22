@@ -43,6 +43,7 @@ class BuyersController extends Controller
         $keywords = $request->keywords;
         $rows_numbers = $request->rows_numbers; 
         $buyer_name = $request->buyer_name;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -64,6 +65,11 @@ class BuyersController extends Controller
             foreach($keywords as $word){
                 $buyers_object->where('interested_keywords','like', '%' . $word . '%');
             }
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $buyers_object->whereBetween('date_added', $date_range);
         }
             
         $buyers_count = $buyers_object->count();

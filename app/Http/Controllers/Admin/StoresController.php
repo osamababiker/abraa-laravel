@@ -58,6 +58,7 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $stores_status = $request->stores_status;
+        $date_range = $request->date_range;
         
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -113,6 +114,12 @@ class StoresController extends Controller
                 $store_obj->where('users_store.meta_keywords','like', '%' . $word . '%');
             }
         }
+
+        
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $store_obj->whereBetween('users_store.date_added', $date_range);
+        }
             
         $stores_count = $store_obj->count();
         $stores = $store_obj->orderBy('users_store.id','desc')
@@ -154,6 +161,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -189,6 +197,12 @@ class StoresController extends Controller
             foreach($meta_keyword as $word){
                 $store_obj->where('users_store.meta_keywords','like', '%' . $word . '%');
             }
+        }
+
+        
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $store_obj->whereBetween('users_store.date_added', $date_range);
         }
             
         $stores_count = $store_obj->count();
@@ -238,6 +252,7 @@ class StoresController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
         $external = (int) $request->external;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -267,6 +282,11 @@ class StoresController extends Controller
             }
         }
             
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $store_obj->whereBetween('users_store.date_added', $date_range);
+        }
+
         $stores_count = $store_obj->count();
         $stores = $store_obj->orderBy('users_store.id','desc')
             ->paginate($rows_numbers);
@@ -310,6 +330,7 @@ class StoresController extends Controller
         $store_country = $request->store_country;
         $rows_numbers = $request->rows_numbers; 
         $meta_keyword = $request->meta_keyword;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -337,6 +358,11 @@ class StoresController extends Controller
             foreach($meta_keyword as $word){
                 $store_obj->where('users_store.meta_keywords','like', '%' . $word . '%');
             }
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $store_obj->whereBetween('users_store.date_added', $date_range);
         }
             
         $stores_count = $store_obj->count();
@@ -390,6 +416,8 @@ class StoresController extends Controller
         $meta_keyword = $request->meta_keyword;
         $external = (int) $request->external;
         $currentPage = $request->current_page;
+        $date_range = $request->date_range;
+
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
         });
@@ -416,6 +444,11 @@ class StoresController extends Controller
             foreach($meta_keyword as $word){
                 $store_obj->where('users_store.meta_keywords','like', '%' . $word . '%');
             }
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $store_obj->whereBetween('users_store.date_added', $date_range);
         }
             
         $stores_count = $store_obj->count();

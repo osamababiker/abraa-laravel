@@ -68,6 +68,7 @@ class SuppliersController extends Controller
         $supplier_type = $request->supplier_type;
         $product_title = $request->product_title;
         $supplier_name = $request->supplier_name;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -90,6 +91,11 @@ class SuppliersController extends Controller
             for($i = 1; $i < count($keywords); $i++) {
                $suppliers_obj->orWhere('interested_keywords', 'like', '%'. $keywords[$i] .'%');      
             }
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $suppliers_obj->whereBetween('date_added', $date_range);
         }
 
         if($product_title){

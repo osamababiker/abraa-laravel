@@ -80,7 +80,7 @@ class GlobalRfqsController extends Controller
         if($date_range){
             $date_range = explode(' - ', $date_range);
             $buying_request_obj->whereBetween('date_added', $date_range);
-        }
+        } 
           
         $buying_requests_count = $buying_request_obj->count();
         $buying_requests = $buying_request_obj->with('category')->with('country')

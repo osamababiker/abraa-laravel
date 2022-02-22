@@ -45,6 +45,7 @@ class ShippersController extends Controller
     public function filterShippers(Request $request){
         $shipper_name = $request->shipper_name;
         $countries = $request->countries;
+        $date_range = $request->date_range;
         $rows_numbers = $request->rows_numbers; 
 
         $currentPage = $request->current_page;
@@ -61,6 +62,12 @@ class ShippersController extends Controller
 
         if($countries){
             $shipper_obj->whereIn('country', $countries);
+        }
+
+        
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $shipper_obj->whereBetween('date_added', $date_range);
         }
 
         $shippers_count = $shipper_obj->count();

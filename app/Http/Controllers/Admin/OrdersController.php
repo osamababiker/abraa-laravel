@@ -43,6 +43,7 @@ class OrdersController extends Controller
         $rows_numbers = $request->rows_numbers; 
         $order_status = $request->order_status;
         $order_type = $request->order_type;
+        $date_range = $request->date_range;
 
         $currentPage = $request->current_page;
         Paginator::currentPageResolver(function () use ($currentPage) {
@@ -70,6 +71,11 @@ class OrdersController extends Controller
 
         if($countries){
             $order_obj->whereIn('users.country', $countries);
+        }
+
+        if($date_range){
+            $date_range = explode(' - ', $date_range);
+            $order_obj->whereBetween('date_created', $date_range);
         }
          
         $orders_count = $order_obj->count();

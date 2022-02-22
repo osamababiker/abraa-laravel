@@ -145,6 +145,7 @@ $(".filter_data_table").on('change input', function () {
     var order_status = $('#order_status').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
     var order_status = $('#order_status').val();
+    var date_range = $('#date_range').val();
     var countries = $("#countries").val();
 
     $.ajax({
@@ -157,6 +158,7 @@ $(".filter_data_table").on('change input', function () {
             'order_status': order_status,
             'order_status': order_status,
             'countries': countries,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },
@@ -283,6 +285,7 @@ $("#pagination").on('click', 'a', function(e) {
     var rows_numbers = $('#rows_numbers').val(); 
     var orders_status = $('#orders_status').val();
     var countries = $("#countries").val();
+    var date_range = $('#date_range').val();
 
     $.ajax({
         url: "/orders/filter",
@@ -294,6 +297,7 @@ $("#pagination").on('click', 'a', function(e) {
             'order_status': order_status,
             'orders_status': orders_status,
             'countries': countries,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },

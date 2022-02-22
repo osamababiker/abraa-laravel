@@ -116,6 +116,7 @@ $(".filter_data_table").on('change input', function () {
     // filter data
     var countries = $('#filter_by_country').val(); 
     var shipper_name = $('#shipper_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -125,6 +126,7 @@ $(".filter_data_table").on('change input', function () {
             'countries': countries,
             'rows_numbers': rows_numbers,
             'shipper_name': shipper_name,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },
@@ -228,6 +230,7 @@ $("#pagination").on('click', 'a', function(e) {
     // filter data
     var countries = $('#filter_by_country').val(); 
     var shipper_name = $('#shipper_name').val(); 
+    var date_range = $('#date_range').val();
     var rows_numbers = $('#rows_numbers').val(); 
 
     $.ajax({
@@ -237,6 +240,7 @@ $("#pagination").on('click', 'a', function(e) {
             'countries': countries,
             'rows_numbers': rows_numbers,
             'shipper_name': shipper_name,
+            'date_range': date_range,
             'current_page': window.current_page,
             '_token': csrf_token
         },

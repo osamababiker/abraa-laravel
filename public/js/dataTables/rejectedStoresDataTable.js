@@ -103,6 +103,7 @@ $(".filter_data_table").on('change input', function () {
     var store_country = $('#store_country').val(); 
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
+    var date_range = $('#date_range').val();
     var stores_status = $('#stores_status').val();
 
     $.ajax({
@@ -113,6 +114,7 @@ $(".filter_data_table").on('change input', function () {
             'store_country': store_country,
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
+            'date_range': date_range,
             "stores_status": stores_status,
             "current_page": window.current_page,
             "_token": csrf_token
@@ -201,6 +203,7 @@ $("#pagination").on('click', 'a', function(e) {
     var store_country = $('#store_country').val(); 
     var meta_keyword = $('#meta_keyword').val(); 
     var rows_numbers = $('#rows_numbers').val(); 
+    var date_range = $('#date_range').val();
     var stores_status = $('#stores_status').val();
 
     $.ajax({
@@ -212,6 +215,7 @@ $("#pagination").on('click', 'a', function(e) {
             'rows_numbers': rows_numbers,
             'meta_keyword': meta_keyword,
             "stores_status": stores_status,
+            'date_range': date_range,
             "current_page": window.current_page,
             "_token": csrf_token
         },
