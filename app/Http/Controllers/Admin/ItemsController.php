@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Country;
+use App\Models\Pavillion;
 use App\Models\Unit;
 use App\Models\State;
 use App\Models\Currency;
@@ -26,7 +27,8 @@ class ItemsController extends Controller
 
     public function index(){
         $countries = Country::all();
-        return view('admin.items.index', compact(['countries']));
+        $pavillions = Pavillion::all();
+        return view('admin.items.index', compact(['countries','pavillions']));
     } 
 
     public function getItemsAsJson(Request $request){
@@ -331,10 +333,10 @@ class ItemsController extends Controller
         // to move selected Items to archived
         if($request->has('delete_selected_btn')){
             foreach($request->item_id as $id){
-                $item = Item::find($id);
+                $item = Item::findOrFail($id);
                 $item->delete();
             }
-            $message = 'Items hass been archived successfully';
+            $message = 'Items has been archived successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
@@ -343,13 +345,13 @@ class ItemsController extends Controller
         // to approve selected Items 
         if($request->has('approve_selected_btn')){
             foreach($request->item_id as $id){
-                $item = Item::find($id);
+                $item = Item::findOrFail($id);
                 $item->status = 1;
                 $item->rejected = 0;
                 $item->approved = 1;
                 $item->save();
             }
-            $message = 'Items hass been approved successfully';
+            $message = 'Items has been approved successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
@@ -358,13 +360,13 @@ class ItemsController extends Controller
         // to reject selectd items
         if($request->has('reject_selected_btn')){
             foreach($request->item_id as $id){
-                $item = Item::find($id);
+                $item = Item::findOrFail($id);
                 $item->status = 0;
                 $item->rejected = 1;
                 $item->approved = 0;
                 $item->save();
             }
-            $message = 'Items hass been rejected successfully';
+            $message = 'Items has been rejected successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
@@ -374,14 +376,14 @@ class ItemsController extends Controller
         // to make selected items featured
         if($request->has('feature_selected_btn')){
             foreach($request->item_id as $id){
-                $item = Item::find($id);
+                $item = Item::findOrFail($id);
                 $item->status = 1;
                 $item->rejected = 0;
                 $item->approved = 1;
                 $item->featured = 1;
                 $item->save();
             }
-            $message = 'Items hass been featured successfully';
+            $message = 'Items has been featured successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
@@ -391,11 +393,11 @@ class ItemsController extends Controller
         // to make selected items unfeatured
         if($request->has('unfeature_selected_btn')){
             foreach($request->item_id as $id){
-                $item = Item::find($id);
+                $item = Item::findOrFail($id);
                 $item->featured = 0;
                 $item->save();
             }
-            $message = 'Items hass been un featured successfully';
+            $message = 'Items has been un featured successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
@@ -404,18 +406,33 @@ class ItemsController extends Controller
         else 
         // to approve single Item
         if($request->has('approve_single_item_btn')){
-           $item = Item::find($request->item_id);
+           $item = Item::findOrFail($request->item_id);
            $item->status = 1;
            $item->rejected = 0;
            $item->approved = 1;
            $item->save();
            
-           $message = 'Item hass been approved successfully';
+           $message = 'Item has been approved successfully';
            session()->flash('success', 'true');
            session()->flash('feedback_title', 'Success');
            session()->flash('feedback', $message);
            return redirect()->back();
         }
+        else 
+        // to add items to pavillion
+        if($request->has('add_item_to_pavillion')){
+            foreach($request->item_id as $id){
+                $item = Item::findOrFail($id);
+                $item->pavillion_id = $request->pavillion_id;
+                $item->save();
+            }
+            
+            $message = 'Item has been Added to Pavillion Successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Added to Pavillion Successfully');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+         }
         
     }
 

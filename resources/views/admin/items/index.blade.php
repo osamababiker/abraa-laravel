@@ -50,6 +50,10 @@
                                             <button type="button" data-target="#unfeature_selected_confirm"
                                                 class="btn btn-warning action_btn"> <i class="fa fa-star"></i> UnFeature Selected
                                             </button> 
+                                            &nbsp; &nbsp;
+                                            <button type="button" data-target="#select_pavillion_modal"
+                                                class="btn btn-warning action_btn"> <i class="fa fa-flag"></i> Add to Pavillion
+                                            </button> 
                                             &nbsp; &nbsp; 
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -155,6 +159,7 @@
                                         @include('admin.items.components.reject_selected')
                                         @include('admin.items.components.feature_selected')
                                         @include('admin.items.components.unfeature_selected')
+                                        @include('admin.items.components.select_pavillion')
                                         @if(session()->has('feedback'))
                                             @include('admin.layouts.feedback')
                                         @endif
