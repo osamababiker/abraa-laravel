@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Pavillion;
 use App\Models\Country;
 use App\Http\Requests\CategoriesRequest;
 use App\Exports\CategoriesExport;
@@ -19,7 +20,8 @@ class CategoriesController extends Controller
  
     public function index(){
         $countries = Country::all();
-        return view('admin.categories.index',compact(['countries']));
+        $pavillions = Pavillion::all();
+        return view('admin.categories.index',compact(['countries','pavillions']));
     } 
 
     public function getCategoriesAsJson(Request $request){
@@ -213,6 +215,33 @@ class CategoriesController extends Controller
         session()->flash('feedback_title', 'Archived Success');
         session()->flash('feedback', $message);
         return redirect()->back();
+    }
+
+
+    public function actions(Request $request){
+        if($request->has('delete_selected_btn')){
+            foreach($request->category_id as $id){
+                Category::where('id',$id)->delete();
+            }
+            $message = 'Categories has been Archived successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Archived Successfully');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
+
+        if($request->has('add_categories_to_pavillion')){
+            foreach($request->category_id as $id){
+                $category = Category::findOrFail($id);
+                $category->pavillion_id = $request->pavillion_id;
+                $category->save();
+            }
+            $message = 'Categories has been Added to Pavillion successfully';
+            session()->flash('success', 'true');
+            session()->flash('feedback_title', 'Added Successfully');
+            session()->flash('feedback', $message);
+            return redirect()->back();
+        }
     }
 
     // import & export to excel

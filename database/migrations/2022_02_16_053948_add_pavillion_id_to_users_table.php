@@ -14,7 +14,7 @@ class AddPavillionIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('pavillion_id')->nullable();
+            $table->integer('pavillion_id')->nullable();
         });
     }
 

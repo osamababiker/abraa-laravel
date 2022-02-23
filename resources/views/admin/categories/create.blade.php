@@ -161,7 +161,7 @@
                                         <div class="form-row mt-5 d-flex justify-content-center">
                                             <button type="submit" class="btn btn-success">Save Category</button>
                                             &nbsp; &nbsp;
-                                            <a href="{{ route('categorys.index') }}" type="button" class="btn btn-primary">Go Back</a>
+                                            <a href="{{ route('categories.index') }}" type="button" class="btn btn-primary">Go Back</a>
                                         </div>
                                     </form>
                                 </div>

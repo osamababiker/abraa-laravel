@@ -103,7 +103,7 @@ class CurrenciesController extends Controller
         $currency->name_ru = $request->name_ru;
         $currency->save();
 
-        $message = 'currency hass been Updated successfully';
+        $message = 'currency has been Updated successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Updated Success');
         session()->flash('feedback', $message);
@@ -112,7 +112,7 @@ class CurrenciesController extends Controller
 
     public function destroy($id){
         Currency::where('id',$id)->delete();
-        $message = 'Currency hass been Archived successfully';
+        $message = 'Currency has been Archived successfully';
         session()->flash('success', 'true');
         session()->flash('feedback_title', 'Archived Success');
         session()->flash('feedback', $message);
@@ -125,7 +125,7 @@ class CurrenciesController extends Controller
             foreach($request->currency_id as $id){
                 Currency::where('id',$id)->delete();
             }
-            $message = 'currencies hass been Archived successfully';
+            $message = 'currencies has been Archived successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);

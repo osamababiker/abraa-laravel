@@ -127,7 +127,7 @@ class CountriesController extends Controller
             foreach($request->country_id as $id){
                 Country::where('id',$id)->delete();
             }
-            $message = 'Countries hass been Archived successfully';
+            $message = 'Countries has been Archived successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);
