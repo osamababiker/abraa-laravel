@@ -52,7 +52,7 @@ $(document).ready(function () {
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"pavillion_id[]\" value=\""+ pavillion.id +"\" ></input> </td>\n" +
                 "<td>"+ pavillion.id +"</td>\n"+
                 "<td>"+ pavillion.name +"</td>\n"+
-                "<td>"+ pavillion_url +"</td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ pavillion_url +"\"> "+ pavillion_url +" </a> </td>\n"+
                 "<td> <img src=\""+ pavillion.logo +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.main_banner +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.right_banner_1 +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
@@ -141,7 +141,7 @@ $(".filter_data_table").on('change input', function () {
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"pavillion_id[]\" value=\""+ pavillion.id +"\" ></input> </td>\n" +
                 "<td>"+ pavillion.id +"</td>\n"+
                 "<td>"+ pavillion.name +"</td>\n"+
-                "<td>"+ pavillion_url +"</td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ pavillion_url +"\"> "+ pavillion_url +" </a> </td>\n"+
                 "<td> <img src=\""+ pavillion.logo +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.main_banner +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.right_banner_1 +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
@@ -230,7 +230,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"pavillion_id[]\" value=\""+ pavillion.id +"\" ></input> </td>\n" +
                 "<td>"+ pavillion.id +"</td>\n"+
                 "<td>"+ pavillion.name +"</td>\n"+
-                "<td>"+ pavillion_url +"</td>\n"+
+                "<td> <a target=\"_blank\" href=\""+ pavillion_url +"\"> "+ pavillion_url +" </a> </td>\n"+
                 "<td> <img src=\""+ pavillion.logo +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.main_banner +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.right_banner_1 +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
