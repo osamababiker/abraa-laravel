@@ -74,7 +74,7 @@
                                                         <th> <input type="checkbox" class="select_all_colums"> </th>
                                                         <th>Id</th>
                                                         <th> Name </th> 
-                                                        <th> Slug </th>
+                                                        <th> Url </th>
                                                         <th> logo </th>
                                                         <th> Main banner </th>
                                                         <th> right banner 1 </th>
@@ -105,8 +105,9 @@
             @include('admin.layouts.select_feedback')
 
             <!-- scripts is here -->
-            @include('admin.layouts.scripts')
+            @include('admin.layouts.scripts') 
             <script type="text/javascript">var csrf_token = "<?= csrf_token() ?>";</script>
+            <script type="text/javascript">var public_url = "<?= config('global.public_url') ?>";</script>
             <script>
                 $('.action_btn').on('click', function(e){
                     var target_modal = $(this).attr('data-target');

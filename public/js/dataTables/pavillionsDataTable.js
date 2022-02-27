@@ -6,6 +6,7 @@ $(document).ready(function () {
     $("#ajax_loader").css('display', 'block');
 
     var pavillions_html = '';
+    var pavillion_url = '';
 
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -22,6 +23,8 @@ $(document).ready(function () {
             $('#pagination').html(response.pagination);
 
             response.pavillions.data.forEach(function(pavillion) {
+
+                pavillion_url = public_url + 'pavillions/' + pavillion.slug;
 
                 pavillions_html = pavillions_html +
                 
@@ -49,7 +52,7 @@ $(document).ready(function () {
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"pavillion_id[]\" value=\""+ pavillion.id +"\" ></input> </td>\n" +
                 "<td>"+ pavillion.id +"</td>\n"+
                 "<td>"+ pavillion.name +"</td>\n"+
-                "<td>"+ pavillion.slug +"</td>\n"+
+                "<td>"+ pavillion_url +"</td>\n"+
                 "<td> <img src=\""+ pavillion.logo +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.main_banner +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.right_banner_1 +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
@@ -88,6 +91,7 @@ $(".filter_data_table").on('change input', function () {
     $("#ajax_loader").css('display', 'block');
 
     var pavillions_html = '';
+    var pavillion_url = '';
     
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -108,6 +112,8 @@ $(".filter_data_table").on('change input', function () {
             $('#pagination').html(response.pagination);
 
             response.pavillions.data.forEach(function(pavillion) {
+
+                pavillion_url = public_url + 'pavillions/' + pavillion.slug;
 
                 pavillions_html = pavillions_html +
                 
@@ -135,7 +141,7 @@ $(".filter_data_table").on('change input', function () {
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"pavillion_id[]\" value=\""+ pavillion.id +"\" ></input> </td>\n" +
                 "<td>"+ pavillion.id +"</td>\n"+
                 "<td>"+ pavillion.name +"</td>\n"+
-                "<td>"+ pavillion.slug +"</td>\n"+
+                "<td>"+ pavillion_url +"</td>\n"+
                 "<td> <img src=\""+ pavillion.logo +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.main_banner +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.right_banner_1 +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
@@ -174,6 +180,7 @@ $("#pagination").on('click', 'a', function(e) {
     $("#ajax_loader").css('display', 'block');
 
     var pavillions_html = '';
+    var pavillion_url = '';
     
     // filter data
     var rows_numbers = $('#rows_numbers').val();
@@ -194,6 +201,8 @@ $("#pagination").on('click', 'a', function(e) {
             $('#pagination').html(response.pagination);
 
             response.pavillions.data.forEach(function(pavillion) {
+
+                pavillion_url = public_url + 'pavillions/' + pavillion.slug;
 
                 pavillions_html = pavillions_html +
                 
@@ -221,7 +230,7 @@ $("#pagination").on('click', 'a', function(e) {
                 "<td> <input type=\"checkbox\" class=\"selected_items\" name=\"pavillion_id[]\" value=\""+ pavillion.id +"\" ></input> </td>\n" +
                 "<td>"+ pavillion.id +"</td>\n"+
                 "<td>"+ pavillion.name +"</td>\n"+
-                "<td>"+ pavillion.slug +"</td>\n"+
+                "<td>"+ pavillion_url +"</td>\n"+
                 "<td> <img src=\""+ pavillion.logo +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.main_banner +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
                 "<td> <img src=\""+ pavillion.right_banner_1 +"\" alt=\""+ pavillion.name +"\" width=\"150\" height=\"150\" /> </td>\n"+
