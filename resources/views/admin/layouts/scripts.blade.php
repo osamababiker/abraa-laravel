@@ -137,10 +137,6 @@
         singleDatePicker: true,
         showDropdowns: true,
     });
-
-    $(".daterangepicker").daterangepicker({
-        
-    });
             
     $(".ymd_datepicker").daterangepicker({
         singleDatePicker: true,
@@ -152,11 +148,22 @@
 
     $(".ymd_datepicker_range").daterangepicker({
         singleDatePicker: false,
-        showDropdowns: true,
+        showDropdowns: true, 
+        autoUpdateInput: false,
         locale: {
             format: "Y-M-D"
-        }
+        },        
     });
+    $('.ymd_datepicker_range').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('Y-M-D') + ' - ' + picker.endDate.format('Y-M-D'));
+        $(this).trigger("change");
+    });
+    $('.ymd_datepicker_range').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
+        $(this).trigger("change");
+    });
+
+
 </script>
 
 <script>
