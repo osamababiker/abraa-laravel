@@ -3,7 +3,7 @@ window.current_page = 1;
 // when the page is load 
 $(document).ready(function () {
 
-    $("#ajax_loader").css('display', 'block');
+    $("#ajax_loader").css('display', 'block'); 
 
     var suppliers_html = ''; 
     var is_verified = '';
@@ -454,20 +454,20 @@ function archive_supplier(supplier_id){
 // to send custome message to suppliers
 $(function(){ 
     $("#send_message_btn").on('click', function() {
-        var suppliers_ids = [];
+        var supplier_id = [];
         var subject = $("#subject").val();
         var message = $("#quill-editor p").text();
         var send_message_btn = $("#send_message_btn").val();
 
         $(':checkbox:checked').each(function(i){
-            suppliers_ids[i] = $(this).val();
+            supplier_id[i] = $(this).val();
         });
 
         $.ajax({
             url: "/suppliers/actions",
             type: "post",
             data: {
-                "suppliers_ids": suppliers_ids,
+                "supplier_id": supplier_id,
                 "subject": subject,
                 "message": message,
                 "send_message_btn": send_message_btn

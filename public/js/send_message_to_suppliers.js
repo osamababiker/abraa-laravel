@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 $("#send_email_btn").on('click', function() {
     $("#ajax_loader").css('display', 'block');
     var subject = $("#subject").val();
-    var suppliers_id = $(".selected_items").map(function() {
+    var supplier_id = $(".selected_items").map(function() {
         return $(this).val();
     }).get();
     var email_content = email_editor.root.innerHTML;
@@ -25,7 +25,7 @@ $("#send_email_btn").on('click', function() {
     $.ajax({
         url: url,
         data: {
-            "suppliers_id": suppliers_id,
+            "supplier_id": supplier_id,
             "subject": subject,
             "email_content": email_content,
             "send_message_to_suppliers": true,

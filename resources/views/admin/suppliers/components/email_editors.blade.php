@@ -48,7 +48,7 @@
                         <span class="ql-formats">
                             <button class="ql-direction" value="rtl"></button>
                             <select class="ql-align"></select>
-                        </span>
+                        </span> 
                         <span class="ql-formats">
                             <button class="ql-link"></button>
                             <button class="ql-image"></button>
@@ -59,7 +59,7 @@
                         </span>
                     </div>
                     <div id="email-editor"></div>
-                </div>
+                </div> 
             </div>
             <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

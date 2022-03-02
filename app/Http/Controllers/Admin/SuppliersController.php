@@ -691,7 +691,7 @@ class SuppliersController extends Controller
             return redirect()->back();
         }
 
-        if($request->has('send_message_to_suppliers')){
+        if($request->has('send_message_to_suppliers')){ 
             $suppliers_id = $request->supplier_id;
             $subject = $request->subject;
             $message = $request->email_content;
