@@ -9,7 +9,7 @@
 
         <div class="main">
 
-            <!-- main nav here -->
+            <!-- main nav here --> 
             @include('admin.layouts.nav')
 
             <main class="content">

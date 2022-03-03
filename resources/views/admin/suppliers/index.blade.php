@@ -29,7 +29,7 @@
                                             in this table </h5>
 
                                         <div class="row ml-1">
-                                            <a href="{{ route('suppliers.create') }}" class="btn btn-primary"> <i
+                                            <a href="{{ route('suppliers.create') }}" target="_blank" class="btn btn-primary"> <i
                                                     class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
                                             <button type="button" data-target="#delete_selected_confirm" class="btn btn-danger action_btn"> <i

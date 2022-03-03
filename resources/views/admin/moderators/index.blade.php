@@ -9,7 +9,7 @@
         <!-- main sidebar here -->
         @include('admin.layouts.sidebar')
 
-        <div class="main">
+        <div class="main"> 
 
             <!-- main nav here -->
             @include('admin.layouts.nav')
@@ -112,7 +112,6 @@
                 </div>
             </main>
 
-            @include('admin.layouts.scripts')
 
             <!-- scripts is here -->
             @include('admin.layouts.scripts')

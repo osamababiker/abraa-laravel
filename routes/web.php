@@ -1267,11 +1267,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('services/importExportView',  [
         ServicesController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('services/update', [
+        ServicesController::class, 'update'
+    ])->name('services.update');
     // custom delete route
     Route::get('services/{id}/destroy', [
         ServicesController::class, 'destroy'
     ]);
-    Route::resource('services', ServicesController::class, ['except' => ['destroy']]);
+    Route::resource('services', ServicesController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Memberships Plans Routes ====================== //

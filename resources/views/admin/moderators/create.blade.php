@@ -17,6 +17,16 @@
 
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Admin </h1>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -68,7 +78,10 @@
 
                 </div>
             </main>
-
+            
+            @if(session()->has('feedback'))
+                @include('admin.layouts.feedback')
+            @endif
             @include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')

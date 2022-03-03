@@ -581,7 +581,7 @@ class StoresController extends Controller
 
             DB::commit();
 
-            $message = 'Store hass been Added successfully';
+            $message = 'Store has been Added successfully';
             session()->flash('success', 'true');
             session()->flash('feedback_title', 'Success');
             session()->flash('feedback', $message);

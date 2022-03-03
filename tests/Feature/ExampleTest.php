@@ -18,5 +18,11 @@ class ExampleTest extends TestCase
         $response->assertOk();
 
         $response->assertSessionHasError('');
+
+        $response->assertRedirect('/');
+
+        $response->assertEquals('0', '0');
+
+        $response->assertInstanceOf(Carbon::class, '');
     }
 }

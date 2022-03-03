@@ -9,8 +9,9 @@ use App\Models\UserLevel;
 use App\Exports\AdminUserExport;
 use App\Imports\AdminUserImport;
 use App\Http\Requests\AdminUsersRequest;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Facades\Excel; 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUsersController extends Controller
 {
@@ -70,14 +71,14 @@ class AdminUsersController extends Controller
 
     
     public function store(AdminUsersRequest $request){
-        User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'userlevel' => $request->user_level,
-            'permissions' => json_encode([]),
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->userlevel = $request->user_level;
+        $user->permissions = json_encode([]);
+        $user->save();
 
         $message = "Admin has been added successfully";
         session()->flash('success', 'true');
