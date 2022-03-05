@@ -23,7 +23,7 @@ class BuyingRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return [ 
             'item_id' => 'required',
             'buyer_id' => 'required',
             'product_name' => 'required',
@@ -35,5 +35,5 @@ class BuyingRequest extends FormRequest
             'target_price' => 'required',
             'validity' => 'required'
         ];
-    }
+    } 
 }

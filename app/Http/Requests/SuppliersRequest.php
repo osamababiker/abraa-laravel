@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BuyersRequest extends FormRequest
+class SuppliersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,15 @@ class BuyersRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => 'required', 
-            'email' => 'required',
-            'phone' => 'required',
+            'business_name' => 'required',
             'country' => 'required',
-            'city' => 'required',
-            'company' => 'required',
             'interested_keywords' => 'required',
-            'verified' => 'required',
-            'active' => 'required', 
+            'primary_name' => 'required',
+            'email' => 'required|unique:users',
+            'phone' => 'required|unique:users',
+            'primary_position' => 'required',
+            'primary_whatsapp' => 'required',
+            'primary_line_number' => 'required'
         ];
     }
 }

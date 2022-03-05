@@ -17,6 +17,17 @@
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Membership Plans </h1>
 
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif 
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -24,36 +35,36 @@
                                     <form method="post" action="{{ route('membershipsPlans.store') }}">
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 form-group required">
                                                 <label for="name">Plan Name</label>
-                                                <input type="text" name="name" id="name" class="form-control">
+                                                <input required type="text" name="name" id="name" class="form-control">
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 form-group required">
                                                 <label for="code">Plan Code</label>
-                                                <input type="text" name="code" id="code" class="form-control">
+                                                <input required type="text" name="code" id="code" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="package_price">Plan Price</label>
-                                                <input type="text" name="package_price" id="package_price" class="form-control">
+                                                <input required type="text" name="package_price" id="package_price" class="form-control">
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="duration">Plan Duration</label>
-                                                <input type="text" name="duration" id="duration" class="form-control">
+                                                <input required type="text" name="duration" id="duration" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-row mt-4">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 form-group required">
                                                 <label for="sales">Sales</label>
-                                                <select name="sales" id="sales" class="form-control select2">
+                                                <select required name="sales" id="sales" class="form-control select2">
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="country_code">Country Code</label>
-                                                <select name="country_code" id="country_code" class="form-control select2">
+                                                <select required name="country_code" id="country_code" class="form-control select2">
                                                     <option value=""></option>
                                                     @foreach($countries as $country)
                                                         <option value="{{ $country->co_code }}">{{ $country->co_code }}</option>
@@ -62,9 +73,9 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="short_description">Plan Shor Description</label>
-                                                <textarea name="short_description" cols="3" rows="3" id="short_description" class="form-control"></textarea>
+                                                <textarea required name="short_description" cols="3" rows="3" id="short_description" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row mt-5 d-flex justify-content-center">

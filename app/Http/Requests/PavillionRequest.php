@@ -23,7 +23,7 @@ class PavillionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return [ 
             'name' => 'required',
             'logo' => 'required',
             'main_banner' => 'required',

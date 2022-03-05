@@ -37,7 +37,7 @@ class CategoriesRequest extends FormRequest
             'top_desc_id' => 'required',
             'footer_desc_id' => 'required',
             'meta_title' => 'required',
-            'meta_keywords' => 'required',
+            'meta_keywords' => 'required', 
             'meta_description' => 'required'
         ];
     }

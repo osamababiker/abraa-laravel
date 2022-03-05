@@ -16,6 +16,18 @@
                 <div class="container-fluid p-0">
 
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Store </h1>
+
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif 
+                    
                     <div class="col-12">
                         <form id="smartwizard-validation" action="{{ route('stores.store') }}" method="post" class="wizard wizard-primary" enctype='multipart/form-data'>
                             @csrf
@@ -40,19 +52,19 @@
                                         <h3> Provide Account Details </h3>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Full name</label>
                                             <input type="text" name="full_name" class="form-control required">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Email address</label>
                                             <input type="email" name="email" class="form-control required" >
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Password</label>
                                             <input type="password" name="password" class="form-control required" >
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Country</label>
                                             <select name="country" id="country" class="form-control required select2">
                                                 <option value="">Select Country</option>
@@ -61,7 +73,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">City</label>
                                             <select name="city" id="city" class="form-control required select2">
                                                 <option value="">Select City</option>
@@ -70,7 +82,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Phone</label>
                                             <input type="number" class="form-control required" name="phone">
                                         </div>
@@ -81,55 +93,55 @@
                                         <h3> Provide Store Details </h3>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Store Name</label>
                                             <input type="text" name="store_name" class="form-control required"
                                                 >
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group required col-md-6">
                                             <label class="form-label">Sub Domain</label>
                                             <input type="text" name="sub_domain" class="form-control required"
                                                 >
                                         </div>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group required col-md-12">
                                             <label class="form-label">Contact Address</label>
                                             <textarea name="contact_address" cols="4" rows="4"
                                                 class="form-control required"></textarea>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">Website Url</label>
-                                            <input type="text" class="form-control required" name="weburl">
+                                            <input type="text" class="form-control" name="weburl">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="form-label">About Store</label>
                                             <textarea name="aboutpage" cols="4" rows="4"
-                                                class="form-control required"></textarea>
+                                                class="form-control"></textarea>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Facebook Url</label>
-                                            <input type="text" class="form-control required" name="facebook_url">
+                                            <input type="text" class="form-control" name="facebook_url">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Twitter Url</label>
-                                            <input type="text" class="form-control required" name="twitter_url">
+                                            <input type="text" class="form-control" name="twitter_url">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Instagram Url</label>
-                                            <input type="text" class="form-control required" name="instagram_url">
+                                            <input type="text" class="form-control" name="instagram_url">
                                         </div>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group required col-md-12">
                                             <label class="form-label">Meta Keywords</label>
-                                            <select name="meta_keywords[]" multiple="multiple" id="meta_keywords" class="form-control select2">
+                                            <select name="meta_keywords[]" required multiple="multiple" id="meta_keywords" class="form-control select2">
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group required col-md-12">
                                             <label for="meta_title">Meta Title</label>
-                                            <textarea name="meta_title" id="meta_title" cols="4" rows="4"
+                                            <textarea required name="meta_title" id="meta_title" cols="4" rows="4"
                                                 class="form-control"></textarea>
                                         </div>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group required col-md-12">
                                             <label for="meta_description">Meta Description</label>
-                                            <textarea name="meta_description" id="meta_description" cols="8"
+                                            <textarea required name="meta_description" id="meta_description" cols="8"
                                                 rows="8"
                                                 class="form-control"></textarea>
                                         </div>

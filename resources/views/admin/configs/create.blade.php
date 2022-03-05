@@ -17,6 +17,16 @@
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New config </h1>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -24,11 +34,11 @@
                                     <form method="post" action="{{ route('configs.store') }}">
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="config_name">Config Name</label>
                                                 <input type="text" name="config_name" id="config_name" class="form-control">
                                             </div>
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="config_value">Config Value</label>
                                                 <textarea name="config_value" cols="3" rows="3" id="config_value" class="form-control"></textarea>
                                             </div>

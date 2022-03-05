@@ -21,7 +21,7 @@ class MembershipPlansRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() 
     {
         return [
             'code' => 'required',

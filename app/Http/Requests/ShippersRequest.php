@@ -22,7 +22,7 @@ class ShippersRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    { 
         return [
             'full_name' => 'required',
             'email' => 'required|email',

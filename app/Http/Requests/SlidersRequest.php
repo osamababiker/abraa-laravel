@@ -23,7 +23,7 @@ class SlidersRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return [ 
             'title' => 'required',
             'slider' => 'required',
             'link' => 'required',

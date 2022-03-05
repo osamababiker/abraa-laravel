@@ -22,7 +22,7 @@ class CurrenciesRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    { 
         return [
             'code' => 'required',
             'conversion_rate' => 'required',

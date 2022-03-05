@@ -34,23 +34,23 @@
                                     <form method="post" action="{{ route('buyers.store') }}">
                                         @csrf
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="full_name">Full Name</label>
                                                 <input name="full_name" type="text" class="form-control" id="full_name">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="email">Email</label>
                                                 <input name="email" type="email" class="form-control" id="email">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="password">Password</label>
                                                 <input name="password" type="password" class="form-control" id="password">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="counter">Country</label>
                                                 <select name="country" id="country" class="form-control select2">
                                                     <option value="">Select country</option>
@@ -59,7 +59,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="city">City</label>
                                                 <select name="city" id="city" class="form-control select2">
                                                     <option value="">Select city</option>
@@ -67,17 +67,17 @@
                                             </div>
                                         </div> 
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="phone">Phone</label>
                                                 <input type="number" class="form-control" name="phone" id="phone">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="company">Company</label>
                                                 <input type="text" class="form-control" name="company" id="company">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="primary_name">Interested Products</label>
                                                 <select name="interested_keywords[]" id="interested_keywords" multiple="multiple" class="form-control select2">
                                                     
@@ -85,14 +85,14 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="verified">Is Verified</label>
                                                 <select name="verified" id="verified" class="form-control select2">
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="active">Is Actived</label>
                                                 <select name="active" id="active" class="form-control select2">
                                                     <option value="1">Yes</option>

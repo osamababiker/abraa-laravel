@@ -17,6 +17,16 @@
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Home Page Buyer </h1>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif  
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -24,24 +34,24 @@
                                     <form method="post" action="{{ route('homePageBuyers.store') }}" enctype="multipart/form-data">
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 form-group required">
                                                 <label for="buyername">Buyer Name</label>
                                                 <input type="text" name="buyername" id="buyername" class="form-control">
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 form-group required">
                                                 <label for="buyer_link">Buyer Link</label>
                                                 <input type="text" name="buyer_link" id="buyer_link" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12">
-                                                <div class="file-drop-area"> 
+                                                <div class="file-drop-area required"> 
                                                     <span class="choose-file-button">Choose buyer Logo</span> 
                                                     <input type="file" name="buyer_logo" id="buyer-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
                                                 </div>
                                                 <div id="buyer_preview"></div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12 required">
                                                 <label for="status"> Choose Status </label>
                                                 <select name="status" id="status" class="form-control select2">
                                                     <option value=""></option>

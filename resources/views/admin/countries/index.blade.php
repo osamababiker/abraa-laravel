@@ -27,7 +27,7 @@
                                         <h5 class="card-title"> You have <span id="countries_counter"></span> Country in
                                             this table </h5>
                                         <div class="row">
-                                            <a href="{{ route('countries.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
+                                            <a href="{{ route('countries.create') }}" target="_blank" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
                                             <button type="button" data-target="#delete_selected_confirm"
                                                 class="btn btn-danger action_btn"> <i class="fa fa-trash"></i> Archive Selected

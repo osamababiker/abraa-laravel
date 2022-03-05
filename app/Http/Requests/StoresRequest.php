@@ -23,7 +23,7 @@ class StoresRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return [ 
             'full_name' => 'required',
             'email' => 'required|unique:users',
             'phone' => 'required|unique:users',
@@ -32,6 +32,9 @@ class StoresRequest extends FormRequest
             'city' => 'required',
             'store_name' => 'required',
             'sub_domain' => 'required|unique:users_store',
+            'meta_keywords' => 'required',
+            'meta_description' => 'required',
+            'meta_title' => 'required',
         ];
     }
 }

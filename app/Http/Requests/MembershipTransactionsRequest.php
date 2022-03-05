@@ -23,7 +23,7 @@ class MembershipTransactionsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return [ 
             'user_id' => 'required',
             'plan_id' => 'required',
             'total_amount' => 'required',

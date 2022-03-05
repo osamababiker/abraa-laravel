@@ -17,55 +17,66 @@
 
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Buying Request </h1>
 
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif 
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <form method="post" action="{{ route('rfqs.store') }}">
                                         @csrf
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12 autocomplete autocomplete-buyer">
+                                        <div class="form-row"> 
+                                            <div class="form-group required col-md-12 autocomplete autocomplete-buyer">
                                                 <label for="buyer_search">Select Buyer</label>
                                                 <input type="hidden" name="buyer_id" id="buyer_id">
-                                                <input name="buyer_search" type="text" class="form-control" id="buyer_search">
+                                                <input required name="buyer_search" type="text" class="form-control" id="buyer_search">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-12 autocomplete autocomplete-product">
+                                            <div class="form-group required col-md-12 autocomplete autocomplete-product">
                                                 <label for="product_search">Select Product</label>
                                                 <input type="hidden" name="item_id" id="item_id">
-                                                <input name="product_search" type="text" class="form-control" id="product_search">
+                                                <input required name="product_search" type="text" class="form-control" id="product_search">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="product_name">Product Name</label>
-                                                <input name="product_name" type="text" class="form-control" id="product_name">
+                                                <input required name="product_name" type="text" class="form-control" id="product_name">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="quantity">Quantity</label>
-                                                <input name="quantity" type="number" class="form-control" id="quantity">
+                                                <input required name="quantity" type="number" class="form-control" id="quantity">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="product_detail">Product Details</label>
-                                                <textarea name="product_detail" id="product_detail" cols="30" rows="10" class="form-control"></textarea>
+                                                <textarea required name="product_detail" id="product_detail" cols="30" rows="10" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="unit_id">Select Unit</label>
-                                                <select name="unit_id" id="unit_id" class="form-control select2">
+                                                <select required name="unit_id" id="unit_id" class="form-control select2">
                                                     <option value=""></option>
                                                     @foreach($units as $unit)
                                                         <option value="{{ $unit->id }}">{{ $unit->unit_en }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="buying_frequency_id">Buying Frequency</label>
-                                                <select name="buying_frequency_id" id="buying_frequency_id" class="form-control select2">
+                                                <select required name="buying_frequency_id" id="buying_frequency_id" class="form-control select2">
                                                     <option value=""></option>
                                                     @foreach($buying_frequencies as $buying_frequency)
                                                         <option value="{{ $buying_frequency->id }}">{{ $buying_frequency->buying_frequency_en }}</option>
@@ -74,19 +85,19 @@
                                             </div>
                                         </div> 
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group required col-md-12">
                                                 <label for="reference_url">Reference URL</label>
-                                                <input type="text" class="form-control" name="reference_url" id="reference_url">
+                                                <input required type="text" class="form-control" name="reference_url" id="reference_url">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="target_price">Target Price</label>
-                                                <input name="target_price" type="text" class="form-control" id="target_price">
+                                                <input required name="target_price" type="text" class="form-control" id="target_price">
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group required col-md-6">
                                                 <label for="validity">Validity</label>
-                                                <input name="validity" type="text" class="form-control ymd_datepicker" id="validity">
+                                                <input required name="validity" type="text" class="form-control ymd_datepicker" id="validity">
                                             </div>
                                         </div>
                                         <div class="form-row d-flex justify-content-center">

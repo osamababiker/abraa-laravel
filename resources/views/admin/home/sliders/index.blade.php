@@ -29,7 +29,7 @@
                                             in
                                             this table </h5>
                                         <div class="row">
-                                            <a href="{{ route('homeSliders.create') }}" target="_blanck"
+                                            <a href="{{ route('homeSliders.create') }}" target="_blank"
                                                 class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                             &nbsp; &nbsp;
                                             <button type="button" 

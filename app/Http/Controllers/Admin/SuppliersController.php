@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Http\Requests\SuppliersRequest;
 use App\Models\Supplier;
 use App\Models\Pavillion;
 use App\Models\Item;
@@ -583,18 +584,7 @@ class SuppliersController extends Controller
         return view('admin.suppliers.buyingRequests.create', compact(['supplier']));
     }
     
-    public function store(Request $request){
-        $this->validate($request, [
-            'business_name' => 'required',
-            'country' => 'required',
-            'interested_keywords' => 'required',
-            'primary_name' => 'required',
-            'email' => 'required|unique:users',
-            'phone' => 'required|unique:users',
-            'primary_position' => 'required',
-            'primary_whatsapp' => 'required',
-            'primary_line_number' => 'required'
-        ]);
+    public function store(SuppliersRequest $request){
 
         $salt = $this->getRandomString(3); 
         $register_on = date('Y-m-d H:i:s');

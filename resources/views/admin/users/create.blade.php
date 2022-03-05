@@ -23,27 +23,27 @@
                                 <div class="card-body">
                                     <form method="post" action="{{ route('users.store') }}">
                                         @csrf
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Name</label>
                                             <input class="form-control form-control-lg" type="text" name="name"
                                                 placeholder="Enter your name" />
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Username</label>
                                             <input class="form-control form-control-lg" type="text" name="username"
                                                 placeholder="Enter your username" />
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Email</label>
                                             <input class="form-control form-control-lg" type="email" name="email"
                                                 placeholder="Enter your email" />
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Password</label>
                                             <input class="form-control form-control-lg" type="password"
                                                 name="password" placeholder="Enter password" />
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group required">
                                             <label>Password Confirmation</label>
                                             <input class="form-control form-control-lg" type="password"
                                                 name="password_confirmation" placeholder="Re-Enter password" />

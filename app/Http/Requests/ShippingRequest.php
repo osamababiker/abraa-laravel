@@ -23,7 +23,7 @@ class ShippingRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return [ 
             'sub_of' => 'required',
             'company_name' => 'required',
             'email' => 'required',

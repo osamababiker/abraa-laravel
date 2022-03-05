@@ -17,6 +17,17 @@
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Slider </h1>
 
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif 
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -30,31 +41,31 @@
                                                     <input type="file" name="slider" id="slider-input" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif"> 
                                                 </div>
                                                 <div id="slider_preview"></div>
-                                            </div>
+                                            </div> 
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 required">
                                                 <label for="link">Slider Link</label>
-                                                <input type="text" class="form-control" name="link" id="link">
+                                                <input required type="text" class="form-control" name="link" id="link">
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="title">Alt Text</label>
+                                            <div class="col-md-6 required">
+                                                <label required for="title">Alt Text</label>
                                                 <input type="text" class="form-control" name="title" id="title">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 required">
                                                 <label for="region"> Select Language </label>
-                                                <select name="region" id="region" class="form-control select2">
+                                                <select required name="region" id="region" class="form-control select2">
                                                     <option value=""></option>
                                                     @foreach($languages as $language)
                                                         <option value="{{ $language->code }}">{{ $language->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 required">
                                                 <label for="status"> Choose Status </label>
-                                                <select name="status" id="status" class="form-control select2">
+                                                <select required name="status" id="status" class="form-control select2">
                                                     <option value=""></option>
                                                     <option value="1">Active</option>
                                                     <option value="0">Not Active</option>

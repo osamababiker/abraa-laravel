@@ -8,7 +8,7 @@
         @include('admin.layouts.sidebar')
 
         <div class="main">
-
+ 
             <!-- main nav here -->
             @include('admin.layouts.nav')
 
@@ -57,12 +57,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-row mt-4">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="business_name">Business Name</label>
                                                     <input type="text"  name="business_name" class="form-control" id="business_name"
                                                         placeholder="business name">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="counter">Country</label>
                                                     <select name="country"  id="country" class="form-control select2">
                                                         <option value="">Select country</option>
@@ -73,28 +73,28 @@
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group required col-md-12">
                                                     <label for="interested_keywords">Business keyword</label>
                                                     <select name="interested_keywords[]" id="interested_keywords" multiple="multiple" class="form-control select2">
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="primary_name">Primary Contact Person</label>
                                                     <input type="text" name="primary_name" class="form-control" id="primary_name">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="primary_email">Primary Email</label>
                                                     <input type="email" name="email" class="form-control" id="primary_email">
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="primary_m_phone">Primary Mobile Number</label>
                                                     <input type="number" name="phone" class="form-control" id="primary_m_phone">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="primary_position">Primary Position</label>
                                                     <select id="primary_position" name="primary_position" class="form-control select2">
                                                         <option value="1">
@@ -110,11 +110,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="primary_whatsapp">WhatsApp Number</label>
                                                     <input type="text" name="primary_whatsapp" class="form-control" id="primary_whatsapp">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group required col-md-6">
                                                     <label for="primary_line_number">Land Line Number</label>
                                                     <input type="text" name="primary_line_number" class="form-control" id="primary_line_number">
                                                 </div>

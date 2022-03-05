@@ -64,7 +64,7 @@ class ConfigsController extends Controller
     }
    
     public function store(ConfigsRequest $request){
-        $config = new Config();
+        $config = new Config(); 
         $config->config_name = $request->config_name;
         $config->config_value = $request->config_value;
         $config->save();

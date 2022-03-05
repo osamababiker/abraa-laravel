@@ -17,6 +17,16 @@
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New state </h1>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -24,14 +34,14 @@
                                 <form method="post" action="{{ route('states.store') }}">
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="capital">Is Capital</label>
                                                 <select name="capital" id="capital" class="form-control select2">
                                                     <option value="1">is capital</option>
                                                     <option value="0">not capital</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="sub_of">Select Country</label>
                                                 <select name="sub_of" id="sub_of" class="form-control select2">
                                                     <option value=""></option>
@@ -42,11 +52,11 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="ar_name">state Arabic Name</label>
                                                 <input type="text" name="ar_name" id="ar_name" class="form-control">
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="en_name">state English Name</label>
                                                 <input type="text" name="en_name" id="en_name" class="form-control">
                                             </div>

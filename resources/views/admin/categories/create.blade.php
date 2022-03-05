@@ -13,9 +13,20 @@
             @include('admin.layouts.nav')
 
             <main class="content">
-                <div class="container-fluid p-0">
+                <div class="container-fluid p-0"> 
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Category </h1>
+
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif 
 
                     <div class="row">
                         <div class="col-md-12">
@@ -24,28 +35,28 @@
                                     <form method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="sub_of">Category Parent</label>
-                                                <select name="sub_of" id="sub_of" class="form-control select2">
+                                                <select required name="sub_of" id="sub_of" class="form-control select2">
                                                     <option value=""></option>
                                                     @foreach($categories as $category)
                                                         <option value="$category->id">{{ $category->en_title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="slug">Category Slug</label>
-                                                <input type="text" name="slug" class="form-control" id="slug">
+                                                <input type="text" required name="slug" class="form-control" id="slug">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="ar_title">Title (AR)</label>
-                                                <input type="text" name="ar_title" class="form-control" id="ar_title">
+                                                <input type="text" required name="ar_title" class="form-control" id="ar_title">
                                             </div>
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-md-6 required form-group">
                                                 <label for="en_title">Title (EN)</label>
-                                                <input type="text" name="en_title" class="form-control" id="en_title">
+                                                <input type="text" required name="en_title" class="form-control" id="en_title">
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -69,13 +80,13 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="ar_description">Category Description (AR)</label>
-                                                <textarea name="ar_description" id="ar_description" cols="30" rows="8" class="form-control"></textarea>
+                                                <textarea required name="ar_description" id="ar_description" cols="30" rows="8" class="form-control"></textarea>
                                             </div>
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="en_description">Category Description (EN)</label>
-                                                <textarea name="en_description" id="en_description" cols="30" rows="8" class="form-control"></textarea>
+                                                <textarea required name="en_description" id="en_description" cols="30" rows="8" class="form-control"></textarea>
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label for="cn_description">Category Description (CN)</label>
@@ -95,24 +106,24 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-3 required form-group">
                                                 <label for="sort_id">Sort ID</label>
-                                                <input type="number" class="form-control" name="sort_id" id="sort_id">
+                                                <input required type="number" class="form-control" name="sort_id" id="sort_id">
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-3 required form-group">
                                                 <label for="sort_order">Sort Order</label>
-                                                <input type="number" class="form-control" name="sort_order" id="sort_order">
+                                                <input required type="number" class="form-control" name="sort_order" id="sort_order">
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-3 required form-group">
                                                 <label for="status">Category Status</label>
-                                                <select name="status" id="status" class="form-control select2">
+                                                <select required name="status" id="status" class="form-control select2">
                                                     <option value="1">Active</option>
                                                     <option value="0">Not Active</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 form-group">
+                                            <div class="col-md-3 required form-group">
                                                 <label for="is_home_thumb">Is Home Category</label>
-                                                <select name="is_home_thumb" id="is_home_thumb" class="form-control select2">
+                                                <select required name="is_home_thumb" id="is_home_thumb" class="form-control select2">
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
                                                 </select>
@@ -145,17 +156,17 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="meta_title">Meta Title</label>
-                                                <input type="text" id="meta_title" name="meta_title" class="form-control">
+                                                <input required type="text" id="meta_title" name="meta_title" class="form-control">
                                             </div>
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="meta_keywords">Meta Keywords</label>
-                                                <textarea name="meta_keywords" id="meta_keywords" cols="30" rows="8" class="form-control"></textarea>
+                                                <textarea required name="meta_keywords" id="meta_keywords" cols="30" rows="8" class="form-control"></textarea>
                                             </div>
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 required form-group">
                                                 <label for="meta_description">Meta Description</label>
-                                                <textarea name="meta_description" id="meta_description" cols="30" rows="8" class="form-control"></textarea>
+                                                <textarea required name="meta_description" id="meta_description" cols="30" rows="8" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row mt-5 d-flex justify-content-center">

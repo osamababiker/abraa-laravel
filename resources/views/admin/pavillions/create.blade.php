@@ -16,6 +16,16 @@
                 <div class="container-fluid p-0">
  
                     <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New pavillion </h1>
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger pt-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif 
 
                     <div class="row">
                         <div class="col-md-12">
@@ -24,7 +34,7 @@
                                     <form method="post" action="{{ route('pavillions.store') }}" enctype="multipart/form-data">
                                         @csrf 
                                         <div class="form-row mt-4">
-                                            <div class="col-md-12 form-group">
+                                            <div class="col-md-12 form-group required">
                                                 <label for="name">Pavillion Name</label>
                                                 <input type="text" name="name" class="form-control" id="name">
                                             </div>
