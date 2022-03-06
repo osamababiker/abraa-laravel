@@ -619,7 +619,7 @@ class StoresController extends Controller
         $store = Store::findOrFail($request->store_id);
         $supplier = Supplier::findOrFail($store->sub_of);
 
-        DB::beginTransaction();
+        DB::beginTransaction(); 
         try {
             
             if($request->password){

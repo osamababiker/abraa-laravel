@@ -94,8 +94,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="table-container">
-                                            <table id="" class="table table-striped">
+                                        <div class="table-container table-parent-wrapper">
+                                            <table id="" class="table table-striped table-child-wrapper">
                                                 <thead>
                                                     <tr>
                                                         <th> <input type="checkbox" name="all_colums"
@@ -116,9 +116,8 @@
 
                                                 </tbody>
                                             </table>
-                                            <div id="pagination" class="d-flex justify-content-center">
-                                            </div>
                                         </div>
+                                        <hr><div id="pagination" class="d-flex justify-content-center"></div>
                                         @include('admin.suppliers.stores.components.delete_selected')
                                     </div>
                                 </div>

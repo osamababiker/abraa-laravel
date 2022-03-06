@@ -82,8 +82,8 @@
 
                                     <form action="{{ route('closedRfqs.actions') }}" id="buying_request_actions_form" method="post">
                                         @csrf
-                                        <div class="table-container">
-                                            <table id="" class="table table-striped">
+                                        <div class="table-container table-parent-wrapper">
+                                            <table id="" class="table table-striped table-child-wrapper">
                                                 <thead>
                                                     <tr>
                                                         <th> <input type="checkbox" class="select_all_colums"> </th>
@@ -108,9 +108,8 @@
 
                                                 </tbody>
                                             </table> 
-                                            <div id="pagination" class="d-flex justify-content-center">
-                                            </div>
                                         </div>
+                                        <hr><div id="pagination" class="d-flex justify-content-center"></div>
                                         @if(session()->has('feedback'))
                                             @include('admin.layouts.feedback')
                                         @endif
