@@ -52,7 +52,7 @@ class RfqsExport implements FromCollection, WithMapping, WithHeadings
                 $rfq->item_id > 0 ? 'product' : 'global',
                 $rfq->date_added
             ];
-        }
+        }  
         else return [];
     }
 
