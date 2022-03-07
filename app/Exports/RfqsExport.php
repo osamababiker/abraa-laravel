@@ -26,7 +26,6 @@ class RfqsExport implements FromCollection, WithMapping, WithHeadings
             'Unit',
             'Buying Frequency',
             'tags',
-            'status',
             'created at'
         ];
     }
@@ -51,11 +50,6 @@ class RfqsExport implements FromCollection, WithMapping, WithHeadings
                 $rfq->unit ? $rfq->unit->unit_en : '',
                 $rfq->buying_frequency ? $rfq->buying_frequency->buying_frequency_en : '',
                 $rfq->item_id > 0 ? 'product' : 'global',
-                $rfq->status == 1 ? 'pending' : 
-                    $rfq->status == 2 ? 'approved' : 
-                    $rfq->status == 3 ? 'completed' :
-                    $rfq->status == 4 ? 'lost' : 
-                    $rfq->status == 5 ? 'canceld' : '',
                 $rfq->date_added
             ];
         }
