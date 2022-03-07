@@ -213,7 +213,7 @@ class RfqsController extends Controller
     
     // import & export to excel
     public function exportExcel() {
-        return Excel::download(new RfqsExport, 'stores.xlsx'); 
+        return Excel::download(new RfqsExport, 'buying_requests.xlsx'); 
     }
    
     public function importExcel() {

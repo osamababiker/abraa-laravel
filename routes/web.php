@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\ShippersController;
 use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\StoresController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\BuyersController;
+use App\Http\Controllers\Admin\BuyersController; 
 use App\Http\Controllers\Admin\BuyerMessagesController;
 use App\Http\Controllers\Admin\RfqInvoicesController;
 use App\Http\Controllers\Admin\RfqsController;

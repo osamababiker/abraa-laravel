@@ -21,9 +21,6 @@ class Rfq extends Model
         return $this->belongsTo(Country::class,'country_code','co_code');
     }
  
-    public function city(){
-        return $this->belongsTo(State::class,'city');
-    }
  
     public function buyer(){ 
         return $this->belongsTo(Buyer::class,'buyer_id');

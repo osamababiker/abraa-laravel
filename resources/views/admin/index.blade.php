@@ -47,6 +47,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card illustration flex-fill">
+                                <a href="#">
                                 <div class="card-body p-0 d-flex flex-fill">
                                     <div class="row no-gutters w-100">
                                         <div class="col-6">
@@ -61,11 +62,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
-                                <div class="card-body py-4">
+                                <a href="{{ route('stores.pending.index') }}">
+                                <div class="card-body py-4"> 
                                     <div class="media">
                                         <div class="media-body">
                                             <h3 class="mb-2">{{ $pending_stores_count }}</h3> 
@@ -85,10 +88,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
+                                <a href="{{ route('items.index') }}">
                                 <div class="card-body py-4">
                                     <div class="media">
                                         <div class="media-body">
@@ -109,10 +114,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
+                                <a href="#">
                                 <div class="card-body py-4">
                                     <div class="media">
                                         <div class="media-body">
@@ -131,10 +138,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
+                                <a href="{{ route('rfqs.index') }}">
                                 <div class="card-body py-4">
                                     <div class="media">
                                         <div class="media-body">
@@ -155,10 +164,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
+                                <a href="{{ route('globalRfqs.index') }}">
                                 <div class="card-body py-4">
                                     <div class="media">
                                         <div class="media-body">
@@ -179,10 +190,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
+                                <a href="#">
                                 <div class="card-body py-4">
                                     <div class="media">
                                         <div class="media-body">
@@ -201,10 +214,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-md-3 d-flex">
                             <div class="card flex-fill">
+                                <a href="#">
                                 <div class="card-body py-4">
                                     <div class="media">
                                         <div class="media-body">
@@ -218,6 +233,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                     </div>
