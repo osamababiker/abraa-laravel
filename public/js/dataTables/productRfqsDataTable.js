@@ -34,11 +34,11 @@ $(document).ready(function () {
 
                 if(request.unit){
                     unit = request.unit.unit_en;
-                }
+                }else unit = '';
 
                 if(request.category){
                     category = request.category.en_title;
-                }
+                }else category = '';
 
                 if(request.buyer){
                     buyer_id = request.buyer.id;
@@ -46,6 +46,11 @@ $(document).ready(function () {
                     buyer_email = request.buyer.email;
                     buyer_phone = request.buyer.phone;
 
+                }else {
+                    buyer_id = '';
+                    buyer_name = '';
+                    buyer_email = '';
+                    buyer_phone = '';
                 }
 
                 if(request.country){
@@ -54,7 +59,7 @@ $(document).ready(function () {
                 
                 if(request.approved_by != 0 && request.approved_by_admin){
                     approved_by  = request.approved_by_admin.name;
-                }
+                }else approved_by = '';
                 
                 buying_request_html = buying_request_html +
 
@@ -161,26 +166,31 @@ $(".filter_data_table").on('change input', function () {
 
                 if(request.unit){
                     unit = request.unit.unit_en;
-                }
+                }else unit = '';
 
                 if(request.category){
                     category = request.category.en_title;
-                }
+                }else category = '';
 
                 if(request.buyer){
                     buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
                     buyer_email = request.buyer.email;
                     buyer_phone = request.buyer.phone;
+                }else {
+                    buyer_id = '';
+                    buyer_name = '';
+                    buyer_email = '';
+                    buyer_phone = '';
                 }
 
                 if(request.country){
                     country = request.country.en_name;
-                }
+                }else country = '';
                 
                 if(request.approved_by != 0 && request.approved_by_admin){
                     approved_by  = request.approved_by_admin.name;
-                }
+                }else approved_by = '';
                 
                 buying_request_html = buying_request_html +
 
@@ -288,26 +298,31 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(request.unit){
                     unit = request.unit.unit_en;
-                }
+                }else unit = '';
 
                 if(request.category){
                     category = request.category.en_title;
-                }
+                }else category = '';
 
                 if(request.buyer){
                     buyer_id = request.buyer.id;
                     buyer_name = request.buyer.full_name;
                     buyer_email = request.buyer.email;
                     buyer_phone = request.buyer.phone;
+                }else {
+                    buyer_id = '';
+                    buyer_name = '';
+                    buyer_email = '';
+                    buyer_phone = '';
                 }
 
                 if(request.country){
                     country = request.country.en_name;
-                }
+                }else country = '';
                 
                 if(request.approved_by != 0 && request.approved_by_admin){
                     approved_by  = request.approved_by_admin.name;
-                }
+                }else approved_by = '';
                 
                 buying_request_html = buying_request_html +
 
