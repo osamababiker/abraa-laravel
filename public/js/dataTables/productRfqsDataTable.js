@@ -45,11 +45,12 @@ $(document).ready(function () {
                     buyer_name = request.buyer.full_name;
                     buyer_email = request.buyer.email;
                     buyer_phone = request.buyer.phone;
+
                 }
 
                 if(request.country){
                     country = request.country.en_name;
-                }
+                }else country = '';
                 
                 if(request.approved_by != 0 && request.approved_by_admin){
                     approved_by  = request.approved_by_admin.name;

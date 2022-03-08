@@ -36,7 +36,7 @@ class RfqsController extends Controller
  
         $rows_numbers = $request->rows_numbers;
         $buying_request_status = $request->buying_request_status; 
-
+ 
         $buying_request_obj = Rfq::where('status', 1);
 
         $buying_requests_count = $buying_request_obj->count();

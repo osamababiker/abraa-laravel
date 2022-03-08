@@ -13,7 +13,7 @@ class Buyer extends Model
     protected $table = "users";
     protected $guarded = []; 
 
-    public function buyer_country() {
+    public function buyer_country() { 
         return $this->belongsTo(Country::class,'country','co_code');
     } 
 

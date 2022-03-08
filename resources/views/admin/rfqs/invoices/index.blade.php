@@ -17,14 +17,14 @@
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3 mb-3">Manage All Quotes Table</h1>
+                    <h1 class="h3 mb-3">Manage All Buying Requests </h1>
 
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header ml-3">
                                     <h5 class="card-title"> You have <span id="buying_request_invoices_counter"></span>
-                                        Quotes in this table </h5>
+                                        Requests in this table </h5>
                                     <div class="row">
                                         <a href="{{ route('rfqInvoices.create') }}" target="_blanck" class="btn btn-primary"> <i class="fa fa-plus"></i> Add New </a>
                                         &nbsp; &nbsp;

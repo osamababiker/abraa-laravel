@@ -23,7 +23,7 @@ class AdsController extends Controller
     public function index(){
         $adsCategories = AdsCategory::all();
         return view('admin.home.ads.index', compact(['adsCategories'])); 
-    }
+    } 
 
     public function getadsAsJson(Request $request){
         $rows_numbers = $request->rows_numbers;
