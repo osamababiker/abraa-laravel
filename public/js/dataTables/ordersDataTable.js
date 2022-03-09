@@ -36,15 +36,20 @@ $(document).ready(function () {
                     full_name = order.user.full_name;
                     email = order.user.email;
                     phone = order.user.phone;
+                }else {
+                    country = '';
+                    full_name = '';
+                    email = '';
+                    phone = '';
                 }
 
                 if(order.status){
                     status = order.status.title;
-                }
+                }else status = '';
 
                 if(order.currency){
                     currency = order.currency.name_en;
-                }
+                }else currency = '';
 
                 if(order.payment_geteway == 3){
                     payment_geteway = 'Outside UAE'; 
@@ -175,15 +180,20 @@ $(".filter_data_table").on('change input', function () {
                     full_name = order.user.full_name;
                     email = order.user.email;
                     phone = order.user.phone;
+                }else {
+                    country = '';
+                    full_name = '';
+                    email = '';
+                    phone = '';
                 }
 
                 if(order.status){
                     status = order.status.title;
-                }
+                }else status = '';
 
                 if(order.currency){
                     currency = order.currency.name_en;
-                }
+                }else currency = '';
 
                 if(order.payment_geteway == 3){
                     payment_geteway = 'Outside UAE';
@@ -314,15 +324,20 @@ $("#pagination").on('click', 'a', function(e) {
                     full_name = order.user.full_name;
                     email = order.user.email;
                     phone = order.user.phone;
+                }else {
+                    country = '';
+                    full_name = '';
+                    email = '';
+                    phone = '';
                 }
 
                 if(order.status){
                     status = order.status.title;
-                }
+                }else status = '';
 
                 if(order.currency){
                     currency = order.currency.name_en;
-                }
+                }else currency = '';
 
                 if(order.payment_geteway == 3){
                     payment_geteway = 'Outside UAE';

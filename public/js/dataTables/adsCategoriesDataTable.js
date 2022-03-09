@@ -34,7 +34,7 @@ $(document).ready(function () {
 
                 if(adsCategory.category){
                     category = adsCategory.category.en_title;
-                }
+                }else category = '';
 
                 adsCategories_html = adsCategories_html +
                 
@@ -121,7 +121,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(adsCategory.category){
                     category = adsCategory.category.en_title;
-                }
+                }else category = '';
 
                 adsCategories_html = adsCategories_html +
                 
@@ -210,7 +210,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(adsCategory.category){
                     category = adsCategory.category.en_title;
-                }
+                }else category = '';
 
                 adsCategories_html = adsCategories_html +
                 

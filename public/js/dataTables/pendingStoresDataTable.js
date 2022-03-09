@@ -31,6 +31,9 @@ $(document).ready(function () {
                 if(store.user){
                     user_email = store.user.email;
                     store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
+                }else {
+                    user_email = '';
+                    store_url = '';
                 }
 
                 if(store.store_verified == 1){
@@ -144,6 +147,9 @@ $(".filter_data_table").on('change input', function () {
                 if(store.user){
                     user_email = store.user.email;
                     store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
+                }else {
+                    user_email = '';
+                    store_url = '';
                 }
 
                 if(store.store_verified == 1){
@@ -258,6 +264,9 @@ $("#pagination").on('click', 'a', function(e) {
                 if(store.user){
                     user_email = store.user.email;
                     store_url = "<a target=\"_blank\" href=\""+ public_url +"store/"+ store.user.id +"\"> "+ public_url +"store/"+ store.user.id +"</a>";
+                }else {
+                    user_email = '';
+                    store_url = '';
                 }
 
                 if(store.store_verified == 1){

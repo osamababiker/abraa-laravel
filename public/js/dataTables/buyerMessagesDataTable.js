@@ -27,11 +27,11 @@ $(document).ready(function () {
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
-                }
+                }else buyer_name = '';
 
                 if(message.supplier){
                     supplier_name = message.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(message.message_from == 1){
                     message_from = "Buyer";
@@ -155,11 +155,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
-                }
+                }else buyer_name = '';
 
                 if(message.supplier){
                     supplier_name = message.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(message.message_from == 1){
                     message_from = "Buyer";
@@ -284,11 +284,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
-                }
+                }else buyer_name = '';
 
                 if(message.supplier){
                     supplier_name = message.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(message.message_from == 1){
                     message_from = "Buyer";

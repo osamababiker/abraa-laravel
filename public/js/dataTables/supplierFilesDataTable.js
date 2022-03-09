@@ -26,7 +26,7 @@ $(document).ready(function () {
 
                 if(file.supplier){
                     supplier_name = file.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 files_html = files_html +
                 
@@ -110,7 +110,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(file.supplier){
                     supplier_name = file.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 files_html = files_html +
                 
@@ -194,7 +194,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(file.supplier){
                     supplier_name = file.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 files_html = files_html +
                 

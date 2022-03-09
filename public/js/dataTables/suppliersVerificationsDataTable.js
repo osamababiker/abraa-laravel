@@ -27,7 +27,7 @@ $(document).ready(function () {
 
                 if(verification.supplier){
                     supplier_name = verification.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(verification.paid == 1){
                     is_paid = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -143,7 +143,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(verification.supplier){
                     supplier_name = verification.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(verification.paid == 1){
                     is_paid = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -262,7 +262,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(verification.supplier){
                     supplier_name = verification.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(verification.paid == 1){
                     is_paid = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

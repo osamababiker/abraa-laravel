@@ -38,6 +38,11 @@ $(document).ready(function () {
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                     }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
+                }else{
+                    user_email = '';
+                    store_url = '';
+                    products_count = '';
+                    is_reminder_sent = '';
                 }
 
                 if(store.store_verified == 1){
@@ -155,6 +160,11 @@ $(".filter_data_table").on('change input', function () {
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                     }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
+                }else{
+                    user_email = '';
+                    store_url = '';
+                    products_count = '';
+                    is_reminder_sent = '';
                 }
 
                 if(store.store_verified == 1){
@@ -274,6 +284,11 @@ $("#pagination").on('click', 'a', function(e) {
                     if(store.user.is_reminder_sent == 1){
                         is_reminder_sent = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
                     }else is_reminder_sent = "<i class=\"fa fa-times\" style=\"color: red\"></i>";
+                }else{
+                    user_email = '';
+                    store_url = '';
+                    products_count = '';
+                    is_reminder_sent = '';
                 }
 
                 if(store.store_verified == 1){

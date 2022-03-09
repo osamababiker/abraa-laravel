@@ -28,7 +28,7 @@ $(document).ready(function () {
 
                 if(item.category){
                     item_category = item.category.en_title;
-                }
+                }else item_category = '';
 
                 items_html = items_html +
                 
@@ -120,7 +120,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(item.category){
                     item_category = item.category.en_title;
-                }
+                }else item_category = '';
 
                 items_html = items_html +
                 
@@ -213,7 +213,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(item.category){
                     item_category = item.category.en_title;
-                }
+                }else item_category = '';
 
                 items_html = items_html +
                 

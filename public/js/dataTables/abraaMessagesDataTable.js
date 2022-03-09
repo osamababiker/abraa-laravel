@@ -26,11 +26,11 @@ $(document).ready(function () {
 
                 if(message.user){
                     username = message.user.full_name;
-                }
+                }else username = '';
 
                 if(message.sender){
                     sent_by = message.sender.name;
-                }
+                }else sent_by = '';
 
                 if(message.message_read == 1){
                     is_read = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -147,11 +147,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(message.user){
                     username = message.user.full_name;
-                }
+                }else username = '';
 
                 if(message.sender){
                     sent_by = message.sender.name;
-                }
+                }else sent_by = '';
 
                 if(message.message_read == 1){
                     is_read = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -269,11 +269,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(message.user){
                     username = message.user.full_name;
-                }
+                }else username = '';
 
                 if(message.sender){
                     sent_by = message.sender.name;
-                }
+                }else sent_by = '';
 
                 if(message.message_read == 1){
                     is_read = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

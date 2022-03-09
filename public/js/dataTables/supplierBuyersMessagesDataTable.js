@@ -26,11 +26,11 @@ $(document).ready(function () {
 
                 if(message.supplier){
                     supplier_name = message.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
-                }
+                }else buyer_name = '';
 
                 buyers_messages_html = buyers_messages_html +
                 
@@ -140,11 +140,11 @@ $(".filter_data_table").on('change input', function () {
                 
                 if(message.supplier){
                     supplier_name = message.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
-                }
+                }else buyer_name = '';
 
                 buyers_messages_html = buyers_messages_html +
                 
@@ -255,11 +255,11 @@ $("#pagination").on('click', 'a', function(e) {
                 
                 if(message.supplier){
                     supplier_name = message.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(message.buyer){
                     buyer_name = message.buyer.full_name;
-                }
+                }else buyer_name = '';
 
                 buyers_messages_html = buyers_messages_html +
                 

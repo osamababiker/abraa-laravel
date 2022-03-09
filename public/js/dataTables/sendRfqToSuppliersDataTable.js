@@ -35,11 +35,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(supplier.supplier_country){
                     supplier_country = supplier.supplier_country.en_name;
-                }
+                }else supplier_country = '';
 
                 if(supplier.store){
                     supplier_store = supplier.store.name;
-                }
+                }else supplier_store = '';
 
                 supplier_html = supplier_html +
                 "<tr>\n"+
@@ -99,11 +99,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(supplier.supplier_country){
                     supplier_country = supplier.supplier_country.en_name;
-                }
+                }else supplier_country = '';
 
                 if(supplier.store){
                     supplier_store = supplier.store.name;
-                }
+                }else supplier_store = '';
 
                 supplier_html = supplier_html +
                 "<tr>\n"+

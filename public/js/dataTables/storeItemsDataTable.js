@@ -28,7 +28,7 @@ $(document).ready(function () {
                 
                 if(item.category){
                     item_category = item.category.en_title;
-                }
+                }else item_category = '';
 
                 if(item.status == 1){
                     item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
@@ -135,7 +135,7 @@ $(".filter_data_table").on('change input', function () {
                 
                 if(item.category){
                     item_category = item.category.en_title;
-                }
+                }else item_category = '';
 
                 if(item.status == 1){
                     item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";
@@ -244,7 +244,7 @@ $("#pagination").on('click', 'a', function(e) {
                 
                 if(item.category){
                     item_category = item.category.en_title;
-                }
+                }else item_category = '';
 
                 if(item.status == 1){
                     item_status = "<i style=\"color: green\">approved - <i style=\"color: green\" class=\"fa fa-check\"></i></i>";

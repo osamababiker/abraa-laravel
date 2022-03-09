@@ -28,7 +28,7 @@ $(document).ready(function () {
 
                 if(category.parent){
                     parent_category = category.parent.en_title;
-                }
+                }else parent_category = '';
 
                 if(category.status == 1)
                     category_status = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -131,7 +131,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(category.parent){
                     parent_category = category.parent.en_title;
-                }
+                }else parent_category = '';
 
                 if(category.status == 1)
                     category_status = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -236,7 +236,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(category.parent){
                     parent_category = category.parent.en_title;
-                }
+                }else parent_category = '';
 
                 if(category.status == 1)
                     category_status = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

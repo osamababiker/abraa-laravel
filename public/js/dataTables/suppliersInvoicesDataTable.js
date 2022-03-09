@@ -33,19 +33,19 @@ $(document).ready(function () {
 
                 if(request.unit){
                     request_unit = request.unit.unit_en;
-                }
+                }else request_unit = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.supplier){
                     supplier_name = request.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(request.currency){
                     currency = request.currency.name_en;
-                }
+                }else currency = '';
 
                 if(request.confirmed == 1){
                     is_confirmed = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -186,19 +186,19 @@ $(".filter_data_table").on('change input', function () {
 
                 if(request.unit){
                     request_unit = request.unit.unit_en;
-                }
+                }else request_unit = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.supplier){
                     supplier_name = request.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(request.currency){
                     currency = request.currency.name_en;
-                }
+                }else currency = '';
 
                 if(request.confirmed == 1){
                     is_confirmed = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -341,19 +341,19 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(request.unit){
                     request_unit = request.unit.unit_en;
-                }
+                }else request_unit = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.supplier){
                     supplier_name = request.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(request.currency){
                     currency = request.currency.name_en;
-                }
+                }else currency = '';
 
                 if(request.confirmed == 1){
                     is_confirmed = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

@@ -25,7 +25,7 @@ $(document).ready(function () {
             response.buyers.data.forEach(function(buyer) {
                 if(buyer.buyer_country){
                     buyer_country = buyer.buyer_country.en_name;
-                }
+                }else buyer_country = '';
 
                 if(buyer.verified == 1){
                     is_verified = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
@@ -135,7 +135,7 @@ $(".filter_data_table").on('change input', function () {
             response.buyers.data.forEach(function(buyer) {
                 if(buyer.buyer_country){
                     buyer_country = buyer.buyer_country.en_name;
-                }
+                }else buyer_country = '';
 
                 if(buyer.verified == 1){
                     is_verified = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
@@ -246,7 +246,7 @@ $("#pagination").on('click', 'a', function(e) {
             response.buyers.data.forEach(function(buyer) {
                 if(buyer.buyer_country){
                     buyer_country = buyer.buyer_country.en_name;
-                }
+                }else buyer_country = '';
 
                 if(buyer.verified == 1){
                     is_verified = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";

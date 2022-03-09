@@ -33,7 +33,7 @@ $(document).ready(function () {
 
                 if(file.item){
                     file_item = file.item.title;
-                }
+                }else file_item = '';
 
                 files_html = files_html +
                 
@@ -124,7 +124,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(file.item){
                     file_item = file.item.title;
-                }
+                }else file_item = '';
 
                 files_html = files_html +
                 
@@ -217,7 +217,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(file.item){
                     file_item = file.item.title;
-                }
+                }else file_item = '';
 
                 files_html = files_html +
                 

@@ -29,7 +29,7 @@ $(document).ready(function () {
 
                 if(store.user){
                     user_email = store.user.email;
-                }
+                }else user_email = '';
 
                 if(store.store_verified == 1){
                     store_verified = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -131,7 +131,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(store.user){
                     user_email = store.user.email;
-                }
+                }else user_email = '';
 
                 if(store.store_verified == 1){
                     store_verified = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -235,7 +235,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(store.user){
                     user_email = store.user.email;
-                }
+                }else user_email = '';
 
                 if(store.store_verified == 1){
                     store_verified = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

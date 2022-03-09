@@ -27,7 +27,7 @@ $(document).ready(function () {
 
                 if(shipper.shipper_country){
                     shipper_country = shipper.shipper_country.en_name;
-                }
+                }else shipper_country = '';
 
                 
                 if(shipper.verified == 1){
@@ -139,7 +139,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(shipper.shipper_country){
                     shipper_country = shipper.shipper_country.en_name;
-                }
+                }else shipper_country = '';
 
                 
                 if(shipper.verified == 1){
@@ -253,7 +253,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(shipper.shipper_country){
                     shipper_country = shipper.shipper_country.en_name;
-                }
+                }else shipper_country = '';
 
                 
                 if(shipper.verified == 1){

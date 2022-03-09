@@ -27,11 +27,11 @@ $(document).ready(function () {
 
                 if(member.user_country){
                     member_country = member.user_country.en_name;
-                }
+                }else member_country = '';
 
                 if(member.user){
                     full_name = member.user.full_name;
-                }
+                }else full_name = '';
 
                 if(member.is_loggedin == 1){
                     is_loggedin = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -148,11 +148,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(member.user_country){
                     member_country = member.user_country.en_name;
-                }
+                }else member_country = '';
 
                 if(member.user){
                     full_name = member.user.full_name;
-                }
+                }else full_name = '';
 
                 if(member.is_loggedin == 1){
                     is_loggedin = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -271,11 +271,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(member.user_country){
                     member_country = member.user_country.en_name;
-                }
+                }else member_country = '';
 
                 if(member.user){
                     full_name = member.user.full_name;
-                }
+                }else full_name = '';
 
                 if(member.is_loggedin == 1){
                     is_loggedin = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

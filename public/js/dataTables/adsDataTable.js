@@ -35,11 +35,11 @@ $(document).ready(function () {
 
                 if(ads.category){
                     category = ads.category.name;
-                }
+                }else category = '';
 
                 if(ads.language){
                     language = ads.language.name;
-                }
+                }else language = '';
 
 
                 ads_html = ads_html +
@@ -145,11 +145,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(ads.category){
                     category = ads.category.name;
-                }
+                }else category = '';
 
                 if(ads.language){
                     language = ads.language.name;
-                }
+                }else language = '';
 
                 ads_html = ads_html +
                 
@@ -255,11 +255,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(ads.category){
                     category = ads.category.name;
-                }
+                }else category = '';
 
                 if(ads.language){
                     language = ads.language.name;
-                }
+                }else language = '';
 
                 ads_html = ads_html +
                 

@@ -33,15 +33,18 @@ $(document).ready(function () {
 
                 if(request.unit){
                     request_unit = request.unit.unit_en;
-                }
+                }else request_unit = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.supplier){
                     supplier = request.supplier.full_name;
                     supplier_email = request.supplier.email;
+                }else {
+                    supplier = '';
+                    supplier_email = '';
                 }
 
                 if(request.confirmed == 1){
@@ -182,15 +185,18 @@ $(".filter_data_table").on('change input', function () {
 
                 if(request.unit){
                     request_unit = request.unit.unit_en;
-                }
+                }else request_unit = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.supplier){
                     supplier = request.supplier.full_name;
                     supplier_email = request.supplier.email;
+                }else {
+                    supplier = '';
+                    supplier_email = '';
                 }
 
                 if(request.confirmed == 1){
@@ -334,15 +340,18 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(request.unit){
                     request_unit = request.unit.unit_en;
-                }
+                }else request_unit = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.supplier){
                     supplier = request.supplier.full_name;
                     supplier_email = request.supplier.email;
+                }else {
+                    supplier = '';
+                    supplier_email = '';
                 }
 
                 if(request.confirmed == 1){

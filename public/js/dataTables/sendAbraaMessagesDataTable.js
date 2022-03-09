@@ -33,11 +33,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(user.store){
                     user_store = user.store.name;
-                }
+                }else user_store = '';
 
                 if(user.member_country){
                     country = user.member_country.en_name;
-                }
+                }else country = '';
 
                 users_html = users_html +
                 "<tr>\n"+
@@ -93,11 +93,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(user.store){
                     user_store = user.store.name;
-                }
+                }else user_store = '';
 
                 if(user.member_country){
                     country = user.member_country.en_name;
-                }
+                }else country = '';
 
                 users_html = users_html +
                 "<tr>\n"+

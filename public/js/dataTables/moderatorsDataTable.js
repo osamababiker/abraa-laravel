@@ -40,7 +40,7 @@ $(document).ready(function () {
 
                 if(moderator.member_country){
                     country = moderator.member_country.en_name;
-                }
+                }else country = '';
 
                 moderators_html = moderators_html +
                 
@@ -146,7 +146,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(moderator.member_country){
                     country = moderator.member_country.en_name;
-                }
+                }else country = '';
 
                 moderators_html = moderators_html +
                 
@@ -253,7 +253,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(moderator.member_country){
                     country = moderator.member_country.en_name;
-                }
+                }else country = '';
 
                 moderators_html = moderators_html +
                 

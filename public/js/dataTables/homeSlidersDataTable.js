@@ -35,11 +35,11 @@ $(document).ready(function () {
 
                 if(slider.region){
                     slider_language = slider.language.name;
-                }
+                }else slider_language = '';
 
                 if(slider.user){
                     added_by = slider.user.name;
-                }
+                }else added_by = '';
 
 
                 sliders_html = sliders_html +
@@ -133,11 +133,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(slider.region){
                     slider_language = slider.language.name;
-                }
+                }else slider_language = '';
 
                 if(slider.user){
                     added_by = slider.user.name;
-                }
+                }else added_by = '';
 
 
                 sliders_html = sliders_html +
@@ -233,11 +233,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(slider.region){
                     slider_language = slider.language.name;
-                }
+                }else slider_language = '';
 
                 if(slider.user){
                     added_by = slider.user.name;
-                }
+                }else added_by = '';
 
 
                 sliders_html = sliders_html +

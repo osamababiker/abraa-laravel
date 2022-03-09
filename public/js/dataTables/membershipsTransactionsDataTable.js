@@ -27,11 +27,11 @@ $(document).ready(function () {
 
                 if(transaction.user){
                     user = transaction.user.full_name;
-                }
+                }else user = '';
 
                 if(transaction.plan){
                     plan = transaction.plan.name;
-                }
+                }else plan = '';
 
                 membershipsTransactions_html = membershipsTransactions_html +
                 
@@ -124,11 +124,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(transaction.user){
                     user = transaction.user.full_name;
-                }
+                }else user = '';
 
                 if(transaction.plan){
                     plan = transaction.plan.name;
-                }
+                }else plan = '';
 
                 membershipsTransactions_html = membershipsTransactions_html +
                 
@@ -223,11 +223,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(transaction.user){
                     user = transaction.user.full_name;
-                }
+                }else user = '';
 
                 if(transaction.plan){
                     plan = transaction.plan.name;
-                }
+                }else plan = '';
 
                 membershipsTransactions_html = membershipsTransactions_html +
                 

@@ -28,11 +28,11 @@ $(document).ready(function () {
 
                 if(request.supplier){
                     supplier_name = request.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.is_organic == 1){
                     is_organic = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -137,11 +137,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(request.supplier){
                     supplier_name = request.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.is_organic == 1){
                     is_organic = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -247,11 +247,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(request.supplier){
                     supplier_name = request.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 if(request.buying_request){
                     buying_request = request.buying_request.product_name;
-                }
+                }else buying_request = '';
 
                 if(request.is_organic == 1){
                     is_organic = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

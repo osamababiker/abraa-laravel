@@ -26,7 +26,7 @@ $(document).ready(function () {
 
                 if(user.userlevel == 1){
                     user_level = 'Admin';
-                }
+                }else user_level = '';
 
                 users_html = users_html +
                 
@@ -114,7 +114,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(user.userlevel == 1){
                     user_level = 'Admin';
-                }
+                }else user_level = '';
 
                 users_html = users_html +
                 
@@ -203,7 +203,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(user.userlevel == 1){
                     user_level = 'Admin';
-                }
+                }else user_level = '';
 
                 users_html = users_html +
                 

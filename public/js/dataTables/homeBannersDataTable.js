@@ -35,11 +35,11 @@ $(document).ready(function () {
 
                 if(banner.region){
                     banner_language = banner.language.name;
-                }
+                }else banner_language = '';
 
                 if(banner.user){
                     added_by = banner.user.name;
-                }
+                }else added_by = '';
 
 
                 banners_html = banners_html +
@@ -130,11 +130,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(banner.region){
                     banner_language = banner.language.name;
-                }
+                }else banner_language = '';
 
                 if(banner.user){
                     added_by = banner.user.name;
-                }
+                }else added_by = '';
 
 
                 banners_html = banners_html +
@@ -226,11 +226,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(banner.region){
                     banner_language = banner.language.name;
-                }
+                }else banner_language = '';
 
                 if(banner.user){
                     added_by = banner.user.name;
-                }
+                }else added_by = '';
 
 
                 banners_html = banners_html +

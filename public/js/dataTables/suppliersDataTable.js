@@ -26,7 +26,7 @@ $(document).ready(function () {
             response.suppliers.data.forEach(function(supplier) {
                 if(supplier.supplier_country){
                     supplier_country = supplier.supplier_country.en_name;
-                }
+                }else supplier_country = '';
 
                 if(supplier.verified == 1){
                     is_verified = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
@@ -163,7 +163,7 @@ $(".filter_data_table").on('change input', function () {
             response.suppliers.data.forEach(function(supplier) {
                 if(supplier.supplier_country){
                     supplier_country = supplier.supplier_country.en_name;
-                }
+                }else supplier_country = '';
 
                 if(supplier.verified == 1){
                     is_verified = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";
@@ -322,7 +322,7 @@ $("#pagination").on('click', 'a', function(e) {
             response.suppliers.data.forEach(function(supplier) {
                 if(supplier.supplier_country){
                     supplier_country = supplier.supplier_country.en_name;
-                }
+                }else supplier_country = '';
 
                 if(supplier.verified == 1){
                     is_verified = "<i class=\"fa fa-check\" style=\"color: green;\"></i>";

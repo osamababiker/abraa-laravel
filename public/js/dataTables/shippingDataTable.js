@@ -30,7 +30,7 @@ $(document).ready(function () {
 
                 if(shipping.shipper){
                     shipper_name = shipping.shipper.full_name;
-                }
+                }else shipper_name = '';
 
                 if(shipping.shipping_methods == 1){
                     shipping_method = "Sea";
@@ -76,11 +76,11 @@ $(document).ready(function () {
 
                 if(shipping.clearance == 1){
                     clearance = 'clearance';
-                }
+                }else clearance = '';
 
                 if(shipping.doortodoor == 1){
                     door_to_door = 'Door to Door';
-                }
+                }else door_to_door = '';
 
 
                 shipping_html = shipping_html +
@@ -183,7 +183,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(shipping.shipper){
                     shipper_name = shipping.shipper.full_name;
-                }
+                }else shipper_name = '';
 
                 if(shipping.shipping_method == 1){
                     shipping_method = "Sea";
@@ -229,11 +229,11 @@ $(".filter_data_table").on('change input', function () {
 
                 if(shipping.clearance == 1){
                     clearance = 'clearance';
-                }
+                }else clearance = '';
 
                 if(shipping.doortodoor == 1){
                     door_to_door = 'Door to Door';
-                }
+                }else door_to_door = '';
 
 
                 shipping_html = shipping_html +
@@ -338,7 +338,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(shipping.shipper){
                     shipper_name = shipping.shipper.full_name;
-                }
+                }else shipper_name = '';
 
                 if(shipping.shipping_method == 1){
                     shipping_method = "Sea";
@@ -384,11 +384,11 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(shipping.clearance == 1){
                     clearance = 'clearance';
-                }
+                }else clearance = '';
 
                 if(shipping.doortodoor == 1){
                     door_to_door = 'Door to Door';
-                }
+                }else door_to_door = '';
 
 
                 shipping_html = shipping_html +

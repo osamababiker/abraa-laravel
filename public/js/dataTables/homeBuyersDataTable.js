@@ -33,7 +33,7 @@ $(document).ready(function () {
 
                 if(buyer.added_by_admin){
                     added_by = buyer.added_by_admin.name;
-                }
+                }else added_by = '';
 
 
                 buyers_html = buyers_html +
@@ -129,7 +129,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(buyer.added_by_admin){
                     added_by = buyer.added_by_admin.name;
-                }
+                }else added_by = '';
 
 
                 buyers_html = buyers_html +
@@ -227,7 +227,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(buyer.added_by_admin){
                     added_by = buyer.added_by_admin.name;
-                }
+                }else added_by = '';
 
 
                 buyers_html = buyers_html +

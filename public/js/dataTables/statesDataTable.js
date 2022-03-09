@@ -27,7 +27,7 @@ $(document).ready(function () {
 
                 if(state.country){
                     state_country = state.country.en_name;
-                }
+                }else state_country = '';
 
                 if(state.capital == 1){
                     is_capital = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -123,7 +123,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(state.country){
                     state_country = state.country.en_name;
-                }
+                }else state_country = '';
 
                 if(state.capital == 1){
                     is_capital = "<i class=\"fa fa-check\" style=\"color: green\"></i>";
@@ -220,7 +220,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(state.country){
                     state_country = state.country.en_name;
-                }
+                }else state_country = '';
 
                 if(state.capital == 1){
                     is_capital = "<i class=\"fa fa-check\" style=\"color: green\"></i>";

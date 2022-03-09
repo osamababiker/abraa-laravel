@@ -31,7 +31,7 @@ $(document).ready(function () {
 
                 if(verification.supplier){
                     supplier_name = verification.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 verifications_html = verifications_html +
                 
@@ -148,7 +148,7 @@ $(".filter_data_table").on('change input', function () {
 
                 if(verification.supplier){
                     supplier_name = verification.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 verifications_html = verifications_html +
                 
@@ -266,7 +266,7 @@ $("#pagination").on('click', 'a', function(e) {
 
                 if(verification.supplier){
                     supplier_name = verification.supplier.full_name;
-                }
+                }else supplier_name = '';
 
                 verifications_html = verifications_html +
                 
