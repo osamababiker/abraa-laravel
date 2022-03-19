@@ -79,7 +79,7 @@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="users_table_body">
+                                            <tbody id="users_table_body"> 
 
                                             </tbody>
                                         </table>

@@ -10,7 +10,7 @@ use App\Exports\AdminUserExport;
 use App\Imports\AdminUserImport;
 use App\Http\Requests\AdminUsersRequest;
 use Maatwebsite\Excel\Facades\Excel; 
-use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\Paginator; 
 use Illuminate\Support\Facades\Hash;
 
 class AdminUsersController extends Controller
@@ -85,19 +85,36 @@ class AdminUsersController extends Controller
         session()->flash('feedback_title', 'Added Success');
         session()->flash('feedback', $message);
         return redirect()->back();
-
     }
   
     public function show($id){
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.show', compact(['user']));
     }
    
     public function edit($id){
-        //
+        $user = User::findOrFail($id);
+        $users_level = UserLevel::get();
+        return view('admin.users.edit', compact(['user','users_level']));
     }
 
-    public function update(Request $request, $id){
-        //
+    public function update(Request $request){
+        $user = User::findOrFail($request->userId);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->userlevel = $request->user_level;
+        $user->permissions = json_encode([]);
+        if($request->has('password')){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        $message = "Admin has been updated successfully";
+        session()->flash('success', 'true');
+        session()->flash('feedback_title', 'updated Success');
+        session()->flash('feedback', $message);
+        return redirect()->back();
     }
 
     public function destroy($id){

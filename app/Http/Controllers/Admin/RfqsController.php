@@ -230,9 +230,9 @@ class RfqsController extends Controller
                 $rfq = Rfq::find($request_id);
                 $rfq->status = 2;
                 $rfq->approved_by = Auth::user()->id;
-                $rfq->save();
+                $rfq->save(); 
 
-                // to send email to user 
+                // to send email to buyer 
                 $buyer_name = $rfq->buyer->full_name;
                 $buyer_email = $rfq->buyer->email;
                 $product_name = $rfq->product_name;
@@ -241,6 +241,36 @@ class RfqsController extends Controller
                 $email_content = $this->getApproveRfqMessage($buyer_name, $product_name, $product_link);
                 $email_templete = $this->getEmailTemplete($email_content); 
                 $this->sendEmail($email_templete, $buyer_email, $subject);
+
+                // to send email to supplier
+                $supplierName =  '';
+                $supplierEmail = '';
+                $supplierId = '';
+                if($rfq->item){
+                    $supplierName = $rfq->item->supplier ? $rfq->item->supplier->full_name : '';
+                    $supplierEmail = $rfq->item->supplier ? $rfq->item->supplier->email : '';
+                    $supplierId = $rfq->item->supplier ? $rfq->item->supplier->id : '';
+                }
+                $buyFrequency = $rfq->buying_frequency ? $rfq->buying_frequency->buying_frequency_en : '';
+                $countryOfShipping = $rfq->country ? $rfq->country->en_name : '';
+                $sendQuotationUrl = config('global.public_url') . 'external-login/' . $this->__encryptors('encrypt', $supplierId.'-'.$rfq->id);
+                $baseUrl = config('global.public_url');
+                $productUrl =  config('global.public_url') . '/item' . '/' . $rfq->item_id;
+                $subject = "RFQ for";
+                $names = explode(' ', $rfq->product_name);
+                for($i = 0; $i < count($names); $i++){
+                    if($i < 4){
+                        $subject.= " ".$names[$i];
+                    }elseif($i > 4 && $i < 6){
+                        $subject .= " ...";
+                    }
+                }
+                $email_templete = $this->getRfqApprovedSupplierEmailTemplete(
+                    $supplierName,$rfq->product_name,$productUrl,$rfq->product_detail,
+                    $buyFrequency,$countryOfShipping,$sendQuotationUrl,$baseUrl
+                );
+                if($supplierEmail != '')
+                    $this->sendEmail($email_templete, $supplierEmail, $subject, 'rfq@abraa.com');
             }
 
              // to clear the cache on abraa

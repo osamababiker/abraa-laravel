@@ -1613,7 +1613,7 @@ Route::group(['middleware' => 'auth'], function (){
     )->name('users.actions');
     // get users as json route 
     Route::get('users/json', [
-        AdminUsersController::class, 'getUsersAsJson'
+        AdminUsersController::class, 'getUsersAsJson' 
     ])->name('users.json');
     // filter users  route 
     Route::post('users/filter', [
@@ -1629,11 +1629,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('users/importExportView',  [
         AdminUsersController::class, 'importExportView'
     ]);
+    // custom update route
+    Route::post('users/update', [
+        AdminUsersController::class, 'update'
+    ])->name('users.update');
     // custom delete route
     Route::get('users/{id}/destroy', [
         AdminUsersController::class, 'destroy'
     ]);
-    Route::resource('users', AdminUsersController::class, ['except' => ['destroy']]);
+    Route::resource('users', AdminUsersController::class, ['except' => ['destroy','update']]);
 
 
     // ======================= Email Archived Routes ====================== //

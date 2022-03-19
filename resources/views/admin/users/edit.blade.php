@@ -15,98 +15,51 @@
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Add New Supplier </h1>
+                    <h1 class="h3 mb-3"> <i class="fa fa-plus"></i> Edit Admin </h1>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form>
-                                        <div class="form-row d-flex justify-content-center mt-4">
-                                            <div class="form-group">
-                                                <label class="custom-control custom-checkbox m-0">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"> Manufactuer </span>
-                                                </label>
-                                            </div>
-                                            &nbsp; &nbsp;
-                                            <div class="form-group">
-                                                <label class="custom-control custom-checkbox m-0">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"> Brand Owner </span>
-                                                </label>
-                                            </div>
-                                            &nbsp; &nbsp;
-                                            <div class="form-group">
-                                                <label class="custom-control custom-checkbox m-0">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"> Reseller </span>
-                                                </label>
-                                            </div>
+                                    <form method="post" action="{{ route('users.update') }}">
+                                        <input type="hidden" name="userId" value="{{ $user->id }}">
+                                        @csrf
+                                        <div class="form-group required">
+                                            <label>Name</label>
+                                            <input class="form-control form-control-lg" value="{{ $user->name }}" type="text" name="name"
+                                                placeholder="Enter your name" />
                                         </div>
-                                        <div class="form-row mt-4">
-                                            <div class="form-group col-md-6">
-                                                <label for="business_name">Business Name</label>
-                                                <input type="text" class="form-control" id="business_name"
-                                                    placeholder="business_name">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="counter">Country</label>
-                                                <select name="country" id="country" class="form-control select2">
-                                                    <option value="">Select country</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group required">
+                                            <label>Username</label>
+                                            <input class="form-control form-control-lg" value="{{ $user->username }}" type="text" name="username"
+                                                placeholder="Enter your username" />
                                         </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <label for="business_keywords">Business keyword</label>
-                                                <select name="business_keywords" id="business_keywords" multiple="multiple" class="form-control select2">
-                                                    <option value="">Select country</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group required">
+                                            <label>Email</label>
+                                            <input class="form-control form-control-lg" value="{{ $user->email }}" type="email" name="email"
+                                                placeholder="Enter your email" />
                                         </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="primary_name">Primary Contact Person</label>
-                                                <input type="text" name="primary_name" class="form-control" id="primary_name">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="primary_email">Primary Contact Person</label>
-                                                <input type="text" name="primary_email" class="form-control" id="primary_email">
-                                            </div>
+                                        <div class="form-group required">
+                                            <label>Password</label>
+                                            <input class="form-control form-control-lg"  type="password"
+                                                name="password" placeholder="Enter password" />
                                         </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="primary_m_phone">Primary Mobile Number</label>
-                                                <input type="number" name="primary_m_phone" class="form-control" id="primary_m_phone">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="position">Position</label>
-                                                <select id="position" name="position" class="form-control select2">
-                                                    <option value=""> Select position </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="primary_whatsapp">WhatsApp Number</label>
-                                                <input type="number" name="primary_whatsapp" class="form-control" id="primary_whatsapp">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="primary_line_number">Land Line Number</label>
-                                                <input type="number" name="primary_line_number" class="form-control" id="primary_line_number">
-                                            </div>
+                                        <div class="form-group required">
+                                            <label>Password Confirmation</label>
+                                            <input class="form-control form-control-lg" type="password"
+                                                name="password_confirmation" placeholder="Re-Enter password" />
                                         </div>
                                         <div class="form-group">
-											<label class="custom-control custom-checkbox m-0">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label">Contact Supplier For Premium Membership </span>
-                                            </label>
+                                            <label for="user_level"> Users Level </label>
+                                            <select name="user_level" id="userlevel" class="form-control select2">
+                                                <option value="{{ $user->userlevel }}"></option>
+                                                @foreach($users_level as $level)
+                                                    <option value="{{ $level->type }}"> {{ $level->levelname }} </option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        <div class="form-row d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success">Save Supplier</button>
-                                            &nbsp; &nbsp;
-                                            <button type="submit" class="btn btn-primary">Add Secondary Contact Person</button>
+                                        <div class="text-center mt-3">
+                                            <button type="submit" class="btn btn-lg btn-primary">Update Admin</button>
                                         </div>
                                     </form>
                                 </div>
@@ -117,5 +70,6 @@
                 </div>
             </main>
 
+            @include('admin.layouts.scripts')
             <!-- footer is here -->
             @include('admin.layouts.footer')

@@ -714,6 +714,175 @@ trait MailerTrait {
     }
 
 
+
+    public function getRfqApprovedSupplierEmailTemplete(
+        $supplierName,$productName,$productUrl,$productDetails,$buyFrequency,$countryOfShipping,$sendQuotationUrl,$baseUrl
+    ){
+        $html = '<HTML
+            <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailBody" style="background:#FFFFFF; border-radius:4px; -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);">
+                <tbody>
+                                <tr>
+                                    <td align="center" valign="top" style="padding: 0px;">
+                                        <table border="0" cellpadding="20" cellspacing="0" width="100%"
+                                            style="padding:20px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="center" valign="top" style="padding: 0px;">
+                                                        <label
+                                                            style="text-align:center;padding: 7px 14px;border-radius:6px;color:#1180b0;font-size:11px;text-decoration:none;">buyer
+                                                            interested in your product
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" style="padding:0px;">
+
+                                        <table border="0" cellpadding="20" cellspacing="0" width="100%"
+                                            style="padding:0px 73px 0px 73px; text-align:left;; color:#617083; line-height: 20px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="center" valign="top" style="padding: 0px;">
+                                                        <h3
+                                                            style="color:#585e66;font-size: 15px;margin: 0px;padding-bottom: 25px;text-align: left;font-weight:normal;;">
+                                                            Hi'. $supplierName  .' ,<br />
+                                                            <br />
+                                                            <span>
+                                                                A buyer is looking for the below product:
+                                                            </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 0px;font-weight:bold ;color: #000 !important;padding-left: 0px;color: #000;font-size: 14px;letter-spacing: 1px;font-weight: bold;width: 220px;display: inline-block;">
+                                                        Product name
+                                                    </td>
+                                                    <td
+                                                        style="padding: 0px;padding-left: 0px;color: #000 !important;font-size: 14px;letter-spacing: 1px;width: 220px;display: inline-block;">
+                                                        <a href="' . $productUrl . '">' . $productName . '</a>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding:8px 0px;border-bottom:1px solid rgba(17,128,176,1.00)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;font-weight:bold ;color: #000 !important;padding-left: 0px;color: #000;font-size: 14px;letter-spacing: 1px;font-weight: bold;width: 220px;display: inline-block;">
+                                                        More Details
+                                                    </td>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;padding-left: 0px;color: #000 !important;font-size: 14px;letter-spacing: 1px;width: 220px;display: inline-block;">
+                                                        ' . $productDetails . '
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding:8px 0px;border-bottom:1px solid rgba(17,128,176,1.00)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;font-weight:bold ;color: #000 !important;padding-left: 0px;color: #000;font-size: 14px;letter-spacing: 1px;font-weight: bold;width: 220px;display: inline-block;">
+                                                        Quantity required
+                                                    </td>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;padding-left: 0px;color: #000 !important;font-size: 14px;letter-spacing: 1px;width: 220px;display: inline-block;">
+                                                        $buyingQty
+                                                    </td>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;font-weight:bold ;color: #000 !important;padding-left: 0px;color: #000;font-size: 14px;letter-spacing: 1px;font-weight: bold;width: 220px;display: inline-block;">
+                                                        Buying frequency
+                                                    </td>
+
+                                                    <td
+                                                        style="padding: 10px 0 0 0;padding-left: 0px;color: #000 !important;font-size: 14px;letter-spacing: 1px;width: 220px;display: inline-block;">
+                                                            ' . $buyFrequency . '
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding:8px 0px;border-bottom:1px solid rgba(17,128,176,1.00)">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;font-weight:bold ;color: #000 !important;padding-left: 0px;color: #000;font-size: 14px;letter-spacing: 1px;font-weight: bold;width: 220px;display: inline-block;">
+                                                        Ship to country
+                                                    </td>
+                                                    <td
+                                                        style="padding: 10px 0 0 0;padding-left: 0px;color: #000 !important;font-size: 14px;letter-spacing: 1px;width: 220px;display: inline-block;">
+                                                        ' . $countryOfShipping . '
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" valign="top"
+                                                        style="padding-bottom: 0px;">
+                                                        <h3
+                                                            style="color:#585e66;font-size: 13px;margin: 0px;text-align: center;font-weight:normal;;">
+                                                            If you can supply this product Please click here
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" valign="top" style="padding: 0px;">
+                                                        <a target="_blank"
+                                                            href=" ' . $sendQuotationUrl . '"
+                                                            style="width: 27%;display: inline-block;margin-top:10px;padding: 7px 14px;border-radius:6px;border-color:rgba(2,90,191,1);background:rgba(17,128,176,1);color:#FFFFFF;font-size:11px;text-decoration:none;">
+                                                            Submit Quotation
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" valign="top"
+                                                        style="padding-bottom: 10px;padding-top: 10px;">
+                                                        <h3 style="color:#585e66;font-size: 13px;margin: 0px;text-align: center;font-weight:normal;">
+                                                            Or
+                                                        </h3>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" valign="top" style="padding:0px;">
+                                                        <a target="_blank" href="https://api.whatsapp.com/send?phone=+971566710044"
+                                                            style="color:rgba(17,128,176,1) ;font-size:12px;text-decoration:none;">
+                                                            Click here to reply via WhatsApp
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                <td align="center" valign="top" style="">
+                                                    <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td align="center" valign="top" style="padding:0px; text-align: left;">
+                                                                <p style="text-align:justify;font-size:12px; padding:20px 0px; margin: 0px; color: black; line-height: 20px; font-weight: 500;">
+                                                                    
+                                                                    <span>
+                                                                        <a style="text-decoration:none;color:black;"
+                                                                            href="'. $baseUrl .'">Abraa.com</a>
+                                                                        &nbsp; &nbsp;|
+                                                                        <a style="text-decoration:none;color:black;"
+                                                                            href="' . $baseUrl . '">RFQ Team</a>
+                                                                        &nbsp;
+                                                                    </span>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                    </td>
+                                </tr>
+                </tbody>
+        </table>';
+
+        return $html;
+
+    }
+
     function __encryptors($action, $string)
     {
         $output = false;

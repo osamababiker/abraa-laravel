@@ -130,7 +130,7 @@
                                                         <th>Verified</th>
                                                         <th>Country</th>
                                                         <th>Company</th>
-                                                        <th>Is Organic</th>
+                                                        <th>Is Organic</th> 
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>

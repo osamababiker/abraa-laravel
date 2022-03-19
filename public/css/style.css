@@ -113,11 +113,11 @@ table{
 
 
 .table-parent-wrapper {
-    transform: rotateX(180deg);
+    transform: rotateX(180deg)!important;
     overflow-x: auto;
-} 
+}  
 .table-child-wrapper {
-    transform: rotateX(180deg);
+    transform: rotateX(180deg)!important;
 }
 
 

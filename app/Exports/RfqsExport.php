@@ -11,7 +11,7 @@ class RfqsExport implements FromCollection, WithMapping, WithHeadings
 {
 
     public function headings(): array
-    {
+    { 
         return [
             '#',
             'Buyer name',
@@ -55,6 +55,7 @@ class RfqsExport implements FromCollection, WithMapping, WithHeadings
         }  
         else return [];
     }
+     
 
     /**
     * @return \Illuminate\Support\Collection
